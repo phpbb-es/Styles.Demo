@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+	<title>VinaBB Demo Styles</title>
+
+	<link href="{{ T_ASSETS_PATH }}/demo/css/bootstrap.min.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet" media="screen">
+	<link href="{{ T_ASSETS_PATH }}/demo/css/template.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet" media="screen">
+	<link href="{{ T_ASSETS_PATH }}/demo/css/font-awesome.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet" type="text/css">
+	<link href="{{ T_ASSETS_PATH }}/demo/css/font-opensans.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet" type="text/css">
+
+	<!-- Do not iframe our iframe! -->
+	<script type="text/javascript">
+		if (top !== self)
+		{
+			top.location.replace(self.location.href);
+		}
+	</script>
+
+	<!--[if lt IE 9]>
+		<script>/*@cc_on'abbr article aside audio canvas details figcaption figure footer header hgroup mark meter nav output progress section summary subline time video'.replace(/\w+/g,function(n){document.createElement(n)})@*/</script>
+	<![endif]-->    
+</head>
+	
+<body class="dark">
+	<header class="switcher-bar clearfix">
+		<div class="logo pull-left">
+			<img src="{{ T_ASSETS_PATH }}/demo/images/logo.png" data-toggle="tooltip" title="VinaBB - The Holy Land of phpBB :)" class="show-tooltip" />
+		</div>
+
+		<div class="style-switcher pull-left">
+			<a href="#" data-toggle="tooltip" title="Pick a style to preview" class="show-tooltip">Select a style <span>+</span></a>
+		</div>
+
+		<div class="remove-btn header-btn pull-right hidden-xs">
+			<a href="#" data-toggle="tooltip" title="Close" class="icon-remove show-tooltip"></a>
+		</div>
+
+		<div class="switch-btn header-btn pull-right hidden-xs">
+			<a href="#" data-toggle="modal" data-target=".bs-example-modal-sm" title="{{ SWITCH_TITLE }}" class="icon-refresh show-tooltip"></a>
+		</div>
+
+		<div class="download-btn header-btn pull-right hidden-xs">
+			<a href="#" data-toggle="tooltip" title="Download" class="icon-download-alt show-tooltip"></a>
+		</div>
+
+		<div class="info-btn header-btn pull-right hidden-xs">
+			<a href="#" data-toggle="tooltip" title="Details" class="icon-info-sign show-tooltip"></a>
+		</div>
+
+		<div class="mobile-btn header-btn pull-right hidden-xs">
+			<a href="#" data-toggle="tooltip" title="Phone" class="icon-mobile-phone show-tooltip"></a>
+		</div>
+
+		<div class="tablet-btn header-btn pull-right hidden-xs">
+			<a href="#" data-toggle="tooltip" title="Tablet" class="icon-tablet show-tooltip"></a>
+		</div>
+
+		<div class="desktop-btn header-btn pull-right hidden-xs">
+			<a href="#" data-toggle="tooltip" title="Desktop" class="icon-desktop show-tooltip"></a>
+		</div>
+	</header>
+
+	<section class="switcher-body">
+		<a href="#" title="Previous" class="icon-chevron-left styles-prev"></a>
+
+		<div class="styles-wrapper">
+			<div class="styles-list clearfix"></div>
+		</div>
+
+		<a href="#" title="Next" class="icon-chevron-right styles-next"></a>
+
+		<div class="horizontal-line bottom-nav"></div>
+	</section>
+
+	<iframe class="style-iframe" frameborder="0" border="0"></iframe>
+
+	<div class="preloader"></div>
+	<div class="preloading-icon"><i class="icon-bolt"></i></div>
+
+	<div class="modal fade" id="downloadAlert" tabindex="-1" role="dialog" aria-labelledby="downloadAlertLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="downloadAlertLabel">Disclaimer</h4>
+				</div>
+				<div class="modal-body">
+					This style is sale at the price $<span id="stylePrice">0</span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" id="agreeDownload"><i class="icon-cloud-download"></i> Try for Free</button>
+					<button type="button" class="btn btn-success" id="agreePurchase"><i class="icon-shopping-cart"></i> Purchase</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- List all the styles here -->
+	<script type="text/javascript">
+		var $styles,
+			$current_style = 'prosilver',
+			$switch_url = '{{ U_SWITCH }}';
+
+		$styles = {
+			{% for style in styles %}
+			'{{ style.VARNAME }}' : {
+				name : '{{ style.NAME }}',
+				tag : '{{ style.TAG }}',
+				responsive : '{{ style.RESPONSIVE }}',
+				img : '{{ style.IMG }}',
+				url : '{{ style.URL }}',
+				info : '{{ style.INFO }}',	
+				newest : '{{ style.NEWEST }}',
+				bb : '{{ style.BB }}',
+				get : '{{ style.GET }}',
+				buy : '{{ style.BUY }}',
+				price : '{{ style.PRICE }}'
+			},
+			{% endfor %}
+		};
+	</script>
+
+	<script type="text/javascript" src="{{ T_ASSETS_PATH }}/demo/js/jquery.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ T_ASSETS_PATH }}/demo/js/detectmobilebrowser.js?assets_version={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ T_ASSETS_PATH }}/demo/js/jquery.mousewheel.js?assets_version={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ T_ASSETS_PATH }}/demo/js/bootstrap.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ T_ASSETS_PATH }}/demo/js/jquery.caroufredsel.js?assets_version={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ T_ASSETS_PATH }}/demo/js/jquery.touchswipe.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ T_ASSETS_PATH }}/demo/js/application.js?assets_version={{ T_ASSETS_VERSION }}"></script>
+</body>
+</html>
