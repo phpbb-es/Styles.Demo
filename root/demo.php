@@ -2,9 +2,9 @@
 /**
 * VinaBB Demo Styles
 *
-* @version 1.00
-* @copyright (c) 2014 nedka
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @version 1.01
+* @copyright (c) VinaBB <vinabb.vn>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
@@ -43,8 +43,6 @@ $user->setup();
 
 $mode = $request->variable('m', '');
 
-
-
 if ($mode == 'acp')
 {
 	// $phpbb_adm_relative_path
@@ -60,7 +58,7 @@ if ($mode == 'acp')
 			'NAME'			=> $style_dir,
 			'TAG'			=> '<i class="icon-star"></i> phpBB 3.2.0',
 			'RESPONSIVE'	=> 1,
-			'IMG'			=> 'http://www.rockettheme.com/images/phpbb/styles/osmosis/master.jpg',
+			'IMG'			=> "{$web_path}assets/demo/screenshots/example.jpg",
 			'URL'			=> append_sid("{$phpbb_admin_path}index.$phpEx", 's=' . $style_dir, false, $user->session_id),
 			'INFO'			=> '<strong>Version:</strong> 1.0.0<br /><strong>Author:</strong> phpBB<br /><strong>Template:</strong> prosilver<br /><strong>Responsive:</strong> Yes<br /><strong>Price:</strong> <kbd>$99</kbd>',
 			'NEWEST'		=> 1,
@@ -87,7 +85,7 @@ else
 			'NAME'			=> $row['style_name'],
 			'TAG'			=> '<i class="icon-star"></i> phpBB 3.2.0',
 			'RESPONSIVE'	=> ($row['style_id'] % 2 === 0) ? 1 : 0,
-			'IMG'			=> 'http://www.rockettheme.com/images/phpbb/styles/osmosis/master.jpg',
+			'IMG'			=> "{$web_path}assets/demo/screenshots/example.jpg",
 			'URL'			=> append_sid("{$phpbb_root_path}index.$phpEx", 'style=' . $row['style_id']),
 			'INFO'			=> '<strong>Version:</strong> 1.0.0<br /><strong>Author:</strong> ' . $row['style_copyright'] . '<br /><strong>Template:</strong> prosilver<br /><strong>Responsive:</strong> Yes<br /><strong>Price:</strong> <kbd>$99</kbd>',
 			'NEWEST'		=> ($row['style_id'] > 100) ? 1 : 0,

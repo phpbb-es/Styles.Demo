@@ -23,7 +23,6 @@ body {
 
 .logo {
 	padding: 13px 10px 13px;
-	/*border-right: 1px solid #E6E6E6;*/
 }
 
 .logo a {
@@ -70,31 +69,31 @@ body {
 	top: 18px;
 }
 
-.header-btn a.icon-tablet {
+.header-btn a.fa-tablet {
 	font-size: 30px;
 }
 
-.header-btn a.icon-tablet:before {
+.header-btn a.fa-tablet:before {
 	left: 21px;
 	position: absolute;
 	top: 16px;
 }
 
-.header-btn a.icon-mobile-phone {
+.header-btn a.fa-mobile {
 	font-size: 30px;
 }
 
-.header-btn a.icon-mobile-phone:before {
+.header-btn a.fa-mobile:before {
 	left: 23px;
 	position: absolute;
 	top: 16px;
 }
 
-.header-btn a.icon-remove {
+.header-btn a.fa-remove {
 	font-size: 24px;
 }
 
-.header-btn a.icon-remove:before {
+.header-btn a.fa-remove:before {
 	left: 21px;
 	position: absolute;
 	top: 18px;
@@ -210,7 +209,6 @@ body {
 	border-bottom: 1px solid #333333;
 	border-top: 1px solid #333333;
 	height: 364px;
-/*	height: 184px;*/
 	padding: 10px 0;
 }
 
@@ -220,7 +218,6 @@ body {
 
 .styles-list {
 	max-height: 332px;
-/*	max-height: 152px;*/
 	overflow: hidden;
 }
 
@@ -228,13 +225,11 @@ body {
 .styles-next {
 	display: block !important;
 	height: 120px;
-/*	height: 60px;*/
 	left: 0;
 	padding: 0;
 	position: absolute;
 	text-decoration: none;
 	top: 130px;
-/*	top: 63px;*/
 	visibility: visible !important;
 	width: 60px;
 	z-index: 999;
@@ -249,7 +244,6 @@ body {
 .styles-next:before {
 	color: #fff;
 	font-size: 45px;
-/*	font-size: 30px;*/
 	margin: 12px 15px;
 }
 
@@ -264,13 +258,11 @@ body {
 	cursor: pointer;
 	display: block;
 	height: 330px;
-/*	height: 150px;*/
 	margin: 0 10px;
 	overflow: hidden;
 	position: relative;
 	text-decoration: none !important;
 	width: 302px;
-/*	width: 238px;*/
 }
 
 .style img {
@@ -284,7 +276,6 @@ body {
 	font-size: 14px;
 	font-weight: 500;
 	max-width: 300px;
-/*	max-width: 236px;*/
 	overflow: hidden;
 	padding: 5px 5px;
 	text-align: center;
@@ -312,12 +303,10 @@ body {
 	font-weight: 500;
 	position: absolute;
 	top: 12px;
-	/*left: 5px;*/
 }
 
 .tooltip-inner {
 	max-width: 302px;
-/*	max-width: 238px;*/
 }
 
 .tooltip-inner img {
@@ -422,14 +411,6 @@ body {
 }
 
 .preloading-icon {
-	background: #4093E6;
-	background-image: -ms-linear-gradient(top, #79B3EE 0%, #4093E6 100%);
-	background-image: -moz-linear-gradient(top, #79B3EE 0%, #4093E6 100%);
-	background-image: -o-linear-gradient(top, #79B3EE 0%, #4093E6 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #79B3EE), color-stop(1, #4093E6));
-	background-image: -webkit-linear-gradient(top, #79B3EE 0%, #4093E6 100%);
-	background-image: linear-gradient(to bottom, #79B3EE 0%, #4093E6 100%);
-	border: 1px solid #3A84CF;
 	display: block;
 	height: 48px;
 	left: 50%;
@@ -441,15 +422,8 @@ body {
 	z-index: 2;
 }
 
-.preloading-icon .icon-bolt:before {
+.preloading-icon .fa-refresh:before {
 	color: #fff;
-	font-size: 30px;
-	margin: 9px 0 0 15px;
-	-webkit-animation: scaling 0.8s infinite linear;
-	-moz-animation: scaling 0.8s infinite linear;
-	-ms-animation: scaling 0.8s infinite linear;
-	-o-animation: scaling 0.8s infinite linear;
-	animation: scaling 0.8s infinite linear;
 }
 
 @keyframes "scaling" {
