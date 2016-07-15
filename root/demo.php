@@ -2,30 +2,10 @@
 /**
 * VinaBB Demo Styles
 *
-* @version 1.01
+* @version 1.02
 * @copyright (c) VinaBB <vinabb.vn>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
-*/
-
-/**
-* NOTE: Enable style preview for everyone
-*
-* For phpBB 3.0.x
-*
-* Open: includes/session.php
-* Find:
-*	if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))
-* Replace with:
-*	if (!empty($_GET['style']) && !defined('ADMIN_START'))
-*
-* For phpBB 3.1.x
-*
-* Open: phpbb/user.php
-* Find:
-*	if ($style_request && (!$config['override_user_style'] || $auth->acl_get('a_styles')) && !defined('ADMIN_START'))
-* Replace with:
-*	if ($style_request && !defined('ADMIN_START'))
 */
 
 /**
@@ -39,21 +19,28 @@ include($phpbb_root_path . 'common.' . $phpEx);
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
-$user->setup();
+$user->setup('demo');
 
 $mode = $request->variable('m', '');
 
+// ACP styles
 if ($mode == 'acp')
 {
-	// $phpbb_adm_relative_path
-	// append_sid("{$phpbb_admin_path}index.$phpEx", false, true, $user->session_id)
-	$style_dirs = array_merge(array('prosilver'), array_diff(scandir($phpbb_admin_path . 'styles/'), array('..', '.')));
-	asort($style_dirs);
+	// Get the list from adm/styles
+	if (file_exists($phpbb_admin_path . 'styles/'))
+	{
+		$style_dirs = array_merge(array('prosilver'), array_diff(scandir($phpbb_admin_path . 'styles/'), array('..', '.')));
+		asort($style_dirs);
+	}
+	// prosilver is the name of default ACP style in adm/style
+	else
+	{
+		$style_dirs = array('prosilver');
+	}
 
 	foreach ($style_dirs as $style_dir)
 	{
 		$template->assign_block_vars('styles', array(
-			//'ID'			=> $row['style_id'],
 			'VARNAME'		=> style_varname_normalize($style_dir, '_'),
 			'NAME'			=> $style_dir,
 			'TAG'			=> '<i class="icon-star"></i> phpBB 3.2.0',
@@ -69,25 +56,28 @@ if ($mode == 'acp')
 		));
 	}
 }
+// Front-end styles
 else
 {
 	$sql = 'SELECT *
 		FROM ' . STYLES_TABLE . '
 		WHERE style_active = 1
-		ORDER BY style_name';
+		ORDER BY style_path';
 	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
 	{
+		// Get data from style.cfg
+		$cfg = parse_cfg_file($phpbb_root_path . 'styles/' . $row['style_path'] . '/style.cfg');
+
 		$template->assign_block_vars('styles', array(
-			'ID'			=> $row['style_id'],
-			'VARNAME'		=> style_varname_normalize($row['style_name'], '_'),
+			'VARNAME'		=> style_varname_normalize($row['style_path'], '_'),
 			'NAME'			=> $row['style_name'],
-			'TAG'			=> '<i class="icon-star"></i> phpBB 3.2.0',
+			'TAG'			=> '<i class="fa fa-star"></i> phpBB ' . $cfg['phpbb_version'],
 			'RESPONSIVE'	=> ($row['style_id'] % 2 === 0) ? 1 : 0,
 			'IMG'			=> "{$web_path}assets/demo/screenshots/example.jpg",
 			'URL'			=> append_sid("{$phpbb_root_path}index.$phpEx", 'style=' . $row['style_id']),
-			'INFO'			=> '<strong>Version:</strong> 1.0.0<br /><strong>Author:</strong> ' . $row['style_copyright'] . '<br /><strong>Template:</strong> prosilver<br /><strong>Responsive:</strong> Yes<br /><strong>Price:</strong> <kbd>$99</kbd>',
+			'INFO'			=> "<strong>Version:</strong> {$cfg['style_version']}<br><strong>Author:</strong> {$row['style_copyright']}<br><strong>Price:</strong> <kbd>$99</kbd>",
 			'NEWEST'		=> ($row['style_id'] > 100) ? 1 : 0,
 			'BB'			=> 'http://localhost/',
 			'GET'			=> 'http://localhost/3012/',
@@ -100,16 +90,16 @@ else
 
 // Assign index specific vars
 $template->assign_vars(array(
-	'SWITCH_TITLE'	=> ($mode == 'acp') ? 'Switch to Frontend Demo' : 'Switch to ACP Demo',
+	'SWITCH_TITLE'	=> ($mode == 'acp') ? $user->lang('SWITCH_FRONTEND') : $user->lang('SWITCH_ACP'),
 	'U_SWITCH'		=> append_sid("{$phpbb_root_path}demo.$phpEx", ($mode == 'acp') ? '' : 'm=acp'),
 ));
 
 // Output page
-page_header('');
+page_header($user->lang('DEMO_STYLES'));
 
 $template->set_filenames(array(
-	'body' => 'demo_body.html')
-);
+	'body' => 'demo_body.html'
+));
 
 page_footer();
 

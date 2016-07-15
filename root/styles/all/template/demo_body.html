@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ S_USER_LANG }}">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-	<title>VinaBB Demo Styles</title>
+	<title>{{ PAGE_TITLE }}</title>
 
 	<link href="{{ T_ASSETS_PATH }}/demo/css/bootstrap.min.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet" media="screen">
 	<link href="{{ T_ASSETS_PATH }}/demo/css/template.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet" media="screen">
@@ -26,52 +27,46 @@
 	
 <body class="dark">
 	<header class="switcher-bar clearfix">
+		<!-- Logo -->
 		<div class="logo pull-left">
-			<img src="{{ T_ASSETS_PATH }}/demo/images/logo.png" data-toggle="tooltip" title="VinaBB - The Holy Land of phpBB :)" class="show-tooltip" />
+			<img src="{{ T_ASSETS_PATH }}/demo/images/logo.png" data-toggle="tooltip" title="{{ lang('DEMO_STYLES_EXPLAIN') }}" class="show-tooltip" />
 		</div>
 
+		<!-- Style switcher -->
 		<div class="style-switcher pull-left">
-			<a href="#" data-toggle="tooltip" title="Pick a style to preview" class="show-tooltip">Select a style <span>+</span></a>
+			<a href="#" data-toggle="tooltip" title="{{ lang('SELECT_STYLE_EXPLAIN') }}" class="show-tooltip">{{ lang('SELECT_STYLE') }} <span>+</span></a>
 		</div>
 
+		<!-- Right buttons -->
 		<div class="remove-btn header-btn pull-right hidden-xs">
-			<a href="#" data-toggle="tooltip" title="Close" class="fa fa-remove show-tooltip"></a>
+			<a href="#" data-toggle="tooltip" title="{{ lang('CLOSE') }}" class="fa fa-remove show-tooltip"></a>
 		</div>
-
 		<div class="switch-btn header-btn pull-right hidden-xs">
 			<a href="#" data-toggle="modal" data-target=".bs-example-modal-sm" title="{{ SWITCH_TITLE }}" class="fa fa-refresh show-tooltip"></a>
 		</div>
-
 		<div class="download-btn header-btn pull-right hidden-xs">
-			<a href="#" data-toggle="tooltip" title="Download" class="fa fa-download show-tooltip"></a>
+			<a href="#" data-toggle="tooltip" title="{{ lang('DOWNLOAD') }}" class="fa fa-download show-tooltip"></a>
 		</div>
-
 		<div class="info-btn header-btn pull-right hidden-xs">
-			<a href="#" data-toggle="tooltip" title="Details" class="fa fa-info-circle show-tooltip"></a>
+			<a href="#" data-toggle="tooltip" title="{{ lang('DETAILS') }}" class="fa fa-info-circle show-tooltip"></a>
 		</div>
-
 		<div class="mobile-btn header-btn pull-right hidden-xs">
-			<a href="#" data-toggle="tooltip" title="Phone" class="fa fa-mobile show-tooltip"></a>
+			<a href="#" data-toggle="tooltip" title="{{ lang('PHONE') }}" class="fa fa-mobile show-tooltip"></a>
 		</div>
-
 		<div class="tablet-btn header-btn pull-right hidden-xs">
-			<a href="#" data-toggle="tooltip" title="Tablet" class="fa fa-tablet show-tooltip"></a>
+			<a href="#" data-toggle="tooltip" title="{{ lang('TABLET') }}" class="fa fa-tablet show-tooltip"></a>
 		</div>
-
 		<div class="desktop-btn header-btn pull-right hidden-xs">
-			<a href="#" data-toggle="tooltip" title="Desktop" class="fa fa-desktop show-tooltip"></a>
+			<a href="#" data-toggle="tooltip" title="{{ lang('DESKTOP') }}" class="fa fa-desktop show-tooltip"></a>
 		</div>
 	</header>
 
 	<section class="switcher-body">
-		<a href="#" title="Previous" class="fa fa-chevron-left styles-prev"></a>
-
+		<a href="#" title="{{ lang('PREVIOUS') }}" class="fa fa-chevron-left styles-prev"></a>
 		<div class="styles-wrapper">
 			<div class="styles-list clearfix"></div>
 		</div>
-
-		<a href="#" title="Next" class="fa fa-chevron-right styles-next"></a>
-
+		<a href="#" title="{{ lang('NEXT') }}" class="fa fa-chevron-right styles-next"></a>
 		<div class="horizontal-line bottom-nav"></div>
 	</section>
 
@@ -86,16 +81,16 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span>
-						<span class="sr-only">Close</span>
+						<span class="sr-only">{{ lang('CLOSE') }}</span>
 					</button>
-					<h4 class="modal-title" id="downloadAlertLabel">Disclaimer</h4>
+					<h4 class="modal-title" id="downloadAlertLabel">{{ lang('INFORMATION') }}</h4>
 				</div>
 				<div class="modal-body">
-					This style is sale at the price $<span id="stylePrice">0</span>
+					{{ lang('PRICE_DIALOG') }}<span id="stylePrice">0</span>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" id="agreeDownload"><i class="fa fa-cloud-download"></i> Try for Free</button>
-					<button type="button" class="btn btn-success" id="agreePurchase"><i class="fa fa-shopping-cart"></i> Purchase</button>
+					<button type="button" class="btn btn-danger" id="agreeDownload"><i class="fa fa-cloud-download"></i> {{ lang('DOWNLOAD') }}</button>
+					<button type="button" class="btn btn-success" id="agreePurchase"><i class="fa fa-shopping-cart"></i> {{ lang('PURCHASE') }}</button>
 				</div>
 			</div>
 		</div>
@@ -109,18 +104,18 @@
 
 		$styles = {
 			{% for style in styles %}
-			'{{ style.VARNAME }}' : {
-				name : '{{ style.NAME }}',
-				tag : '{{ style.TAG }}',
-				responsive : '{{ style.RESPONSIVE }}',
-				img : '{{ style.IMG }}',
-				url : '{{ style.URL }}',
-				info : '{{ style.INFO }}',	
-				newest : '{{ style.NEWEST }}',
-				bb : '{{ style.BB }}',
-				get : '{{ style.GET }}',
-				buy : '{{ style.BUY }}',
-				price : '{{ style.PRICE }}'
+			'{{ style.VARNAME }}': {
+				name: '{{ style.NAME }}',
+				tag: '{{ style.TAG }}',
+				responsive: '{{ style.RESPONSIVE }}',
+				img: '{{ style.IMG }}',
+				url: '{{ style.URL }}',
+				info: '{{ style.INFO }}',	
+				newest: '{{ style.NEWEST }}',
+				bb: '{{ style.BB }}',
+				get: '{{ style.GET }}',
+				buy: '{{ style.BUY }}',
+				price: '{{ style.PRICE }}'
 			},
 			{% endfor %}
 		};
