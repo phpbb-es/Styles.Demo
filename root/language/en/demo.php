@@ -33,13 +33,18 @@ $lang = array_merge($lang, array(
 	'DETAILS'				=> 'Details',
 	'DOWNLOAD'				=> 'Download',
 
-	'PHONE'			=> 'Phone',
-	'PRICE'			=> 'Price',
-	'PRICE_DIALOG'	=> 'This style is sale at the price $',
-	'PURCHASE'		=> 'Purchase',
+	'FREE'	=> 'Free',
+
+	'NEW'	=> 'New',
+
+	'PHONE'		=> 'Phone',
+	'PRICE'		=> 'Price',
+	'PRICE_INFO'	=> 'This style is sale at the price %s',
+	'PURCHASE'	=> 'Purchase',
 
 	'SELECT_STYLE'			=> 'Select a style',
 	'SELECT_STYLE_EXPLAIN'	=> 'Select a style to preview',
+	'SIGN_CURRENCY'			=> '$',
 	'SWITCH_ACP'				=> 'Switch to ACP Demo',
 	'SWITCH_FRONTEND'		=> 'Switch to Front-end Demo',
 

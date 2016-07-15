@@ -86,10 +86,10 @@
 					<h4 class="modal-title" id="downloadAlertLabel">{{ lang('INFORMATION') }}</h4>
 				</div>
 				<div class="modal-body">
-					{{ lang('PRICE_DIALOG') }}<span id="stylePrice">0</span>
+					<span id="stylePrice"></span>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" id="agreeDownload"><i class="fa fa-cloud-download"></i> {{ lang('DOWNLOAD') }}</button>
+					<button type="button" class="btn btn-danger" id="agreeDownload"><i class="fa fa-download"></i> {{ lang('DOWNLOAD') }}</button>
 					<button type="button" class="btn btn-success" id="agreePurchase"><i class="fa fa-shopping-cart"></i> {{ lang('PURCHASE') }}</button>
 				</div>
 			</div>
@@ -100,6 +100,9 @@
 	<script type="text/javascript">
 		var $styles,
 			$current_style = 'prosilver',
+			$label_currency = "{{ lang('SIGN_CURRENCY')|e('js') }}",
+			$label_free = "{{ lang('FREE')|e('js') }}",
+			$label_new = "{{ lang('NEW')|upper|e('js') }}"
 			$switch_url = '{{ U_SWITCH }}';
 
 		$styles = {
@@ -115,7 +118,9 @@
 				bb: '{{ style.BB }}',
 				get: '{{ style.GET }}',
 				buy: '{{ style.BUY }}',
-				price: '{{ style.PRICE }}'
+				price: '{{ style.PRICE }}',
+				price_label: '{{ style.PRICE_LABEL }}',
+				price_info: '{{ style.PRICE_INFO }}'
 			},
 			{% endfor %}
 		};

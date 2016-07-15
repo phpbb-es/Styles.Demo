@@ -53,6 +53,8 @@ if ($mode == 'acp')
 			'GET'			=> 'http://localhost/3012/',
 			'BUY'			=> 'http://vnexpress.net/',
 			'PRICE'			=> 25,
+			'PRICE_LABEL'	=> '$25',
+			'PRICE_INFO'		=> $user->lang('PRICE_INFO', '$25'),
 		));
 	}
 }
@@ -73,16 +75,18 @@ else
 		$template->assign_block_vars('styles', array(
 			'VARNAME'		=> style_varname_normalize($row['style_path'], '_'),
 			'NAME'			=> $row['style_name'],
-			'TAG'			=> '<i class="fa fa-star"></i> phpBB ' . $cfg['phpbb_version'],
-			'RESPONSIVE'	=> ($row['style_id'] % 2 === 0) ? 1 : 0,
+			'TAG'			=> 'phpBB ' . $cfg['phpbb_version'],
+			'RESPONSIVE'	=> ($row['style_id'] % 2 === 0) ? 0 : 1,
 			'IMG'			=> "{$web_path}assets/demo/screenshots/example.jpg",
 			'URL'			=> append_sid("{$phpbb_root_path}index.$phpEx", 'style=' . $row['style_id']),
 			'INFO'			=> "<strong>Version:</strong> {$cfg['style_version']}<br><strong>Author:</strong> {$row['style_copyright']}<br><strong>Price:</strong> <kbd>$99</kbd>",
-			'NEWEST'		=> ($row['style_id'] > 100) ? 1 : 0,
+			'NEWEST'		=> ($row['style_id'] > 100) ? 0 : 1,
 			'BB'			=> 'http://localhost/',
 			'GET'			=> 'http://localhost/3012/',
 			'BUY'			=> 'http://vnexpress.net/',
-			'PRICE'			=> ($row['style_id'] < 100) ? 10 : 25,
+			'PRICE'			=> 25,
+			'PRICE_LABEL'	=> '$25',
+			'PRICE_INFO'		=> $user->lang('PRICE_INFO', '$25'),
 		));
 	}
 	$db->sql_freeresult($result);
