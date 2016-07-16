@@ -1,2 +1,5 @@
 * text=auto
 * text eol=lf
+root/assets/demo/fonts/* binary
+root/assets/demo/images/* binary
+root/assets/demo/screenshots/* binary
