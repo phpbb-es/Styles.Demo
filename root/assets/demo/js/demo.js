@@ -10,6 +10,7 @@
 var $viewportButtons = $('.mobile-btn, .tablet-btn, .desktop-btn'),
 	$styleList = $('.styles-list'),
 	$body = $('body'),
+	$lastViewIframe = '',
 	$styleIframe = $('.style-iframe');
 
 // Insert styles to carousel
@@ -25,9 +26,9 @@ $.each($styles,
 			var tooltip = '';
 		}
 
-		var newBadge = (object.newest == '1') ? '<div class="ribbon-wrapper-green"><div class="ribbon-green">' + $label_new + '</div></div>' : '';
+		var priceRibbon = (object.price > 0) ? '<div class="ribbon"><span>' + object.price_label + '</span></div>' : '';
 
-		$styleList.append('<a class="style pull-left" data-id="' + key + '" ' + tooltip + '><img src="' + object.img + '" alt="' + object.name + '" width="300" height="300"><span data-toggle="popover" data-content="' + object.info + '" class="title">' + object.name + '</span><span class="badge"><i class="fa fa-star"></i> ' + object.tag + '</span>' + newBadge + '</a>');
+		$styleList.append('<a class="style pull-left" data-id="' + key + '" ' + tooltip + '><img src="' + object.img + '" alt="' + object.name + '" width="300" height="300"><span data-toggle="popover" data-content="' + object.info + '" class="title">' + object.name + '</span><span class="badge"><i class="fa fa-star"></i> ' + object.phpbb + '</span>' + priceRibbon + '</a>');
 
 		// Display style info
 		$('.title').popover(
@@ -40,58 +41,98 @@ $.each($styles,
 	}
 );
 
-// Download button on click
-$('.download-btn').click(
+// Get button on click
+$('.get-btn').click(
 	function()
 	{
 		if ($current_style in $styles)
 		{
+			document.getElementById('styleName').innerHTML = $styles[$current_style]['name'];
+			document.getElementById('styleInfo').innerHTML = $styles[$current_style]['phpbb_info'] + '<br>' + $styles[$current_style]['info'];
+
 			if ($styles[$current_style]['price'] > 0)
 			{
-				document.getElementById('stylePrice').innerHTML = $styles[$current_style]['price_info'];
-				$('#downloadAlert').modal('show');
+				document.getElementById('downloadPurchase').innerHTML = '<i class="fa fa-shopping-cart"></i> ' + $label_purchase;
+				document.getElementById('downloadPurchase').className = 'btn btn-success';
 			}
 			else
 			{
-				top.location.href = $styles[$current_style]['get'];
+				document.getElementById('downloadPurchase').innerHTML = '<i class="fa fa-download"></i> ' + $label_download;
+				document.getElementById('downloadPurchase').className = 'btn btn-danger';
 			}
+
+			$('#downloadAlert').modal('show');
 		}
 
 		return false;
 	}
 );
 
-$('#agreeDownload').click(
+// Download/Purchase button on click
+$('#downloadPurchase').click(
 	function()
 	{
 		if ($current_style in $styles)
 		{
-			top.location.href = $styles[$current_style]['get'];
+			$('#downloadAlert').modal('hide');
+			top.location.href = $styles[$current_style]['download'];
 		}
 
 		return false;
 	}
 );
 
-$('#agreePurchase').click(
+// Details button on click
+$('#viewDetails').click(
 	function()
 	{
 		if ($current_style in $styles)
 		{
-			top.location.href = $styles[$current_style]['buy'];
+			$('#downloadAlert').modal('hide');
+			window.open($styles[$current_style]['vinabb']);
 		}
 
 		return false;
 	}
 );
 
-// Info button on click
-$('.info-btn').click(
+// Language button on click
+$('.lang-btn').click(
 	function()
 	{
+		// Switch language
+		$current_lang = ($current_lang == 'en') ? $custom_lang : 'en';
+
+		// Update language button
+		if ($current_lang == 'en')
+		{
+			document.getElementById('langButton').className = 'fa fa-globe show-tooltip';
+			$('#langButton').tooltip('hide');
+			$('#langButton').attr('data-original-title', $english_lang_name);
+		}
+		else
+		{
+			document.getElementById('langButton').className = 'fa fa-star show-tooltip';
+			$('#langButton').tooltip('hide');
+			$('#langButton').attr('data-original-title', $custom_lang_name);
+		}
+
+		// Pre-loading effects
+		$('.preloader, .preloading-icon').fadeIn(400);
+
+		$styleIframe.load(
+			function()
+			{
+				$('.preloader, .preloading-icon').fadeOut(400);
+			}
+		);
+
+		// Also add the last-page parameter z=... to URL
 		if ($current_style in $styles)
 		{
-			window.open($styles[$current_style]['bb']);
+			switcher_viewport_buttons();
+			$styleIframe.attr('src', $styles[$current_style].url_lang + '&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '')));
+			location.hash = '#' + $current_style;
 		}
 
 		return false;
@@ -111,7 +152,7 @@ $('.info-btn').click(
 $('.switch-btn').click(
 	function()
 	{
-		top.location.href = $switch_url;
+		top.location.href = $switch_mode_url;
 
 		return false;
 	}
@@ -264,9 +305,36 @@ $(document).ready(
 			}
 		}
 
-		var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
+		// Update language button
+		if ($current_lang == 'en')
+		{
+			document.getElementById('langButton').className = 'fa fa-globe show-tooltip';
+			$('#langButton').tooltip('hide');
+			$('#langButton').attr('data-original-title', $english_lang_name);
+		}
+		else
+		{
+			document.getElementById('langButton').className = 'fa fa-star show-tooltip';
+			$('#langButton').tooltip('hide');
+			$('#langButton').attr('data-original-title', $custom_lang_name);
+		}
 
+		// Update get button
+		if ($styles[$current_style].price > 0)
+		{
+			$('#getButton').attr('data-original-title', $label_purchase);
+			document.getElementById('getButton').className = 'fa fa-shopping-cart animate-pulse show-tooltip';
+		}
+		else
+		{
+			$('#getButton').attr('data-original-title', $label_download);
+			document.getElementById('getButton').className = 'fa fa-download animate-pulse show-tooltip';
+		}
+
+		// Update style name + price label
+		var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
 		$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
+
 		switcher_viewport_buttons();
 		$styleIframe.attr('src', $styles[$current_style].url);
 
@@ -300,9 +368,22 @@ $('.style').click(
 				}
 			);
 
-			var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
+			// Update get button
+			if ($styles[$current_style].price > 0)
+			{
+				$('#getButton').attr('data-original-title', $label_purchase);
+				document.getElementById('getButton').className = 'fa fa-shopping-cart animate-pulse show-tooltip';
+			}
+			else
+			{
+				$('#getButton').attr('data-original-title', $label_download);
+				document.getElementById('getButton').className = 'fa fa-download animate-pulse show-tooltip';
+			}
 
+			// Update style name + price label
+			var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
 			$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
+
 			$styleIframe.attr('src', $styles[$current_style].url);
 			location.hash = '#' + $current_style;
 		}
@@ -312,3 +393,7 @@ $('.style').click(
 		return false;
 	}
 );
+
+$styleIframe.load(function(){
+    $lastViewIframe = this.contentWindow.location.href;
+});

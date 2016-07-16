@@ -25,7 +25,8 @@ if (empty($lang) || !is_array($lang))
 */
 
 $lang = array_merge($lang, array(
-	'CLOSE'	=> 'Close',
+	'CLOSE'		=> 'Close',
+	'COPYRIGHT'	=> 'Copyright',
 
 	'DEMO_STYLES'			=> 'Demo Styles',
 	'DEMO_STYLES_EXPLAIN'	=> 'The Holy Land of phpBB',
@@ -35,18 +36,24 @@ $lang = array_merge($lang, array(
 
 	'FREE'	=> 'Free',
 
-	'NEW'	=> 'New',
+	'LANG_ENGLISH'	=> 'English (Click to switch to %s)',
+	'LANG_CUSTOM'	=> '%s (Click to switch to English)',
 
-	'PHONE'		=> 'Phone',
-	'PRICE'		=> 'Price',
-	'PRICE_INFO'	=> 'This style is sale at the price %s',
-	'PURCHASE'	=> 'Purchase',
+	'MODE_ACP'		=> 'Switch to ACP Demo',
+	'MODE_FRONTEND'	=> 'Switch to Front-end Demo',
 
-	'SELECT_STYLE'			=> 'Select a style',
+	'PHONE'			=> 'Phone',
+	'PHPBB_BADGE'	=> 'phpBB %s',
+	'PHPBB_VERSION'	=> 'phpBB version',
+	'PRICE'			=> 'Price',
+	'PRICE_INFO'		=> 'This style is sale at the price %s.',
+	'PURCHASE'		=> 'Purchase',
+
+	'SELECT_STYLE'			=> 'Select a style…',
 	'SELECT_STYLE_EXPLAIN'	=> 'Select a style to preview',
 	'SIGN_CURRENCY'			=> '$',
-	'SWITCH_ACP'				=> 'Switch to ACP Demo',
-	'SWITCH_FRONTEND'		=> 'Switch to Front-end Demo',
 
 	'TABLET'	=> 'Tablet',
+
+	'VERSION'	=> 'Version',
 ));
