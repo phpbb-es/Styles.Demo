@@ -48,7 +48,6 @@ $lang = array_merge($lang, array(
 	'PHPBB_VERSION'	=> 'phpBB version',
 	'PRESETS'		=> 'Presets',
 	'PRICE'			=> 'Price',
-	'PRICE_INFO'		=> 'This style is sale at the price %s.',
 	'PURCHASE'		=> 'Purchase',
 
 	'REPONSIVE'	=> 'Reponsive',

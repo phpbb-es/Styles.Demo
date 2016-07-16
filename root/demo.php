@@ -89,7 +89,7 @@ if ($mode == 'acp')
 	// Get the list from adm/styles
 	if (file_exists($phpbb_admin_path . 'styles/'))
 	{
-		$style_dirs = array_merge(array(DEFAULT_STYLE), array_diff(scandir($phpbb_admin_path . 'styles/'), array('..', '.')));
+		$style_dirs = array_merge(array(DEFAULT_STYLE), array_diff(scandir($phpbb_admin_path . 'styles/'), array('..', '.', '.htaccess')));
 		asort($style_dirs);
 	}
 	// Add the default ACP style in adm/style
@@ -186,18 +186,18 @@ else
 			$style_info = '<strong>' . $user->lang('VERSION') . $user->lang('COLON') . '</strong> ' . $cfg['style_version'];
 			$style_info .= '<br><strong>' . $user->lang('COPYRIGHT') . $user->lang('COLON') . '</strong> ' . $cfg['copyright'];
 			$style_vinabb = $style_download = generate_board_url();
-			$style_price = rand(0, 1);
-			$style_price_label = '$' . $style_price;
+			$style_price = 0;
+			$style_price_label = '';
 		}
 
 		$template->assign_block_vars('styles', array(
 			'VARNAME'		=> $style_varname,
 			'NAME'			=> $row['style_name'],
 			'PHPBB'			=> $user->lang('PHPBB_BADGE', $phpbb_version),
-			'PHPBB_INFO'		=> '<strong>' . $user->lang('PHPBB_VERSION') . $user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
+			'PHPBB_INFO'	=> '<strong>' . $user->lang('PHPBB_VERSION') . $user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
 			'IMG'			=> $style_img,
 			'INFO'			=> $style_info,
-			'VINABB'			=> $style_vinabb,
+			'VINABB'		=> $style_vinabb,
 			'DOWNLOAD'		=> $style_download,
 			'PRICE'			=> $style_price,
 			'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $user->lang('FREE'),
@@ -217,7 +217,7 @@ $template->assign_vars(array(
 	'CUSTOM_LANG_NAME'	=> CUSTOM_LANG_NAME,
 	'CURRENT_LANG'		=> $demo_lang,
 	'LANG_NAME'			=> ($demo_lang == 'en') ? $user->lang('LANG_ENGLISH', CUSTOM_LANG_NAME) : $user->lang('LANG_CUSTOM', CUSTOM_LANG_NAME),
-	'MODE_TITLE'			=> ($mode == 'acp') ? $user->lang('MODE_FRONTEND') : $user->lang('MODE_ACP'),
+	'MODE_TITLE'		=> ($mode == 'acp') ? $user->lang('MODE_FRONTEND') : $user->lang('MODE_ACP'),
 
 	'U_MODE'	=> append_sid("{$phpbb_root_path}demo.$phpEx", ($mode == 'acp') ? '' : 'm=acp'),
 ));
