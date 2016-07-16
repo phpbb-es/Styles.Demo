@@ -53,12 +53,12 @@ $('.get-btn').click(
 			if ($styles[$current_style]['price'] > 0)
 			{
 				document.getElementById('downloadPurchase').innerHTML = '<i class="fa fa-shopping-cart"></i> ' + $label_purchase;
-				document.getElementById('downloadPurchase').className = 'btn btn-success';
+				document.getElementById('downloadPurchase').className = 'btn btn-danger';
 			}
 			else
 			{
 				document.getElementById('downloadPurchase').innerHTML = '<i class="fa fa-download"></i> ' + $label_download;
-				document.getElementById('downloadPurchase').className = 'btn btn-danger';
+				document.getElementById('downloadPurchase').className = 'btn btn-success';
 			}
 
 			$('#downloadAlert').modal('show');
