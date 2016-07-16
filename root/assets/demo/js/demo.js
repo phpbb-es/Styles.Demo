@@ -131,7 +131,7 @@ $('.lang-btn').click(
 		if ($current_style in $styles)
 		{
 			switcher_viewport_buttons();
-			$styleIframe.attr('src', $styles[$current_style].url_lang + '&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '')));
+			$styleIframe.attr('src', $styles[$current_style].url_lang + '&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '').replace('&amp;', '&')));
 			location.hash = '#' + $current_style;
 		}
 
