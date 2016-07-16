@@ -30,6 +30,7 @@ $lang = array_merge($lang, array(
 
 	'DEMO_STYLES'			=> 'Demo Styles',
 	'DEMO_STYLES_EXPLAIN'	=> 'The Holy Land of phpBB',
+	'DESIGNER'				=> 'Designer',
 	'DESKTOP'				=> 'Desktop',
 	'DETAILS'				=> 'Details',
 	'DOWNLOAD'				=> 'Download',
@@ -45,9 +46,12 @@ $lang = array_merge($lang, array(
 	'PHONE'			=> 'Phone',
 	'PHPBB_BADGE'	=> 'phpBB %s',
 	'PHPBB_VERSION'	=> 'phpBB version',
+	'PRESETS'		=> 'Presets',
 	'PRICE'			=> 'Price',
 	'PRICE_INFO'		=> 'This style is sale at the price %s.',
 	'PURCHASE'		=> 'Purchase',
+
+	'REPONSIVE'	=> 'Reponsive',
 
 	'SELECT_STYLE'			=> 'Select a style…',
 	'SELECT_STYLE_EXPLAIN'	=> 'Select a style to preview',

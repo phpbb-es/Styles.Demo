@@ -325,7 +325,8 @@ body {
 	right: -5px; top: -5px;
 	z-index: 1;
 	overflow: hidden;
-	width: 75px; height: 75px;
+	width: 75px;
+	height: 75px;
 	text-align: right;
 }
 
@@ -344,12 +345,15 @@ body {
 	background: linear-gradient(#F70505 0%, #8F0808 100%);
 	box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
 	position: absolute;
-	top: 19px; right: -21px;
+	top: 19px;
+	right: -21px;
 }
 
 .ribbon span::before {
 	content: "";
-	position: absolute; left: 0px; top: 100%;
+	position: absolute;
+	left: 0px;
+	top: 100%;
 	z-index: -1;
 	border-left: 3px solid #8F0808;
 	border-right: 3px solid transparent;
@@ -359,7 +363,9 @@ body {
 
 .ribbon span::after {
 	content: "";
-	position: absolute; right: 0px; top: 100%;
+	position: absolute;
+	right: 0px;
+	top: 100%;
 	z-index: -1;
 	border-left: 3px solid transparent;
 	border-right: 3px solid #8F0808;
@@ -381,7 +387,7 @@ body {
 	height: 116px;
 	background: #e1e1e1;
 	border-bottom: 1px solid #d1d1d1;
-	box-shadow: inset 0 2px 8px rgba(0,0,0,0.1),0 1px 0 0 rgba(255,255,255,0.8);
+	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Demo Iframe */
@@ -400,7 +406,7 @@ body {
 	bottom: 0;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	filter: alpha(opacity=50);
-	opacity: .5;
+	opacity: 0.5;
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -425,85 +431,85 @@ body {
 
 @keyframes "scaling" {
 	0% {
-		-webkit-transform: scale(1,1);
-		-moz-transform: scale(1,1);
-		-o-transform: scale(1,1);
-		-ms-transform: scale(1,1);
-		transform: scale(1,1);
+		-webkit-transform: scale(1, 1);
+		-moz-transform: scale(1, 1);
+		-o-transform: scale(1, 1);
+		-ms-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 	50% {
-		-webkit-transform: scale(0.8,0.8);
-		-moz-transform: scale(0.8,0.8);
-		-o-transform: scale(0.8,0.8);
-		-ms-transform: scale(0.8,0.8);
-		transform: scale(0.8,0.8);
+		-webkit-transform: scale(0.8, 0.8);
+		-moz-transform: scale(0.8, 0.8);
+		-o-transform: scale(0.8, 0.8);
+		-ms-transform: scale(0.8, 0.8);
+		transform: scale(0.8, 0.8);
 	}
 	100% {
-		-webkit-transform: scale(1,1);
-		-moz-transform: scale(1,1);
-		-o-transform: scale(1,1);
-		-ms-transform: scale(1,1);
-		transform: scale(1,1);
+		-webkit-transform: scale(1, 1);
+		-moz-transform: scale(1, 1);
+		-o-transform: scale(1, 1);
+		-ms-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 }
 
 @-moz-keyframes scaling {
 	0% {
-		-moz-transform: scale(1,1);
-		transform: scale(1,1);
+		-moz-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 	50% {
-		-moz-transform: scale(0.8,0.8);
-		transform: scale(0.8,0.8);
+		-moz-transform: scale(0.8, 0.8);
+		transform: scale(0.8, 0.8);
 	}
 	100% {
-		-moz-transform: scale(1,1);
-		transform: scale(1,1);
+		-moz-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 }
 
 @-webkit-keyframes "scaling" {
 	0% {
-		-webkit-transform: scale(1,1);
-		transform: scale(1,1);
+		-webkit-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 	50% {
-		-webkit-transform: scale(0.8,0.8);
-		transform: scale(0.8,0.8);
+		-webkit-transform: scale(0.8, 0.8);
+		transform: scale(0.8, 0.8);
 	}
 	100% {
-		-webkit-transform: scale(1,1);
-		transform: scale(1,1);
+		-webkit-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 }
 
 @-ms-keyframes "scaling" {
 	0% {
-		-ms-transform: scale(1,1);
-		transform: scale(1,1);
+		-ms-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 	50% {
-		-ms-transform: scale(0.8,0.8);
-		transform: scale(0.8,0.8);
+		-ms-transform: scale(0.8, 0.8);
+		transform: scale(0.8, 0.8);
 	}
 	100% {
-		-ms-transform: scale(1,1);
-		transform: scale(1,1);
+		-ms-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 }
 
 @-o-keyframes "scaling" {
 	0% {
-		-o-transform: scale(1,1);
-		transform: scale(1,1);
+		-o-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 	50% {
-		-o-transform: scale(0.8,0.8);
-		transform: scale(0.8,0.8);
+		-o-transform: scale(0.8, 0.8);
+		transform: scale(0.8, 0.8);
 	}
 	100% {
-		-o-transform: scale(1,1);
-		transform: scale(1,1);
+		-o-transform: scale(1, 1);
+		transform: scale(1, 1);
 	}
 }
 
@@ -534,6 +540,12 @@ body.dark,
 .dark .logo,
 .dark .header-btn a {
 	border-color: #0f1d2d;
+}
+
+/* Green version for <code> */
+code.green {
+	color: #3c763d;
+	background-color: #dff0d8;
 }
 
 /* Animate-Pulse Effect for Font Awesome */

@@ -19,12 +19,8 @@
 			top.location.replace(self.location.href);
 		}
 	</script>
-
-	<!--[if lt IE 9]>
-		<script>/*@cc_on'abbr article aside audio canvas details figcaption figure footer header hgroup mark meter nav output progress section summary subline time video'.replace(/\w+/g,function(n){document.createElement(n)})@*/</script>
-	<![endif]-->    
 </head>
-	
+
 <body class="dark">
 	<header class="switcher-bar clearfix">
 		<!-- Logo -->
@@ -61,6 +57,7 @@
 		</div>
 	</header>
 
+	<!-- Styles switcher -->
 	<section class="switcher-body">
 		<a href="#" title="{{ lang('PREVIOUS') }}" class="fa fa-chevron-left styles-prev"></a>
 		<div class="styles-wrapper">
@@ -70,11 +67,14 @@
 		<div class="horizontal-line bottom-nav"></div>
 	</section>
 
+	<!-- Preview iframe -->
 	<iframe class="style-iframe" frameborder="0" border="0"></iframe>
 
+	<!-- Pre-loading effect -->
 	<div class="preloader"></div>
 	<div class="preloading-icon"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></div>
 
+	<!-- Download dialog -->
 	<div class="modal fade" id="downloadAlert" tabindex="-1" role="dialog" aria-labelledby="downloadAlertLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -89,7 +89,7 @@
 					<span id="styleInfo"></span>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" id="viewDetails"><i class="fa fa-info-circle"></i> {{ lang('DETAILS') }}</button>
+					<button type="button" class="btn btn-primary" id="viewDetails"><i class="fa fa-info-circle"></i> {{ lang('DETAILS') }}</button>
 					<button type="button" class="btn btn-success" id="downloadPurchase"><i class="fa fa-download"></i> {{ lang('DOWNLOAD') }}</button>
 				</div>
 			</div>

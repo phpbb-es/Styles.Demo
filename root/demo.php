@@ -2,7 +2,7 @@
 /**
 * VinaBB Demo Styles
 *
-* @version 1.03
+* @version 1.05
 * @copyright (c) VinaBB <vinabb.vn>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
@@ -48,7 +48,6 @@ if ($switch_lang)
 
 */
 
-
 /**
 * @ignore
 */
@@ -67,8 +66,8 @@ define('CUSTOM_LANG', 'vi');
 define('CUSTOM_LANG_NAME', 'Vietnamese');
 
 // Get more online style data
-$get_online_data = false;
-$get_online_url = '';
+$get_online_data = true;
+$get_online_url = generate_board_url() . '/assets/demo/styles.json';
 
 // Parameters
 $mode = $request->variable('m', '');
@@ -121,6 +120,29 @@ if ($mode == 'acp')
 // Front-end styles
 else
 {
+	// Get more style data from our server
+	$json = array();
+
+	if ($get_online_data && !empty($get_online_url))
+	{
+		// Test file URL
+		$test = get_headers($get_online_url);
+
+		if (strpos($test[0], '200') !== false)
+		{
+			// We use cURL here since cURL is faster than file_get_contents()
+			$curl = curl_init($get_online_url);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			$raw = curl_exec($curl);
+			curl_close($curl);
+
+			// Parse JSON
+			$json = json_decode($raw, true);
+		}
+	}
+
+	// Build the style list
 	$sql = 'SELECT *
 		FROM ' . STYLES_TABLE . '
 		WHERE style_active = 1
@@ -129,6 +151,9 @@ else
 
 	while ($row = $db->sql_fetchrow($result))
 	{
+		// Get data from style.cfg
+		$cfg = parse_cfg_file($phpbb_root_path . 'styles/' . $row['style_path'] . '/style.cfg');
+
 		// Style varname
 		$style_varname = style_varname_normalize($row['style_path'], '_');
 
@@ -141,19 +166,22 @@ else
 		}
 
 		// Style info
-		if ($get_online_data)
+		if (isset($json['frontend'][$style_varname]))
 		{
-			$phpbb_version = '';
-			$style_info = '';
-			$style_vinabb = $style_download = '';
-			$style_price = 0;
+			$phpbb_version = $json['frontend'][$style_varname]['phpbb_version'];
+			$style_info = '<strong>' . $user->lang('VERSION') . $user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['version'];
+			$style_info .= '<br><strong>' . $user->lang('DESIGNER') . $user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['author_name'];
+			$style_info .= '<br><strong>' . $user->lang('PRESETS') . $user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['presets'];
+			$style_info .= '<br><strong>' . $user->lang('REPONSIVE') . $user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['reponsive'] == 1) ? $user->lang('YES') : $user->lang('NO'));
+			$style_info .= '<br><strong>' . $user->lang('PRICE') . $user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $user->lang('FREE') . '</code>');
+			$style_vinabb = 'http://vinabb.vn/bb/item/' . $json['frontend'][$style_varname]['id'] . '/download';
+			$style_download = $json['frontend'][$style_varname]['url'];
+			$style_price = $json['frontend'][$style_varname]['price'];
+			$style_price_label = $json['frontend'][$style_varname]['price_label'];
 		}
 		// Only basic info
 		else
 		{
-			// Get data from style.cfg
-			$cfg = parse_cfg_file($phpbb_root_path . 'styles/' . $row['style_path'] . '/style.cfg');
-
 			$phpbb_version = $cfg['phpbb_version'];
 			$style_info = '<strong>' . $user->lang('VERSION') . $user->lang('COLON') . '</strong> ' . $cfg['style_version'];
 			$style_info .= '<br><strong>' . $user->lang('COPYRIGHT') . $user->lang('COLON') . '</strong> ' . $cfg['copyright'];

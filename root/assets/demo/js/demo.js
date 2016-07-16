@@ -1,5 +1,5 @@
 /**
-* Switcheroo by OriginalEXE
+* Based on Switcheroo by OriginalEXE
 * https://github.com/OriginalEXE/Switcheroo
 * MIT licenced
 */
