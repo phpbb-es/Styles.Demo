@@ -1,5 +1,6 @@
 * text=auto
 * text eol=lf
+contrib/*.ttf binary
 root/assets/demo/fonts/* binary
 root/assets/demo/images/* binary
 root/assets/demo/screenshots/* binary
