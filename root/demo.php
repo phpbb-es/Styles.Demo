@@ -2,7 +2,7 @@
 /**
 * VinaBB Demo Styles
 *
-* @version 1.05
+* @version 1.06
 * @copyright (c) VinaBB <vinabb.vn>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
@@ -83,19 +83,50 @@ else
 	$demo_lang = $user->data['user_lang'];
 }
 
+// Get more style data from our server
+$json = array();
+
+if ($get_online_data && !empty($get_online_url))
+{
+	// Test file URL
+	$test = get_headers($get_online_url);
+
+	if (strpos($test[0], '200') !== false)
+	{
+		// We use cURL here since cURL is faster than file_get_contents()
+		$curl = curl_init($get_online_url);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		$raw = curl_exec($curl);
+		curl_close($curl);
+
+		// Parse JSON
+		$json = json_decode($raw, true);
+	}
+}
+
 // ACP styles
 if ($acp)
 {
-	// Get the list from adm/styles
+	// Add the default ACP style in adm/style
+	$style_dirs[] = DEFAULT_STYLE;
+
+	// Get the extra ACP style list from adm/styles
 	if (file_exists($phpbb_admin_path . 'styles/'))
 	{
-		$style_dirs = array_merge(array(DEFAULT_STYLE), array_diff(scandir($phpbb_admin_path . 'styles/'), array('..', '.', '.htaccess')));
+		$style_dirs = array();
+		$scan_dirs = array_diff(scandir("{$phpbb_admin_path}styles/"), array('..', '.', '.htaccess'));
+
+		foreach ($scan_dirs as $scan_dir)
+		{
+			if (is_dir($scan_dir) && file_exists("{$phpbb_admin_path}styles/composer.json"))
+			{
+				$style_dirs[] = $scan_dir;
+			}
+		}
+
+		// Sort $style_dirs again
 		asort($style_dirs);
-	}
-	// Add the default ACP style in adm/style
-	else
-	{
-		$style_dirs = array(DEFAULT_STYLE);
 	}
 
 	foreach ($style_dirs as $style_dir)
@@ -120,28 +151,6 @@ if ($acp)
 // Front-end styles
 else
 {
-	// Get more style data from our server
-	$json = array();
-
-	if ($get_online_data && !empty($get_online_url))
-	{
-		// Test file URL
-		$test = get_headers($get_online_url);
-
-		if (strpos($test[0], '200') !== false)
-		{
-			// We use cURL here since cURL is faster than file_get_contents()
-			$curl = curl_init($get_online_url);
-			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-			$raw = curl_exec($curl);
-			curl_close($curl);
-
-			// Parse JSON
-			$json = json_decode($raw, true);
-		}
-	}
-
 	// Build the style list
 	$sql = 'SELECT *
 		FROM ' . STYLES_TABLE . '
