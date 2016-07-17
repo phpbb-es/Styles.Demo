@@ -128,8 +128,6 @@ if ($acp)
 		asort($style_dirs);
 	}
 
-	//die(print_r($style_dirs));
-
 	foreach ($style_dirs as $style_dir)
 	{
 		// Style varname
@@ -165,7 +163,7 @@ if ($acp)
 			$phpbb_version = strtoupper(PHPBB_VERSION);
 			$style_info = '<strong>' . $user->lang('VERSION') . $user->lang('COLON') . '</strong> ' . $phpbb_version;
 			$style_info .= '<br><strong>' . $user->lang('COPYRIGHT') . $user->lang('COLON') . '</strong> © phpBB Limited, 2007';
-			$style_vinabb = $style_download = generate_board_url();
+			$style_vinabb = $style_download = 'https://www.phpbb.com/';
 			$style_price = 0;
 			$style_price_label = '';
 		}
@@ -325,5 +323,3 @@ function style_varname_normalize($name, $underscore = '_')
 
 	return $name;
 }
-
-?>
