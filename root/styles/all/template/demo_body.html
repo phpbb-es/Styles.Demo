@@ -112,6 +112,10 @@
 			$switch_mode_url = '{{ U_MODE }}';
 
 		$styles = {
+			{#
+				Use 'loops.styles' for backward compatible with 3.1.x
+				Remove the prefix 'loops.' once 3.1.x is ended of life ;)
+			#}
 			{% for style in loops.styles %}
 			'{{ style.VARNAME }}': {
 				name: '{{ style.NAME }}',

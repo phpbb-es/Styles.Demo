@@ -70,7 +70,7 @@ $get_online_data = true;
 $get_online_url = generate_board_url() . '/assets/demo/styles.json';
 
 // Parameters
-$mode = $request->variable('m', '');
+$acp = $request->variable('acp', false);
 
 // Need to switch to another language?
 if ($user->data['user_id'] == ANONYMOUS)
@@ -84,7 +84,7 @@ else
 }
 
 // ACP styles
-if ($mode == 'acp')
+if ($acp)
 {
 	// Get the list from adm/styles
 	if (file_exists($phpbb_admin_path . 'styles/'))
@@ -105,7 +105,7 @@ if ($mode == 'acp')
 			'NAME'			=> $style_dir,
 			'TAG'			=> 'phpBB 3.2.0',
 			'RESPONSIVE'	=> 1,
-			'IMG'			=> "{$web_path}assets/demo/screenshots/example.png",
+			'IMG'			=> "{$phpbb_root_path}assets/demo/screenshots/example.png",
 			'URL'			=> append_sid("{$phpbb_admin_path}index.$phpEx", 's=' . $style_dir, false, $user->session_id),
 			'INFO'			=> '<strong>Version:</strong> 1.0.0<br /><strong>Author:</strong> phpBB<br /><strong>Template:</strong> prosilver<br /><strong>Responsive:</strong> Yes<br /><strong>Price:</strong> <kbd>$99</kbd>',
 			'NEWEST'		=> 1,
@@ -158,11 +158,11 @@ else
 		$style_varname = style_varname_normalize($row['style_path'], '_');
 
 		// Style screenshot
-		$style_img = "{$web_path}assets/demo/screenshots/{$style_varname}.png";
+		$style_img = "{$phpbb_root_path}assets/demo/screenshots/{$style_varname}.png";
 
 		if (!file_exists($style_img))
 		{
-			$style_img = "{$web_path}assets/demo/screenshots/default.png";
+			$style_img = "{$phpbb_root_path}assets/demo/screenshots/default.png";
 		}
 
 		// Style info
@@ -217,9 +217,9 @@ $template->assign_vars(array(
 	'CUSTOM_LANG_NAME'	=> CUSTOM_LANG_NAME,
 	'CURRENT_LANG'		=> $demo_lang,
 	'LANG_NAME'			=> ($demo_lang == 'en') ? $user->lang('LANG_ENGLISH', CUSTOM_LANG_NAME) : $user->lang('LANG_CUSTOM', CUSTOM_LANG_NAME),
-	'MODE_TITLE'		=> ($mode == 'acp') ? $user->lang('MODE_FRONTEND') : $user->lang('MODE_ACP'),
+	'MODE_TITLE'		=> ($acp) ? $user->lang('MODE_FRONTEND') : $user->lang('MODE_ACP'),
 
-	'U_MODE'	=> append_sid("{$phpbb_root_path}demo.$phpEx", ($mode == 'acp') ? '' : 'm=acp'),
+	'U_MODE'	=> append_sid("{$phpbb_root_path}demo.$phpEx", ($acp) ? '' : 'acp=1'),
 ));
 
 // Output page
