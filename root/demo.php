@@ -2,7 +2,7 @@
 /**
 * VinaBB Demo Styles
 *
-* @version 1.06
+* @version 1.07
 * @copyright (c) VinaBB <vinabb.vn>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
@@ -109,17 +109,16 @@ if ($get_online_data && !empty($get_online_url))
 if ($acp)
 {
 	// Add the default ACP style in adm/style
-	$style_dirs[] = DEFAULT_STYLE;
+	$style_dirs = array(DEFAULT_STYLE);
 
 	// Get the extra ACP style list from adm/styles
 	if (file_exists($phpbb_admin_path . 'styles/'))
 	{
-		$style_dirs = array();
 		$scan_dirs = array_diff(scandir("{$phpbb_admin_path}styles/"), array('..', '.', '.htaccess'));
 
 		foreach ($scan_dirs as $scan_dir)
 		{
-			if (is_dir($scan_dir) && file_exists("{$phpbb_admin_path}styles/composer.json"))
+			if (is_dir("{$phpbb_admin_path}styles/{$scan_dir}/") && file_exists("{$phpbb_admin_path}styles/{$scan_dir}/composer.json"))
 			{
 				$style_dirs[] = $scan_dir;
 			}
@@ -129,22 +128,87 @@ if ($acp)
 		asort($style_dirs);
 	}
 
+	//die(print_r($style_dirs));
+
 	foreach ($style_dirs as $style_dir)
 	{
+		// Style varname
+		$style_varname = style_varname_normalize($style_dir);
+
+		// Style screenshot
+		$style_img = "{$phpbb_root_path}assets/demo/screenshots/acp/{$style_varname}.png";
+
+		if (!file_exists($style_img))
+		{
+			$style_img = "{$phpbb_root_path}assets/demo/screenshots/acp/default.png";
+		}
+
+		// Style info
+		if (isset($json['acp'][$style_varname]))
+		{
+			$style_name = $json['acp'][$style_varname]['name'];
+			$phpbb_version = $json['acp'][$style_varname]['phpbb_version'];
+			$style_info = '<strong>' . $user->lang('VERSION') . $user->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['version'];
+			$style_info .= '<br><strong>' . $user->lang('DESIGNER') . $user->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['author_name'];
+			$style_info .= '<br><strong>' . $user->lang('PRESETS') . $user->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['presets'];
+			$style_info .= '<br><strong>' . $user->lang('REPONSIVE') . $user->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['reponsive'] == 1) ? $user->lang('YES') : $user->lang('NO'));
+			$style_info .= '<br><strong>' . $user->lang('PRICE') . $user->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $user->lang('FREE') . '</code>');
+			$style_vinabb = 'http://vinabb.vn/bb/item/' . $json['acp'][$style_varname]['id'] . '/download';
+			$style_download = $json['acp'][$style_varname]['url'];
+			$style_price = $json['acp'][$style_varname]['price'];
+			$style_price_label = $json['acp'][$style_varname]['price_label'];
+		}
+		// The default ACP style in adm/style
+		else if ($style_varname == DEFAULT_STYLE)
+		{
+			$style_name = DEFAULT_STYLE;
+			$phpbb_version = strtoupper(PHPBB_VERSION);
+			$style_info = '<strong>' . $user->lang('VERSION') . $user->lang('COLON') . '</strong> ' . $phpbb_version;
+			$style_info .= '<br><strong>' . $user->lang('COPYRIGHT') . $user->lang('COLON') . '</strong> © phpBB Limited, 2007';
+			$style_vinabb = $style_download = generate_board_url();
+			$style_price = 0;
+			$style_price_label = '';
+		}
+		// Only local info from composer.json
+		else
+		{
+			// adm/styles/<style_dir_name>/composer.json
+			$style_json = json_decode(file_get_contents("{$phpbb_admin_path}styles/{$style_dir}/composer.json"), true);
+
+			// How many authors are there?
+			if (!function_exists('array_column'))
+			{
+				$style_authors = array_map(function($element){return $element['name'];}, $style_json['authors']);
+			}
+			else
+			{
+				$style_authors = array_column($style_json['authors'], 'name');
+			}
+
+			$style_authors = implode(', ', $style_authors);
+
+			$style_name = $style_json['extra']['display-name'];
+			$phpbb_version = str_replace(array('<', '=', '>'), '', $style_json['extra']['soft-require']['phpbb/phpbb']);
+			$style_info = '<strong>' . $user->lang('VERSION') . $user->lang('COLON') . '</strong> ' . $style_json['version'];
+			$style_info .= '<br><strong>' . $user->lang('DESIGNER') . $user->lang('COLON') . '</strong> ' . $style_authors;
+			$style_vinabb = $style_download = generate_board_url();
+			$style_price = 0;
+			$style_price_label = '';
+		}
+
 		$template->assign_block_vars('styles', array(
-			'VARNAME'		=> style_varname_normalize($style_dir, '_'),
-			'NAME'			=> $style_dir,
-			'TAG'			=> 'phpBB 3.2.0',
-			'RESPONSIVE'	=> 1,
-			'IMG'			=> "{$phpbb_root_path}assets/demo/screenshots/example.png",
+			'VARNAME'		=> $style_varname,
+			'NAME'			=> $style_name,
+			'PHPBB'			=> $user->lang('PHPBB_BADGE', $phpbb_version),
+			'PHPBB_INFO'	=> '<strong>' . $user->lang('PHPBB_VERSION') . $user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
+			'IMG'			=> $style_img,
+			'INFO'			=> $style_info,
+			'VINABB'		=> $style_vinabb,
+			'DOWNLOAD'		=> $style_download,
+			'PRICE'			=> $style_price,
+			'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $user->lang('FREE'),
 			'URL'			=> append_sid("{$phpbb_admin_path}index.$phpEx", 's=' . $style_dir, false, $user->session_id),
-			'INFO'			=> '<strong>Version:</strong> 1.0.0<br /><strong>Author:</strong> phpBB<br /><strong>Template:</strong> prosilver<br /><strong>Responsive:</strong> Yes<br /><strong>Price:</strong> <kbd>$99</kbd>',
-			'NEWEST'		=> 1,
-			'BB'			=> 'http://localhost/',
-			'GET'			=> 'http://localhost/3012/',
-			'BUY'			=> 'http://vnexpress.net/',
-			'PRICE'			=> 25,
-			'PRICE_LABEL'	=> '$25',
+			'URL_LANG'		=> append_sid("{$phpbb_root_path}index.$phpEx", 'l=1&amp;s=' . $style_dir),
 		));
 	}
 }
@@ -164,7 +228,7 @@ else
 		$cfg = parse_cfg_file($phpbb_root_path . 'styles/' . $row['style_path'] . '/style.cfg');
 
 		// Style varname
-		$style_varname = style_varname_normalize($row['style_path'], '_');
+		$style_varname = style_varname_normalize($row['style_path']);
 
 		// Style screenshot
 		$style_img = "{$phpbb_root_path}assets/demo/screenshots/frontend/{$style_varname}.png";
@@ -211,7 +275,7 @@ else
 			'PRICE'			=> $style_price,
 			'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $user->lang('FREE'),
 			'URL'			=> append_sid("{$phpbb_root_path}index.$phpEx", 'style=' . $row['style_id']),
-			'URL_LANG'		=> append_sid("{$phpbb_root_path}index.$phpEx", 'l=1&style=' . $row['style_id']),
+			'URL_LANG'		=> append_sid("{$phpbb_root_path}index.$phpEx", 'l=1&amp;style=' . $row['style_id']),
 		));
 	}
 	$db->sql_freeresult($result);

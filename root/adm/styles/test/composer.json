@@ -1,22 +1,30 @@
 {
-	"name": "acme/demo",
+	"name": "vendor/test",
 	"type": "phpbb-acp-style",
 	"description": "",
 	"homepage": "",
-	"version": "0.1.0",
-	"time": "2013-11-05",
+	"version": "1.0.0",
+	"time": "2016-06-28",
 	"license": "GPL-2.0",
-	"authors": [{
-		"name": "",
-		"email": "",
-		"homepage": "",
-		"role": ""
-	}],
+	"authors": [
+		{
+			"name": "Mr. Bear",
+			"email": "",
+			"homepage": "",
+			"role": ""
+		},
+		{
+			"name": "Mrs. Cat",
+			"email": "",
+			"homepage": "",
+			"role": ""
+		}
+	],
 	"require": {
 		"composer/installers": "~1.0"
 	},
 	"extra": {
-		"display-name": "",
+		"display-name": "Test",
 		"soft-require" : {
 			"phpbb/phpbb": ">=3.2.0-RC1"
 		}
