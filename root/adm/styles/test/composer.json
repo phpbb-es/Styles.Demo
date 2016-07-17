@@ -1,0 +1,24 @@
+{
+	"name": "acme/demo",
+	"type": "phpbb-acp-style",
+	"description": "",
+	"homepage": "",
+	"version": "0.1.0",
+	"time": "2013-11-05",
+	"license": "GPL-2.0",
+	"authors": [{
+		"name": "",
+		"email": "",
+		"homepage": "",
+		"role": ""
+	}],
+	"require": {
+		"composer/installers": "~1.0"
+	},
+	"extra": {
+		"display-name": "",
+		"soft-require" : {
+			"phpbb/phpbb": ">=3.2.0-RC1"
+		}
+	}
+}
