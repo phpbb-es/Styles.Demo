@@ -167,11 +167,11 @@ else
 		$style_varname = style_varname_normalize($row['style_path'], '_');
 
 		// Style screenshot
-		$style_img = "{$phpbb_root_path}assets/demo/screenshots/{$style_varname}.png";
+		$style_img = "{$phpbb_root_path}assets/demo/screenshots/frontend/{$style_varname}.png";
 
 		if (!file_exists($style_img))
 		{
-			$style_img = "{$phpbb_root_path}assets/demo/screenshots/default.png";
+			$style_img = "{$phpbb_root_path}assets/demo/screenshots/frontend/default.png";
 		}
 
 		// Style info
