@@ -1,0 +1,22 @@
+services:
+    vinabb.demostyles.controller:
+        class: vinabb\demostyles\controller\main
+        arguments:
+            - @dbal.conn
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - @request
+            - @ext.manager
+            - @path_helper
+            - %core.root_path%
+            - %core.adm_relative_path%
+            - %core.php_ext%
+    vinabb.demostyles.listener:
+        class: vinabb\demostyles\event\listener
+        arguments:
+            - @controller.helper
+            - @template
+        tags:
+            - { name: event.listener }
