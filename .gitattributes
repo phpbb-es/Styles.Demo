@@ -1,7 +1,17 @@
 * text=auto
 * text eol=lf
-contrib/*.ttf binary
-root/assets/demo/fonts/* binary
-root/assets/demo/images/* binary
-root/assets/demo/screenshots/acp/* binary
-root/assets/demo/screenshots/frontend/* binary
+
+# Images
+*.gif binary
+*.ico binary
+*.jpg binary
+*.png binary
+*.psd binary
+*.svg binary
+
+# Fonts
+*.eot binary
+*.otf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
