@@ -3,4 +3,5 @@
 contrib/*.ttf binary
 root/assets/demo/fonts/* binary
 root/assets/demo/images/* binary
-root/assets/demo/screenshots/* binary
+root/assets/demo/screenshots/acp/* binary
+root/assets/demo/screenshots/frontend/* binary
