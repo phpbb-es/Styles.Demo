@@ -72,6 +72,7 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.user_setup'	=> 'update_lang',
 			'core.page_header'	=> 'add_page_header_link',
+			'core.add_form_key'	=> 'prevent_submit',
 		);
 	}
 
@@ -116,5 +117,73 @@ class listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'U_DEMO'	=> $this->helper->route('vinabb_demostyles_route', array('mode' => '')),
 		));
+	}
+
+	public function prevent_submit($event)
+	{
+		if ($this->user->data['user_id'] == /*ANONYMOUS*/ 2 && (
+			/* Multi files */
+			$this->request->is_set_post('submit')
+			|| $this->request->is_set_post('update')
+			/* acp_attachments.html */
+			|| $this->request->is_set_post('securesubmit')
+			|| $this->request->is_set_post('unsecuresubmit')
+			|| $this->request->is_set_post('add_extension_check')
+			|| $this->request->is_set_post('action_stats')
+			/* acp_ban.html */
+			|| $this->request->is_set_post('bansubmit')
+			|| $this->request->is_set_post('unbansubmit')
+			/* acp_captcha.html */
+			|| $this->request->is_set_post('main_submit')
+			/* acp_database.html */
+			|| $this->request->is_set_post('delete')
+			|| $this->request->is_set_post('download')
+			/* acp_disallow.html */
+			|| $this->request->is_set_post('disallow')
+			|| $this->request->is_set_post('allow')
+			/* acp_ext_delete_data.html */
+			|| $this->request->is_set_post('delete_data')
+			/* acp_ext_disable.html */
+			|| $this->request->is_set_post('disable')
+			/* acp_ext_enable.html */
+			|| $this->request->is_set_post('enable')
+			/* acp_groups.html */
+			|| $this->request->is_set_post('addusers')
+			/* acp_icons.html, acp_permission_roles.html */
+			|| $this->request->is_set_post('add')
+			/* acp_icons.html */
+			|| $this->request->is_set_post('import')
+			|| $this->request->is_set_post('edit')
+			/* acp_language.html */
+			|| $this->request->is_set_post('update_details')
+			/* acp_logs.html, acp_users_feedback.html, acp_users_warnings.html */
+			|| $this->request->is_set_post('delall')
+			/* acp_logs.html, acp_users_feedback.html, acp_users_warnings.html, acp_users.html */
+			|| $this->request->is_set_post('delmarked')
+			/* acp_main.html */
+			|| $this->request->is_set_post('action_online')
+			|| $this->request->is_set_post('action_date')
+			|| $this->request->is_set_post('action_stats')
+			|| $this->request->is_set_post('action_user')
+			|| $this->request->is_set_post('action_db_track')
+			|| $this->request->is_set_post('action_purge_sessions')
+			|| $this->request->is_set_post('action_purge_cache')
+			/* acp_modules.html */
+			|| $this->request->is_set_post('quickadd')
+			/* acp_permissions.html */
+			|| $this->request->is_set_post('action[delete]')
+			|| $this->request->is_set_post('action[apply_all_permissions]')
+			|| $this->request->is_set_post('submit_edit_options')
+			|| $this->request->is_set_post('submit_add_options')
+			/* acp_profile.html, acp_words.html */
+			|| $this->request->is_set_post('save')
+			/* acp_search.html ?? */
+			// create/delete index...
+			/* acp_styles.html, confirm_bbcode.html, confirm_body_prune.html, confirm_body.html */
+			|| $this->request->is_set_post('confirm')
+		))
+		{
+			trigger_error($this->user->lang['UNAVAILABLE_IN_DEMO'], E_USER_WARNING);
+		}
 	}
 }

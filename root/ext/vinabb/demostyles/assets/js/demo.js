@@ -131,7 +131,7 @@ $('.lang-btn').click(
 		if ($current_style in $styles)
 		{
 			switcher_viewport_buttons();
-			$styleIframe.attr('src', $styles[$current_style].url_lang + '&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '').replace('&amp;', '&')));
+			$styleIframe.attr('src', $styles[$current_style].url_lang + '&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '').replace(/&amp;/g, '&')));
 			location.hash = '#' + $current_style;
 		}
 
@@ -192,11 +192,11 @@ function switcher_viewport_buttons()
 	if ('undefined' !== typeof $styles[$current_style].responsive && $styles[$current_style].responsive === 0)
 	{
 		$('.desktop-btn').click();
-		$viewportButtons.addClass('disabled').removeClass('visible').css({ 'opacity': 0, 'visibility': 'hidden' });
+		$viewportButtons.addClass('disabled').removeClass('visible').css({'opacity': 0, 'visibility': 'hidden'});
 	}
 	else
 	{
-		$viewportButtons.removeClass('disabled').addClass('visible').css({ 'opacity': 1, 'visibility': 'visible' });
+		$viewportButtons.removeClass('disabled').addClass('visible').css({'opacity': 1, 'visibility': 'visible'});
 	}
 }
 
@@ -403,6 +403,9 @@ $('.style').click(
 	}
 );
 
-$styleIframe.load(function(){
-    $lastViewIframe = this.contentWindow.location.href;
-});
+$styleIframe.load(
+	function()
+	{
+    	$lastViewIframe = this.contentWindow.location.href;
+	}
+);
