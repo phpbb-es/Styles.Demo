@@ -12,11 +12,12 @@
 */
 
 /**
+* Welcome you to APP: Admin Preview Panel
 */
 define('IN_PHPBB', true);
+define('IN_ADMIN', true);
 define('ADMIN_START', true);
 define('NEED_SID', true);
-define('DEFAULT_STYLE', 'prosilver');
 
 // Include files
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../../../../';
@@ -30,33 +31,23 @@ require($phpbb_root_path . 'includes/functions_module.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('acp/common');
-// End session management
+$user->add_lang_ext('vinabb/demostyles', 'demo');
 
-// Have they authenticated (again) as an admin for this session?
-/*if (!isset($user->data['session_admin']) || !$user->data['session_admin'])
-{
-	login_box('', $user->lang['LOGIN_ADMIN_CONFIRM'], $user->lang['LOGIN_ADMIN_SUCCESS'], true, false);
-}*/
-
-// Is user any type of admin? No, then stop here, each script needs to
-// check specific permissions but this is a catchall
-if (!$auth->acl_get('a_'))
-{
-	trigger_error('NO_ADMIN');
-}
-
-// We define the admin variables now, because the user is now able to use the admin related features...
-define('IN_ADMIN', true);
-
-// Some oft used variables
+// Some often used variables
 $safe_mode = (@ini_get('safe_mode') == '1' || strtolower(@ini_get('safe_mode')) === 'on') ? true : false;
 $file_uploads = (@ini_get('file_uploads') == '1' || strtolower(@ini_get('file_uploads')) === 'on') ? true : false;
-$module_id = request_var('i', '');
-$mode = request_var('mode', '');
+$module_id = $request->variable('i', '');
+$mode = $request->variable('mode', '');
 
 // Custom ACP style
-$style = request_var('s', DEFAULT_STYLE);
-$style_dir = ($style == DEFAULT_STYLE) ? $phpbb_admin_path . 'style' : $phpbb_admin_path . "styles/{$style}/style";
+$style = $request->variable('s', '');
+
+if (empty($style) || !file_exists("./styles/{$style}/"))
+{
+	trigger_error('NO_ACP_STYLES', E_USER_ERROR);
+}
+
+$style_dir = "./styles/{$style}/style";
 
 // Set custom style for admin area
 $template->set_custom_style(array(
@@ -69,9 +60,6 @@ $template->set_custom_style(array(
 $template->assign_var('T_ASSETS_PATH', generate_board_url() . '/assets');
 $template->assign_var('T_TEMPLATE_PATH', $style_dir);
 
-// Use this trick because overall_header.html/simple_header.html still use 'style/admin.css' instead of '{T_TEMPLATE_PATH}/admin.css' :(
-$template->assign_var('META', "<base href=\"$style_dir\">");
-
 // Instantiate new module
 $module = new p_master();
 
@@ -83,7 +71,7 @@ $module->set_active($module_id, $mode);
 
 // Assign data to the template engine for the list of modules
 // We do this before loading the active module for correct menu display in trigger_error
-$module->assign_tpl_vars(append_sid(generate_board_url() . "/ext/vinabb/demostyles/adm/index.$phpEx"));
+$module->assign_tpl_vars(append_sid(generate_board_url() . "/ext/vinabb/demostyles/app/index.$phpEx"));
 
 // Load and execute the relevant module
 $module->load_active();

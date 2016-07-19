@@ -9,6 +9,7 @@
 namespace vinabb\demostyles\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use vinabb\demostyles\includes\constants;
 
 class listener implements EventSubscriberInterface
 {
@@ -70,9 +71,9 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.user_setup'	=> 'update_lang',
-			'core.page_header'	=> 'add_page_header_link',
-			'core.add_form_key'	=> 'prevent_submit',
+			'core.user_setup'		=> 'update_lang',
+			'core.page_header'		=> 'add_page_header_link',
+			'core.add_form_key'		=> 'prevent_submit',
 		);
 	}
 

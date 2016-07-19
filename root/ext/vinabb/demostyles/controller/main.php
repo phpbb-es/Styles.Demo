@@ -135,28 +135,27 @@ class main
 		// ACP styles
 		if ($mode == 'acp')
 		{
-			// Add the default ACP style in adm/style
-			$style_dirs = array(constants::DEFAULT_STYLE);
+			$style_dirs = array();
 
 			// Get the extra ACP style list from adm/styles
-			if (file_exists($this->ext_root_path . 'adm/styles/'))
+			$scan_dirs = array_diff(scandir("{$this->ext_root_path}app/styles/"), array('..', '.', '.htaccess', "index.{$this->php_ext}"));
+
+			foreach ($scan_dirs as $scan_dir)
 			{
-				$scan_dirs = array_diff(scandir("{$this->ext_root_path}adm/styles/"), array('..', '.', '.htaccess'));
-
-				foreach ($scan_dirs as $scan_dir)
+				if (is_dir("{$this->ext_root_path}app/styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}app/styles/{$scan_dir}/style.cfg"))
 				{
-					if (is_dir("{$this->ext_root_path}adm/styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}adm/styles/{$scan_dir}/composer.json"))
-					{
-						$style_dirs[] = $scan_dir;
-					}
+					$style_dirs[] = $scan_dir;
 				}
-
-				// Sort $style_dirs again
-				asort($style_dirs);
 			}
+
+			// Sort $style_dirs again
+			asort($style_dirs);
 
 			foreach ($style_dirs as $style_dir)
 			{
+				// Get data from style.cfg
+				$cfg = parse_cfg_file("{$this->ext_root_path}app/styles/{$style_dir}/style.cfg");
+
 				// Style varname
 				$style_varname = $this->style_varname_normalize($style_dir);
 
@@ -183,39 +182,13 @@ class main
 					$style_price = $json['acp'][$style_varname]['price'];
 					$style_price_label = $json['acp'][$style_varname]['price_label'];
 				}
-				// The default ACP style in adm/style
-				else if ($style_varname == constants::DEFAULT_STYLE)
-				{
-					$style_name = constants::DEFAULT_STYLE_NAME;
-					$phpbb_version = strtoupper(PHPBB_VERSION);
-					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $phpbb_version;
-					$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> ' . constants::DEFAULT_STYLE_COPYRIGHT;
-					$style_vinabb = $style_download = constants::DEFAULT_STYLE_URL;
-					$style_price = 0;
-					$style_price_label = '';
-				}
-				// Only local info from composer.json
+				// Only basic info
 				else
 				{
-					// adm/styles/<style_dir_name>/composer.json
-					$style_json = json_decode(file_get_contents("{$this->ext_root_path}adm/styles/{$style_dir}/composer.json"), true);
-
-					// How many authors are there?
-					if (!function_exists('array_column'))
-					{
-						$style_authors = array_map(function($element){return $element['name'];}, $style_json['authors']);
-					}
-					else
-					{
-						$style_authors = array_column($style_json['authors'], 'name');
-					}
-
-					$style_authors = implode(', ', $style_authors);
-
-					$style_name = $style_json['extra']['display-name'];
-					$phpbb_version = str_replace(array('<', '=', '>'), '', $style_json['extra']['soft-require']['phpbb/phpbb']);
-					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $style_json['version'];
-					$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . $style_authors;
+					$style_name = $cfg['name'];
+					$phpbb_version = $cfg['phpbb_version'];
+					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_version'];
+					$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> ' . $cfg['copyright'];
 					$style_vinabb = $style_download = generate_board_url();
 					$style_price = 0;
 					$style_price_label = '';
@@ -232,7 +205,7 @@ class main
 					'DOWNLOAD'		=> $style_download,
 					'PRICE'			=> $style_price,
 					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
-					'URL'			=> append_sid("{$this->ext_root_path}adm/index.{$this->php_ext}", 'f=1&s=' . $style_dir, false, $this->user->session_id),
+					'URL'			=> append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $style_dir, false, $this->user->session_id),
 					'URL_LANG'		=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'l=1&amp;s=' . $style_dir),
 				));
 			}
@@ -266,6 +239,7 @@ class main
 				// Style info
 				if (isset($json['frontend'][$style_varname]))
 				{
+					$style_name = $json['frontend'][$style_varname]['name'];
 					$phpbb_version = $json['frontend'][$style_varname]['phpbb_version'];
 					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['version'];
 					$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['author_name'];
@@ -280,17 +254,28 @@ class main
 				// Only basic info
 				else
 				{
+					// prosilver
+					if ($style_varname == constants::DEFAULT_STYLE)
+					{
+						$style_name = constants::DEFAULT_STYLE_NAME;
+						$style_vinabb = $style_download = constants::DEFAULT_STYLE_URL;
+					}
+					else
+					{
+						$style_name = $row['style_name'];
+						$style_vinabb = $style_download = generate_board_url();
+					}
+
 					$phpbb_version = $cfg['phpbb_version'];
 					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_version'];
 					$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> ' . $cfg['copyright'];
-					$style_vinabb = $style_download = generate_board_url();
 					$style_price = 0;
 					$style_price_label = '';
 				}
 
 				$this->template->assign_block_vars('styles', array(
 					'VARNAME'		=> $style_varname,
-					'NAME'			=> $row['style_name'],
+					'NAME'			=> $style_name,
 					'PHPBB'			=> $this->user->lang('PHPBB_BADGE', $phpbb_version),
 					'PHPBB_INFO'	=> '<strong>' . $this->user->lang('PHPBB_VERSION') . $this->user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
 					'IMG'			=> $style_img,

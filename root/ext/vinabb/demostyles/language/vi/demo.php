@@ -42,6 +42,8 @@ $lang = array_merge($lang, array(
 	'MODE_ACP'		=> 'Chuyển sang giao diện quản trị',
 	'MODE_FRONTEND'	=> 'Chuyển sang giao diện chính',
 
+	'NO_ACP_STYLES'	=> 'Không có giao diện quản trị nào để xem thử.',
+
 	'PHONE'			=> 'Điện thoại',
 	'PHPBB_BADGE'	=> 'phpBB %s',
 	'PHPBB_VERSION'	=> 'Phiên bản phpBB',

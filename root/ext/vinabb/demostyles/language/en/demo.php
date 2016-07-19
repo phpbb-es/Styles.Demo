@@ -42,6 +42,8 @@ $lang = array_merge($lang, array(
 	'MODE_ACP'		=> 'Switch to ACP Demo',
 	'MODE_FRONTEND'	=> 'Switch to Front-end Demo',
 
+	'NO_ACP_STYLES'	=> 'No ACP styles available to preview.',
+
 	'PHONE'			=> 'Phone',
 	'PHPBB_BADGE'	=> 'phpBB %s',
 	'PHPBB_VERSION'	=> 'phpBB version',
