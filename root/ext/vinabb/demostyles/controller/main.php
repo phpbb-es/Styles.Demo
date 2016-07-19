@@ -99,9 +99,6 @@ class main
 	{
 		$this->user->add_lang_ext('vinabb/demostyles', 'demo');
 
-		// Do not switch to ACP mode since there is no admin styles
-		$has_acp_styles = false;
-
 		// Need to switch to another language?
 		if ($this->user->data['user_id'] == ANONYMOUS)
 		{
@@ -135,30 +132,28 @@ class main
 			}
 		}
 
+		// Get the extra ACP style list from <ext>/app/styles/
+		$style_dirs = array();
+		$scan_dirs = array_diff(scandir("{$this->ext_root_path}app/styles/"), array('..', '.', '.htaccess', '_example'));
+
+		foreach ($scan_dirs as $scan_dir)
+		{
+			if (is_dir("{$this->ext_root_path}app/styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}app/styles/{$scan_dir}/style.cfg"))
+			{
+				$style_dirs[] = $scan_dir;
+			}
+		}
+
+		// Do not switch to ACP mode since there is no admin styles
+		$has_acp_styles = sizeof($style_dirs) ? true : false;
+
 		// ACP styles
 		if ($mode == 'acp')
 		{
-			$style_dirs = array();
-
-			// Get the extra ACP style list from adm/styles
-			$scan_dirs = array_diff(scandir("{$this->ext_root_path}app/styles/"), array('..', '.', '.htaccess', '_example'));
-
-			foreach ($scan_dirs as $scan_dir)
-			{
-				if (is_dir("{$this->ext_root_path}app/styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}app/styles/{$scan_dir}/style.cfg"))
-				{
-					$style_dirs[] = $scan_dir;
-				}
-			}
-
 			// Nothing to preview
-			if (!sizeof($style_dirs))
+			if (!$has_acp_styles)
 			{
 				trigger_error('NO_ACP_STYLES');
-			}
-			else
-			{
-				$has_acp_styles = true;
 			}
 
 			// Sort $style_dirs again
