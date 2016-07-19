@@ -103,14 +103,14 @@ class settings_module
 
 		// Select an extra language to switch
 		$sql = 'SELECT *
-			FROM ' . LANG_TABLE . "
-			ORDER BY lang_english_name";
+			FROM ' . LANG_TABLE . '
+			ORDER BY lang_english_name';
 		$result = $this->db->sql_query($sql);
 		$rows = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
 
 		$selected_lang_switch = isset($lang_switch) ? $lang_switch : $this->config['vinabb_demostyles_lang_switch'];
-		$lang_default_name = $lang_switch_options = '';
+		$default_lang_name = $lang_switch_options = '';
 
 		if (sizeof($rows) > 1)
 		{
@@ -120,7 +120,7 @@ class settings_module
 			{
 				if ($row['lang_iso'] == $this->config['default_lang'])
 				{
-					$lang_default_name = ($row['lang_english_name'] == $row['lang_local_name']) ? $row['lang_english_name'] : $row['lang_english_name'] . ' (' . $row['lang_local_name'] . ')';
+					$default_lang_name = ($row['lang_english_name'] == $row['lang_local_name']) ? $row['lang_english_name'] : $row['lang_english_name'] . ' (' . $row['lang_local_name'] . ')';
 				}
 				else
 				{
@@ -131,7 +131,7 @@ class settings_module
 
 		// Output
 		$this->template->assign_vars(array(
-			'LANG_DEFAULT'	=> $lang_default_name,
+			'DEFAULT_LANG'	=> $default_lang_name,
 			'LANG_ENABLE'	=> isset($lang_enable) ? $lang_enable : $this->config['vinabb_demostyles_lang_enable'],
 			'ACP_ENABLE'	=> isset($acp_enable) ? $acp_enable : $this->config['vinabb_demostyles_acp_enable'],
 			'JSON_ENABLE'	=> isset($json_enable) ? $json_enable : $this->config['vinabb_demostyles_json_enable'],

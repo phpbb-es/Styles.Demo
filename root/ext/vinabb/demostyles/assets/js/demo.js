@@ -47,18 +47,18 @@ $('.get-btn').click(
 	{
 		if ($current_style in $styles)
 		{
-			$("#styleName").html($styles[$current_style]['name']);
-			$("#styleInfo").html($styles[$current_style]['phpbb_info'] + '<br>' + $styles[$current_style]['info']);
+			$('#styleName').html($styles[$current_style]['name']);
+			$('#styleInfo').html($styles[$current_style]['phpbb_info'] + '<br>' + $styles[$current_style]['info']);
 
 			if ($styles[$current_style]['price'] > 0)
 			{
-				$("#downloadPurchase").html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
-				$("#downloadPurchase").attr('class', 'btn btn-danger');
+				$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
+				$('#downloadPurchase').attr('class', 'btn btn-danger');
 			}
 			else
 			{
-				$("#downloadPurchase").html('<i class="fa fa-download"></i> ' + $label_download);
-				$("#downloadPurchase").attr('class', 'btn btn-success');
+				$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
+				$('#downloadPurchase').attr('class', 'btn btn-success');
 			}
 
 			$('#downloadAlert').modal('show');
@@ -101,20 +101,20 @@ $('.lang-btn').click(
 	function()
 	{
 		// Switch language
-		$current_lang = ($current_lang == 'en') ? $custom_lang : 'en';
+		$current_lang = ($current_lang == $default_lang) ? $switch_lang : $default_lang;
 
 		// Update language button
-		if ($current_lang == 'en')
+		if ($current_lang == $default_lang)
 		{
-			$("#langButton").attr('class', 'fa fa-globe show-tooltip');
+			$('#langButton').attr('class', 'fa fa-globe show-tooltip');
 			$('#langButton').tooltip('hide');
-			$('#langButton').attr('data-original-title', $english_lang_name);
+			$('#langButton').attr('data-original-title', $default_to_switch_title);
 		}
 		else
 		{
-			$("#langButton").attr('class', 'fa fa-star show-tooltip');
+			$('#langButton').attr('class', 'fa fa-star show-tooltip');
 			$('#langButton').tooltip('hide');
-			$('#langButton').attr('data-original-title', $custom_lang_name);
+			$('#langButton').attr('data-original-title', $switch_to_default_title);
 		}
 
 		// Pre-loading effects
@@ -308,17 +308,17 @@ $(document).ready(
 		// Update language button
 		if ($('#langButton').length > 0)
 		{
-			if ($current_lang == 'en')
+			if ($current_lang == $default_lang)
 			{
-				$("#langButton").attr('class', 'fa fa-globe show-tooltip');
+				$('#langButton').attr('class', 'fa fa-globe show-tooltip');
 				$('#langButton').tooltip('hide');
-				$('#langButton').attr('data-original-title', $english_lang_name);
+				$('#langButton').attr('data-original-title', $default_to_switch_title);
 			}
 			else
 			{
-				$("#langButton").attr('class', 'fa fa-star show-tooltip');
+				$('#langButton').attr('class', 'fa fa-star show-tooltip');
 				$('#langButton').tooltip('hide');
-				$('#langButton').attr('data-original-title', $custom_lang_name);
+				$('#langButton').attr('data-original-title', $switch_to_default_title);
 			}
 		}
 
@@ -328,12 +328,12 @@ $(document).ready(
 			if ($styles[$current_style].price > 0)
 			{
 				$('#getButton').attr('data-original-title', $label_purchase);
-				$("#getButton").attr('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+				$('#getButton').attr('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
 			}
 			else
 			{
 				$('#getButton').attr('data-original-title', $label_download);
-				$("#getButton").attr('class', 'fa fa-download animate-pulse show-tooltip');
+				$('#getButton').attr('class', 'fa fa-download animate-pulse show-tooltip');
 			}
 		}
 
@@ -380,12 +380,12 @@ $('.style').click(
 				if ($styles[$current_style].price > 0)
 				{
 					$('#getButton').attr('data-original-title', $label_purchase);
-					$("#getButton").attr('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+					$('#getButton').attr('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
 				}
 				else
 				{
 					$('#getButton').attr('data-original-title', $label_download);
-					$("#getButton").attr('class', 'fa fa-download animate-pulse show-tooltip');
+					$('#getButton').attr('class', 'fa fa-download animate-pulse show-tooltip');
 				}
 			}
 

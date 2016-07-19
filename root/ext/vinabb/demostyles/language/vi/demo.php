@@ -37,8 +37,7 @@ $lang = array_merge($lang, array(
 
 	'FREE'	=> 'Miễn phí',
 
-	'LANG_ENGLISH'	=> 'Tiếng Anh (Bấm để chuyển sang tiếng Việt)',
-	'LANG_CUSTOM'	=> 'Tiếng Việt (Bấm để chuyển sang tiếng Anh)',
+	'LANG_SWITCH'	=> '%1$s » %2$s',
 
 	'MODE_ACP'		=> 'Chuyển sang giao diện quản trị',
 	'MODE_FRONTEND'	=> 'Chuyển sang giao diện chính',

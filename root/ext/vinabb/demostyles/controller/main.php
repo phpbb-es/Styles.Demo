@@ -78,7 +78,6 @@ class main
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->user = $user;
-		$this->language = $language;
 		$this->request = $request;
 		$this->ext_manager = $ext_manager;
 		$this->path_helper = $path_helper;
@@ -100,10 +99,6 @@ class main
 	{
 		$this->user->add_lang_ext('vinabb/demostyles', 'demo');
 
-		// Get more online style data
-		$get_online_data = true;
-		$get_online_url = generate_board_url() . '/assets/demo/styles.json';
-
 		// Parameters
 		$mode = $this->request->variable('mode', '');
 
@@ -121,15 +116,15 @@ class main
 		// Get more style data from our server
 		$json = array();
 
-		if ($get_online_data && !empty($get_online_url))
+		if ($this->config['vinabb_demostyles_json_enable'] && !empty($this->config['vinabb_demostyles_json_url']))
 		{
 			// Test file URL
-			$test = get_headers($get_online_url);
+			$test = get_headers($this->config['vinabb_demostyles_json_url']);
 
 			if (strpos($test[0], '200') !== false)
 			{
 				// We use cURL here since cURL is faster than file_get_contents()
-				$curl = curl_init($get_online_url);
+				$curl = curl_init($this->config['vinabb_demostyles_json_url']);
 				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 				$raw = curl_exec($curl);
@@ -278,7 +273,7 @@ class main
 					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['version'];
 					$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['author_name'];
 					$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['presets'];
-					$style_info .= '<br><strong>' . $this->user->lang('REPONSIVE') . $this->user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['reponsive'] == 1) ? $user->lang('YES') : $user->lang('NO'));
+					$style_info .= '<br><strong>' . $this->user->lang('REPONSIVE') . $this->user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['reponsive'] == 1) ? $this->user->lang('YES') : $this->user->lang('NO'));
 					$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $user->lang('FREE') . '</code>');
 					$style_vinabb = 'http://vinabb.vn/bb/item/' . $json['frontend'][$style_varname]['id'] . '/download';
 					$style_download = $json['frontend'][$style_varname]['url'];
@@ -314,22 +309,52 @@ class main
 			$this->db->sql_freeresult($result);
 		}
 
+		// Get lang info
+		$lang_title = $default_lang_name = $switch_lang_name = '';
+
+		if ($this->config['vinabb_demostyles_lang_enable'] && !empty($this->config['vinabb_demostyles_lang_switch']) && $this->config['vinabb_demostyles_lang_switch'] != $this->config['default_lang'])
+		{
+			$sql = 'SELECT *
+				FROM ' . LANG_TABLE . '
+				WHERE ' . $this->db->sql_in_set('lang_iso', array($this->config['default_lang'], $this->config['vinabb_demostyles_lang_switch'])) . '
+				ORDER BY lang_english_name';
+			$result = $this->db->sql_query($sql);
+			$rows = $this->db->sql_fetchrowset($result);
+			$this->db->sql_freeresult($result);
+
+			foreach ($rows as $row)
+			{
+				if ($row['lang_iso'] == $this->config['default_lang'])
+				{
+					$default_lang_name = $row['lang_local_name'];
+				}
+				else
+				{
+					$switch_lang_name = $row['lang_local_name'];
+				}
+			}
+
+			$lang_title = ($demo_lang == $this->config['default_lang']) ? $this->user->lang('LANG_SWITCH', $default_lang_name, $switch_lang_name) : $this->user->lang('LANG_SWITCH', $switch_lang_name, $default_lang_name);
+		}
+
 		// Assign index specific vars
 		$this->template->assign_vars(array(
 			'PREFIX_URL'	=> generate_board_url() . '/',
 
 			'DEFAULT_STYLE'		=> constants::DEFAULT_STYLE,
-			'CUSTOM_LANG'		=> 'vi',
-			'CUSTOM_LANG_NAME'	=> 'Vietnamese',
 			'CURRENT_LANG'		=> $demo_lang,
-			'LANG_NAME'			=> ($demo_lang == 'en') ? $this->user->lang('LANG_ENGLISH', CUSTOM_LANG_NAME) : $this->user->lang('LANG_CUSTOM', CUSTOM_LANG_NAME),
+			'DEFAULT_LANG'		=> $this->config['default_lang'],
+			'DEFAULT_LANG_NAME'	=> $default_lang_name,
+			'SWITCH_LANG'		=> $this->config['vinabb_demostyles_lang_switch'],
+			'SWITCH_LANG_NAME'	=> $switch_lang_name,
+			'LANG_TITLE'			=> $lang_title,
 			'MODE_TITLE'		=> ($mode == 'acp') ? $this->user->lang('MODE_FRONTEND') : $this->user->lang('MODE_ACP'),
 
 			'EXT_ASSETS_PATH'	=> "{$this->ext_root_path}assets",
 
-			'S_LANG_ENABLE'	=> $this->config['vinabb_demostyles_lang_enable'],
+			'S_LANG_ENABLE'	=> !empty($lang_title) ? true : false,
 			'S_ACP_ENABLE'	=> $this->config['vinabb_demostyles_acp_enable'],
-			'S_JSON_ENABLE'	=> $this->config['vinabb_demostyles_json_enable'],
+			'S_JSON_ENABLE'	=> ($this->config['vinabb_demostyles_json_enable'] && !empty($this->config['vinabb_demostyles_json_url'])) ? true : false,
 
 			'U_MODE'	=> $this->helper->route('vinabb_demostyles_route', array('mode' => ($mode == 'acp') ? '' : 'acp')),
 		));
@@ -348,13 +373,12 @@ class main
 	*/
 	public function style_varname_normalize($name, $underscore = '_')
 	{
-		$name = str_replace('&', ' & ', $name);
+		$name = str_replace('&', ' and ', $name);
+		$name = str_replace('-', ' ', $name);
+		$name = str_replace('.', ' ', $name);
+		$name = str_replace('@', 'a', $name);
 		$name = strtolower(trim($name));
 		$name = str_replace(' ', $underscore, $name);
-		$name = str_replace('&', ' and ', $name);
-		$name = str_replace('-', $underscore, $name);
-		$name = str_replace('.', $underscore, $name);
-		$name = str_replace('@', 'a', $name);
 
 		return $name;
 	}

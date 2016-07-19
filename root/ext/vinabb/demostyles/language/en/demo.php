@@ -37,8 +37,7 @@ $lang = array_merge($lang, array(
 
 	'FREE'	=> 'Free',
 
-	'LANG_ENGLISH'	=> 'English (Click to switch to %s)',
-	'LANG_CUSTOM'	=> '%s (Click to switch to English)',
+	'LANG_SWITCH'	=> '%1$s » %2$s',
 
 	'MODE_ACP'		=> 'Switch to ACP Demo',
 	'MODE_FRONTEND'	=> 'Switch to Front-end Demo',
