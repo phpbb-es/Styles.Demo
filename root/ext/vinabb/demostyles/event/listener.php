@@ -121,7 +121,7 @@ class listener implements EventSubscriberInterface
 
 	public function prevent_submit($event)
 	{
-		if ($this->user->data['user_id'] == /*ANONYMOUS*/ 2 && (
+		if ($this->user->data['user_id'] == ANONYMOUS && (
 			/* Multi files */
 			$this->request->is_set_post('submit')
 			|| $this->request->is_set_post('update')
