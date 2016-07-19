@@ -16,7 +16,13 @@ services:
     vinabb.demostyles.listener:
         class: vinabb\demostyles\event\listener
         arguments:
+            - @dbal.conn
+            - @config
             - @controller.helper
             - @template
+            - @user
+            - @request
+            - %core.root_path%
+            - %core.php_ext%
         tags:
             - { name: event.listener }
