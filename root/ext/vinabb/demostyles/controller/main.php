@@ -99,6 +99,9 @@ class main
 	{
 		$this->user->add_lang_ext('vinabb/demostyles', 'demo');
 
+		// Do not switch to ACP mode since there is no admin styles
+		$has_acp_styles = false;
+
 		// Need to switch to another language?
 		if ($this->user->data['user_id'] == ANONYMOUS)
 		{
@@ -146,6 +149,16 @@ class main
 				{
 					$style_dirs[] = $scan_dir;
 				}
+			}
+
+			// Nothing to preview
+			if (!sizeof($style_dirs))
+			{
+				trigger_error('NO_ACP_STYLES');
+			}
+			else
+			{
+				$has_acp_styles = true;
 			}
 
 			// Sort $style_dirs again
@@ -335,7 +348,7 @@ class main
 			'EXT_ASSETS_PATH'	=> "{$this->ext_web_path}assets",
 
 			'S_LANG_ENABLE'	=> !empty($lang_title) ? true : false,
-			'S_ACP_ENABLE'	=> $this->config['vinabb_demostyles_acp_enable'],
+			'S_ACP_ENABLE'	=> ($this->config['vinabb_demostyles_acp_enable'] && $has_acp_styles) ? true : false,
 			'S_JSON_ENABLE'	=> ($this->config['vinabb_demostyles_json_enable'] && !empty($this->config['vinabb_demostyles_json_url'])) ? true : false,
 
 			'U_MODE'	=> $this->helper->route('vinabb_demostyles_route', array('mode' => ($mode == 'acp') ? '' : 'acp')),
