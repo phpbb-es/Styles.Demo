@@ -9,6 +9,7 @@
 namespace vinabb\demostyles\controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use vinabb\demostyles\includes\constants;
 
 class main
 {
@@ -326,6 +327,9 @@ class main
 
 			'EXT_ASSETS_PATH'	=> "{$this->ext_root_path}assets",
 
+			'S_LANG_ENABLE'	=> $this->config['vinabb_demostyles_lang_enable'],
+			'S_ACP_ENABLE'	=> $this->config['vinabb_demostyles_acp_enable'],
+			'S_JSON_ENABLE'	=> $this->config['vinabb_demostyles_json_enable'],
 
 			'U_MODE'	=> $this->helper->route('vinabb_demostyles_route', array('mode' => ($mode == 'acp') ? '' : 'acp')),
 		));
