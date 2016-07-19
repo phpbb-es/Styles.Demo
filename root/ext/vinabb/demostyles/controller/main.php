@@ -141,7 +141,7 @@ class main
 			$style_dirs = array();
 
 			// Get the extra ACP style list from adm/styles
-			$scan_dirs = array_diff(scandir("{$this->ext_root_path}app/styles/"), array('..', '.', '.htaccess', "index.{$this->php_ext}"));
+			$scan_dirs = array_diff(scandir("{$this->ext_root_path}app/styles/"), array('..', '.', '.htaccess', '_example'));
 
 			foreach ($scan_dirs as $scan_dir)
 			{
