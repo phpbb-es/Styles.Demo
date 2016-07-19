@@ -100,7 +100,7 @@ class main
 		$this->user->add_lang_ext('vinabb/demostyles', 'demo');
 
 		// Parameters
-		$mode = $this->request->variable('mode', '');
+		//$mode = $this->request->variable('mode', '');
 
 		// Need to switch to another language?
 		if ($this->user->data['user_id'] == ANONYMOUS)
@@ -144,11 +144,11 @@ class main
 			// Get the extra ACP style list from adm/styles
 			if (file_exists($this->ext_root_path . 'adm/styles/'))
 			{
-				$scan_dirs = array_diff(scandir("{$this->ext_root_path}adm/styles/"), array('..', '.', '.htaccess'));
+				$scan_dirs = array_diff(scandir("{$this->ext_root_path}assets/acp_styles/"), array('..', '.', '.htaccess'));
 
 				foreach ($scan_dirs as $scan_dir)
 				{
-					if (is_dir("{$this->ext_root_path}adm/styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}adm/styles/{$scan_dir}/composer.json"))
+					if (is_dir("{$this->ext_root_path}assets/acp_styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}assets/acp_styles/{$scan_dir}/composer.json"))
 					{
 						$style_dirs[] = $scan_dir;
 					}
@@ -235,7 +235,7 @@ class main
 					'DOWNLOAD'		=> $style_download,
 					'PRICE'			=> $style_price,
 					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
-					'URL'			=> append_sid("{$this->phpbb_admin_path}index.{$this->php_ext}", 's=' . $style_dir, false, $this->user->session_id),
+					'URL'			=> append_sid("{$this->ext_path}adm/index.{$this->php_ext}", 's=' . $style_dir, false, $this->user->session_id),
 					'URL_LANG'		=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'l=1&amp;s=' . $style_dir),
 				));
 			}

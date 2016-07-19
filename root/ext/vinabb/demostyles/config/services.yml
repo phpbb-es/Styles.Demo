@@ -1,4 +1,8 @@
 services:
+    user:
+        class: vinabb\demostyles\controller\user
+        arguments:
+            - %datetime.class%
     vinabb.demostyles.controller:
         class: vinabb\demostyles\controller\main
         arguments:
