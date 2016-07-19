@@ -85,8 +85,8 @@ class main
 		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->php_ext = $php_ext;
 
-		$this->ext_path = $this->ext_manager->get_extension_path('vinabb/demostyles', true);
-		$this->ext_root_path = $this->path_helper->update_web_root_path($this->ext_path);
+		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/demostyles', true);
+		$this->ext_web_path = $this->path_helper->update_web_root_path($this->ext_root_path);
 	}
 
 	/**
@@ -98,9 +98,6 @@ class main
 	public function handle($mode)
 	{
 		$this->user->add_lang_ext('vinabb/demostyles', 'demo');
-
-		// Parameters
-		//$mode = $this->request->variable('mode', '');
 
 		// Need to switch to another language?
 		if ($this->user->data['user_id'] == ANONYMOUS)
@@ -144,11 +141,11 @@ class main
 			// Get the extra ACP style list from adm/styles
 			if (file_exists($this->ext_root_path . 'adm/styles/'))
 			{
-				$scan_dirs = array_diff(scandir("{$this->ext_root_path}assets/acp_styles/"), array('..', '.', '.htaccess'));
+				$scan_dirs = array_diff(scandir("{$this->ext_root_path}adm/styles/"), array('..', '.', '.htaccess'));
 
 				foreach ($scan_dirs as $scan_dir)
 				{
-					if (is_dir("{$this->ext_root_path}assets/acp_styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}assets/acp_styles/{$scan_dir}/composer.json"))
+					if (is_dir("{$this->ext_root_path}adm/styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}adm/styles/{$scan_dir}/composer.json"))
 					{
 						$style_dirs[] = $scan_dir;
 					}
@@ -164,11 +161,11 @@ class main
 				$style_varname = $this->style_varname_normalize($style_dir);
 
 				// Style screenshot
-				$style_img = "{$this->ext_root_path}assets/screenshots/acp/{$style_varname}.png";
+				$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}.png";
 
 				if (!file_exists($style_img))
 				{
-					$style_img = "{$this->ext_root_path}assets/screenshots/acp/default.png";
+					$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
 				}
 
 				// Style info
@@ -201,7 +198,7 @@ class main
 				else
 				{
 					// adm/styles/<style_dir_name>/composer.json
-					$style_json = json_decode(file_get_contents("{$this->phpbb_admin_path}styles/{$style_dir}/composer.json"), true);
+					$style_json = json_decode(file_get_contents("{$this->ext_root_path}adm/styles/{$style_dir}/composer.json"), true);
 
 					// How many authors are there?
 					if (!function_exists('array_column'))
@@ -235,7 +232,7 @@ class main
 					'DOWNLOAD'		=> $style_download,
 					'PRICE'			=> $style_price,
 					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
-					'URL'			=> append_sid("{$this->ext_path}adm/index.{$this->php_ext}", 's=' . $style_dir, false, $this->user->session_id),
+					'URL'			=> append_sid("{$this->ext_root_path}adm/index.{$this->php_ext}", 'f=1&s=' . $style_dir, false, $this->user->session_id),
 					'URL_LANG'		=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'l=1&amp;s=' . $style_dir),
 				));
 			}
@@ -259,11 +256,11 @@ class main
 				$style_varname = $this->style_varname_normalize($row['style_path']);
 
 				// Style screenshot
-				$style_img = "{$this->ext_root_path}assets/screenshots/frontend/{$style_varname}.png";
+				$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}.png";
 
 				if (!file_exists($style_img))
 				{
-					$style_img = "{$this->ext_root_path}assets/screenshots/frontend/default.png";
+					$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
 				}
 
 				// Style info
@@ -350,7 +347,7 @@ class main
 			'LANG_TITLE'			=> $lang_title,
 			'MODE_TITLE'		=> ($mode == 'acp') ? $this->user->lang('MODE_FRONTEND') : $this->user->lang('MODE_ACP'),
 
-			'EXT_ASSETS_PATH'	=> "{$this->ext_root_path}assets",
+			'EXT_ASSETS_PATH'	=> "{$this->ext_web_path}assets",
 
 			'S_LANG_ENABLE'	=> !empty($lang_title) ? true : false,
 			'S_ACP_ENABLE'	=> $this->config['vinabb_demostyles_acp_enable'],

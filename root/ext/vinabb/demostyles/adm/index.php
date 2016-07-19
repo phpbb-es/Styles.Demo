@@ -16,6 +16,7 @@
 define('IN_PHPBB', true);
 define('ADMIN_START', true);
 define('NEED_SID', true);
+define('DEFAULT_STYLE', 'prosilver');
 
 // Include files
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../../../../';
@@ -48,10 +49,14 @@ if (!$auth->acl_get('a_'))
 define('IN_ADMIN', true);
 
 // Some oft used variables
-$safe_mode		= (@ini_get('safe_mode') == '1' || strtolower(@ini_get('safe_mode')) === 'on') ? true : false;
-$file_uploads	= (@ini_get('file_uploads') == '1' || strtolower(@ini_get('file_uploads')) === 'on') ? true : false;
-$module_id		= request_var('i', '');
-$mode			= request_var('mode', '');
+$safe_mode = (@ini_get('safe_mode') == '1' || strtolower(@ini_get('safe_mode')) === 'on') ? true : false;
+$file_uploads = (@ini_get('file_uploads') == '1' || strtolower(@ini_get('file_uploads')) === 'on') ? true : false;
+$module_id = request_var('i', '');
+$mode = request_var('mode', '');
+
+// Custom ACP style
+$style = request_var('s', DEFAULT_STYLE);
+$style_dir = ($style == DEFAULT_STYLE) ? $phpbb_admin_path . 'style' : $phpbb_admin_path . "styles/{$style}/style";
 
 // Set custom style for admin area
 $template->set_custom_style(array(
@@ -59,10 +64,13 @@ $template->set_custom_style(array(
 		'name' 		=> 'adm',
 		'ext_path' 	=> 'adm/style/',
 	),
-), $phpbb_admin_path . 'style');
+), $style_dir);
 
-$template->assign_var('T_ASSETS_PATH', $phpbb_root_path . 'assets');
-$template->assign_var('T_TEMPLATE_PATH', $phpbb_admin_path . 'style');
+$template->assign_var('T_ASSETS_PATH', generate_board_url() . '/assets');
+$template->assign_var('T_TEMPLATE_PATH', $style_dir);
+
+// Use this trick because overall_header.html/simple_header.html still use 'style/admin.css' instead of '{T_TEMPLATE_PATH}/admin.css' :(
+$template->assign_var('META', "<base href=\"$style_dir\">");
 
 // Instantiate new module
 $module = new p_master();
@@ -75,7 +83,7 @@ $module->set_active($module_id, $mode);
 
 // Assign data to the template engine for the list of modules
 // We do this before loading the active module for correct menu display in trigger_error
-$module->assign_tpl_vars(append_sid("{$phpbb_admin_path}index.$phpEx"));
+$module->assign_tpl_vars(append_sid(generate_board_url() . "/ext/vinabb/demostyles/adm/index.$phpEx"));
 
 // Load and execute the relevant module
 $module->load_active();

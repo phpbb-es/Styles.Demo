@@ -29,7 +29,6 @@ $lang = array_merge($lang, array(
 
 	'DEFAULT_LANGUAGE'					=> 'Default language',
 	'DEMOSTYLES_ACP_ENABLE'				=> 'Enable demo for ACP styles',
-	'DEMOSTYLES_ACP_ENABLE_DESC'		=> '<strong>How to patch phpBB to preview ACP styles?</strong>',
 	'DEMOSTYLES_JSON_ENABLE'			=> 'Fetch more style data via JSON',
 	'DEMOSTYLES_JSON_URL'				=> 'JSON URL',
 	'DEMOSTYLES_JSON_URL_EXPLAIN'		=> 'Enter the URL of JSON data file.',
@@ -37,6 +36,8 @@ $lang = array_merge($lang, array(
 	'DEMOSTYLES_LANG_SWITCH'			=> 'Switch language',
 	'DEMOSTYLES_LANG_SWITCH_EXPLAIN'	=> 'The switch language is must be different with the default language.',
 	'DEMOSTYLES_SETTINGS_UPDATED'		=> 'Demo styles settings have been updated.',
+
+	'NO_EXTRA_LANG_TO_SELECT'	=> 'No extra languages to select.',
 
 	'SELECT_LANGUAGE'	=> 'Select a language',
 ));
