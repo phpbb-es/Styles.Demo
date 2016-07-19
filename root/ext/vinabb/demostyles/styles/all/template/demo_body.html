@@ -37,15 +37,21 @@
 		<div class="remove-btn header-btn pull-right hidden-xs">
 			<a href="#" data-toggle="tooltip" title="{{ lang('CLOSE') }}" class="fa fa-remove show-tooltip"></a>
 		</div>
+		{% if S_LANG_ENABLE %}
 		<div class="lang-btn header-btn pull-right hidden-xs">
 			<a href="#" data-toggle="modal" title="{{ LANG_NAME }}" class="fa fa-globe show-tooltip" id="langButton"></a>
 		</div>
+		{% endif %}
+		{% if S_ACP_ENABLE %}
 		<div class="switch-btn header-btn pull-right hidden-xs">
 			<a href="#" data-toggle="modal" title="{{ MODE_TITLE }}" class="fa fa-refresh show-tooltip"></a>
 		</div>
+		{% endif %}
+		{% if S_JSON_ENABLE %}
 		<div class="get-btn header-btn pull-right hidden-xs">
 			<a href="#" data-toggle="tooltip" title="{{ lang('DOWNLOAD') }}" class="fa fa-download animate-pulse show-tooltip" id="getButton"></a>
 		</div>
+		{% endif %}
 		<div class="mobile-btn header-btn pull-right hidden-xs">
 			<a href="#" data-toggle="tooltip" title="{{ lang('PHONE') }}" class="fa fa-mobile show-tooltip"></a>
 		</div>
@@ -74,6 +80,7 @@
 	<div class="preloader"></div>
 	<div class="preloading-icon"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></div>
 
+	{% if S_JSON_ENABLE %}
 	<!-- Download dialog -->
 	<div class="modal fade" id="downloadAlert" tabindex="-1" role="dialog" aria-labelledby="downloadAlertLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -95,6 +102,7 @@
 			</div>
 		</div>
 	</div>
+	{% endif %}
 
 	<!-- List all the styles here -->
 	<script type="text/javascript">

@@ -97,10 +97,6 @@ class main
 	*/
 	public function handle($mode)
 	{
-		define('DEFAULT_STYLE', 'prosilver');
-		define('CUSTOM_LANG', 'vi');
-		define('CUSTOM_LANG_NAME', 'Vietnamese');
-
 		$this->user->add_lang_ext('vinabb/demostyles', 'demo');
 
 		// Get more online style data
@@ -113,7 +109,7 @@ class main
 		// Need to switch to another language?
 		if ($this->user->data['user_id'] == ANONYMOUS)
 		{
-			$demo_lang = $this->request->variable($config['cookie_name'] . '_lang', '', true, \phpbb\request\request_interface::COOKIE);
+			$demo_lang = $this->request->variable($this->config['cookie_name'] . '_lang', '', true, \phpbb\request\request_interface::COOKIE);
 			$demo_lang = empty($demo_lang) ? $this->config['default_lang'] : $demo_lang;
 		}
 		else
@@ -147,7 +143,7 @@ class main
 		if ($mode == 'acp')
 		{
 			// Add the default ACP style in adm/style
-			$style_dirs = array(DEFAULT_STYLE);
+			$style_dirs = array(constants::DEFAULT_STYLE);
 
 			// Get the extra ACP style list from adm/styles
 			if (file_exists($this->ext_root_path . 'adm/styles/'))
@@ -195,13 +191,13 @@ class main
 					$style_price_label = $json['acp'][$style_varname]['price_label'];
 				}
 				// The default ACP style in adm/style
-				else if ($style_varname == DEFAULT_STYLE)
+				else if ($style_varname == constants::DEFAULT_STYLE)
 				{
-					$style_name = DEFAULT_STYLE;
+					$style_name = constants::DEFAULT_STYLE_NAME;
 					$phpbb_version = strtoupper(PHPBB_VERSION);
 					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $phpbb_version;
-					$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> © phpBB Limited, 2007';
-					$style_vinabb = $style_download = 'https://www.phpbb.com/';
+					$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> ' . constants::DEFAULT_STYLE_COPYRIGHT;
+					$style_vinabb = $style_download = constants::DEFAULT_STYLE_URL;
 					$style_price = 0;
 					$style_price_label = '';
 				}
@@ -321,14 +317,15 @@ class main
 		$this->template->assign_vars(array(
 			'PREFIX_URL'	=> generate_board_url() . '/',
 
-			'DEFAULT_STYLE'		=> DEFAULT_STYLE,
-			'CUSTOM_LANG'		=> CUSTOM_LANG,
-			'CUSTOM_LANG_NAME'	=> CUSTOM_LANG_NAME,
+			'DEFAULT_STYLE'		=> constants::DEFAULT_STYLE,
+			'CUSTOM_LANG'		=> 'vi',
+			'CUSTOM_LANG_NAME'	=> 'Vietnamese',
 			'CURRENT_LANG'		=> $demo_lang,
 			'LANG_NAME'			=> ($demo_lang == 'en') ? $this->user->lang('LANG_ENGLISH', CUSTOM_LANG_NAME) : $this->user->lang('LANG_CUSTOM', CUSTOM_LANG_NAME),
 			'MODE_TITLE'		=> ($mode == 'acp') ? $this->user->lang('MODE_FRONTEND') : $this->user->lang('MODE_ACP'),
 
 			'EXT_ASSETS_PATH'	=> "{$this->ext_root_path}assets",
+
 
 			'U_MODE'	=> $this->helper->route('vinabb_demostyles_route', array('mode' => ($mode == 'acp') ? '' : 'acp')),
 		));
