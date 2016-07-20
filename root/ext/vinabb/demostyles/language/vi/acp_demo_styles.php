@@ -35,6 +35,7 @@ $lang = array_merge($lang, array(
 	'DEMOSTYLES_LANG_ENABLE'			=> 'Cho phép chuyển ngôn ngữ',
 	'DEMOSTYLES_LANG_SWITCH'			=> 'Ngôn ngữ chuyển',
 	'DEMOSTYLES_LANG_SWITCH_EXPLAIN'	=> 'Ngôn ngữ chuyển và mặc định phải khác nhau.',
+	'DEMOSTYLES_URL'					=> 'Xem thử giao diện',
 	'DEMOSTYLES_SETTINGS_UPDATED'		=> 'Đã cập nhật thiết lập xem thử giao diện.',
 
 	'NO_EXTRA_LANG_TO_SELECT'	=> 'Không có thêm ngôn ngữ khác để chọn.',

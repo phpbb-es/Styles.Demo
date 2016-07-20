@@ -17,7 +17,7 @@ class settings_module
 
 	public function main($id, $mode)
 	{
-		global $phpbb_container;
+		global $phpbb_container, $phpEx;
 
 		$this->config = $phpbb_container->get('config');
 		$this->db = $phpbb_container->get('dbal.conn');
@@ -137,11 +137,12 @@ class settings_module
 
 		// Output
 		$this->template->assign_vars(array(
-			'DEFAULT_LANG'	=> $default_lang_name,
-			'LANG_ENABLE'	=> isset($lang_enable) ? $lang_enable : $this->config['vinabb_demostyles_lang_enable'],
+			'DEMOSTYLES_URL'	=> generate_board_url() . (($this->config['enable_mod_rewrite']) ? '' : "/app.$phpEx") . '/demo/',
+			'DEFAULT_LANG'		=> $default_lang_name,
+			'LANG_ENABLE'		=> isset($lang_enable) ? $lang_enable : $this->config['vinabb_demostyles_lang_enable'],
 			'ACP_ENABLE'	=> isset($acp_enable) ? $acp_enable : $this->config['vinabb_demostyles_acp_enable'],
-			'JSON_ENABLE'	=> isset($json_enable) ? $json_enable : $this->config['vinabb_demostyles_json_enable'],
-			'JSON_URL'		=> (isset($json_url) && !empty($json_url)) ? $json_url : $this->config['vinabb_demostyles_json_url'],
+			'JSON_ENABLE'		=> isset($json_enable) ? $json_enable : $this->config['vinabb_demostyles_json_enable'],
+			'JSON_URL'			=> (isset($json_url) && !empty($json_url)) ? $json_url : $this->config['vinabb_demostyles_json_url'],
 
 			'LANG_SWITCH_OPTIONS'	=> $lang_switch_options,
 

@@ -1,10 +1,13 @@
 {% include 'overall_header.html' %}
 
+<a href="{{ DEMOSTYLES_URL }}" style="float: {{ S_CONTENT_FLOW_END }};">&raquo; {{ lang('DEMOSTYLES_URL') }}</a>
+
 <h1>{{ lang('ACP_DEMO_STYLES') }}</h1>
 <p>{{ lang('ACP_DEMO_STYLES_EXPLAIN') }}</p>
 
 <form id="acp_demo_styles" method="post" action="{{ U_ACTION }}">
 	<fieldset>
+		<legend>{{ lang('SETTINGS') }}</legend>
 		<dl>
 			<dt><label for="lang_enable">{{ lang('DEMOSTYLES_LANG_ENABLE') }}{{ lang('COLON') }}</label></dt>
 			<dd>

@@ -35,6 +35,7 @@ $lang = array_merge($lang, array(
 	'DEMOSTYLES_LANG_ENABLE'			=> 'Enable language switcher',
 	'DEMOSTYLES_LANG_SWITCH'			=> 'Switch language',
 	'DEMOSTYLES_LANG_SWITCH_EXPLAIN'	=> 'The switch and default language must be different.',
+	'DEMOSTYLES_URL'					=> 'Demo styles',
 	'DEMOSTYLES_SETTINGS_UPDATED'		=> 'Demo styles settings have been updated.',
 
 	'NO_EXTRA_LANG_TO_SELECT'	=> 'No extra languages to select.',
