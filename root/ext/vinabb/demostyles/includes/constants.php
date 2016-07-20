@@ -10,6 +10,7 @@ namespace vinabb\demostyles\includes;
 
 class constants
 {
+	const ROLE_ADMIN_DEMO = 'ROLE_ADMIN_DEMO';
 	const DEFAULT_STYLE = 'prosilver';// Do not change it! This is not the default style of your board.
 	const DEFAULT_STYLE_NAME = 'proSilver';
 	const DEFAULT_STYLE_URL = 'https://www.phpbb.com/';

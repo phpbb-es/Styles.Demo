@@ -8,34 +8,12 @@
 
 namespace vinabb\demostyles\acp;
 
+use vinabb\demostyles\includes\constants;
+
 class settings_module
 {
-	/* @var \phpbb\config\config */
-	protected $config;
-
-	/* @var \phpbb\db\driver\driver_interface */
-	protected $db;
-
-	/* @var \phpbb\log\log */
-	protected $log;
-
-	/* @var \phpbb\request\request */
-	protected $request;
-
-	/* @var \phpbb\template\template */
-	protected $template;
-
-	/* @var \phpbb\user */
-	protected $user;
-
 	/* @var string */
 	public $u_action;
-
-	/* @var string */
-	public $tpl_name;
-
-	/* @var string */
-	public $page_title;
 
 	public function main($id, $mode)
 	{
@@ -47,6 +25,7 @@ class settings_module
 		$this->request = $phpbb_container->get('request');
 		$this->template = $phpbb_container->get('template');
 		$this->user = $phpbb_container->get('user');
+		$this->auth = $phpbb_container->get('auth');
 
 		$this->tpl_name = 'settings_body';
 		$this->page_title = $this->user->lang('ACP_DEMO_STYLES');
@@ -86,6 +65,28 @@ class settings_module
 
 			if (empty($errors))
 			{
+				// Assign the role ROLE_ADMIN_DEMO to the group GUESTS if ACP mode is enabled
+				if ($acp_enable && !$this->config['vinabb_demostyles_acp_enable'])
+				{
+					$sql_ary = array(
+						'user_id'			=> ANONYMOUS,
+						'forum_id'			=> 0,
+						'auth_option_id'	=> 0,
+						'auth_role_id'		=> $this->get_demo_role_id(),
+						'auth_setting'		=> 0
+					);
+			
+					$this->db->sql_query('INSERT INTO ' . ACL_USERS_TABLE . ' ' . $this->db->sql_build_array('INSERT', $sql_ary));
+				}
+				else if (!$acp_enable && $this->config['vinabb_demostyles_acp_enable'])
+				{
+					$sql = 'DELETE FROM ' . ACL_USERS_TABLE . ' WHERE user_id = ' . ANONYMOUS . ' AND auth_role_id = ' . $this->get_demo_role_id();
+					$this->db->sql_query($sql);
+				}
+
+				// Clear permissions cache
+				$this->auth->acl_clear_prefetch();
+
 				$this->config->set('vinabb_demostyles_lang_enable', $lang_enable);
 				$this->config->set('vinabb_demostyles_lang_switch', $lang_switch);
 				$this->config->set('vinabb_demostyles_acp_enable', $acp_enable);
@@ -93,6 +94,8 @@ class settings_module
 				$this->config->set('vinabb_demostyles_json_url', $json_url);
 
 				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_DEMO_STYLES_SETTINGS');
+				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), array('Anonymous'));
+
 				trigger_error($this->user->lang('DEMOSTYLES_SETTINGS_UPDATED') . adm_back_link($this->u_action));
 			}
 			else
@@ -144,5 +147,18 @@ class settings_module
 
 			'U_ACTION'	=> $this->u_action,
 		));
+	}
+
+	protected function get_demo_role_id()
+	{
+		$sql = 'SELECT role_id
+			FROM ' . ACL_ROLES_TABLE . "
+			WHERE role_type = 'a_'
+				AND role_name = '" . constants::ROLE_ADMIN_DEMO . "'";
+		$result = $this->db->sql_query($sql);
+		$role_id = (int) $this->db->sql_fetchfield('role_id');
+		$this->db->sql_freeresult($result);
+
+		return $role_id;
 	}
 }
