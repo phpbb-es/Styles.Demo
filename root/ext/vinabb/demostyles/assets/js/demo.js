@@ -53,12 +53,12 @@ $('.get-btn').click(
 			if ($styles[$current_style]['price'] > 0)
 			{
 				$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
-				$('#downloadPurchase').attr('class', 'btn btn-danger');
+				$('#downloadPurchase').prop('class', 'btn btn-danger');
 			}
 			else
 			{
 				$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
-				$('#downloadPurchase').attr('class', 'btn btn-success');
+				$('#downloadPurchase').prop('class', 'btn btn-success');
 			}
 
 			$('#downloadAlert').modal('show');
@@ -106,15 +106,15 @@ $('.lang-btn').click(
 		// Update language button
 		if ($current_lang == $default_lang)
 		{
-			$('#langButton').attr('class', 'fa fa-globe show-tooltip');
+			$('#langButton').prop('class', 'fa fa-globe show-tooltip');
 			$('#langButton').tooltip('hide');
-			$('#langButton').attr('data-original-title', $default_to_switch_title);
+			$('#langButton').prop('data-original-title', $default_to_switch_title);
 		}
 		else
 		{
-			$('#langButton').attr('class', 'fa fa-star show-tooltip');
+			$('#langButton').prop('class', 'fa fa-star show-tooltip');
 			$('#langButton').tooltip('hide');
-			$('#langButton').attr('data-original-title', $switch_to_default_title);
+			$('#langButton').prop('data-original-title', $switch_to_default_title);
 		}
 
 		// Pre-loading effects
@@ -131,7 +131,7 @@ $('.lang-btn').click(
 		if ($current_style in $styles)
 		{
 			switcher_viewport_buttons();
-			$styleIframe.attr('src', $styles[$current_style].url_lang + '&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '').replace(/&amp;/g, '&')));
+			$styleIframe.prop('src', $styles[$current_style].url_lang + '&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '').replace(/&amp;/g, '&')));
 			location.hash = '#' + $current_style;
 		}
 
@@ -310,15 +310,15 @@ $(document).ready(
 		{
 			if ($current_lang == $default_lang)
 			{
-				$('#langButton').attr('class', 'fa fa-globe show-tooltip');
+				$('#langButton').prop('class', 'fa fa-globe show-tooltip');
 				$('#langButton').tooltip('hide');
-				$('#langButton').attr('data-original-title', $default_to_switch_title);
+				$('#langButton').prop('data-original-title', $default_to_switch_title);
 			}
 			else
 			{
-				$('#langButton').attr('class', 'fa fa-star show-tooltip');
+				$('#langButton').prop('class', 'fa fa-star show-tooltip');
 				$('#langButton').tooltip('hide');
-				$('#langButton').attr('data-original-title', $switch_to_default_title);
+				$('#langButton').prop('data-original-title', $switch_to_default_title);
 			}
 		}
 
@@ -327,13 +327,13 @@ $(document).ready(
 		{
 			if ($styles[$current_style].price > 0)
 			{
-				$('#getButton').attr('data-original-title', $label_purchase);
-				$('#getButton').attr('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+				$('#getButton').prop('data-original-title', $label_purchase);
+				$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
 			}
 			else
 			{
-				$('#getButton').attr('data-original-title', $label_download);
-				$('#getButton').attr('class', 'fa fa-download animate-pulse show-tooltip');
+				$('#getButton').prop('data-original-title', $label_download);
+				$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
 			}
 		}
 
@@ -342,7 +342,7 @@ $(document).ready(
 		$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
 
 		switcher_viewport_buttons();
-		$styleIframe.attr('src', $styles[$current_style].url);
+		$styleIframe.prop('src', $styles[$current_style].url);
 
 		$('.style').tooltip(
 			{
@@ -379,13 +379,13 @@ $('.style').click(
 			{
 				if ($styles[$current_style].price > 0)
 				{
-					$('#getButton').attr('data-original-title', $label_purchase);
-					$('#getButton').attr('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+					$('#getButton').prop('data-original-title', $label_purchase);
+					$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
 				}
 				else
 				{
-					$('#getButton').attr('data-original-title', $label_download);
-					$('#getButton').attr('class', 'fa fa-download animate-pulse show-tooltip');
+					$('#getButton').prop('data-original-title', $label_download);
+					$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
 				}
 			}
 
@@ -393,7 +393,7 @@ $('.style').click(
 			var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
 			$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
 
-			$styleIframe.attr('src', $styles[$current_style].url);
+			$styleIframe.prop('src', $styles[$current_style].url);
 			location.hash = '#' + $current_style;
 		}
 
