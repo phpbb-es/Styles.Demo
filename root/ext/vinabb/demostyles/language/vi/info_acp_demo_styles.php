@@ -30,5 +30,8 @@ $lang = array_merge($lang, array(
 
 	'LOG_DEMO_STYLES_SETTINGS'	=> '<strong>Altered demo styles settings</strong>',
 
+	'ROLE_ADMIN_DEMO'		=> 'Demo Admin',
+	'ROLE_ADMIN_DEMO_DESC'	=> 'Use only for demo phpBB boards.',
+
 	'UNAVAILABLE_IN_DEMO'	=> 'No changes saved in demo mode.',
 ));
