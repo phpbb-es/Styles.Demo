@@ -1,14 +1,9 @@
 <?php
 /**
+* This file is part of the VinaBB Demo Styles package.
 *
-* This file is part of the phpBB Forum Software package.
-*
-* @copyright (c) phpBB Limited <https://www.phpbb.com>
+* @copyright (c) VinaBB <vinabb.vn>
 * @license GNU General Public License, version 2 (GPL-2.0)
-*
-* For full copyright and license information, please see
-* the docs/CREDITS.txt file.
-*
 */
 
 /**
@@ -32,6 +27,12 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('acp/common');
 $user->add_lang_ext('vinabb/demostyles', 'demo');
+
+// Do not access this file once ACP mode is disabled
+if (!$config['vinabb_demostyles_acp_enable'])
+{
+	trigger_error('ACP_STYLES_DISABLED', E_USER_WARNING);
+}
 
 // Some often used variables
 $safe_mode = (@ini_get('safe_mode') == '1' || strtolower(@ini_get('safe_mode')) === 'on') ? true : false;
