@@ -112,9 +112,12 @@ class settings_module
 		$selected_lang_switch = isset($lang_switch) ? $lang_switch : $this->config['vinabb_demostyles_lang_switch'];
 		$default_lang_name = $lang_switch_options = '';
 
-		if (sizeof($rows) > 1)
+		if (sizeof($rows))
 		{
-			$lang_switch_options .= '<option value=""' . (($selected_lang_switch == '') ? ' selected' : '' ) . '>' . $this->user->lang('SELECT_LANGUAGE') . '</option>';
+			if (sizeof($rows) > 1)
+			{
+				$lang_switch_options .= '<option value=""' . (($selected_lang_switch == '') ? ' selected' : '' ) . '>' . $this->user->lang('SELECT_LANGUAGE') . '</option>';
+			}
 
 			foreach ($rows as $row)
 			{
