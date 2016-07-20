@@ -25,6 +25,8 @@ if (empty($lang) || !is_array($lang))
  */
 
 $lang = array_merge($lang, array(
+	'ACP_STYLES_DISABLED'	=> 'Chức năng xem thử giao diện quản trị đã tắt.',
+
 	'CLOSE'		=> 'Đóng',
 	'COPYRIGHT'	=> 'Bản quyền',
 
@@ -42,6 +44,7 @@ $lang = array_merge($lang, array(
 	'MODE_ACP'		=> 'Chuyển sang giao diện quản trị',
 	'MODE_FRONTEND'	=> 'Chuyển sang giao diện chính',
 
+	'NO_ACP_STYLE'	=> 'Giao diện quản trị “%s” không tồn tại.',
 	'NO_ACP_STYLES'	=> 'Không có giao diện quản trị nào để xem thử.',
 
 	'PHONE'			=> 'Điện thoại',

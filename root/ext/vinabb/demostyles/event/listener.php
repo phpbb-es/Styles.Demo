@@ -35,6 +35,9 @@ class listener implements EventSubscriberInterface
 	protected $phpbb_root_path;
 
 	/* @var string */
+	protected $phpbb_admin_path;
+
+	/* @var string */
 	protected $php_ext;
 
 	/**
@@ -56,6 +59,7 @@ class listener implements EventSubscriberInterface
 								\phpbb\user $user,
 								\phpbb\request\request $request,
 								$phpbb_root_path,
+								$phpbb_admin_path,
 								$php_ext)
 	{
 		$this->db = $db;
@@ -65,15 +69,17 @@ class listener implements EventSubscriberInterface
 		$this->user = $user;
 		$this->request = $request;
 		$this->phpbb_root_path = $phpbb_root_path;
+		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->php_ext = $php_ext;
 	}
 
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.user_setup'		=> 'update_lang',
-			'core.page_header'		=> 'add_page_header_link',
-			'core.add_form_key'		=> 'prevent_submit',
+			'core.user_setup'				=> 'update_lang',
+			'core.page_header'				=> 'add_page_header_link',
+			'core.adm_page_header_after'	=> 'update_tpl_vars',
+			'core.add_form_key'				=> 'prevent_submit',
 		);
 	}
 
@@ -120,23 +126,55 @@ class listener implements EventSubscriberInterface
 		));
 	}
 
+	public function update_tpl_vars($event)
+	{
+		$this->template->assign_vars(array(
+			'ROOT_PATH'			=> $this->phpbb_root_path,
+			'ADMIN_ROOT_PATH'	=> $this->phpbb_admin_path,
+			'PREFIX_URL'			=> generate_board_url() . '/' . $this->phpbb_admin_path,
+			'PREFIX_URL_ALT'	=> generate_board_url(),
+
+			'S_GUEST'	=> ($this->user->data['user_id'] == ANONYMOUS) ? true : false,
+
+			'U_LOGOUT'		=> ($this->user->data['user_id'] == ANONYMOUS) ? '#' : append_sid("{$this->phpbb_root_path}ucp.{$this->php_ext}", 'mode=logout'),
+			'U_ADM_LOGOUT'	=> ($this->user->data['user_id'] == ANONYMOUS) ? '#' : append_sid("{$this->phpbb_admin_path}index.{$this->php_ext}", 'action=admlogout'),
+			'U_ADM_INDEX'	=> '#',
+			'U_INDEX'		=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}"),
+
+			'T_IMAGES_PATH'			=> "{$this->phpbb_root_path}images/",
+			'T_SMILIES_PATH'		=> "{$this->phpbb_root_path}{$this->config['smilies_path']}/",
+			'T_AVATAR_PATH'			=> "{$this->phpbb_root_path}{$this->config['avatar_path']}/",
+			'T_AVATAR_GALLERY_PATH'	=> "{$this->phpbb_root_path}{$this->config['avatar_gallery_path']}/",
+			'T_ICONS_PATH'			=> "{$this->phpbb_root_path}{$this->config['icons_path']}/",
+			'T_RANKS_PATH'			=> "{$this->phpbb_root_path}{$this->config['ranks_path']}/",
+			'T_UPLOAD_PATH'			=> "{$this->phpbb_root_path}{$this->config['upload_path']}/",
+		));
+	}
+
 	public function prevent_submit($event)
 	{
+		if ($this->user->data['user_id'] == ANONYMOUS)
+		{
+			$user->data['session_admin'] = 1;
+		}
+
 		if ($this->user->data['user_id'] == ANONYMOUS && (
-			/* Multi files */
+			// Multi files
 			$this->request->is_set_post('submit')
 			|| $this->request->is_set_post('update')
-			/* acp_attachments.html */
+			// acp_attachments.html
 			|| $this->request->is_set_post('securesubmit')
 			|| $this->request->is_set_post('unsecuresubmit')
 			|| $this->request->is_set_post('add_extension_check')
 			|| $this->request->is_set_post('action_stats')
-			/* acp_ban.html */
+			// acp_ban.html
 			|| $this->request->is_set_post('bansubmit')
 			|| $this->request->is_set_post('unbansubmit')
-			/* acp_captcha.html */
+			// acp_board.php
+			|| $this->request->is_set_post('allow_quick_reply_enable')
+			// acp_captcha.html
 			|| $this->request->is_set_post('main_submit')
-			/* acp_database.html */
+			// acp_database.html
 			|| $this->request->is_set_post('delete')
 			|| $this->request->is_set_post('download')
 			/* acp_disallow.html */
@@ -182,6 +220,8 @@ class listener implements EventSubscriberInterface
 			// create/delete index...
 			/* acp_styles.html, confirm_bbcode.html, confirm_body_prune.html, confirm_body.html */
 			|| $this->request->is_set_post('confirm')
+			/* acp_users.html */
+			|| $this->request->is_set_post('submituser')
 		))
 		{
 			trigger_error($this->user->lang['UNAVAILABLE_IN_DEMO'], E_USER_WARNING);

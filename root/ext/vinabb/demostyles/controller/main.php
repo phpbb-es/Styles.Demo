@@ -28,6 +28,9 @@ class main
 	/* @var \phpbb\user */
     protected $user;
 
+	/* @var \phpbb\auth\auth */
+    protected $auth;
+
 	/* @var \phpbb\request\request */
     protected $request;
 
@@ -54,6 +57,7 @@ class main
 	* @param \phpbb\controller\helper $helper
 	* @param \phpbb\template\template $template
 	* @param \phpbb\user $user
+	* @param \phpbb\auth\auth $auth
 	* @param \phpbb\request\request $request
 	* @param \phpbb\extension\manager $ext_manager
 	* @param \phpbb\path_helper $path_helper
@@ -66,6 +70,7 @@ class main
 								\phpbb\controller\helper $helper,
 								\phpbb\template\template $template,
 								\phpbb\user $user,
+								\phpbb\auth\auth $auth,
 								\phpbb\request\request $request,
 								\phpbb\extension\manager $ext_manager,
 								\phpbb\path_helper $path_helper,
@@ -78,11 +83,12 @@ class main
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->user = $user;
+		$this->auth = $auth;
 		$this->request = $request;
 		$this->ext_manager = $ext_manager;
 		$this->path_helper = $path_helper;
 		$this->phpbb_root_path = $phpbb_root_path;
-		$this->phpbb_admin_path = $phpbb_admin_path;
+		$this->phpbb_admin_path = $this->phpbb_root_path . $phpbb_admin_path;
 		$this->php_ext = $php_ext;
 
 		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/demostyles', true);
@@ -150,6 +156,11 @@ class main
 		// ACP styles
 		if ($mode == 'acp')
 		{
+			if ((!$this->auth->acl_get('a_') || $this->user->data['user_id'] == ANONYMOUS) && !$this->config['vinabb_demostyles_acp_enable'])
+			{
+				trigger_error('ACP_STYLES_DISABLED');
+			}
+
 			// Nothing to preview
 			if (!$has_acp_styles)
 			{

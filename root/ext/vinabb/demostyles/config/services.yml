@@ -11,6 +11,7 @@ services:
             - @controller.helper
             - @template
             - @user
+            - @auth
             - @request
             - @ext.manager
             - @path_helper
@@ -27,6 +28,7 @@ services:
             - @user
             - @request
             - %core.root_path%
+            - %core.adm_relative_path%
             - %core.php_ext%
         tags:
             - { name: event.listener }

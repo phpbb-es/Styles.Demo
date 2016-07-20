@@ -19,7 +19,7 @@ class settings_info
 			'modes'			=> array(
 				'settings'	=> array(
 					'title'	=> 'ACP_DEMO_STYLES',
-					'auth'	=> 'ext_vinabb/demostyles && acl_a_board',
+					'auth'	=> 'ext_vinabb/demostyles && acl_a_board && acl_a_modules',
 					'cat'	=> array('ACP_CAT_DEMO_STYLES'),
 				),
 			),

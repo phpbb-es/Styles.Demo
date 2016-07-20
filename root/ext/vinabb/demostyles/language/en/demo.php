@@ -25,6 +25,8 @@ if (empty($lang) || !is_array($lang))
 */
 
 $lang = array_merge($lang, array(
+	'ACP_STYLES_DISABLED'	=> 'The ACP style preview has been disabled.',
+
 	'CLOSE'		=> 'Close',
 	'COPYRIGHT'	=> 'Copyright',
 
@@ -42,6 +44,7 @@ $lang = array_merge($lang, array(
 	'MODE_ACP'		=> 'Switch to ACP Demo',
 	'MODE_FRONTEND'	=> 'Switch to Front-end Demo',
 
+	'NO_ACP_STYLE'	=> 'The ACP style “%s” does not exist.',
 	'NO_ACP_STYLES'	=> 'No ACP styles available to preview.',
 
 	'PHONE'			=> 'Phone',

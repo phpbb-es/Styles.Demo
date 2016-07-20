@@ -39,12 +39,21 @@ $file_uploads = (@ini_get('file_uploads') == '1' || strtolower(@ini_get('file_up
 $module_id = $request->variable('i', '');
 $mode = $request->variable('mode', '');
 
+// To be admin? So easy ;)
+if ($user->data['user_id'] == ANONYMOUS && !$user->data['session_admin'])
+{
+	$sql = 'UPDATE ' . SESSIONS_TABLE . '
+		SET session_admin = 1
+		WHERE session_id = \'' . $db->sql_escape($user->session_id) . '\'';
+	$db->sql_query($sql);
+}
+
 // Custom ACP style
 $style = $request->variable('s', '');
 
 if (empty($style) || !file_exists("./styles/{$style}/"))
 {
-	trigger_error('NO_ACP_STYLES', E_USER_ERROR);
+	trigger_error('NO_ACP_STYLES', E_USER_WARNING);
 }
 
 $style_dir = "./styles/{$style}/style";
@@ -59,6 +68,7 @@ $template->set_custom_style(array(
 
 $template->assign_var('T_ASSETS_PATH', generate_board_url() . '/assets');
 $template->assign_var('T_TEMPLATE_PATH', $style_dir);
+$template->assign_var('S_PREVIEW_ACP', true);
 
 // Instantiate new module
 $module = new p_master();

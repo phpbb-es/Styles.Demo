@@ -1,0 +1,38 @@
+{% if S_PREVIEW_ACP %}
+<script type="text/javascript">
+// <![CDATA[
+
+$(document).ready(
+	function()
+	{
+		$('form').prop('action', window.location.href);
+		$('a').each(
+			function()
+			{
+				if (this.href.indexOf('vinabb/demostyles') == -1)
+				{
+					$(this).prop('href', this.href.replace('{{ PREFIX_URL }}', '{{ PREFIX_URL_ALT }}/ext/vinabb/demostyles/app/'));
+				}
+			}
+		);
+
+		{% if S_GUEST %}
+		//$('input[type=submit]').prop('disabled', true);
+		//$('input[type=submit]').addClass('disabled');
+
+		/*var buttonIDs = ['submit', 'update', 'securesubmit', 'unsecuresubmit'];
+
+		buttonIDs.forEach(
+			function(id)
+			{
+	    		$('#' + id).prop('disabled', true);
+				$('#' + id).addClass('disabled');
+			}
+		);*/
+		{% endif %}
+	}
+);
+
+// ]]>
+</script>
+{% endif %}
