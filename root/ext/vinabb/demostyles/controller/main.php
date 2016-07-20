@@ -103,6 +103,12 @@ class main
 	*/
 	public function handle($mode)
 	{
+		// Why do you like typing slash at the end? :D
+		if ($mode == 'acp/')
+		{
+			$mode = 'acp';
+		}
+
 		$this->user->add_lang_ext('vinabb/demostyles', 'demo');
 
 		// Need to switch to another language?

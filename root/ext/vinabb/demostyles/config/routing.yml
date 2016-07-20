@@ -2,4 +2,4 @@ vinabb_demostyles_route:
     path: /demo/{mode}
     defaults: { _controller: vinabb.demostyles.controller:handle }
     requirements:
-        mode: (|acp)
+        mode: (|acp|acp\/)
