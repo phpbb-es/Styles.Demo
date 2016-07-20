@@ -25,13 +25,13 @@ if (empty($lang) || !is_array($lang))
 */
 
 $lang = array_merge($lang, array(
-	'ACP_CAT_DEMO_STYLES'	=> 'Demo styles',
-	'ACP_DEMO_STYLES'		=> 'Demo styles settings',
+	'ACP_CAT_DEMO_STYLES'	=> 'Xem thử giao diện',
+	'ACP_DEMO_STYLES'		=> 'Thiết lập xem thử giao diện',
 
-	'LOG_DEMO_STYLES_SETTINGS'	=> '<strong>Altered demo styles settings</strong>',
+	'LOG_DEMO_STYLES_SETTINGS'	=> '<strong>Đã chỉnh thiết lập xem thử giao diện</strong>',
 
-	'ROLE_ADMIN_DEMO'		=> 'Demo Admin',
-	'ROLE_ADMIN_DEMO_DESC'	=> 'Use only for demo phpBB boards.',
+	'ROLE_ADMIN_DEMO'		=> 'Quản trị giả lập',
+	'ROLE_ADMIN_DEMO_DESC'	=> 'Chỉ dùng cho chức năng xem thử giao diện.',
 
-	'UNAVAILABLE_IN_DEMO'	=> 'No changes saved in demo mode.',
+	'UNAVAILABLE_IN_DEMO'	=> 'Không lưu thay đổi trong chế độ giả lập.',
 ));

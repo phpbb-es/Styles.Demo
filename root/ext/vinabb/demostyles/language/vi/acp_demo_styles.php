@@ -25,19 +25,19 @@ if (empty($lang) || !is_array($lang))
 */
 
 $lang = array_merge($lang, array(
-	'ACP_DEMO_STYLES_EXPLAIN'	=> 'Here you can enable or disable several options.',
+	'ACP_DEMO_STYLES_EXPLAIN'	=> 'Cảm ơn bạn đã dùng thử “Demo Styles”. Phiên bản ổn định hơn đang được phát triển tại <a href="https://github.com/VinaBB/Demo.Styles">GitHub</a>.',
 
-	'DEFAULT_LANGUAGE'					=> 'Default language',
-	'DEMOSTYLES_ACP_ENABLE'				=> 'Enable demo for ACP styles',
-	'DEMOSTYLES_JSON_ENABLE'			=> 'Fetch more style data via JSON',
-	'DEMOSTYLES_JSON_URL'				=> 'JSON URL',
-	'DEMOSTYLES_JSON_URL_EXPLAIN'		=> 'Enter the URL of JSON data file.',
-	'DEMOSTYLES_LANG_ENABLE'			=> 'Enable language switcher',
-	'DEMOSTYLES_LANG_SWITCH'			=> 'Switch language',
-	'DEMOSTYLES_LANG_SWITCH_EXPLAIN'	=> 'The switch language is must be different with the default language.',
-	'DEMOSTYLES_SETTINGS_UPDATED'		=> 'Demo styles settings have been updated.',
+	'DEFAULT_LANGUAGE'					=> 'Ngôn ngữ mặc định',
+	'DEMOSTYLES_ACP_ENABLE'				=> 'Cho phép xem thử giao diện quản trị',
+	'DEMOSTYLES_JSON_ENABLE'			=> 'Lấy thêm thông tin từ JSON',
+	'DEMOSTYLES_JSON_URL'				=> 'Liên kết JSON',
+	'DEMOSTYLES_JSON_URL_EXPLAIN'		=> 'Liên kết của tập tin dữ liệu JSON.',
+	'DEMOSTYLES_LANG_ENABLE'			=> 'Cho phép chuyển ngôn ngữ',
+	'DEMOSTYLES_LANG_SWITCH'			=> 'Ngôn ngữ chuyển',
+	'DEMOSTYLES_LANG_SWITCH_EXPLAIN'	=> 'Ngôn ngữ chuyển và mặc định phải khác nhau.',
+	'DEMOSTYLES_SETTINGS_UPDATED'		=> 'Đã cập nhật thiết lập xem thử giao diện.',
 
-	'NO_EXTRA_LANG_TO_SELECT'	=> 'No extra languages to select.',
+	'NO_EXTRA_LANG_TO_SELECT'	=> 'Không có thêm ngôn ngữ khác để chọn.',
 
-	'SELECT_LANGUAGE'	=> 'Select a language',
+	'SELECT_LANGUAGE'	=> 'Chọn ngôn ngữ',
 ));

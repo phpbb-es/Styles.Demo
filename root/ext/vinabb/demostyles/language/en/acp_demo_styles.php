@@ -25,7 +25,7 @@ if (empty($lang) || !is_array($lang))
 */
 
 $lang = array_merge($lang, array(
-	'ACP_DEMO_STYLES_EXPLAIN'	=> 'Here you can enable or disable several options.',
+	'ACP_DEMO_STYLES_EXPLAIN'	=> 'Thanks you for testing “Demo Styles”. Check for stable versions as soon at <a href="https://github.com/VinaBB/Demo.Styles">GitHub</a>.',
 
 	'DEFAULT_LANGUAGE'					=> 'Default language',
 	'DEMOSTYLES_ACP_ENABLE'				=> 'Enable demo for ACP styles',
@@ -34,7 +34,7 @@ $lang = array_merge($lang, array(
 	'DEMOSTYLES_JSON_URL_EXPLAIN'		=> 'Enter the URL of JSON data file.',
 	'DEMOSTYLES_LANG_ENABLE'			=> 'Enable language switcher',
 	'DEMOSTYLES_LANG_SWITCH'			=> 'Switch language',
-	'DEMOSTYLES_LANG_SWITCH_EXPLAIN'	=> 'The switch language is must be different with the default language.',
+	'DEMOSTYLES_LANG_SWITCH_EXPLAIN'	=> 'The switch and default language must be different.',
 	'DEMOSTYLES_SETTINGS_UPDATED'		=> 'Demo styles settings have been updated.',
 
 	'NO_EXTRA_LANG_TO_SELECT'	=> 'No extra languages to select.',
