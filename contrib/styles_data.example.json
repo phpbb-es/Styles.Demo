@@ -24,7 +24,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/2"
+			"url": "http://vinabb.vn/bb/item/download/2"
 		},
 		"aero": {
 			"id": 3,
@@ -37,7 +37,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/3"
+			"url": "http://vinabb.vn/bb/item/download/3"
 		},
 		"afterburner": {
 			"id": 4,
@@ -50,7 +50,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/4"
+			"url": "http://vinabb.vn/bb/item/download/4"
 		},
 		"air": {
 			"id": 5,
@@ -63,7 +63,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/5"
+			"url": "http://vinabb.vn/bb/item/download/5"
 		},
 		"alerion": {
 			"id": 6,
@@ -87,8 +87,8 @@
 			"phpbb_version": "3.1.4",
 			"presets": 0,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/anami/8732129"
 		},
 		"ariki": {
@@ -100,8 +100,8 @@
 			"phpbb_version": "3.1.5",
 			"presets": 16,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/ariki/7773806"
 		},
 		"basic": {
@@ -115,7 +115,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/9"
+			"url": "http://vinabb.vn/bb/item/download/9"
 		},
 		"bboots": {
 			"id": 10,
@@ -126,8 +126,8 @@
 			"phpbb_version": "3.1.6",
 			"presets": 19,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/bboots/6043477"
 		},
 		"bbox7": {
@@ -154,7 +154,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/12"
+			"url": "http://vinabb.vn/bb/item/download/12"
 		},
 		"bootlike": {
 			"id": 13,
@@ -167,7 +167,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/13"
+			"url": "http://vinabb.vn/bb/item/download/13"
 		},
 		"ca_simplicity": {
 			"id": 14,
@@ -180,7 +180,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/14"
+			"url": "http://vinabb.vn/bb/item/download/14"
 		},
 		"canvas": {
 			"id": 15,
@@ -258,7 +258,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/20"
+			"url": "http://vinabb.vn/bb/item/download/20"
 		},
 		"coralis": {
 			"id": 21,
@@ -297,7 +297,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/23"
+			"url": "http://vinabb.vn/bb/item/download/23"
 		},
 		"deluxe": {
 			"id": 24,
@@ -310,7 +310,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/24"
+			"url": "http://vinabb.vn/bb/item/download/24"
 		},
 		"diametric": {
 			"id": 25,
@@ -336,7 +336,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/26"
+			"url": "http://vinabb.vn/bb/item/download/26"
 		},
 		"dirtyboard": {
 			"id": 27,
@@ -349,7 +349,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/27"
+			"url": "http://vinabb.vn/bb/item/download/27"
 		},
 		"dualcore": {
 			"id": 28,
@@ -362,7 +362,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/28"
+			"url": "http://vinabb.vn/bb/item/download/28"
 		},
 		"elegance": {
 			"id": 29,
@@ -375,7 +375,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/29"
+			"url": "http://vinabb.vn/bb/item/download/29"
 		},
 		"eles": {
 			"id": 30,
@@ -425,8 +425,8 @@
 			"phpbb_version": "3.1.6",
 			"presets": 0,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/flatboots/8536771"
 		},
 		"flato": {
@@ -453,7 +453,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/35"
+			"url": "http://vinabb.vn/bb/item/download/35"
 		},
 		"fresco": {
 			"id": 36,
@@ -505,7 +505,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/39"
+			"url": "http://vinabb.vn/bb/item/download/39"
 		},
 		"hawiki": {
 			"id": 40,
@@ -516,8 +516,8 @@
 			"phpbb_version": "3.1.4",
 			"presets": 16,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/hawiki/6879435"
 		},
 		"helion": {
@@ -531,7 +531,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/41"
+			"url": "http://vinabb.vn/bb/item/download/41"
 		},
 		"hexeris": {
 			"id": 42,
@@ -557,7 +557,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/43"
+			"url": "http://vinabb.vn/bb/item/download/43"
 		},
 		"jade": {
 			"id": 44,
@@ -570,7 +570,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/44"
+			"url": "http://vinabb.vn/bb/item/download/44"
 		},
 		"kirigami": {
 			"id": 45,
@@ -596,7 +596,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/46"
+			"url": "http://vinabb.vn/bb/item/download/46"
 		},
 		"leviathan": {
 			"id": 47,
@@ -633,8 +633,8 @@
 			"phpbb_version": "3.1.6",
 			"presets": 6,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/marina/6509951"
 		},
 		"metro": {
@@ -646,8 +646,8 @@
 			"phpbb_version": "3.0.11",
 			"presets": 9,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/metro/4559274"
 		},
 		"metro_light": {
@@ -661,7 +661,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/51"
+			"url": "http://vinabb.vn/bb/item/download/51"
 		},
 		"metropolis": {
 			"id": 52,
@@ -713,7 +713,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/55"
+			"url": "http://vinabb.vn/bb/item/download/55"
 		},
 		"momentum": {
 			"id": 56,
@@ -739,7 +739,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/57"
+			"url": "http://vinabb.vn/bb/item/download/57"
 		},
 		"oculus": {
 			"id": 58,
@@ -765,7 +765,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/59"
+			"url": "http://vinabb.vn/bb/item/download/59"
 		},
 		"origami": {
 			"id": 60,
@@ -830,7 +830,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/64"
+			"url": "http://vinabb.vn/bb/item/download/64"
 		},
 		"phantom": {
 			"id": 65,
@@ -843,7 +843,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/65"
+			"url": "http://vinabb.vn/bb/item/download/65"
 		},
 		"phonics": {
 			"id": 66,
@@ -856,7 +856,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/66"
+			"url": "http://vinabb.vn/bb/item/download/66"
 		},
 		"praxis": {
 			"id": 67,
@@ -882,7 +882,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/68"
+			"url": "http://vinabb.vn/bb/item/download/68"
 		},
 		"prosocial": {
 			"id": 69,
@@ -895,7 +895,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/69"
+			"url": "http://vinabb.vn/bb/item/download/69"
 		},
 		"quarto": {
 			"id": 70,
@@ -906,8 +906,8 @@
 			"phpbb_version": "3.0.12",
 			"presets": 9,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/quarto/8526816"
 		},
 		"ravaio": {
@@ -934,7 +934,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/72"
+			"url": "http://vinabb.vn/bb/item/download/72"
 		},
 		"solace": {
 			"id": 73,
@@ -960,7 +960,7 @@
 			"reponsive": 1,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/74"
+			"url": "http://vinabb.vn/bb/item/download/74"
 		},
 		"spectral": {
 			"id": 75,
@@ -986,7 +986,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/76"
+			"url": "http://vinabb.vn/bb/item/download/76"
 		},
 		"stratos": {
 			"id": 77,
@@ -1010,8 +1010,8 @@
 			"phpbb_version": "3.1.3",
 			"presets": 5,
 			"reponsive": 1,
-			"price": 16,
-			"price_label": "$16",
+			"price": 17,
+			"price_label": "$17",
 			"url": "http://themeforest.net/item/subway/9820360"
 		},
 		"tessellate": {
@@ -1051,7 +1051,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/81"
+			"url": "http://vinabb.vn/bb/item/download/81"
 		},
 		"vermilion": {
 			"id": 82,
@@ -1077,7 +1077,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/83"
+			"url": "http://vinabb.vn/bb/item/download/83"
 		},
 		"wide": {
 			"id": 84,
@@ -1103,7 +1103,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/85"
+			"url": "http://vinabb.vn/bb/item/download/85"
 		},
 		"x_mass": {
 			"id": 86,
@@ -1116,7 +1116,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/86"
+			"url": "http://vinabb.vn/bb/item/download/86"
 		},
 		"x_silver": {
 			"id": 87,
@@ -1129,7 +1129,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/87"
+			"url": "http://vinabb.vn/bb/item/download/87"
 		},
 		"xtream_micro_s3": {
 			"id": 88,
@@ -1142,7 +1142,7 @@
 			"reponsive": 0,
 			"price": 0,
 			"price_label": "",
-			"url": "http://vinabb.vn/bb/item/88"
+			"url": "http://vinabb.vn/bb/item/download/88"
 		}
 	},
 	"acp": {
