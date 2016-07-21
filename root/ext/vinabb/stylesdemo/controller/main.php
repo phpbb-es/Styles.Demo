@@ -352,6 +352,7 @@ class main
 		// Assign index specific vars
 		$this->template->assign_vars(array(
 			'PREFIX_URL'	=> generate_board_url() . '/',
+			'LOGO_TEXT'		=> $this->config['vinabb_stylesdemo_logo_text'],
 
 			'DEFAULT_STYLE'		=> constants::DEFAULT_STYLE,
 			'CURRENT_LANG'		=> $demo_lang,
