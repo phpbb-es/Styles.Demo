@@ -93,6 +93,7 @@ class main
 
 		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/demostyles', true);
 		$this->ext_web_path = $this->path_helper->update_web_root_path($this->ext_root_path);
+		$this->real_path = dirname(__DIR__) . '/';
 	}
 
 	/**
@@ -185,9 +186,11 @@ class main
 				$style_varname = $this->style_varname_normalize($style_dir);
 
 				// Style screenshot
-				$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}.png";
-
-				if (!file_exists($style_img))
+				if (file_exists("{$this->real_path}assets/screenshots/acp/{$style_varname}.png"))
+				{
+					$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}.png";
+				}
+				else
 				{
 					$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
 				}
@@ -202,7 +205,7 @@ class main
 					$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['presets'];
 					$style_info .= '<br><strong>' . $this->user->lang('REPONSIVE') . $this->user->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['reponsive'] == 1) ? $this->user->lang('YES') : $this->user->lang('NO'));
 					$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->user->lang('FREE') . '</code>');
-					$style_vinabb = 'http://vinabb.vn/bb/item/' . $json['acp'][$style_varname]['id'] . '/download';
+					$style_vinabb = 'http://vinabb.vn/bb/item/' . $json['acp'][$style_varname]['id'];
 					$style_download = $json['acp'][$style_varname]['url'];
 					$style_price = $json['acp'][$style_varname]['price'];
 					$style_price_label = $json['acp'][$style_varname]['price_label'];
@@ -214,7 +217,7 @@ class main
 					$phpbb_version = $cfg['phpbb_version'];
 					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_version'];
 					$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> ' . $cfg['copyright'];
-					$style_vinabb = $style_download = generate_board_url();
+					$style_vinabb = $style_download = '#';
 					$style_price = 0;
 					$style_price_label = '';
 				}
@@ -254,9 +257,11 @@ class main
 				$style_varname = $this->style_varname_normalize($row['style_path']);
 
 				// Style screenshot
-				$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}.png";
-
-				if (!file_exists($style_img))
+				if (file_exists("{$this->real_path}assets/screenshots/frontend/{$style_varname}.png"))
+				{
+					$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}.png";
+				}
+				else
 				{
 					$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
 				}
@@ -271,7 +276,7 @@ class main
 					$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['presets'];
 					$style_info .= '<br><strong>' . $this->user->lang('REPONSIVE') . $this->user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['reponsive'] == 1) ? $this->user->lang('YES') : $this->user->lang('NO'));
 					$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->user->lang('FREE') . '</code>');
-					$style_vinabb = 'http://vinabb.vn/bb/item/' . $json['frontend'][$style_varname]['id'] . '/download';
+					$style_vinabb = 'http://vinabb.vn/bb/item/' . $json['frontend'][$style_varname]['id'];
 					$style_download = $json['frontend'][$style_varname]['url'];
 					$style_price = $json['frontend'][$style_varname]['price'];
 					$style_price_label = $json['frontend'][$style_varname]['price_label'];
@@ -288,7 +293,7 @@ class main
 					else
 					{
 						$style_name = $row['style_name'];
-						$style_vinabb = $style_download = generate_board_url();
+						$style_vinabb = $style_download = '#';
 					}
 
 					$phpbb_version = $cfg['phpbb_version'];
