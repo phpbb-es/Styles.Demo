@@ -25,7 +25,7 @@
 	<header class="switcher-bar clearfix">
 		<!-- Logo -->
 		<div class="logo pull-left">
-			<img src="{{ EXT_ASSETS_PATH }}/images/logo.png" data-toggle="tooltip" title="{{ lang('STYLES_DEMO_EXPLAIN') }}" class="show-tooltip" />
+			<img src="{{ EXT_ASSETS_PATH }}/images/logo.png" data-toggle="tooltip" title="{% if SITE_DESCRIPTION %}{{ SITE_DESCRIPTION }}{% else %}{{ lang('STYLES_DEMO') }}{% endif %}" class="show-tooltip" />
 		</div>
 
 		<!-- Style switcher -->

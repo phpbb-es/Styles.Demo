@@ -22,6 +22,7 @@ class user extends \phpbb\user
 	*		Before (1.) above
 	*		Added:
 	*			$acp_style_request = $request->variable('s', '');
+	*
 	*			if ($acp_style_request && defined('ADMIN_START'))
 	*			{
 	*				global $SID, $_EXTRA_URL;
@@ -145,6 +146,7 @@ class user extends \phpbb\user
 
 		// Added by Styles Demo
 		$acp_style_request = $request->variable('s', '');
+
 		if ($acp_style_request && defined('ADMIN_START'))
 		{
 			global $SID, $_EXTRA_URL;
@@ -154,6 +156,7 @@ class user extends \phpbb\user
 		}
 
 		$style_request = $request->variable('style', 0);
+
 		if ($style_request && !defined('ADMIN_START'))
 		{
 			global $SID, $_EXTRA_URL;
@@ -264,6 +267,7 @@ class user extends \phpbb\user
 			{
 				$message = (!empty($config['board_disable_msg'])) ? $config['board_disable_msg'] : 'BOARD_DISABLE';
 			}
+
 			trigger_error($message);
 		}
 
@@ -293,6 +297,7 @@ class user extends \phpbb\user
 					{
 						send_status_line(503, 'Service Unavailable');
 					}
+
 					trigger_error('BOARD_UNAVAILABLE');
 				}
 			}
@@ -310,6 +315,7 @@ class user extends \phpbb\user
 						SET session_viewonline = 1
 						WHERE session_user_id = ' . $this->data['user_id'];
 					$db->sql_query($sql);
+
 					$this->data['session_viewonline'] = 1;
 				}
 			}
@@ -322,6 +328,7 @@ class user extends \phpbb\user
 						SET session_viewonline = 0
 						WHERE session_user_id = ' . $this->data['user_id'];
 					$db->sql_query($sql);
+
 					$this->data['session_viewonline'] = 0;
 				}
 			}

@@ -58,7 +58,6 @@ $lang = array_merge($lang, array(
 	'SELECT_STYLE_EXPLAIN'	=> 'Select a style to preview',
 	'SIGN_CURRENCY'			=> '$',
 	'STYLES_DEMO'			=> 'Styles Demo',
-	'STYLES_DEMO_EXPLAIN'	=> 'The Holy Land of phpBB',
 
 	'TABLET'	=> 'Tablet',
 

@@ -58,7 +58,6 @@ $lang = array_merge($lang, array(
 	'SELECT_STYLE_EXPLAIN'	=> 'Chọn giao diện xem thử',
 	'SIGN_CURRENCY'			=> '$',
 	'STYLES_DEMO'			=> 'Xem thử giao diện',
-	'STYLES_DEMO_EXPLAIN'	=> 'The Holy Land of phpBB',
 
 	'TABLET'	=> 'Máy tính bảng',
 
