@@ -52,7 +52,7 @@ $lang = array_merge($lang, array(
 	'PRICE'			=> 'Giá',
 	'PURCHASE'		=> 'Mua',
 
-	'REPONSIVE'	=> 'Reponsive',
+	'RESPONSIVE'	=> 'Responsive',
 
 	'SELECT_STYLE'			=> 'Chọn giao diện…',
 	'SELECT_STYLE_EXPLAIN'	=> 'Chọn giao diện xem thử',

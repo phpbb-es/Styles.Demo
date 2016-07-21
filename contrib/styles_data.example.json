@@ -8,9 +8,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 5,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 15,
 			"price_label": "$15",
+			"screenshot": "",
 			"url": "http://themebyte.com/theme/abandon-phpbb3-style"
 		},
 		"absolution": {
@@ -21,9 +22,10 @@
 			"version": "2.0.0",
 			"phpbb_version": "3.1.9",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/community/viewtopic.php?f=476&t=2378311"
 		},
 		"aero": {
@@ -34,9 +36,10 @@
 			"version": "2.0.10",
 			"phpbb_version": "3.1.9",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/community/viewtopic.php?f=476&t=2269886"
 		},
 		"afterburner": {
@@ -47,9 +50,10 @@
 			"version": "2.0.0",
 			"phpbb_version": "3.0.11",
 			"presets": 2,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/afterburner2"
 		},
 		"air": {
@@ -60,9 +64,10 @@
 			"version": "2.0.2",
 			"phpbb_version": "3.0.12",
 			"presets": 2,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/air"
 		},
 		"alerion": {
@@ -73,9 +78,10 @@
 			"version": "1.2.0",
 			"phpbb_version": "3.0.11",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/alerion"
 		},
 		"anami": {
@@ -86,9 +92,10 @@
 			"version": "1.1.0",
 			"phpbb_version": "3.1.4",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/anami/8732129"
 		},
 		"ariki": {
@@ -99,9 +106,10 @@
 			"version": "1.1.0",
 			"phpbb_version": "3.1.5",
 			"presets": 16,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/ariki/7773806"
 		},
 		"basic": {
@@ -112,9 +120,10 @@
 			"version": "3.1.9",
 			"phpbb_version": "3.1.9",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/basic"
 		},
 		"bboots": {
@@ -125,9 +134,10 @@
 			"version": "3.0.3",
 			"phpbb_version": "3.1.6",
 			"presets": 19,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/bboots/6043477"
 		},
 		"bbox7": {
@@ -138,9 +148,10 @@
 			"version": "1.0.1",
 			"phpbb_version": "3.0.12",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 15,
 			"price_label": "$15",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/bbox7/6897937"
 		},
 		"black": {
@@ -151,9 +162,10 @@
 			"version": "3.1.9",
 			"phpbb_version": "3.1.9",
 			"presets": 3,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/black2"
 		},
 		"bootlike": {
@@ -164,9 +176,10 @@
 			"version": "1.0.6",
 			"phpbb_version": "3.1.9",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/community/viewtopic.php?f=476&t=2289856"
 		},
 		"ca_simplicity": {
@@ -177,9 +190,10 @@
 			"version": "3.1.9",
 			"phpbb_version": "3.1.9",
 			"presets": 6,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/simplicity"
 		},
 		"canvas": {
@@ -190,9 +204,10 @@
 			"version": "1.2.1",
 			"phpbb_version": "3.1.6",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/canvas/12900904"
 		},
 		"cerulean": {
@@ -203,9 +218,10 @@
 			"version": "1.4.0",
 			"phpbb_version": "3.0.11",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/cerulean"
 		},
 		"chapelco": {
@@ -216,9 +232,10 @@
 			"version": "1.3.0",
 			"phpbb_version": "3.0.11",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/chapelco"
 		},
 		"charon": {
@@ -229,9 +246,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 6,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 16,
 			"price_label": "$16",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/charon/7808334"
 		},
 		"clarion": {
@@ -242,9 +260,10 @@
 			"version": "1.2.0",
 			"phpbb_version": "3.0.10",
 			"presets": 11,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 29,
 			"price_label": "$29",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/clarion"
 		},
 		"comboot": {
@@ -255,9 +274,10 @@
 			"version": "1.1.0",
 			"phpbb_version": "3.1.9",
 			"presets": 16,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://comboot.io/blog/beta/beta-3-1"
 		},
 		"coralis": {
@@ -268,9 +288,10 @@
 			"version": "1.0.1",
 			"phpbb_version": "3.0.12",
 			"presets": 9,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 16,
 			"price_label": "$16",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/coralis/5891252"
 		},
 		"corvus": {
@@ -281,9 +302,10 @@
 			"version": "1.1.0",
 			"phpbb_version": "3.0.11",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/corvus"
 		},
 		"craparty": {
@@ -294,9 +316,10 @@
 			"version": "1.2.0",
 			"phpbb_version": "3.0.11",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://spieleresidenz.de/board/dm_eds/download.php?id=326"
 		},
 		"deluxe": {
@@ -307,9 +330,10 @@
 			"version": "2.0.3",
 			"phpbb_version": "3.0.12",
 			"presets": 2,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/deluxe"
 		},
 		"diametric": {
@@ -320,9 +344,10 @@
 			"version": "1.3.0",
 			"phpbb_version": "3.0.10",
 			"presets": 11,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 29,
 			"price_label": "$29",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/diametric"
 		},
 		"digi": {
@@ -333,9 +358,10 @@
 			"version": "3.1.9",
 			"phpbb_version": "3.1.9",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/digi"
 		},
 		"dirtyboard": {
@@ -346,9 +372,10 @@
 			"version": "3.0.11",
 			"phpbb_version": "3.0.11",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/customise/db/style/dirty_board_2.0"
 		},
 		"dualcore": {
@@ -359,9 +386,10 @@
 			"version": "1.0.1",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/customise/db/style/dualcore/"
 		},
 		"elegance": {
@@ -372,9 +400,10 @@
 			"version": "3.1.9",
 			"phpbb_version": "3.1.9",
 			"presets": 6,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/elegance2"
 		},
 		"eles": {
@@ -385,9 +414,10 @@
 			"version": "1.4.0",
 			"phpbb_version": "3.1.9",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/eles/13769708"
 		},
 		"enigma": {
@@ -398,9 +428,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.9",
 			"presets": 7,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 29,
 			"price_label": "$29",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/enigma"
 		},
 		"epsilon": {
@@ -411,9 +442,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 49,
 			"price_label": "$49",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/epsilon"
 		},
 		"flatboots": {
@@ -424,9 +456,10 @@
 			"version": "2.0.5",
 			"phpbb_version": "3.1.6",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/flatboots/8536771"
 		},
 		"flato": {
@@ -437,9 +470,10 @@
 			"version": "1.0.2",
 			"phpbb_version": "3.0.12",
 			"presets": 10,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 16,
 			"price_label": "$16",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/flato/6314993"
 		},
 		"fledge": {
@@ -450,9 +484,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.1.9",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://github.com/taniarascia/fledge"
 		},
 		"fresco": {
@@ -463,9 +498,10 @@
 			"version": "1.3.0",
 			"phpbb_version": "3.0.10",
 			"presets": 9,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 29,
 			"price_label": "$29",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/fresco"
 		},
 		"graffito": {
@@ -476,9 +512,10 @@
 			"version": "1.4.0",
 			"phpbb_version": "3.0.11",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/graffito"
 		},
 		"hadron": {
@@ -489,9 +526,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 49,
 			"price_label": "$49",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/hadron"
 		},
 		"halcyon": {
@@ -502,9 +540,10 @@
 			"version": "1.0.9",
 			"phpbb_version": "3.0.12",
 			"presets": 2,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://stsoftware.biz/phpbb30_style.ca_halcyon.html"
 		},
 		"hawiki": {
@@ -515,9 +554,10 @@
 			"version": "1.1.0",
 			"phpbb_version": "3.1.4",
 			"presets": 16,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/hawiki/6879435"
 		},
 		"helion": {
@@ -528,9 +568,10 @@
 			"version": "1.3.1",
 			"phpbb_version": "3.0.12",
 			"presets": 6,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/helion"
 		},
 		"hexeris": {
@@ -541,9 +582,10 @@
 			"version": "1.3.0",
 			"phpbb_version": "3.0.11",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/hexeris"
 		},
 		"insist": {
@@ -554,9 +596,10 @@
 			"version": "1.0.1",
 			"phpbb_version": "3.0.11",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://spieleresidenz.de/board/dm_eds/download.php?id=318"
 		},
 		"jade": {
@@ -567,9 +610,10 @@
 			"version": "1.0.6",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/community/viewtopic.php?t=2161650"
 		},
 		"kirigami": {
@@ -580,9 +624,10 @@
 			"version": "1.1.0",
 			"phpbb_version": "3.0.10",
 			"presets": 9,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/kirigami"
 		},
 		"latte": {
@@ -593,9 +638,10 @@
 			"version": "3.1.9",
 			"phpbb_version": "3.1.9",
 			"presets": 1,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/latte"
 		},
 		"leviathan": {
@@ -606,9 +652,10 @@
 			"version": "1.3.0",
 			"phpbb_version": "3.0.11",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/leviathan"
 		},
 		"lexicon": {
@@ -619,9 +666,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 49,
 			"price_label": "$49",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/lexicon"
 		},
 		"marina": {
@@ -632,9 +680,10 @@
 			"version": "2.0.0",
 			"phpbb_version": "3.1.6",
 			"presets": 6,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/marina/6509951"
 		},
 		"metro": {
@@ -645,9 +694,10 @@
 			"version": "1.0.2",
 			"phpbb_version": "3.0.11",
 			"presets": 9,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/metro/4559274"
 		},
 		"metro_light": {
@@ -658,9 +708,10 @@
 			"version": "1.0.1",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://github.com/Rahber/metrolight"
 		},
 		"metropolis": {
@@ -671,9 +722,10 @@
 			"version": "1.3.0",
 			"phpbb_version": "3.0.11",
 			"presets": 9,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/metropolis"
 		},
 		"milk": {
@@ -684,9 +736,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.1.9",
 			"presets": 4,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/milk/16119149"
 		},
 		"mobbern": {
@@ -697,9 +750,10 @@
 			"version": "3.12.0",
 			"phpbb_version": "3.1.2",
 			"presets": 4,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 16,
 			"price_label": "$16",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/mobbern/9014094"
 		},
 		"mobile_and_seo": {
@@ -710,9 +764,10 @@
 			"version": "3.5.0",
 			"phpbb_version": "3.0.12",
 			"presets": 3,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/mobile"
 		},
 		"momentum": {
@@ -723,9 +778,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.9",
 			"presets": 5,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 29,
 			"price_label": "$29",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/momentum"
 		},
 		"mossy_knoll": {
@@ -736,9 +792,10 @@
 			"version": "1.0.1",
 			"phpbb_version": "3.0.11",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://spieleresidenz.de/board/dm_eds/download.php?id=325"
 		},
 		"oculus": {
@@ -749,9 +806,10 @@
 			"version": "1.3.0",
 			"phpbb_version": "3.0.11",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/oculus"
 		},
 		"orbital": {
@@ -762,9 +820,10 @@
 			"version": "1.0.9",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://stsoftware.biz/phpbb30_style.ca_orbital.html"
 		},
 		"origami": {
@@ -775,9 +834,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 16,
 			"price_label": "$16",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/origami/9325517"
 		},
 		"osmosis": {
@@ -788,9 +848,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 49,
 			"price_label": "$49",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/osmosis"
 		},
 		"paradigm": {
@@ -801,9 +862,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 49,
 			"price_label": "$49",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/paradigm"
 		},
 		"parmida": {
@@ -814,9 +876,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 16,
 			"price_label": "$16",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/parmida/8934013"
 		},
 		"pbtech": {
@@ -827,9 +890,10 @@
 			"version": "3.0.8",
 			"phpbb_version": "3.1.9",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/customise/db/style/pbtech"
 		},
 		"phantom": {
@@ -840,9 +904,10 @@
 			"version": "2.0.1",
 			"phpbb_version": "3.0.12",
 			"presets": 2,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://artodia.com/phpbb-styles/phantom"
 		},
 		"phonics": {
@@ -853,9 +918,10 @@
 			"version": "1.0.1",
 			"phpbb_version": "3.0.11",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://spieleresidenz.de/board/dm_eds/download.php?id=328"
 		},
 		"praxis": {
@@ -866,9 +932,10 @@
 			"version": "1.2.0",
 			"phpbb_version": "3.0.11",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/praxis"
 		},
 		"proschool": {
@@ -879,9 +946,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://phpbb-fr.com/customise/db/style/pro_school"
 		},
 		"prosocial": {
@@ -892,9 +960,10 @@
 			"version": "1.2.0",
 			"phpbb_version": "3.0.11",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/community/viewtopic.php?f=185&t=2154087"
 		},
 		"quarto": {
@@ -905,9 +974,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 9,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/quarto/8526816"
 		},
 		"ravaio": {
@@ -918,9 +988,10 @@
 			"version": "2.1.5",
 			"phpbb_version": "3.1.8",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/ravaio/13123186"
 		},
 		"simplicity": {
@@ -931,9 +1002,10 @@
 			"version": "1.0.3",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/customise/db/style/simplicity_2"
 		},
 		"solace": {
@@ -944,9 +1016,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.1.6",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://sites.fastspring.com/devlom/product/solace"
 		},
 		"solorwind": {
@@ -957,9 +1030,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://webgurubb.com/resources/solarwind.10"
 		},
 		"spectral": {
@@ -970,9 +1044,10 @@
 			"version": "1.1.0",
 			"phpbb_version": "3.0.12",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/spectral"
 		},
 		"star_trek_lcars": {
@@ -983,9 +1058,10 @@
 			"version": "1.2.1",
 			"phpbb_version": "3.0.11",
 			"presets": 1,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://spieleresidenz.de/board/dm_eds/download.php?id=314"
 		},
 		"stratos": {
@@ -996,9 +1072,10 @@
 			"version": "1.2.0",
 			"phpbb_version": "3.0.11",
 			"presets": 7,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 39,
 			"price_label": "$39",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/stratos"
 		},
 		"subway": {
@@ -1009,9 +1086,10 @@
 			"version": "1.0.5",
 			"phpbb_version": "3.1.3",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/subway/9820360"
 		},
 		"tessellate": {
@@ -1022,9 +1100,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 49,
 			"price_label": "$49",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/tessellate"
 		},
 		"tiaw": {
@@ -1035,9 +1114,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.1.6",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 17,
 			"price_label": "$17",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/tiaw/15903985"
 		},
 		"ultra_light": {
@@ -1048,9 +1128,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://phpbb-fr.com/customise/db/style/ultra_light"
 		},
 		"vermilion": {
@@ -1061,9 +1142,10 @@
 			"version": "1.0.0",
 			"phpbb_version": "3.0.12",
 			"presets": 5,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 49,
 			"price_label": "$49",
+			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/vermilion"
 		},
 		"vintage": {
@@ -1074,9 +1156,10 @@
 			"version": "1.0.9",
 			"phpbb_version": "3.0.12",
 			"presets": 2,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://stsoftware.biz/phpbb30_style.ca_vintage.html"
 		},
 		"wide": {
@@ -1087,9 +1170,10 @@
 			"version": "1.0.2",
 			"phpbb_version": "3.0.12",
 			"presets": 0,
-			"reponsive": 1,
+			"responsive": 1,
 			"price": 16,
 			"price_label": "$16",
+			"screenshot": "",
 			"url": "http://themeforest.net/item/wide/7949289"
 		},
 		"x_iphone": {
@@ -1100,9 +1184,10 @@
 			"version": "3.0.8",
 			"phpbb_version": "3.0.8",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/community/viewtopic.php?f=74&t=1056115"
 		},
 		"x_mass": {
@@ -1113,9 +1198,10 @@
 			"version": "3.0.8",
 			"phpbb_version": "3.0.8",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "https://phpbb.com/community/viewtopic.php?f=185&t=2114522"
 		},
 		"x_silver": {
@@ -1126,9 +1212,10 @@
 			"version": "3.0.8",
 			"phpbb_version": "3.0.8",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://demo.phpbb3styles.net/X_Silver"
 		},
 		"xtream_micro_s3": {
@@ -1139,9 +1226,10 @@
 			"version": "1.2.2",
 			"phpbb_version": "3.0.11",
 			"presets": 0,
-			"reponsive": 0,
+			"responsive": 0,
 			"price": 0,
 			"price_label": "",
+			"screenshot": "",
 			"url": "http://spieleresidenz.de/board/dm_eds/download.php?id=302"
 		}
 	},

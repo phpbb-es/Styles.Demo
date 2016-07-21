@@ -52,7 +52,7 @@ $lang = array_merge($lang, array(
 	'PRICE'			=> 'Price',
 	'PURCHASE'		=> 'Purchase',
 
-	'REPONSIVE'	=> 'Reponsive',
+	'RESPONSIVE'	=> 'Responsive',
 
 	'SELECT_STYLE'			=> 'Select a style…',
 	'SELECT_STYLE_EXPLAIN'	=> 'Select a style to preview',
