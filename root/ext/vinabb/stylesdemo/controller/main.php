@@ -186,13 +186,33 @@ class main
 				$style_varname = $this->style_varname_normalize($style_dir);
 
 				// Style screenshot
-				if (file_exists("{$this->real_path}assets/screenshots/acp/{$style_varname}.png"))
+				switch ($this->config['vinabb_stylesdemo_screenshot_type'])
 				{
-					$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}.png";
-				}
-				else
-				{
-					$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
+					case constants::SCREENSHOT_TYPE_JSON:
+						if (isset($json['acp'][$style_varname]['screenshot']))
+						{
+							$style_img = $json['acp'][$style_varname]['screenshot'];
+						}
+						else
+						{
+							$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
+						}
+					break;
+
+					case constants::SCREENSHOT_TYPE_PHANTOM:
+						//...
+					break;
+
+					default:
+						if (file_exists("{$this->real_path}assets/screenshots/acp/{$style_varname}.png"))
+						{
+							$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}.png";
+						}
+						else
+						{
+							$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
+						}
+					break;
 				}
 
 				// Remote data
@@ -287,13 +307,33 @@ class main
 				$style_varname = $this->style_varname_normalize($row['style_path']);
 
 				// Style screenshot
-				if (file_exists("{$this->real_path}assets/screenshots/frontend/{$style_varname}.png"))
+				switch ($this->config['vinabb_stylesdemo_screenshot_type'])
 				{
-					$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}.png";
-				}
-				else
-				{
-					$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
+					case constants::SCREENSHOT_TYPE_JSON:
+						if (isset($json['frontend'][$style_varname]['screenshot']))
+						{
+							$style_img = $json['frontend'][$style_varname]['screenshot'];
+						}
+						else
+						{
+							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
+						}
+					break;
+
+					case constants::SCREENSHOT_TYPE_PHANTOM:
+						//...
+					break;
+
+					default:
+						if (file_exists("{$this->real_path}assets/screenshots/frontend/{$style_varname}.png"))
+						{
+							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}.png";
+						}
+						else
+						{
+							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
+						}
+					break;
 				}
 
 				// Remote data
