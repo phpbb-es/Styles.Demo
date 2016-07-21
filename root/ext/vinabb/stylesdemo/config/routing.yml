@@ -1,0 +1,5 @@
+vinabb_stylesdemo_route:
+    path: /demo/{mode}
+    defaults: { _controller: vinabb.stylesdemo.controller:handle }
+    requirements:
+        mode: (|acp|acp\/)

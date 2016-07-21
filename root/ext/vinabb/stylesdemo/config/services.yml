@@ -1,0 +1,34 @@
+services:
+    user:
+        class: vinabb\stylesdemo\controller\user
+        arguments:
+            - %datetime.class%
+    vinabb.stylesdemo.controller:
+        class: vinabb\stylesdemo\controller\main
+        arguments:
+            - @dbal.conn
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - @auth
+            - @request
+            - @ext.manager
+            - @path_helper
+            - %core.root_path%
+            - %core.adm_relative_path%
+            - %core.php_ext%
+    vinabb.stylesdemo.listener:
+        class: vinabb\stylesdemo\event\listener
+        arguments:
+            - @dbal.conn
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - @request
+            - %core.root_path%
+            - %core.adm_relative_path%
+            - %core.php_ext%
+        tags:
+            - { name: event.listener }

@@ -1,0 +1,53 @@
+{% include 'overall_header.html' %}
+
+<a href="{{ STYLES_DEMO_URL }}" style="float: {{ S_CONTENT_FLOW_END }};">&raquo; {{ lang('STYLES_DEMO_URL') }}</a>
+
+<h1>{{ lang('ACP_STYLES_DEMO') }}</h1>
+<p>{{ lang('ACP_STYLES_DEMO_EXPLAIN') }}</p>
+
+<form id="acp_styles_demo" method="post" action="{{ U_ACTION }}">
+	<fieldset>
+		<legend>{{ lang('SETTINGS') }}</legend>
+		<dl>
+			<dt><label for="lang_enable">{{ lang('STYLES_DEMO_LANG_ENABLE') }}{{ lang('COLON') }}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="lang_enable" value="1" id="lang_enable"{% if LANG_ENABLE %} checked{% endif %}> {L_YES}</label>
+				<label><input type="radio" class="radio" name="lang_enable" value="0"{% if not LANG_ENABLE %} checked{% endif %}> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="default_lang">{{ lang('DEFAULT_LANGUAGE') }}{{ lang('COLON') }}</label></dt>
+			<dd><strong>{{ DEFAULT_LANG }}</strong></dd>
+		</dl>
+		<dl>
+			<dt><label for="lang_switch">{{ lang('STYLES_DEMO_LANG_SWITCH') }}{{ lang('COLON') }}</label><br /><span>{{ lang('STYLES_DEMO_LANG_SWITCH_EXPLAIN') }}</span></dt>
+			<dd>{% if LANG_SWITCH_OPTIONS is not empty %}<select name="lang_switch" id="lang_switch">{{ LANG_SWITCH_OPTIONS }}</select>{% else %}{{ lang('NO_EXTRA_LANG_TO_SELECT') }}{% endif %}</dd>
+		</dl>
+		<dl>
+			<dt><label for="acp_enable">{{ lang('STYLES_DEMO_ACP_ENABLE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('STYLES_DEMO_ACP_ENABLE_EXPLAIN') }}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="acp_enable" value="1" id="acp_enable"{% if ACP_ENABLE %} checked{% endif %}> {L_YES}</label>
+				<label><input type="radio" class="radio" name="acp_enable" value="0"{% if not ACP_ENABLE %} checked{% endif %}> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="json_enable">{{ lang('STYLES_DEMO_JSON_ENABLE') }}{{ lang('COLON') }}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="json_enable" value="1" id="json_enable"{% if JSON_ENABLE %} checked{% endif %}> {L_YES}</label>
+				<label><input type="radio" class="radio" name="json_enable" value="0"{% if not JSON_ENABLE %} checked{% endif %}> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="json_url">{{ lang('STYLES_DEMO_JSON_URL') }}{{ lang('COLON') }}</label><br /><span>{{ lang('STYLES_DEMO_JSON_URL_EXPLAIN') }}</span></dt>
+			<dd><input type="url" name="json_url" id="json_url" maxlength="255" value="{{ JSON_URL }}"></dd>
+		</dl>
+
+		 <p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}">
+		 </p>
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+</form>
+
+{% include 'overall_footer.html' %}
