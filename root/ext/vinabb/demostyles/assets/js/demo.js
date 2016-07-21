@@ -61,7 +61,7 @@ $('.get-btn').click(
 				$('#downloadPurchase').prop('class', 'btn btn-success');
 			}
 
-			$('#downloadAlert').modal('show');
+			$('#styleInfoDialog').modal('show');
 		}
 
 		return false;
@@ -74,8 +74,16 @@ $('#downloadPurchase').click(
 	{
 		if ($current_style in $styles)
 		{
-			$('#downloadAlert').modal('hide');
-			top.location.href = $styles[$current_style]['download'];
+			$('#styleInfoDialog').modal('hide');
+
+			if ($styles[$current_style]['price'] > 0)
+			{
+				window.open($styles[$current_style]['download']);
+			}
+			else
+			{
+				top.location.href = $styles[$current_style]['download'];
+			}
 		}
 
 		return false;
@@ -88,7 +96,7 @@ $('#viewDetails').click(
 	{
 		if ($current_style in $styles)
 		{
-			$('#downloadAlert').modal('hide');
+			$('#styleInfoDialog').modal('hide');
 			window.open($styles[$current_style]['vinabb']);
 		}
 

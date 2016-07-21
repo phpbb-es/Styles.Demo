@@ -81,8 +81,8 @@
 	<div class="preloading-icon"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></div>
 
 	{% if S_JSON_ENABLE %}
-	<!-- Download dialog -->
-	<div class="modal fade" id="downloadAlert" tabindex="-1" role="dialog" aria-labelledby="downloadAlertLabel" aria-hidden="true">
+	<!-- Download/Purchase dialog -->
+	<div class="modal fade" id="styleInfoDialog" tabindex="-1" role="dialog" aria-labelledby="styleInfoTitle" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -90,7 +90,7 @@
 						<span aria-hidden="true">&times;</span>
 						<span class="sr-only">{{ lang('CLOSE') }}</span>
 					</button>
-					<h4 class="modal-title" id="downloadAlertLabel"><span id="styleName"></span></h4>
+					<h4 class="modal-title" id="styleInfoTitle"><span id="styleName"></span></h4>
 				</div>
 				<div class="modal-body">
 					<span id="styleInfo"></span>
