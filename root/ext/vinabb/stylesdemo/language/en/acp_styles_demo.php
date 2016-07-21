@@ -40,6 +40,10 @@ $lang = array_merge($lang, array(
 
 	'OS_NAME_USING'	=> 'Your server is running on %s.',
 
+	'SCREENSHOT_TYPE'					=> 'Screenshot type',
+	'SCREENSHOT_TYPE_JSON'				=> 'Get link from JSON',
+	'SCREENSHOT_TYPE_LOCAL'				=> 'Local images',
+	'SCREENSHOT_TYPE_PHANTOM'			=> 'Use PhantomJS to create',
 	'SELECT_LANGUAGE'					=> 'Select a language',
 	'STYLES_DEMO_ACP_ENABLE'			=> 'Enable demo for ACP styles',
 	'STYLES_DEMO_ACP_ENABLE_EXPLAIN'	=> 'When enabled, guests will be assigned administrator permissions to access the fake ACP. However, no changes saved in this demo mode.',

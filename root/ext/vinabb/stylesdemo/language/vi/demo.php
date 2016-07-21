@@ -56,7 +56,6 @@ $lang = array_merge($lang, array(
 
 	'SELECT_STYLE'			=> 'Chọn giao diện…',
 	'SELECT_STYLE_EXPLAIN'	=> 'Chọn giao diện xem thử',
-	'SIGN_CURRENCY'			=> '$',
 	'STYLES_DEMO'			=> 'Xem thử giao diện',
 
 	'TABLET'	=> 'Máy tính bảng',

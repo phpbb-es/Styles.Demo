@@ -14,7 +14,7 @@ class release_1_0_0 extends migration
 {
 	public function effectively_installed()
 	{
-		return isset($this->config['vinabb_stylesdemo_lang_enable']);
+		return isset($this->config['vinabb_stylesdemo_logo_text']);
 	}
 
 	static public function depends_on()
@@ -26,11 +26,13 @@ class release_1_0_0 extends migration
 	{
 		return array(
 			// Config
+			array('config.add', array('vinabb_stylesdemo_logo_text', '')),
 			array('config.add', array('vinabb_stylesdemo_lang_enable', 0)),
 			array('config.add', array('vinabb_stylesdemo_lang_switch', '')),
 			array('config.add', array('vinabb_stylesdemo_acp_enable', 0)),
 			array('config.add', array('vinabb_stylesdemo_json_enable', 0)),
 			array('config.add', array('vinabb_stylesdemo_json_url', '')),
+			array('config.add', array('vinabb_stylesdemo_screenshot_type', 0)),
 
 			// Modules
 			array('module.add', array(

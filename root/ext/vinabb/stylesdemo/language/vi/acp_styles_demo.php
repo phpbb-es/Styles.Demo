@@ -40,6 +40,10 @@ $lang = array_merge($lang, array(
 
 	'OS_NAME_USING'	=> 'Hệ điều hành máy chủ của bạn là %s.',
 
+	'SCREENSHOT_TYPE'					=> 'Screenshot type',
+	'SCREENSHOT_TYPE_JSON'				=> 'Get link from JSON',
+	'SCREENSHOT_TYPE_LOCAL'				=> 'Local images',
+	'SCREENSHOT_TYPE_PHANTOM'			=> 'Use PhantomJS to create',
 	'SELECT_LANGUAGE'					=> 'Chọn ngôn ngữ',
 	'STYLES_DEMO_ACP_ENABLE'			=> 'Cho phép xem thử giao diện quản trị',
 	'STYLES_DEMO_ACP_ENABLE_EXPLAIN'	=> 'Nếu bật, khách sẽ được cấp quyền quản trị để truy cập vào bảng quản trị giả. Tuy nhiên, không có thay đổi nào được lưu trong chế độ giả lập này.',

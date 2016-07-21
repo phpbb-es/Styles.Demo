@@ -56,7 +56,6 @@ $lang = array_merge($lang, array(
 
 	'SELECT_STYLE'			=> 'Select a style…',
 	'SELECT_STYLE_EXPLAIN'	=> 'Select a style to preview',
-	'SIGN_CURRENCY'			=> '$',
 	'STYLES_DEMO'			=> 'Styles Demo',
 
 	'TABLET'	=> 'Tablet',

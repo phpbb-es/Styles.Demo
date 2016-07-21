@@ -9,37 +9,59 @@
 	<fieldset>
 		<legend>{{ lang('SETTINGS') }}</legend>
 		<dl>
+			<dt><label for="logo_text">{{ lang('STYLES_DEMO_LOGO_TEXT') }}{{ lang('COLON') }}</label></dt>
+			<dd><input id="logo_text" type="text" size="40" maxlength="255" name="logo_text" value="{{ LOGO_TEXT }}"></dd>
+		</dl>
+		<dl>
 			<dt><label for="lang_enable">{{ lang('STYLES_DEMO_LANG_ENABLE') }}{{ lang('COLON') }}</label></dt>
 			<dd>
-				<label><input type="radio" class="radio" name="lang_enable" value="1" id="lang_enable"{% if LANG_ENABLE %} checked{% endif %}> {L_YES}</label>
-				<label><input type="radio" class="radio" name="lang_enable" value="0"{% if not LANG_ENABLE %} checked{% endif %}> {L_NO}</label>
+				<label><input type="radio" class="radio" name="lang_enable" value="1" id="lang_enable"{% if LANG_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('lang_enable_options', 1)"> {{ lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="lang_enable" value="0"{% if not LANG_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('lang_enable_options', -1)"> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
-		<dl>
-			<dt><label for="default_lang">{{ lang('DEFAULT_LANGUAGE') }}{{ lang('COLON') }}</label></dt>
-			<dd><strong>{{ DEFAULT_LANG }}</strong></dd>
-		</dl>
-		<dl>
-			<dt><label for="lang_switch">{{ lang('STYLES_DEMO_LANG_SWITCH') }}{{ lang('COLON') }}</label><br /><span>{{ lang('STYLES_DEMO_LANG_SWITCH_EXPLAIN') }}</span></dt>
-			<dd>{% if LANG_SWITCH_OPTIONS is not empty %}<select name="lang_switch" id="lang_switch">{{ LANG_SWITCH_OPTIONS }}</select>{% else %}{{ lang('NO_EXTRA_LANG_TO_SELECT') }}{% endif %}</dd>
-		</dl>
+		<div id="lang_enable_options"{% if not LANG_ENABLE %} style="display: none;"{% endif %}>
+			<dl>
+				<dt><label for="default_lang">{{ lang('DEFAULT_LANGUAGE') }}{{ lang('COLON') }}</label></dt>
+				<dd><strong>{{ DEFAULT_LANG }}</strong></dd>
+			</dl>
+			<dl>
+				<dt><label for="lang_switch">{{ lang('STYLES_DEMO_LANG_SWITCH') }}{{ lang('COLON') }}</label><br /><span>{{ lang('STYLES_DEMO_LANG_SWITCH_EXPLAIN') }}</span></dt>
+				<dd>{% if LANG_SWITCH_OPTIONS is not empty %}<select name="lang_switch" id="lang_switch">{{ LANG_SWITCH_OPTIONS }}</select>{% else %}{{ lang('NO_EXTRA_LANG_TO_SELECT') }}{% endif %}</dd>
+			</dl>
+		</div>
 		<dl>
 			<dt><label for="acp_enable">{{ lang('STYLES_DEMO_ACP_ENABLE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('STYLES_DEMO_ACP_ENABLE_EXPLAIN') }}</span></dt>
 			<dd>
-				<label><input type="radio" class="radio" name="acp_enable" value="1" id="acp_enable"{% if ACP_ENABLE %} checked{% endif %}> {L_YES}</label>
-				<label><input type="radio" class="radio" name="acp_enable" value="0"{% if not ACP_ENABLE %} checked{% endif %}> {L_NO}</label>
+				<label><input type="radio" class="radio" name="acp_enable" value="1" id="acp_enable"{% if ACP_ENABLE %} checked{% endif %}> {{ lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="acp_enable" value="0"{% if not ACP_ENABLE %} checked{% endif %}> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		<dl>
 			<dt><label for="json_enable">{{ lang('STYLES_DEMO_JSON_ENABLE') }}{{ lang('COLON') }}</label></dt>
 			<dd>
-				<label><input type="radio" class="radio" name="json_enable" value="1" id="json_enable"{% if JSON_ENABLE %} checked{% endif %}> {L_YES}</label>
-				<label><input type="radio" class="radio" name="json_enable" value="0"{% if not JSON_ENABLE %} checked{% endif %}> {L_NO}</label>
+				<label><input type="radio" class="radio" name="json_enable" value="1" id="json_enable"{% if JSON_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('json_enable_yes_options', 1);phpbb.toggleDisplay('json_enable_no_options', -1)"> {{ lang('STYLES_DEMO_JSON_ENABLE_YES') }}</label>
+				<label><input type="radio" class="radio" name="json_enable" value="0"{% if not JSON_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('json_enable_yes_options', -1);phpbb.toggleDisplay('json_enable_no_options', 1)"> {{ lang('STYLES_DEMO_JSON_ENABLE_NO') }}</label>
 			</dd>
+			<div id="json_enable_no_options"{% if JSON_ENABLE %} style="display: none;"{% endif %}>
+				<dd><br>{{ lang('STYLES_DEMO_JSON_ENABLE_NO_DESC') }}</dd>
+			</div>
 		</dl>
+		<div id="json_enable_yes_options"{% if not JSON_ENABLE %} style="display: none;"{% endif %}>
+			<dl>
+				<dt><label for="json_url">{{ lang('STYLES_DEMO_JSON_URL') }}{{ lang('COLON') }}</label><br /><span>{{ lang('STYLES_DEMO_JSON_URL_EXPLAIN') }}</span></dt>
+				<dd><input type="url" name="json_url" id="json_url" size="40" maxlength="255" value="{{ JSON_URL }}"></dd>
+			</dl>
+		</div>
 		<dl>
-			<dt><label for="json_url">{{ lang('STYLES_DEMO_JSON_URL') }}{{ lang('COLON') }}</label><br /><span>{{ lang('STYLES_DEMO_JSON_URL_EXPLAIN') }}</span></dt>
-			<dd><input type="url" name="json_url" id="json_url" maxlength="255" value="{{ JSON_URL }}"></dd>
+			<dt><label for="screenshot_type">{{ lang('SCREENSHOT_TYPE') }}{{ lang('COLON') }}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_LOCAL }}" id="screenshot_type"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_LOCAL %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', -1)"> {{ lang('SCREENSHOT_TYPE_LOCAL') }}</label>
+				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_JSON }}"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_JSON %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', -1)"> {{ lang('SCREENSHOT_TYPE_JSON') }}</label>
+				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_PHANTOM }}"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_PHANTOM %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', 1)"> {{ lang('SCREENSHOT_TYPE_PHANTOM') }}</label>
+			</dd>
+			<div id="screenshot_type_phantom"{% if SCREENSHOT_TYPE != SCREENSHOT_TYPE_PHANTOM %} style="display: none;"{% endif %}>
+				<dd><br>{% if OS_NAME %}{{ lang('OS_NAME_USING', OS_NAME) }} {{ GET_PHANTOM_FOR_OS }}{% else %}{{ GET_PHANTOM_NO_OS }}{% endif %}</dd>
+			</div>
 		</dl>
 
 		 <p class="submit-buttons">

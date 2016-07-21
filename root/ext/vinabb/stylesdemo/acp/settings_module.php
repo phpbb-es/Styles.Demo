@@ -44,11 +44,13 @@ class settings_module
 			}
 
 			// Get from the form
+			$logo_text = $this->request->variable('logo_text', '');
 			$lang_enable = $this->request->variable('lang_enable', false);
 			$lang_switch = $this->request->variable('lang_switch', '');
 			$acp_enable = $this->request->variable('acp_enable', false);
 			$json_enable = $this->request->variable('json_enable', false);
 			$json_url = $this->request->variable('json_url', '');
+			$screenshot_type = $this->request->variable('screenshot_type', constants::SCREENSHOT_TYPE_LOCAL);
 
 			// Check switch lang
 			if ($lang_enable && (empty($lang_switch) || $lang_switch == $this->config['default_lang']))
@@ -87,11 +89,13 @@ class settings_module
 				// Clear permissions cache
 				$this->auth->acl_clear_prefetch();
 
+				$this->config->set('vinabb_stylesdemo_logo_text', $logo_text);
 				$this->config->set('vinabb_stylesdemo_lang_enable', $lang_enable);
 				$this->config->set('vinabb_stylesdemo_lang_switch', $lang_switch);
 				$this->config->set('vinabb_stylesdemo_acp_enable', $acp_enable);
 				$this->config->set('vinabb_stylesdemo_json_enable', $json_enable);
 				$this->config->set('vinabb_stylesdemo_json_url', $json_url);
+				$this->config->set('vinabb_stylesdemo_screenshot_type', $screenshot_type);
 
 				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_STYLES_DEMO_SETTINGS');
 				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), array('Anonymous'));
@@ -138,11 +142,21 @@ class settings_module
 		// Output
 		$this->template->assign_vars(array(
 			'STYLES_DEMO_URL'	=> generate_board_url() . (($this->config['enable_mod_rewrite']) ? '' : "/app.$phpEx") . '/demo/',
+
+			'LOGO_TEXT'			=> isset($logo_text) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
 			'DEFAULT_LANG'		=> $default_lang_name,
 			'LANG_ENABLE'		=> isset($lang_enable) ? $lang_enable : $this->config['vinabb_stylesdemo_lang_enable'],
 			'ACP_ENABLE'		=> isset($acp_enable) ? $acp_enable : $this->config['vinabb_stylesdemo_acp_enable'],
 			'JSON_ENABLE'		=> isset($json_enable) ? $json_enable : $this->config['vinabb_stylesdemo_json_enable'],
 			'JSON_URL'			=> (isset($json_url) && !empty($json_url)) ? $json_url : $this->config['vinabb_stylesdemo_json_url'],
+
+			'SCREENSHOT_TYPE'			=> isset($screenshot_type) ? $screenshot_type : $this->config['vinabb_stylesdemo_screenshot_type'],
+			'SCREENSHOT_TYPE_LOCAL'		=> constants::SCREENSHOT_TYPE_LOCAL,
+			'SCREENSHOT_TYPE_JSON'		=> constants::SCREENSHOT_TYPE_JSON,
+			'SCREENSHOT_TYPE_PHANTOM'	=> constants::SCREENSHOT_TYPE_PHANTOM,
+			'OS_NAME'					=> $this->get_php_os_name(),
+			'GET_PHANTOM_FOR_OS'		=> $this->user->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, './ext/vinabb/stylesdemo/'),
+			'GET_PHANTOM_NO_OS'			=> $this->user->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, './ext/vinabb/stylesdemo/'),
 
 			'LANG_SWITCH_OPTIONS'	=> $lang_switch_options,
 
@@ -166,5 +180,37 @@ class settings_module
 		$this->db->sql_freeresult($result);
 
 		return $role_id;
+	}
+
+	/**
+	* Get server OS name
+	*
+	* @param bool $get_lang_key false returns OS name, true returns lang key for OS
+	* @return string OS name, empty if undefined
+	*/
+	protected function get_php_os_name($get_lang_key = false)
+	{
+		switch (strtoupper(PHP_OS))
+		{
+			case 'WINNT';
+				return ($get_lang_key) ? 'WIN' : 'Windows';
+			break;
+
+			case 'DARWIN';
+				return ($get_lang_key) ? 'MAC' : 'Mac OS X';
+			break;
+
+			case 'LINUX';
+				return ($get_lang_key) ? 'LINUX' : 'Linux';
+			break;
+
+			case 'FREEBSD':
+				return ($get_lang_key) ? 'BSD' : 'FreeBSD';
+			break;
+
+			default:
+				return '';
+			break;
+		}
 	}
 }
