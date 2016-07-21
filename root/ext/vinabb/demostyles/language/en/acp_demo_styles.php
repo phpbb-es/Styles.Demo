@@ -29,14 +29,15 @@ $lang = array_merge($lang, array(
 
 	'DEFAULT_LANGUAGE'					=> 'Default language',
 	'DEMOSTYLES_ACP_ENABLE'				=> 'Enable demo for ACP styles',
-	'DEMOSTYLES_JSON_ENABLE'			=> 'Fetch more style data via JSON',
+	'DEMOSTYLES_ACP_ENABLE_EXPLAIN'		=> 'When enabled, guests will be assigned administrator permissions to access the fake ACP. However, no changes saved in this demo mode.',
+	'DEMOSTYLES_JSON_ENABLE'			=> 'Get style data via JSON',
 	'DEMOSTYLES_JSON_URL'				=> 'JSON URL',
 	'DEMOSTYLES_JSON_URL_EXPLAIN'		=> 'Enter the URL of JSON data file.',
 	'DEMOSTYLES_LANG_ENABLE'			=> 'Enable language switcher',
 	'DEMOSTYLES_LANG_SWITCH'			=> 'Switch language',
 	'DEMOSTYLES_LANG_SWITCH_EXPLAIN'	=> 'The switch and default language must be different.',
 	'DEMOSTYLES_URL'					=> 'Demo styles',
-	'DEMOSTYLES_SETTINGS_UPDATED'		=> 'Demo styles settings have been updated.',
+	'DEMOSTYLES_SETTINGS_UPDATED'		=> 'Demo style settings have been updated.',
 
 	'NO_EXTRA_LANG_TO_SELECT'	=> 'No extra languages to select.',
 

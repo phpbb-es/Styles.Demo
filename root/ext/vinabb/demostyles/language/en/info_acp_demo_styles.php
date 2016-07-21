@@ -26,9 +26,9 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'ACP_CAT_DEMO_STYLES'	=> 'Demo styles',
-	'ACP_DEMO_STYLES'		=> 'Demo styles settings',
+	'ACP_DEMO_STYLES'		=> 'Demo style settings',
 
-	'LOG_DEMO_STYLES_SETTINGS'	=> '<strong>Altered demo styles settings</strong>',
+	'LOG_DEMO_STYLES_SETTINGS'	=> '<strong>Altered demo style settings</strong>',
 
 	'ROLE_ADMIN_DEMO'		=> 'Demo Admin',
 	'ROLE_ADMIN_DEMO_DESC'	=> 'Use only for demo phpBB boards.',

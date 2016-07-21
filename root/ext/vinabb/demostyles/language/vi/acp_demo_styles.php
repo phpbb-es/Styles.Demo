@@ -29,7 +29,8 @@ $lang = array_merge($lang, array(
 
 	'DEFAULT_LANGUAGE'					=> 'Ngôn ngữ mặc định',
 	'DEMOSTYLES_ACP_ENABLE'				=> 'Cho phép xem thử giao diện quản trị',
-	'DEMOSTYLES_JSON_ENABLE'			=> 'Lấy thêm thông tin từ JSON',
+	'DEMOSTYLES_ACP_ENABLE_EXPLAIN'		=> 'Nếu bật, khách sẽ được cấp quyền quản trị để truy cập vào bảng quản trị giả. Tuy nhiên, không có thay đổi nào được lưu trong chế độ giả lập này.',
+	'DEMOSTYLES_JSON_ENABLE'			=> 'Lấy dữ liệu giao diện từ JSON',
 	'DEMOSTYLES_JSON_URL'				=> 'Liên kết JSON',
 	'DEMOSTYLES_JSON_URL_EXPLAIN'		=> 'Liên kết của tập tin dữ liệu JSON.',
 	'DEMOSTYLES_LANG_ENABLE'			=> 'Cho phép chuyển ngôn ngữ',
