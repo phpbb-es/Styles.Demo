@@ -13,31 +13,31 @@ use vinabb\stylesdemo\includes\constants;
 
 class listener implements EventSubscriberInterface
 {
-	/* @var \phpbb\db\driver\driver_interface */
+	/** @var \phpbb\db\driver\driver_interface */
     protected $db;
 
-	/* @var \phpbb\config\config */
+	/** @var \phpbb\config\config */
     protected $config;
 
-	/* @var \phpbb\controller\helper */
+	/** @var \phpbb\controller\helper */
     protected $helper;
 
-	/* @var \phpbb\template\template */
+	/** @var \phpbb\template\template */
     protected $template;
 
-	/* @var \phpbb\user */
+	/** @var \phpbb\user */
     protected $user;
 
-	/* @var \phpbb\request\request */
+	/** @var \phpbb\request\request */
     protected $request;
 
-	/* @var string */
+	/** @var string */
 	protected $phpbb_root_path;
 
-	/* @var string */
+	/** @var string */
 	protected $phpbb_admin_path;
 
-	/* @var string */
+	/** @var string */
 	protected $php_ext;
 
 	/**

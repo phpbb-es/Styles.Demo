@@ -13,40 +13,43 @@ use vinabb\stylesdemo\includes\constants;
 
 class main
 {
-	/* @var \phpbb\db\driver\driver_interface */
+	/** @var \phpbb\db\driver\driver_interface */
     protected $db;
 
-	/* @var \phpbb\config\config */
+	/** @var \phpbb\config\config */
     protected $config;
 
-	/* @var \phpbb\controller\helper */
+	/** @var \phpbb\controller\helper */
     protected $helper;
 
-	/* @var \phpbb\template\template */
+	/** @var \phpbb\template\template */
     protected $template;
 
-	/* @var \phpbb\user */
+	/** @var \phpbb\user */
     protected $user;
 
-	/* @var \phpbb\auth\auth */
+	/** @var \phpbb\auth\auth */
     protected $auth;
 
-	/* @var \phpbb\request\request */
+	/** @var \phpbb\request\request */
     protected $request;
 
-	/* @var \phpbb\extension\manager */
+	/** @var \phpbb\extension\manager */
 	protected $ext_manager;
 
-	/* @var \phpbb\path_helper */
+	/** @var \phpbb\path_helper */
 	protected $path_helper;
 
-	/* @var string */
+	/** @var \phpbb\file_downloader */
+	protected $file_downloader;
+
+	/** @var string */
 	protected $phpbb_root_path;
 
-	/* @var string */
+	/** @var string */
 	protected $phpbb_admin_path;
 
-	/* @var string */
+	/** @var string */
 	protected $php_ext;
 
 	/**
@@ -61,6 +64,7 @@ class main
 	* @param \phpbb\request\request $request
 	* @param \phpbb\extension\manager $ext_manager
 	* @param \phpbb\path_helper $path_helper
+	* @param \phpbb\file_downloader $file_downloader
 	* @param string $phpbb_root_path
 	* @param string $phpbb_admin_path
 	* @param string $php_ext
@@ -74,6 +78,7 @@ class main
 								\phpbb\request\request $request,
 								\phpbb\extension\manager $ext_manager,
 								\phpbb\path_helper $path_helper,
+								\phpbb\file_downloader $file_downloader,
 								$phpbb_root_path,
 								$phpbb_admin_path,
 								$php_ext)
@@ -87,6 +92,7 @@ class main
 		$this->request = $request;
 		$this->ext_manager = $ext_manager;
 		$this->path_helper = $path_helper;
+		$this->file_downloader = $file_downloader;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->phpbb_admin_path = $this->phpbb_root_path . $phpbb_admin_path;
 		$this->php_ext = $php_ext;
@@ -133,15 +139,32 @@ class main
 
 			if (strpos($test[0], '200') !== false)
 			{
-				// We use cURL here since cURL is faster than file_get_contents()
-				$curl = curl_init($this->config['vinabb_stylesdemo_json_url']);
-				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-				$raw = curl_exec($curl);
-				curl_close($curl);
+				if (function_exists('curl_version'))
+				{
+					$curl = curl_init($this->config['vinabb_stylesdemo_json_url']);
+					curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+					$raw = curl_exec($curl);
+					curl_close($curl);
+				}
+				else
+				{
+					$url_parts = parse_url($this->config['vinabb_stylesdemo_json_url']);
+
+					try
+					{
+						$raw = $this->file_downloader->get($url_parts['host'], '', $url_parts['path'], ($url_parts['scheme'] == 'https') ? 443 : 80);
+					}
+					catch (\phpbb\exception\runtime_exception $e)
+					{
+						throw new \RuntimeException($this->file_downloader->get_error_string());
+					}
+				}
 
 				// Parse JSON
-				$json = json_decode($raw, true);
+				if (!empty($raw))
+				{
+					$json = json_decode($raw, true);
+				}
 			}
 		}
 
@@ -189,7 +212,7 @@ class main
 				switch ($this->config['vinabb_stylesdemo_screenshot_type'])
 				{
 					case constants::SCREENSHOT_TYPE_JSON:
-						if (isset($json['acp'][$style_varname]['screenshot']))
+						if (!empty($json['acp'][$style_varname]['screenshot']))
 						{
 							$style_img = $json['acp'][$style_varname]['screenshot'];
 						}
@@ -310,7 +333,7 @@ class main
 				switch ($this->config['vinabb_stylesdemo_screenshot_type'])
 				{
 					case constants::SCREENSHOT_TYPE_JSON:
-						if (isset($json['frontend'][$style_varname]['screenshot']))
+						if (!empty($json['frontend'][$style_varname]['screenshot']))
 						{
 							$style_img = $json['frontend'][$style_varname]['screenshot'];
 						}

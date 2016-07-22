@@ -12,7 +12,7 @@ use vinabb\stylesdemo\includes\constants;
 
 class settings_module
 {
-	/* @var string */
+	/** @var string */
 	public $u_action;
 
 	public function main($id, $mode)
