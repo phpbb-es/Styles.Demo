@@ -281,9 +281,9 @@ class main
 
 					if (isset($cfg['style_price']) && is_numeric($cfg['style_price']))
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($cfg['style_price']) ? '<code>' . ((isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : $cfg['style_price']) . '</code>' : '<code class=green>' . $this->user->lang('FREE') . '</code>');
 						$style_price = $cfg['style_price'];
-						$style_price_label = (isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : '';
+						$style_price_label = (isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : $style_price;
+						$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($style_price) ? "<code>$style_price_label</code>" : '<code class=green>' . $this->user->lang('FREE') . '</code>');
 					}
 					else
 					{
@@ -416,9 +416,9 @@ class main
 
 					if (isset($cfg['style_price']) && is_numeric($cfg['style_price']))
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($cfg['style_price']) ? '<code>' . ((isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : $cfg['style_price']) . '</code>' : '<code class=green>' . $this->user->lang('FREE') . '</code>');
 						$style_price = $cfg['style_price'];
-						$style_price_label = (isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : '';
+						$style_price_label = (isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : $style_price;
+						$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($style_price) ? "<code>$style_price_label</code>" : '<code class=green>' . $this->user->lang('FREE') . '</code>');
 					}
 					else
 					{

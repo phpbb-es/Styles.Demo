@@ -29,6 +29,7 @@ class settings_module
 
 		$this->tpl_name = 'settings_body';
 		$this->page_title = $this->user->lang('ACP_STYLES_DEMO');
+		$this->real_path = dirname(__DIR__) . '/';
 		$this->user->add_lang_ext('vinabb/stylesdemo', 'acp_styles_demo');
 
 		add_form_key('vinabb/stylesdemo');
@@ -40,7 +41,7 @@ class settings_module
 		{
 			if (!check_form_key('vinabb/stylesdemo'))
 			{
-				$errors[] = $this->user->lang['FORM_INVALID'];
+				$errors[] = $this->user->lang('FORM_INVALID');
 			}
 
 			// Get from the form
@@ -63,6 +64,19 @@ class settings_module
 			if ($json_enable && empty($json_url))
 			{
 				$json_enable = false;
+			}
+
+			// Check PhantomJS
+			if ($screenshot_type == constants::SCREENSHOT_TYPE_PHANTOM)
+			{
+				if (!file_exists("{$this->real_path}bin/"))
+				{
+					$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_FOUND', constants::EXT_PATH_IN_LANG . 'bin/');
+				}
+				else if (!is_writable("{$this->real_path}bin/") || !is_executable("{$this->real_path}bin/"))
+				{
+					$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_CHMOD', constants::EXT_PATH_IN_LANG . 'bin/');
+				}
 			}
 
 			if (empty($errors))
@@ -155,8 +169,8 @@ class settings_module
 			'SCREENSHOT_TYPE_JSON'		=> constants::SCREENSHOT_TYPE_JSON,
 			'SCREENSHOT_TYPE_PHANTOM'	=> constants::SCREENSHOT_TYPE_PHANTOM,
 			'OS_NAME'					=> $this->get_php_os_name(),
-			'GET_PHANTOM_FOR_OS'		=> $this->user->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, './ext/vinabb/stylesdemo/'),
-			'GET_PHANTOM_NO_OS'			=> $this->user->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, './ext/vinabb/stylesdemo/'),
+			'GET_PHANTOM_FOR_OS'		=> $this->user->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
+			'GET_PHANTOM_NO_OS'			=> $this->user->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
 
 			'LANG_SWITCH_OPTIONS'	=> $lang_switch_options,
 
