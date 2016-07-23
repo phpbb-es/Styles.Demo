@@ -223,7 +223,14 @@ class main
 					break;
 
 					case constants::SCREENSHOT_TYPE_PHANTOM:
-						//...
+						if (file_exists("{$this->real_path}bin/images/acp_{$style_varname}.png"))
+						{
+							$style_img = "{$this->ext_web_path}bin/images/acp_{$style_varname}.png";
+						}
+						else
+						{
+							$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
+						}
 					break;
 
 					default:
@@ -344,7 +351,14 @@ class main
 					break;
 
 					case constants::SCREENSHOT_TYPE_PHANTOM:
-						//...
+						if (file_exists("{$this->real_path}bin/images/{$style_varname}.png"))
+						{
+							$style_img = "{$this->ext_web_path}bin/images/{$style_varname}.png";
+						}
+						else
+						{
+							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
+						}
 					break;
 
 					default:
