@@ -19,7 +19,7 @@ class release_1_0_0 extends migration
 
 	static public function depends_on()
 	{
-		return array('\phpbb\db\migration\data\v31x\v317');
+		return array('\phpbb\db\migration\data\v310\gold');
 	}
 
 	public function update_data()
@@ -27,12 +27,12 @@ class release_1_0_0 extends migration
 		return array(
 			// Config
 			array('config.add', array('vinabb_stylesdemo_logo_text', '')),
-			array('config.add', array('vinabb_stylesdemo_lang_enable', '0')),
+			array('config.add', array('vinabb_stylesdemo_lang_enable', 0)),
 			array('config.add', array('vinabb_stylesdemo_lang_switch', '')),
-			array('config.add', array('vinabb_stylesdemo_acp_enable', '0')),
-			array('config.add', array('vinabb_stylesdemo_json_enable', '0')),
+			array('config.add', array('vinabb_stylesdemo_acp_enable', 0)),
+			array('config.add', array('vinabb_stylesdemo_json_enable', 0)),
 			array('config.add', array('vinabb_stylesdemo_json_url', '')),
-			array('config.add', array('vinabb_stylesdemo_screenshot_type', '0')),
+			array('config.add', array('vinabb_stylesdemo_screenshot_type', 0)),
 
 			// Modules
 			array('module.add', array(
