@@ -29,15 +29,15 @@ $lang = array_merge($lang, array(
 
 	'DEFAULT_LANGUAGE'	=> 'Ngôn ngữ mặc định',
 
-	'ERROR_PHANTOM_NOT_CHMOD'	=> 'The PhantomJS directory “%s” must be writable and executable.',
-	'ERROR_PHANTOM_NOT_FOUND'	=> 'The PhantomJS directory “%s” does not exist.',
+	'ERROR_PHANTOM_NOT_CHMOD'	=> 'Thư mục PhantomJS “%s” phải được cấp phép có thể ghi và thực thi.',
+	'ERROR_PHANTOM_NOT_FOUND'	=> 'Thư mục PhantomJS “%s” không tồn tại.',
 
-	'GET_PHANTOM_BSD'		=> 'Open Terminal and type <code>sudo pkg install phantomjs</code> to get binary packages. Copy the directory “bin” to the following path: %2$s. You must CHMOD 755 for the directory “bin”.',
-	'GET_PHANTOM_LINUX'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-linux-x86_64.tar.bz2</samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must CHMOD 755 for the directory “bin”.',
-	'GET_PHANTOM_LINUX_32'	=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-linux-i686.tar.bz2</samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must CHMOD 755 for the directory “bin”.',
-	'GET_PHANTOM_MAC'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-macosx.zip </samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must CHMOD 755 for the directory “bin”.',
-	'GET_PHANTOM_NO_OS'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and get the appropriate download package for your server OS. Extracted it and copy the directory “bin” to the following path: %2$s. You must grant the executable permission to the directory “bin”.',
-	'GET_PHANTOM_WIN'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-windows.zip</samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must grant the permission “Read &amp; Execute” to the directory “bin”.',
+	'GET_PHANTOM_BSD'		=> 'Mở Terminal và gõ <code>sudo pkg install phantomjs</code> để tải về các gói phần mềm của PhantomJS. Chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải CHMOD 755 cho thư mục “bin”.',
+	'GET_PHANTOM_LINUX'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-linux-x86_64.tar.bz2</samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải CHMOD 755 cho thư mục “bin”.',
+	'GET_PHANTOM_LINUX_32'	=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-linux-i686.tar.bz2</samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải CHMOD 755 cho thư mục “bin”.',
+	'GET_PHANTOM_MAC'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-macosx.zip </samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải CHMOD 755 cho thư mục “bin”.',
+	'GET_PHANTOM_NO_OS'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và chọn gói tải về tương ứng cho hệ điều hành máy chủ. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải cấp quyền thực thi cho thư mục “bin”.',
+	'GET_PHANTOM_WIN'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-windows.zip</samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải cấp quyền “Đọc &amp; Thực thi” cho thư mục “bin”.',
 
 	'NO_EXTRA_LANG_TO_SELECT'	=> 'Không có thêm ngôn ngữ khác để chọn.',
 
@@ -57,38 +57,38 @@ $lang = array_merge($lang, array(
 	'RESOLUTION_8K'			=> '8K UHD (%1$d x %2$d)',
 
 	'SCREENSHOT_RESOLUTION'				=> 'Độ phân giải màn hình',
-	'SCREENSHOT_RESOLUTION_EXPLAIN'		=> 'Set the screen resolution for PhantomJS.',
-	'SCREENSHOT_TYPE'					=> 'Screenshot type',
-	'SCREENSHOT_TYPE_EXPLAIN'			=> 'PhantomJS allows you to take automatically style screenshots. It is free software/open source, and is available for Windows, Mac, Linux, FreeBSD.',
-	'SCREENSHOT_TYPE_JSON'				=> 'Get link from JSON',
-	'SCREENSHOT_TYPE_LOCAL'				=> 'Local images',
-	'SCREENSHOT_TYPE_PHANTOM'			=> 'Use PhantomJS to create',
+	'SCREENSHOT_RESOLUTION_EXPLAIN'		=> 'Thiết lập độ phân giải màn hình cho PhantomJS.',
+	'SCREENSHOT_TYPE'					=> 'Loại hình thu nhỏ',
+	'SCREENSHOT_TYPE_EXPLAIN'			=> 'PhantomJS giúp bạn tạo hình giao diện thu nhỏ hoàn toàn tự động. Đây là phần mềm miễn phí, mã nguồn mở và hỗ trợ các hệ điều hành: Windows, Mac, Linux, FreeBSD.',
+	'SCREENSHOT_TYPE_JSON'				=> 'Lấy liên kết hình từ JSON',
+	'SCREENSHOT_TYPE_LOCAL'				=> 'Hình có sẵn',
+	'SCREENSHOT_TYPE_PHANTOM'			=> 'Dùng PhantomJS để tạo',
 	'SELECT_RESOLUTION'					=> 'Chọn độ phân giải',
 	'SELECT_LANGUAGE'					=> 'Chọn ngôn ngữ',
 	'STYLES_DEMO_ACP_ENABLE'			=> 'Cho phép xem thử giao diện quản trị',
 	'STYLES_DEMO_ACP_ENABLE_EXPLAIN'	=> 'Nếu bật, khách sẽ được cấp quyền quản trị để truy cập vào bảng quản trị giả. Tuy nhiên, không có thay đổi nào được lưu trong chế độ giả lập này.',
 	'STYLES_DEMO_AUTO_TOGGLE'			=> 'Đóng thanh giao diện khi chuyển sang giao diện khác',
 	'STYLES_DEMO_JSON_ENABLE'			=> 'Nguồn dữ liệu giao diện',
-	'STYLES_DEMO_JSON_ENABLE_NO'		=> 'Use <var>style.cfg</var>',
-	'STYLES_DEMO_JSON_ENABLE_NO_DESC'	=> 'You can define in this file more variables:<br>
+	'STYLES_DEMO_JSON_ENABLE_NO'		=> 'Từ tập tin <var>style.cfg</var>',
+	'STYLES_DEMO_JSON_ENABLE_NO_DESC'	=> 'Bạn có thể gán thêm nhiều biến dữ liệu khác như:<br>
 	<code>
-		<br>style_author = {designer name}
-		<br>style_presets = {number of presets}
-		<br>style_responsive = {1 if supported responsive, 0 if not}
-		<br>style_price = {price of the style, 0 if free}
-		<br>style_price_label = {price with currency symbol, empty if free}
-		<br>style_details = {link_to_source_info_page}
-		<br>style_download = {direct_link_to_file if free download or purchase_link if paid}
+		<br>style_author = {tên người thiết kế}
+		<br>style_presets = {số lượng bản màu}
+		<br>style_responsive = {1 nếu hỗ trợ đa thiết bị, 0 nếu không có}
+		<br>style_price = {giá bán giao diện, 0 nếu miễn phí}
+		<br>style_price_label = {giá đi kèm đơn vị tiền tệ, để trống nếu miễn phí}
+		<br>style_details = {liên_kết_đến_trang_nguồn}
+		<br>style_download = {liên_kết_tải_về_trực_tiếp nếu miễn phí hoặc liên_kết_mua nếu có phí}
 	</code>',
-	'STYLES_DEMO_JSON_ENABLE_YES'		=> 'Remote JSON file',
+	'STYLES_DEMO_JSON_ENABLE_YES'		=> 'Từ tập tin JSON',
 	'STYLES_DEMO_JSON_URL'				=> 'Liên kết JSON',
 	'STYLES_DEMO_JSON_URL_EXPLAIN'		=> 'Liên kết của tập tin dữ liệu JSON.',
 	'STYLES_DEMO_LANG_ENABLE'			=> 'Cho phép chuyển ngôn ngữ',
 	'STYLES_DEMO_LANG_SWITCH'			=> 'Ngôn ngữ chuyển',
 	'STYLES_DEMO_LANG_SWITCH_EXPLAIN'	=> 'Ngôn ngữ chuyển và mặc định phải khác nhau.',
 	'STYLES_DEMO_LOGO_TEXT'				=> 'Giới thiệu',
-	'STYLES_DEMO_PHONE_WIDTH'			=> 'Chiều rộng điện thoại',
-	'STYLES_DEMO_TABLET_WIDTH'			=> 'Chiều rộng máy tính bảng',
+	'STYLES_DEMO_PHONE_WIDTH'			=> 'Chiều rộng chế độ điện thoại',
+	'STYLES_DEMO_TABLET_WIDTH'			=> 'Chiều rộng chế độ máy tính bảng',
 	'STYLES_DEMO_URL'					=> 'Xem thử giao diện',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'Đã cập nhật thiết lập xem thử giao diện.',
 ));

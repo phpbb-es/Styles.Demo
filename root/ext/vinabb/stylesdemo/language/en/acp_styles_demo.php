@@ -87,8 +87,8 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_LANG_SWITCH'			=> 'Switch language',
 	'STYLES_DEMO_LANG_SWITCH_EXPLAIN'	=> 'The switch and default language must be different.',
 	'STYLES_DEMO_LOGO_TEXT'				=> 'Hover logo text',
-	'STYLES_DEMO_PHONE_WIDTH'			=> 'Phone width',
-	'STYLES_DEMO_TABLET_WIDTH'			=> 'Tablet width',
+	'STYLES_DEMO_PHONE_WIDTH'			=> 'Phone mode width',
+	'STYLES_DEMO_TABLET_WIDTH'			=> 'Tablet mode width',
 	'STYLES_DEMO_URL'					=> 'Styles Demo',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'The style demo settings have been updated.',
 ));
