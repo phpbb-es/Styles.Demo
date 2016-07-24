@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'RESOLUTION_8K'			=> '8K UHD (%1$d x %2$d)',
 
 	'SCREENSHOT_RESOLUTION'				=> 'Screen resolution',
-	'SCREENSHOT_RESOLUTION_EXPLAIN'		=> 'Set the screen resolution for PhantomJS browser.',
+	'SCREENSHOT_RESOLUTION_EXPLAIN'		=> 'Set the screen resolution for PhantomJS.',
 	'SCREENSHOT_TYPE'					=> 'Screenshot type',
 	'SCREENSHOT_TYPE_EXPLAIN'			=> 'PhantomJS allows you to take automatically style screenshots. It is free software/open source, and is available for Windows, Mac, Linux, FreeBSD.',
 	'SCREENSHOT_TYPE_JSON'				=> 'Get link from JSON',

@@ -23,12 +23,14 @@ class settings_module
 		$this->db = $phpbb_container->get('dbal.conn');
 		$this->log = $phpbb_container->get('log');
 		$this->request = $phpbb_container->get('request');
+		$this->ext_manager = $phpbb_container->get('ext.manager');
 		$this->template = $phpbb_container->get('template');
 		$this->user = $phpbb_container->get('user');
 		$this->auth = $phpbb_container->get('auth');
 
 		$this->tpl_name = 'settings_body';
 		$this->page_title = $this->user->lang('ACP_STYLES_DEMO');
+		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/stylesdemo', true);
 		$this->real_path = dirname(__DIR__) . '/';
 		$this->user->add_lang_ext('vinabb/stylesdemo', 'acp_styles_demo');
 
@@ -123,6 +125,30 @@ class settings_module
 
 				// Clear permissions cache
 				$this->auth->acl_clear_prefetch();
+
+				// Delete all screenshots which created by PhantomJS but with old resolution setting
+				if ($screenshot_type == constants::SCREENSHOT_TYPE_PHANTOM && $screenshot_width != $this->config['vinabb_stylesdemo_screenshot_width'])
+				{
+					$scan_dirs = array('images'	=> constants::SCREENSHOT_EXT, 'js' => '.js');
+
+					foreach ($scan_dirs as $scan_dir => $file_ext)
+					{
+						$suffix = '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'] . $file_ext;
+
+						if (file_exists("{$this->real_path}bin/{$scan_dir}/"))
+						{
+							$scan_files = array_diff(scandir("{$this->ext_root_path}bin/{$scan_dir}/"), array('..', '.', '.htaccess'));
+
+							foreach ($scan_files as $scan_file)
+							{
+								if (substr($scan_file, strlen($suffix) * -1) == $suffix)
+								{
+									unlink("{$this->ext_root_path}bin/{$scan_dir}/{$scan_file}");
+								}
+							}
+						}
+					}
+				}
 
 				$this->config->set('vinabb_stylesdemo_logo_text', $logo_text);
 				$this->config->set('vinabb_stylesdemo_auto_toggle', $auto_toggle);

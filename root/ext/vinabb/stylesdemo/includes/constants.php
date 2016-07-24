@@ -17,6 +17,7 @@ class constants
 	const ROLE_ADMIN_DEMO = 'ROLE_ADMIN_DEMO';
 
 	// Screenshot types
+	const SCREENSHOT_EXT = '.png';
 	const SCREENSHOT_TYPE_LOCAL = 0;
 	const SCREENSHOT_TYPE_JSON = 1;
 	const SCREENSHOT_TYPE_PHANTOM = 2;
