@@ -211,7 +211,7 @@ function switcher_viewport_buttons()
 $(document).ready(switcher_iframe_height);
 $(window).on('resize load', switcher_iframe_height);
 
-// Switching views
+// Switching device views
 $('.desktop-btn').on('click',
 	function()
 	{
@@ -365,6 +365,7 @@ $(document).ready(
 	}
 );
 
+// Style box on click
 $('.style').click(
 	function()
 	{
@@ -415,6 +416,7 @@ $('.style').click(
 	}
 );
 
+// Remember the last iframe href
 $styleIframe.load(
 	function()
 	{

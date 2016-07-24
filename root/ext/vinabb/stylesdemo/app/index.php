@@ -67,9 +67,11 @@ $template->set_custom_style(array(
 	),
 ), $style_dir);
 
-$template->assign_var('T_ASSETS_PATH', generate_board_url() . '/assets');
-$template->assign_var('T_TEMPLATE_PATH', $style_dir);
-$template->assign_var('S_PREVIEW_ACP', true);
+$template->assign_vars(array(
+	'T_ASSETS_PATH'		=> generate_board_url() . '/assets',
+	'T_TEMPLATE_PATH'	=> $style_dir,
+	'S_PREVIEW_ACP'		=> true
+));
 
 // Instantiate new module
 $module = new p_master();
@@ -91,7 +93,7 @@ $module->load_active();
 adm_page_header($module->get_page_title());
 
 $template->set_filenames(array(
-	'body' => $module->get_tpl_name(),
+	'body' => $module->get_tpl_name()
 ));
 
 adm_page_footer();

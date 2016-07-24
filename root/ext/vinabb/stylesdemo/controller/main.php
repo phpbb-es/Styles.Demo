@@ -129,7 +129,7 @@ class main
 			$demo_lang = $this->user->data['user_lang'];
 		}
 
-		// Get more style data from our server
+		// Get more style data from mom server
 		$json = array();
 
 		if ($this->config['vinabb_stylesdemo_json_enable'] && !empty($this->config['vinabb_stylesdemo_json_url']))
@@ -197,9 +197,6 @@ class main
 				trigger_error('NO_ACP_STYLES');
 			}
 
-			// Sort $style_dirs again
-			asort($style_dirs);
-
 			foreach ($style_dirs as $style_dir)
 			{
 				// Get data from style.cfg
@@ -245,11 +242,14 @@ class main
 							$script = file_get_contents("{$this->real_path}assets/js/phantom.js");
 							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "./ext/vinabb/stylesdemo/bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
 
+							// Create .js data file for PhantomJS
 							file_put_contents("{$this->real_path}bin/js/{$screenshot_filename}.js", $script);
 
+							// Phantom! Summon... Summon...
 							try
 							{
 								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$screenshot_filename}.js");
+
 								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 							}
 							catch (\phpbb\exception\runtime_exception $e)
@@ -399,11 +399,14 @@ class main
 							$script = file_get_contents("{$this->real_path}assets/js/phantom.js");
 							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "./ext/vinabb/stylesdemo/bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
 
+							// Create .js data file for PhantomJS
 							file_put_contents("{$this->real_path}bin/js/{$screenshot_filename}.js", $script);
 
+							// Phantom! Summon... Summon...
 							try
 							{
 								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$screenshot_filename}.js");
+
 								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 							}
 							catch (\phpbb\exception\runtime_exception $e)

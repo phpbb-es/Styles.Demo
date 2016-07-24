@@ -29,8 +29,10 @@ $lang = array_merge($lang, array(
 
 	'DEFAULT_LANGUAGE'	=> 'Ngôn ngữ mặc định',
 
-	'ERROR_PHANTOM_NOT_CHMOD'	=> 'Thư mục PhantomJS “%s” phải được cấp phép có thể ghi và thực thi.',
-	'ERROR_PHANTOM_NOT_FOUND'	=> 'Thư mục PhantomJS “%s” không tồn tại.',
+	'ERROR_JSON_URL_NOT_RESPONSE'	=> 'Liên kết JSON không phản hồi.',
+	'ERROR_JSON_URL_NOT_VALID'		=> 'Liên kết JSON không hợp lệ.',
+	'ERROR_PHANTOM_NOT_CHMOD'		=> 'Thư mục PhantomJS “%s” phải được cấp phép có thể ghi và thực thi.',
+	'ERROR_PHANTOM_NOT_FOUND'		=> 'Thư mục PhantomJS “%s” không tồn tại.',
 
 	'GET_PHANTOM_BSD'		=> 'Mở Terminal và gõ <code>sudo pkg install phantomjs</code> để tải về các gói phần mềm của PhantomJS. Chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải CHMOD 755 cho thư mục “bin”.',
 	'GET_PHANTOM_LINUX'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-linux-x86_64.tar.bz2</samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải CHMOD 755 cho thư mục “bin”.',

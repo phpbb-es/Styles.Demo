@@ -114,9 +114,7 @@ class listener implements EventSubscriberInterface
 			}
 			else
 			{
-				$sql = 'UPDATE ' . USERS_TABLE . "
-					SET user_lang = '$new_lang'
-					WHERE user_id = " . $this->user->data['user_id'];
+				$sql = 'UPDATE ' . USERS_TABLE . " SET user_lang = '$new_lang' WHERE user_id = " . $this->user->data['user_id'];
 				$this->db->sql_query($sql);
 			}
 
@@ -132,7 +130,7 @@ class listener implements EventSubscriberInterface
 	public function add_page_header_link($event)
 	{
 		$this->template->assign_vars(array(
-			'U_DEMO'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => '')),
+			'U_DEMO'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => ''))
 		));
 	}
 

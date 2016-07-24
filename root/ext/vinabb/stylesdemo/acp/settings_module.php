@@ -84,9 +84,31 @@ class settings_module
 			}
 
 			// Check JSON URL
-			if ($json_enable && empty($json_url))
+			if ($json_enable)
 			{
-				$json_enable = false;
+				if (empty($json_url))
+				{
+					$json_enable = false;
+				}
+				// Test file URL
+				else
+				{
+					if (filter_var($json_url, FILTER_VALIDATE_URL))
+					{
+						$test = get_headers($json_url);
+
+						if (strpos($test[0], '200') === false)
+						{
+							$json_enable = false;
+							$errors[] = $this->user->lang('ERROR_JSON_URL_NOT_RESPONSE');
+						}
+					}
+					else
+					{
+						$json_enable = false;
+						$errors[] = $this->user->lang('ERROR_JSON_URL_NOT_VALID');
+					}
+				}
 			}
 
 			// Check PhantomJS
@@ -123,8 +145,13 @@ class settings_module
 					$this->db->sql_query($sql);
 				}
 
-				// Clear permissions cache
-				$this->auth->acl_clear_prefetch();
+				if ($acp_enable != $this->config['vinabb_stylesdemo_acp_enable'])
+				{
+					// Clear permissions cache
+					$this->auth->acl_clear_prefetch();
+
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), array('Anonymous'));
+				}
 
 				// Delete all screenshots which created by PhantomJS but with old resolution setting
 				if ($screenshot_type == constants::SCREENSHOT_TYPE_PHANTOM && $screenshot_width != $this->config['vinabb_stylesdemo_screenshot_width'])
@@ -164,7 +191,6 @@ class settings_module
 				$this->config->set('vinabb_stylesdemo_screenshot_height', $screenshot_height);
 
 				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_STYLES_DEMO_SETTINGS');
-				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), array('Anonymous'));
 
 				trigger_error($this->user->lang('STYLES_DEMO_SETTINGS_UPDATED') . adm_back_link($this->u_action));
 			}
@@ -218,7 +244,7 @@ class settings_module
 		$this->template->assign_vars(array(
 			'STYLES_DEMO_URL'	=> generate_board_url() . (($this->config['enable_mod_rewrite']) ? '' : "/app.$phpEx") . '/demo/',
 
-			'LOGO_TEXT'			=> isset($logo_text) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
+			'LOGO_TEXT'			=> (isset($logo_text) && !empty($logo_text)) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
 			'AUTO_TOGGLE'		=> isset($auto_toggle) ? $auto_toggle : $this->config['vinabb_stylesdemo_auto_toggle'],
 			'PHONE_WIDTH'		=> isset($phone_width) ? $phone_width : $this->config['vinabb_stylesdemo_phone_width'],
 			'TABLET_WIDTH'		=> isset($tablet_width) ? $tablet_width : $this->config['vinabb_stylesdemo_tablet_width'],
