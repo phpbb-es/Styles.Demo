@@ -100,6 +100,7 @@ class main
 		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/stylesdemo', true);
 		$this->ext_web_path = $this->path_helper->update_web_root_path($this->ext_root_path);
 		$this->real_path = dirname(__DIR__) . '/';
+		$this->set_time_limit = false;
 	}
 
 	/**
@@ -228,14 +229,11 @@ class main
 						}
 						else
 						{
-							if (!file_exists("{$this->real_path}bin/images/"))
+							if (!$this->set_time_limit)
 							{
-								mkdir("{$this->real_path}bin/images/");
-							}
+								set_time_limit(0);
 
-							if (!file_exists("{$this->real_path}bin/js/"))
-							{
-								mkdir("{$this->real_path}bin/js/");
+								$this->set_time_limit = true;
 							}
 
 							$preview_url = generate_board_url() . "/ext/vinabb/stylesdemo/app/index.{$this->php_ext}?s={$style_dir}&sid={$this->user->session_id}";
@@ -248,6 +246,13 @@ class main
 							// Phantom! Summon... Summon...
 							try
 							{
+								if (!$this->set_time_limit)
+								{
+									set_time_limit(0);
+
+									$this->set_time_limit = true;
+								}
+
 								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$screenshot_filename}.js");
 
 								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
@@ -385,14 +390,11 @@ class main
 						}
 						else
 						{
-							if (!file_exists("{$this->real_path}bin/images/"))
+							if (!$this->set_time_limit)
 							{
-								mkdir("{$this->real_path}bin/images/");
-							}
+								set_time_limit(0);
 
-							if (!file_exists("{$this->real_path}bin/js/"))
-							{
-								mkdir("{$this->real_path}bin/js/");
+								$this->set_time_limit = true;
 							}
 
 							$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
