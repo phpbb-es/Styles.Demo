@@ -22,7 +22,7 @@
 	"extra": {
 		"display-name": "Styles Demo",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.1"
+			"phpbb/phpbb": ">=3.1.2,<3.2.0@dev"
 		}
 	}
 }
