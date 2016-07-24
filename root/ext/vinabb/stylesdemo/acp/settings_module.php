@@ -114,13 +114,23 @@ class settings_module
 			// Check PhantomJS
 			if ($screenshot_type == constants::SCREENSHOT_TYPE_PHANTOM)
 			{
+				$phantomjs_filename = ($this->get_php_os_name(true) == 'WIN') ? 'phantomjs.exe' : 'phantomjs';
+
 				if (!file_exists("{$this->real_path}bin/"))
 				{
 					$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_FOUND', constants::EXT_PATH_IN_LANG . 'bin/');
 				}
-				else if (!is_writable("{$this->real_path}bin/") || !is_executable("{$this->real_path}bin/"))
+				else
 				{
-					$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_CHMOD', constants::EXT_PATH_IN_LANG . 'bin/');
+					if (!is_writable("{$this->real_path}bin/"))
+					{
+						$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_WRITE', constants::EXT_PATH_IN_LANG . 'bin/');
+					}
+
+					if (!is_executable("{$this->real_path}bin/{$phantomjs_filename}"))
+					{
+						$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_EXEC', constants::EXT_PATH_IN_LANG . "bin/{$phantomjs_filename}");
+					}
 				}
 			}
 

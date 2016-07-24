@@ -31,8 +31,9 @@ $lang = array_merge($lang, array(
 
 	'ERROR_JSON_URL_NOT_RESPONSE'	=> 'The JSON URL does not response.',
 	'ERROR_JSON_URL_NOT_VALID'		=> 'The JSON URL is not valid.',
-	'ERROR_PHANTOM_NOT_CHMOD'		=> 'The PhantomJS directory “%s” must be writable and executable.',
-	'ERROR_PHANTOM_NOT_FOUND'		=> 'The PhantomJS directory “%s” does not exist.',
+	'ERROR_PHANTOM_NOT_EXEC'		=> 'The file “%s” must be executable.',
+	'ERROR_PHANTOM_NOT_FOUND'		=> 'The directory “%s” does not exist.',
+	'ERROR_PHANTOM_NOT_WRITE'		=> 'The directory “%s” must be writable.',
 
 	'GET_PHANTOM_BSD'		=> 'Open Terminal and type <code>sudo pkg install phantomjs</code> to get binary packages. Copy the directory “bin” to the following path: %2$s. You must CHMOD 755 for the directory “bin”.',
 	'GET_PHANTOM_LINUX'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-linux-x86_64.tar.bz2</samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must CHMOD 755 for the directory “bin”.',
