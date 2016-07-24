@@ -68,16 +68,22 @@
 			</dl>
 		</div>
 		<dl>
-			<dt><label for="screenshot_type">{{ lang('SCREENSHOT_TYPE') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="screenshot_type">{{ lang('SCREENSHOT_TYPE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('SCREENSHOT_TYPE_EXPLAIN') }}</span></dt>
 			<dd>
-				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_LOCAL }}" id="screenshot_type"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_LOCAL %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', -1)"> {{ lang('SCREENSHOT_TYPE_LOCAL') }}</label>
-				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_JSON }}"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_JSON %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', -1)"> {{ lang('SCREENSHOT_TYPE_JSON') }}</label>
-				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_PHANTOM }}"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_PHANTOM %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', 1)"> {{ lang('SCREENSHOT_TYPE_PHANTOM') }}</label>
+				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_LOCAL }}" id="screenshot_type"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_LOCAL %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', -1);phpbb.toggleDisplay('resolution_options', -1)"> {{ lang('SCREENSHOT_TYPE_LOCAL') }}</label>
+				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_JSON }}"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_JSON %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', -1);phpbb.toggleDisplay('resolution_options', -1)"> {{ lang('SCREENSHOT_TYPE_JSON') }}</label>
+				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_PHANTOM }}"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_PHANTOM %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', 1);phpbb.toggleDisplay('resolution_options', 1)"> {{ lang('SCREENSHOT_TYPE_PHANTOM') }}</label>
 			</dd>
 			<div id="screenshot_type_phantom"{% if SCREENSHOT_TYPE != SCREENSHOT_TYPE_PHANTOM %} style="display: none;"{% endif %}>
 				<dd><br>{% if OS_NAME %}{{ lang('OS_NAME_USING', OS_NAME) }} {{ GET_PHANTOM_FOR_OS }}{% else %}{{ GET_PHANTOM_NO_OS }}{% endif %}</dd>
 			</div>
 		</dl>
+		<div id="resolution_options"{% if SCREENSHOT_TYPE != SCREENSHOT_TYPE_PHANTOM %} style="display: none;"{% endif %}>
+			<dl>
+				<dt><label for="screenshot_width">{{ lang('SCREENSHOT_RESOLUTION') }}{{ lang('COLON') }}</label><br /><span>{{ lang('SCREENSHOT_RESOLUTION_EXPLAIN') }}</span></dt>
+				<dd><select name="screenshot_width" id="screenshot_width">{{ RESOLUTION_OPTIONS }}</select></dd>
+			</dl>
+		</div>
 
 		 <p class="submit-buttons">
 			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">
@@ -120,7 +126,7 @@ $.event.special.inputchange = {
 $('input[name=phone_width]').on('inputchange',
 	function()
 	{
-		$('input[name=tablet_width]').prop('min', parseInt(this.value) + 100);
+		$('input[name=tablet_width]').prop('min', parseInt(this.value) + {{ MIN_PHONE_WIDTH }});
 	}
 );
 </script>

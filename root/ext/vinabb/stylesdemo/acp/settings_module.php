@@ -36,6 +36,22 @@ class settings_module
 
 		$errors = array();
 
+		// Resolution data
+		$resolutions = array(
+			800		=> array('lang' => 'SVGA', 'height' => 600),
+			1024	=> array('lang' => 'XGA', 'height' => 768),
+			1280	=> array('lang' => 'WXGA', 'height' => 768),
+			1366	=> array('lang' => 'HD', 'height' => 768),
+			1440	=> array('lang' => 'WXGA_PLUS', 'height' => 900),
+			1600	=> array('lang' => 'HD_PLUS', 'height' => 900),
+			1920	=> array('lang' => 'FHD', 'height' => 1080),
+			2560	=> array('lang' => 'QHD', 'height' => 1440),
+			3440	=> array('lang' => 'WQHD', 'height' => 1440),
+			3840	=> array('lang' => 'UHD', 'height' => 2160),
+			5120	=> array('lang' => '5K', 'height' => 2880),
+			7680	=> array('lang' => '8K', 'height' => 4320),
+		);
+
 		// Submit
 		if ($this->request->is_set_post('submit'))
 		{
@@ -56,7 +72,7 @@ class settings_module
 			$json_url = $this->request->variable('json_url', '');
 			$screenshot_type = $this->request->variable('screenshot_type', constants::SCREENSHOT_TYPE_LOCAL);
 			$screenshot_width = max(constants::MIN_SCREEN_WIDTH, $this->request->variable('screenshot_width', 0));
-			$screenshot_height = max(constants::MIN_SCREEN_HEIGHT, $this->request->variable('screenshot_height', 0));
+			$screenshot_height = isset($resolutions[$screenshot_width]['height']) ? $resolutions[$screenshot_width]['height'] : constants::MIN_SCREEN_HEIGHT;
 
 			// Check switch lang
 			if ($lang_enable && (empty($lang_switch) || $lang_switch == $this->config['default_lang']))
@@ -163,6 +179,15 @@ class settings_module
 			}
 		}
 
+		// Select custom screenshot resolution
+		$selected_screenshot_width = isset($screenshot_width) ? $screenshot_width : $this->config['vinabb_stylesdemo_screenshot_width'];
+		$resolution_options = '<option value="0"' . (($selected_screenshot_width == 0) ? ' selected' : '' ) . '>' . $this->user->lang('SELECT_RESOLUTION') . '</option>';
+
+		foreach ($resolutions as $resolution_width => $data)
+		{
+			$resolution_options .= '<option value="' . $resolution_width . '"' . (($selected_screenshot_width == $resolution_width) ? ' selected' : '' ) . '>' . $this->user->lang('RESOLUTION_' . $data['lang'], $resolution_width, $data['height']) . '</option>';
+		}
+
 		// Output
 		$this->template->assign_vars(array(
 			'STYLES_DEMO_URL'	=> generate_board_url() . (($this->config['enable_mod_rewrite']) ? '' : "/app.$phpEx") . '/demo/',
@@ -182,13 +207,12 @@ class settings_module
 			'SCREENSHOT_TYPE_LOCAL'		=> constants::SCREENSHOT_TYPE_LOCAL,
 			'SCREENSHOT_TYPE_JSON'		=> constants::SCREENSHOT_TYPE_JSON,
 			'SCREENSHOT_TYPE_PHANTOM'	=> constants::SCREENSHOT_TYPE_PHANTOM,
-			'SCREENSHOT_WIDTH'			=> isset($screenshot_width) ? $screenshot_width : $this->config['vinabb_stylesdemo_screenshot_width'],
-			'SCREENSHOT_TYPE'			=> isset($screenshot_height) ? $screenshot_height : $this->config['vinabb_stylesdemo_screenshot_height'],
 			'OS_NAME'					=> $this->get_php_os_name(),
 			'GET_PHANTOM_FOR_OS'		=> $this->user->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
 			'GET_PHANTOM_NO_OS'			=> $this->user->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
 
 			'LANG_SWITCH_OPTIONS'	=> $lang_switch_options,
+			'RESOLUTION_OPTIONS'	=> $resolution_options,
 
 			'U_ACTION'	=> $this->u_action,
 		));
