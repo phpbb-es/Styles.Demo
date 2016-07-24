@@ -351,9 +351,11 @@ class main
 					break;
 
 					case constants::SCREENSHOT_TYPE_PHANTOM:
-						if (file_exists("{$this->real_path}bin/images/{$style_varname}.png"))
+						$screenshot_filename = $style_varname . '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'];
+
+						if (file_exists("{$this->real_path}bin/images/{$screenshot_filename}.png"))
 						{
-							$style_img = "{$this->ext_web_path}bin/images/{$style_varname}.png";
+							$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}.png";
 						}
 						else
 						{
@@ -368,14 +370,15 @@ class main
 							}
 
 							$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
-							$script = "var page = require('webpage').create();\n\tpage.viewportSize = {width: {$this->config['vinabb_stylesdemo_screenshot_width']}, height: {$this->config['vinabb_stylesdemo_screenshot_height']}};\n\tpage.clipRect = {top: 0, left: 0, width: {$this->config['vinabb_stylesdemo_screenshot_width']}, height: {$this->config['vinabb_stylesdemo_screenshot_width']}};\n\tpage.open('{$preview_url}', function() {\n\tpage.render('./ext/vinabb/stylesdemo/bin/images/{$style_varname}.png');\n\tphantom.exit();\n});\n";
+							$script = file_get_contents("{$this->real_path}assets/js/phantom.js");
+							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "./ext/vinabb/stylesdemo/bin/images/{$screenshot_filename}.png", $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
 
-							file_put_contents("{$this->real_path}bin/js/{$style_varname}.js", $script);
+							file_put_contents("{$this->real_path}bin/js/{$screenshot_filename}.js", $script);
 
 							try
 							{
-								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$style_varname}.js");
-								$style_img = "{$this->ext_web_path}bin/images/{$style_varname}.png";
+								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$screenshot_filename}.js");
+								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}.png";
 							}
 							catch (\phpbb\exception\runtime_exception $e)
 							{
