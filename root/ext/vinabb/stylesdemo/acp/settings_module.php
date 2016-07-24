@@ -126,6 +126,18 @@ class settings_module
 					{
 						$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_WRITE', constants::EXT_PATH_IN_LANG . 'bin/');
 					}
+					else
+					{
+						if (!file_exists("{$this->real_path}bin/images/"))
+						{
+							mkdir("{$this->real_path}bin/images/");
+						}
+
+						if (!file_exists("{$this->real_path}bin/js/"))
+						{
+							mkdir("{$this->real_path}bin/js/");
+						}
+					}
 
 					if (!is_executable("{$this->real_path}bin/{$phantomjs_filename}"))
 					{

@@ -40,7 +40,7 @@ $lang = array_merge($lang, array(
 	'GET_PHANTOM_LINUX_32'	=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-linux-i686.tar.bz2</samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải CHMOD 755 cho thư mục “bin”.',
 	'GET_PHANTOM_MAC'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-macosx.zip </samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải CHMOD 755 cho thư mục “bin”.',
 	'GET_PHANTOM_NO_OS'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và chọn gói tải về tương ứng cho hệ điều hành máy chủ. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải cấp quyền thực thi cho thư mục “bin”.',
-	'GET_PHANTOM_WIN'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-windows.zip</samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải cấp quyền “Đọc &amp; thực thi” cùng với “Ghi” cho tập tin “bin/phantomjs.exe”.',
+	'GET_PHANTOM_WIN'		=> 'Truy cập trang <a href="%1$s">tải về PhantomJS</a> và tải về tập tin <samp>phantomjs-2.x.x-windows.zip</samp>. Giải nén và chép thư mục “bin” vào đường dẫn sau: %2$s. Bạn phải cấp quyền “Đọc &amp; thực thi” cho tập tin “bin/phantomjs.exe”.',
 
 	'NO_EXTRA_LANG_TO_SELECT'	=> 'Không có thêm ngôn ngữ khác để chọn.',
 

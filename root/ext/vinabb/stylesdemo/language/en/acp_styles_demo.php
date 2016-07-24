@@ -40,7 +40,7 @@ $lang = array_merge($lang, array(
 	'GET_PHANTOM_LINUX_32'	=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-linux-i686.tar.bz2</samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must CHMOD 755 for the directory “bin”.',
 	'GET_PHANTOM_MAC'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-macosx.zip </samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must CHMOD 755 for the directory “bin”.',
 	'GET_PHANTOM_NO_OS'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and get the appropriate download package for your server OS. Extracted it and copy the directory “bin” to the following path: %2$s. You must grant the executable permission to the directory “bin”.',
-	'GET_PHANTOM_WIN'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-windows.zip</samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must grant the permission “Read &amp; execute” and “Write” to the file “bin/phantomjs.exe”.',
+	'GET_PHANTOM_WIN'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-windows.zip</samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must grant the permission “Read &amp; execute” to the file “bin/phantomjs.exe”.',
 
 	'NO_EXTRA_LANG_TO_SELECT'	=> 'No extra languages to select.',
 
