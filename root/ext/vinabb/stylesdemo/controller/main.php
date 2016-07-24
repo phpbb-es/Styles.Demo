@@ -357,7 +357,30 @@ class main
 						}
 						else
 						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
+							if (!file_exists("{$this->real_path}bin/images/"))
+							{
+								mkdir("{$this->real_path}bin/images/");
+							}
+
+							if (!file_exists("{$this->real_path}bin/js/"))
+							{
+								mkdir("{$this->real_path}bin/js/");
+							}
+
+							$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
+							$script = "var page = require('webpage').create();\n\tpage.viewportSize = {width: 1920, height: 1080};\n\tpage.clipRect = {top: 0, left: 0, width: 1920, height: 1920};\n\tpage.open('{$preview_url}', function() {\n\tpage.render('./ext/vinabb/stylesdemo/bin/images/{$style_varname}.png');\n\tphantom.exit();\n});\n";
+
+							file_put_contents("{$this->real_path}bin/js/{$style_varname}.js", $script);
+
+							try
+							{
+								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$style_varname}.js");
+								$style_img = "{$this->ext_web_path}bin/images/{$style_varname}.png";
+							}
+							catch (\phpbb\exception\runtime_exception $e)
+							{
+								$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
+							}
 						}
 					break;
 
