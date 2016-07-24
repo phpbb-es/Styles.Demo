@@ -20,6 +20,13 @@ class constants
 	const SCREENSHOT_TYPE_LOCAL = 0;
 	const SCREENSHOT_TYPE_JSON = 1;
 	const SCREENSHOT_TYPE_PHANTOM = 2;
+
+	// Minimum width/height
+	const MIN_PHONE_WIDTH = 100;
+	const MIN_SCREEN_WIDTH = 800;
+	const MIN_SCREEN_HEIGHT = 600;
+
+	// PhantomJS
 	const PHANTOM_URL = 'http://phantomjs.org/download.html';
 
 	// Default style

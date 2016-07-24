@@ -13,6 +13,21 @@
 			<dd><input id="logo_text" type="text" size="40" maxlength="255" name="logo_text" value="{{ LOGO_TEXT }}"></dd>
 		</dl>
 		<dl>
+			<dt><label for="auto_toggle">{{ lang('STYLES_DEMO_AUTO_TOGGLE') }}{{ lang('COLON') }}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="auto_toggle" value="1" id="auto_toggle"{% if AUTO_TOGGLE %} checked{% endif %}> {{ lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="auto_toggle" value="0"{% if not AUTO_TOGGLE %} checked{% endif %}> {{ lang('NO') }}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="phone_width">{{ lang('STYLES_DEMO_PHONE_WIDTH') }}{{ lang('COLON') }}</label></dt>
+			<dd><input id="phone_width" type="number" min="{{ MIN_PHONE_WIDTH }}" name="phone_width" value="{{ PHONE_WIDTH }}"> {{ lang('PIXEL') }}</dd>
+		</dl>
+		<dl>
+			<dt><label for="tablet_width">{{ lang('STYLES_DEMO_TABLET_WIDTH') }}{{ lang('COLON') }}</label></dt>
+			<dd><input id="tablet_width" type="number" min="{{ PHONE_WIDTH + MIN_PHONE_WIDTH }}" name="tablet_width" value="{{ TABLET_WIDTH }}"> {{ lang('PIXEL') }}</dd>
+		</dl>
+		<dl>
 			<dt><label for="lang_enable">{{ lang('STYLES_DEMO_LANG_ENABLE') }}{{ lang('COLON') }}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="lang_enable" value="1" id="lang_enable"{% if LANG_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('lang_enable_options', 1)"> {{ lang('YES') }}</label>
@@ -73,3 +88,39 @@
 </form>
 
 {% include 'overall_footer.html' %}
+
+<script type="text/javascript">
+$.event.special.inputchange = {
+	setup: function()
+	{
+		var self = this, val;
+		$.data(this, 'timer', window.setInterval(
+			function()
+			{
+				val = self.value;
+
+				if ($.data(self, 'cache') != val)
+				{
+					$.data(self, 'cache', val);
+					$(self).trigger('inputchange');
+				}
+			}
+		, 20));
+	},
+	teardown: function()
+	{
+		window.clearInterval($.data(this, 'timer'));
+	},
+	add: function()
+	{
+		$.data(this, 'cache', this.value);
+	}
+};
+
+$('input[name=phone_width]').on('inputchange',
+	function()
+	{
+		$('input[name=tablet_width]').prop('min', parseInt(this.value) + 100);
+	}
+);
+</script>

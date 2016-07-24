@@ -50,6 +50,7 @@ $lang = array_merge($lang, array(
 	'SELECT_LANGUAGE'					=> 'Select a language',
 	'STYLES_DEMO_ACP_ENABLE'			=> 'Enable demo for ACP styles',
 	'STYLES_DEMO_ACP_ENABLE_EXPLAIN'	=> 'When enabled, guests will be assigned administrator permissions to access the fake ACP. However, no changes saved in this demo mode.',
+	'STYLES_DEMO_AUTO_TOGGLE'			=> 'Close style bar when switch to another style',
 	'STYLES_DEMO_JSON_ENABLE'			=> 'Style data source',
 	'STYLES_DEMO_JSON_ENABLE_NO'		=> 'Local <var>style.cfg</var>',
 	'STYLES_DEMO_JSON_ENABLE_NO_DESC'	=> 'You can define in this file more variables:<br>
@@ -69,6 +70,8 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_LANG_SWITCH'			=> 'Switch language',
 	'STYLES_DEMO_LANG_SWITCH_EXPLAIN'	=> 'The switch and default language must be different.',
 	'STYLES_DEMO_LOGO_TEXT'				=> 'Hover logo text',
+	'STYLES_DEMO_PHONE_WIDTH'			=> 'Phone width',
+	'STYLES_DEMO_TABLET_WIDTH'			=> 'Tablet width',
 	'STYLES_DEMO_URL'					=> 'Styles Demo',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'The style demo settings have been updated.',
 ));

@@ -52,7 +52,7 @@
 			<a href="#" data-toggle="tooltip" title="{{ lang('DOWNLOAD') }}" class="fa fa-download animate-pulse show-tooltip" id="getButton"></a>
 		</div>
 		{% endif %}
-		<div class="mobile-btn header-btn pull-right hidden-xs">
+		<div class="phone-btn header-btn pull-right hidden-xs">
 			<a href="#" data-toggle="tooltip" title="{{ lang('PHONE') }}" class="fa fa-mobile show-tooltip"></a>
 		</div>
 		<div class="tablet-btn header-btn pull-right hidden-xs">
@@ -108,6 +108,9 @@
 	<script type="text/javascript">
 		var $styles,
 			$prefixUrl = '{{ PREFIX_URL }}',
+			$autoToggle = {{ AUTO_TOGGLE }},
+			$tabletWidth = '{{ TABLET_WIDTH }}',
+			$phoneWidth = '{{ PHONE_WIDTH }}',
 			$current_style = '{{ DEFAULT_STYLE }}',
 			$current_lang = '{{ CURRENT_LANG }}',
 			$default_lang = '{{ DEFAULT_LANG }}',

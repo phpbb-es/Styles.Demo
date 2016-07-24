@@ -50,6 +50,7 @@ $lang = array_merge($lang, array(
 	'SELECT_LANGUAGE'					=> 'Chọn ngôn ngữ',
 	'STYLES_DEMO_ACP_ENABLE'			=> 'Cho phép xem thử giao diện quản trị',
 	'STYLES_DEMO_ACP_ENABLE_EXPLAIN'	=> 'Nếu bật, khách sẽ được cấp quyền quản trị để truy cập vào bảng quản trị giả. Tuy nhiên, không có thay đổi nào được lưu trong chế độ giả lập này.',
+	'STYLES_DEMO_AUTO_TOGGLE'			=> 'Đóng thanh giao diện khi chuyển sang giao diện khác',
 	'STYLES_DEMO_JSON_ENABLE'			=> 'Nguồn dữ liệu giao diện',
 	'STYLES_DEMO_JSON_ENABLE_NO'		=> 'Use <var>style.cfg</var>',
 	'STYLES_DEMO_JSON_ENABLE_NO_DESC'	=> 'You can define in this file more variables:<br>
@@ -69,6 +70,8 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_LANG_SWITCH'			=> 'Ngôn ngữ chuyển',
 	'STYLES_DEMO_LANG_SWITCH_EXPLAIN'	=> 'Ngôn ngữ chuyển và mặc định phải khác nhau.',
 	'STYLES_DEMO_LOGO_TEXT'				=> 'Giới thiệu',
+	'STYLES_DEMO_PHONE_WIDTH'			=> 'Chiều rộng điện thoại',
+	'STYLES_DEMO_TABLET_WIDTH'			=> 'Chiều rộng máy tính bảng',
 	'STYLES_DEMO_URL'					=> 'Xem thử giao diện',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'Đã cập nhật thiết lập xem thử giao diện.',
 ));

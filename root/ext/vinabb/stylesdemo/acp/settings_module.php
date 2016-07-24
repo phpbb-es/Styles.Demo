@@ -46,12 +46,17 @@ class settings_module
 
 			// Get from the form
 			$logo_text = $this->request->variable('logo_text', '');
+			$auto_toggle = $this->request->variable('auto_toggle', true);
+			$phone_width = max(constants::MIN_PHONE_WIDTH, $this->request->variable('phone_width', 0));
+			$tablet_width = max($phone_width + constants::MIN_PHONE_WIDTH, $this->request->variable('tablet_width', 0));
 			$lang_enable = $this->request->variable('lang_enable', false);
 			$lang_switch = $this->request->variable('lang_switch', '');
 			$acp_enable = $this->request->variable('acp_enable', false);
 			$json_enable = $this->request->variable('json_enable', false);
 			$json_url = $this->request->variable('json_url', '');
 			$screenshot_type = $this->request->variable('screenshot_type', constants::SCREENSHOT_TYPE_LOCAL);
+			$screenshot_width = max(constants::MIN_SCREEN_WIDTH, $this->request->variable('screenshot_width', 0));
+			$screenshot_height = max(constants::MIN_SCREEN_HEIGHT, $this->request->variable('screenshot_height', 0));
 
 			// Check switch lang
 			if ($lang_enable && (empty($lang_switch) || $lang_switch == $this->config['default_lang']))
@@ -104,12 +109,17 @@ class settings_module
 				$this->auth->acl_clear_prefetch();
 
 				$this->config->set('vinabb_stylesdemo_logo_text', $logo_text);
+				$this->config->set('vinabb_stylesdemo_auto_toggle', $auto_toggle);
+				$this->config->set('vinabb_stylesdemo_phone_width',$phone_width);
+				$this->config->set('vinabb_stylesdemo_tablet_width', $tablet_width);
 				$this->config->set('vinabb_stylesdemo_lang_enable', $lang_enable);
 				$this->config->set('vinabb_stylesdemo_lang_switch', $lang_switch);
 				$this->config->set('vinabb_stylesdemo_acp_enable', $acp_enable);
 				$this->config->set('vinabb_stylesdemo_json_enable', $json_enable);
 				$this->config->set('vinabb_stylesdemo_json_url', $json_url);
 				$this->config->set('vinabb_stylesdemo_screenshot_type', $screenshot_type);
+				$this->config->set('vinabb_stylesdemo_screenshot_width', $screenshot_width);
+				$this->config->set('vinabb_stylesdemo_screenshot_height', $screenshot_height);
 
 				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_STYLES_DEMO_SETTINGS');
 				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), array('Anonymous'));
@@ -158,6 +168,10 @@ class settings_module
 			'STYLES_DEMO_URL'	=> generate_board_url() . (($this->config['enable_mod_rewrite']) ? '' : "/app.$phpEx") . '/demo/',
 
 			'LOGO_TEXT'			=> isset($logo_text) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
+			'AUTO_TOGGLE'		=> isset($auto_toggle) ? $auto_toggle : $this->config['vinabb_stylesdemo_auto_toggle'],
+			'PHONE_WIDTH'		=> isset($phone_width) ? $phone_width : $this->config['vinabb_stylesdemo_phone_width'],
+			'TABLET_WIDTH'		=> isset($tablet_width) ? $tablet_width : $this->config['vinabb_stylesdemo_tablet_width'],
+			'MIN_PHONE_WIDTH'	=> constants::MIN_PHONE_WIDTH,
 			'DEFAULT_LANG'		=> $default_lang_name,
 			'LANG_ENABLE'		=> isset($lang_enable) ? $lang_enable : $this->config['vinabb_stylesdemo_lang_enable'],
 			'ACP_ENABLE'		=> isset($acp_enable) ? $acp_enable : $this->config['vinabb_stylesdemo_acp_enable'],
@@ -168,6 +182,8 @@ class settings_module
 			'SCREENSHOT_TYPE_LOCAL'		=> constants::SCREENSHOT_TYPE_LOCAL,
 			'SCREENSHOT_TYPE_JSON'		=> constants::SCREENSHOT_TYPE_JSON,
 			'SCREENSHOT_TYPE_PHANTOM'	=> constants::SCREENSHOT_TYPE_PHANTOM,
+			'SCREENSHOT_WIDTH'			=> isset($screenshot_width) ? $screenshot_width : $this->config['vinabb_stylesdemo_screenshot_width'],
+			'SCREENSHOT_TYPE'			=> isset($screenshot_height) ? $screenshot_height : $this->config['vinabb_stylesdemo_screenshot_height'],
 			'OS_NAME'					=> $this->get_php_os_name(),
 			'GET_PHANTOM_FOR_OS'		=> $this->user->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
 			'GET_PHANTOM_NO_OS'			=> $this->user->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),

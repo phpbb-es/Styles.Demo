@@ -7,7 +7,7 @@
 // Global "use strict", wrap it up in functions if you can't deal with it...
 "use strict";
 
-var $viewportButtons = $('.mobile-btn, .tablet-btn, .desktop-btn'),
+var $viewportButtons = $('.phone-btn, .tablet-btn, .desktop-btn'),
 	$styleList = $('.styles-list'),
 	$body = $('body'),
 	$lastViewIframe = '',
@@ -224,16 +224,16 @@ $('.desktop-btn').on('click',
 $('.tablet-btn').on('click',
 	function()
 	{
-		$styleIframe.animate({'width': '768px'});
+		$styleIframe.animate({'width': $tabletWidth + 'px'});
 
 		return false;
 	}
 );
 
-$('.mobile-btn' ).on('click',
+$('.phone-btn' ).on('click',
 	function()
 	{
-		$styleIframe.animate({'width': '480px'});
+		$styleIframe.animate({'width': $phoneWidth + 'px'});
 
 		return false;
 	}
@@ -372,7 +372,11 @@ $('.style').click(
 
 		if ($current_style in $styles)
 		{
-			$body.toggleClass('toggle');
+			if ($autoToggle)
+			{
+				$body.toggleClass('toggle');
+			}
+
 			$('.preloader, .preloading-icon').fadeIn(400);
 
 			$styleIframe.load(

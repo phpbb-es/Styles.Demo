@@ -27,12 +27,17 @@ class release_1_0_0 extends migration
 		return array(
 			// Config
 			array('config.add', array('vinabb_stylesdemo_logo_text', '')),
+			array('config.add', array('vinabb_stylesdemo_auto_toggle', 1)),
+			array('config.add', array('vinabb_stylesdemo_tablet_width', 768)),
+			array('config.add', array('vinabb_stylesdemo_phone_width', 480)),
 			array('config.add', array('vinabb_stylesdemo_lang_enable', 0)),
 			array('config.add', array('vinabb_stylesdemo_lang_switch', '')),
 			array('config.add', array('vinabb_stylesdemo_acp_enable', 0)),
 			array('config.add', array('vinabb_stylesdemo_json_enable', 0)),
 			array('config.add', array('vinabb_stylesdemo_json_url', '')),
 			array('config.add', array('vinabb_stylesdemo_screenshot_type', 0)),
+			array('config.add', array('vinabb_stylesdemo_screenshot_width', 1024)),
+			array('config.add', array('vinabb_stylesdemo_screenshot_height', 768)),
 
 			// Modules
 			array('module.add', array(

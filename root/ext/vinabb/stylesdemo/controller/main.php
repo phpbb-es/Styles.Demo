@@ -368,7 +368,7 @@ class main
 							}
 
 							$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
-							$script = "var page = require('webpage').create();\n\tpage.viewportSize = {width: 1920, height: 1080};\n\tpage.clipRect = {top: 0, left: 0, width: 1920, height: 1920};\n\tpage.open('{$preview_url}', function() {\n\tpage.render('./ext/vinabb/stylesdemo/bin/images/{$style_varname}.png');\n\tphantom.exit();\n});\n";
+							$script = "var page = require('webpage').create();\n\tpage.viewportSize = {width: {$this->config['vinabb_stylesdemo_screenshot_width']}, height: {$this->config['vinabb_stylesdemo_screenshot_height']}};\n\tpage.clipRect = {top: 0, left: 0, width: {$this->config['vinabb_stylesdemo_screenshot_width']}, height: {$this->config['vinabb_stylesdemo_screenshot_width']}};\n\tpage.open('{$preview_url}', function() {\n\tpage.render('./ext/vinabb/stylesdemo/bin/images/{$style_varname}.png');\n\tphantom.exit();\n});\n";
 
 							file_put_contents("{$this->real_path}bin/js/{$style_varname}.js", $script);
 
@@ -517,6 +517,9 @@ class main
 		$this->template->assign_vars(array(
 			'PREFIX_URL'	=> generate_board_url() . '/',
 			'LOGO_TEXT'		=> $this->config['vinabb_stylesdemo_logo_text'],
+			'AUTO_TOGGLE'	=> ($this->config['vinabb_stylesdemo_auto_toggle']) ? 'true' : 'false',
+			'PHONE_WIDTH'	=> $this->config['vinabb_stylesdemo_phone_width'],
+			'TABLET_WIDTH'	=> $this->config['vinabb_stylesdemo_tablet_width'],
 
 			'DEFAULT_STYLE'		=> constants::DEFAULT_STYLE,
 			'CURRENT_LANG'		=> $demo_lang,
