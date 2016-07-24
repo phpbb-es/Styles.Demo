@@ -223,20 +223,13 @@ class main
 					break;
 
 					case constants::SCREENSHOT_TYPE_PHANTOM:
-						if (file_exists("{$this->real_path}bin/images/acp_{$style_varname}.png"))
-						{
-							$style_img = "{$this->ext_web_path}bin/images/acp_{$style_varname}.png";
-						}
-						else
-						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
-						}
+						//...
 					break;
 
 					default:
-						if (file_exists("{$this->real_path}assets/screenshots/acp/{$style_varname}.png"))
+						if (file_exists("{$this->real_path}assets/screenshots/acp/{$style_varname}" . constants::SCREENSHOT_EXT))
 						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}.png";
+							$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}" . constants::SCREENSHOT_EXT;
 						}
 						else
 						{
@@ -353,9 +346,9 @@ class main
 					case constants::SCREENSHOT_TYPE_PHANTOM:
 						$screenshot_filename = $style_varname . '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'];
 
-						if (file_exists("{$this->real_path}bin/images/{$screenshot_filename}.png"))
+						if (file_exists("{$this->real_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT))
 						{
-							$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}.png";
+							$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 						}
 						else
 						{
@@ -371,14 +364,14 @@ class main
 
 							$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
 							$script = file_get_contents("{$this->real_path}assets/js/phantom.js");
-							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "./ext/vinabb/stylesdemo/bin/images/{$screenshot_filename}.png", $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
+							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "./ext/vinabb/stylesdemo/bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
 
 							file_put_contents("{$this->real_path}bin/js/{$screenshot_filename}.js", $script);
 
 							try
 							{
 								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$screenshot_filename}.js");
-								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}.png";
+								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 							}
 							catch (\phpbb\exception\runtime_exception $e)
 							{
@@ -388,9 +381,9 @@ class main
 					break;
 
 					default:
-						if (file_exists("{$this->real_path}assets/screenshots/frontend/{$style_varname}.png"))
+						if (file_exists("{$this->real_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT))
 						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}.png";
+							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT;
 						}
 						else
 						{
