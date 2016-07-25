@@ -10,9 +10,6 @@ namespace vinabb\stylesdemo\includes;
 
 class constants
 {
-	// Extension path
-	const EXT_PATH_IN_LANG = './ext/vinabb/stylesdemo/';
-
 	// Admin roles
 	const ROLE_ADMIN_DEMO = 'ROLE_ADMIN_DEMO';
 
