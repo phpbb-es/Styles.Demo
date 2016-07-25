@@ -28,6 +28,9 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\user */
     protected $user;
 
+	/** @var \phpbb\language\language */
+	protected $language;
+
 	/** @var \phpbb\request\request */
     protected $request;
 
@@ -48,6 +51,7 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper $helper
 	* @param \phpbb\template\template $template
 	* @param \phpbb\user $user
+	* @param \phpbb\language\language $language
 	* @param \phpbb\request\request $request
 	* @param string $phpbb_root_path
 	* @param string $php_ext
@@ -57,6 +61,7 @@ class listener implements EventSubscriberInterface
 								\phpbb\controller\helper $helper,
 								\phpbb\template\template $template,
 								\phpbb\user $user,
+								\phpbb\language\language $language,
 								\phpbb\request\request $request,
 								$phpbb_root_path,
 								$phpbb_admin_path,
@@ -67,6 +72,7 @@ class listener implements EventSubscriberInterface
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->user = $user;
+		$this->language = $language;
 		$this->request = $request;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->phpbb_admin_path = $phpbb_admin_path;
@@ -242,7 +248,7 @@ class listener implements EventSubscriberInterface
 			|| $this->request->is_set_post('submituser')
 		))
 		{
-			trigger_error($this->user->lang['UNAVAILABLE_IN_DEMO'], E_USER_WARNING);
+			trigger_error($this->language->lang('UNAVAILABLE_IN_DEMO'), E_USER_WARNING);
 		}
 	}
 }

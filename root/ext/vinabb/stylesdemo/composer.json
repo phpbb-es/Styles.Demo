@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Style preview utility for demo phpBB sites.",
 	"homepage": "http://vinabb.vn/",
-	"version": "0.1.0",
-	"time": "2016-07-24",
+	"version": "1.2.0",
+	"time": "2016-07-28",
 	"license": "GPL-2.0",
 	"authors": [{
 		"name": "nedka",
@@ -13,7 +13,7 @@
 		"role": "Developer"
 	}],
 	"require": {
-		"php": ">=5.3.3",
+		"php": ">=5.3.9",
 		"composer/installers": "~1.0"
 	},
 	"require-dev": {
@@ -22,7 +22,7 @@
 	"extra": {
 		"display-name": "Styles Demo",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.2,<3.2.0@dev"
+			"phpbb/phpbb": ">=3.2.0-RC1,<3.3.0@dev"
 		}
 	}
 }

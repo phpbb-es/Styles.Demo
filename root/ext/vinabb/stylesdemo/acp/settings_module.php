@@ -26,10 +26,11 @@ class settings_module
 		$this->ext_manager = $phpbb_container->get('ext.manager');
 		$this->template = $phpbb_container->get('template');
 		$this->user = $phpbb_container->get('user');
+		$this->language = $phpbb_container->get('language');
 		$this->auth = $phpbb_container->get('auth');
 
 		$this->tpl_name = 'settings_body';
-		$this->page_title = $this->user->lang('ACP_STYLES_DEMO');
+		$this->page_title = $this->language->lang('ACP_STYLES_DEMO');
 		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/stylesdemo', true);
 		$this->real_path = dirname(__DIR__) . '/';
 		$this->user->add_lang_ext('vinabb/stylesdemo', 'acp_styles_demo');
@@ -59,7 +60,7 @@ class settings_module
 		{
 			if (!check_form_key('vinabb/stylesdemo'))
 			{
-				$errors[] = $this->user->lang('FORM_INVALID');
+				$errors[] = $this->language->lang('FORM_INVALID');
 			}
 
 			// Get from the form
@@ -100,13 +101,13 @@ class settings_module
 						if (strpos($test[0], '200') === false)
 						{
 							$json_enable = false;
-							$errors[] = $this->user->lang('ERROR_JSON_URL_NOT_RESPONSE');
+							$errors[] = $this->language->lang('ERROR_JSON_URL_NOT_RESPONSE');
 						}
 					}
 					else
 					{
 						$json_enable = false;
-						$errors[] = $this->user->lang('ERROR_JSON_URL_NOT_VALID');
+						$errors[] = $this->language->lang('ERROR_JSON_URL_NOT_VALID');
 					}
 				}
 			}
@@ -118,13 +119,13 @@ class settings_module
 
 				if (!file_exists("{$this->real_path}bin/"))
 				{
-					$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_FOUND', constants::EXT_PATH_IN_LANG . 'bin/');
+					$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_FOUND', constants::EXT_PATH_IN_LANG . 'bin/');
 				}
 				else
 				{
 					if (!is_writable("{$this->real_path}bin/"))
 					{
-						$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_WRITE', constants::EXT_PATH_IN_LANG . 'bin/');
+						$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_WRITE', constants::EXT_PATH_IN_LANG . 'bin/');
 					}
 					else
 					{
@@ -141,7 +142,7 @@ class settings_module
 
 					if (!is_executable("{$this->real_path}bin/{$phantomjs_filename}"))
 					{
-						$errors[] = $this->user->lang('ERROR_PHANTOM_NOT_EXEC', constants::EXT_PATH_IN_LANG . "bin/{$phantomjs_filename}");
+						$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_EXEC', constants::EXT_PATH_IN_LANG . "bin/{$phantomjs_filename}");
 					}
 				}
 			}
@@ -214,7 +215,7 @@ class settings_module
 
 				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_STYLES_DEMO_SETTINGS');
 
-				trigger_error($this->user->lang('STYLES_DEMO_SETTINGS_UPDATED') . adm_back_link($this->u_action));
+				trigger_error($this->language->lang('STYLES_DEMO_SETTINGS_UPDATED') . adm_back_link($this->u_action));
 			}
 			else
 			{
@@ -237,7 +238,7 @@ class settings_module
 		{
 			if (sizeof($rows) > 1)
 			{
-				$lang_switch_options .= '<option value=""' . (($selected_lang_switch == '') ? ' selected' : '' ) . '>' . $this->user->lang('SELECT_LANGUAGE') . '</option>';
+				$lang_switch_options .= '<option value=""' . (($selected_lang_switch == '') ? ' selected' : '' ) . '>' . $this->language->lang('SELECT_LANGUAGE') . '</option>';
 			}
 
 			foreach ($rows as $row)
@@ -255,11 +256,11 @@ class settings_module
 
 		// Select custom screenshot resolution
 		$selected_screenshot_width = isset($screenshot_width) ? $screenshot_width : $this->config['vinabb_stylesdemo_screenshot_width'];
-		$resolution_options = '<option value="0"' . (($selected_screenshot_width == 0) ? ' selected' : '' ) . '>' . $this->user->lang('SELECT_RESOLUTION') . '</option>';
+		$resolution_options = '<option value="0"' . (($selected_screenshot_width == 0) ? ' selected' : '' ) . '>' . $this->language->lang('SELECT_RESOLUTION') . '</option>';
 
 		foreach ($resolutions as $resolution_width => $data)
 		{
-			$resolution_options .= '<option value="' . $resolution_width . '"' . (($selected_screenshot_width == $resolution_width) ? ' selected' : '' ) . '>' . $this->user->lang('RESOLUTION_' . $data['lang'], $resolution_width, $data['height']) . '</option>';
+			$resolution_options .= '<option value="' . $resolution_width . '"' . (($selected_screenshot_width == $resolution_width) ? ' selected' : '' ) . '>' . $this->language->lang('RESOLUTION_' . $data['lang'], $resolution_width, $data['height']) . '</option>';
 		}
 
 		// Output
@@ -282,8 +283,8 @@ class settings_module
 			'SCREENSHOT_TYPE_JSON'		=> constants::SCREENSHOT_TYPE_JSON,
 			'SCREENSHOT_TYPE_PHANTOM'	=> constants::SCREENSHOT_TYPE_PHANTOM,
 			'OS_NAME'					=> $this->get_php_os_name(),
-			'GET_PHANTOM_FOR_OS'		=> $this->user->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
-			'GET_PHANTOM_NO_OS'			=> $this->user->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
+			'GET_PHANTOM_FOR_OS'		=> $this->language->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
+			'GET_PHANTOM_NO_OS'			=> $this->language->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
 
 			'LANG_SWITCH_OPTIONS'	=> $lang_switch_options,
 			'RESOLUTION_OPTIONS'	=> $resolution_options,

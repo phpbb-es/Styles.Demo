@@ -2,6 +2,7 @@ services:
     user:
         class: vinabb\stylesdemo\controller\user
         arguments:
+            - @language
             - %datetime.class%
     vinabb.stylesdemo.controller:
         class: vinabb\stylesdemo\controller\main
@@ -11,6 +12,7 @@ services:
             - @controller.helper
             - @template
             - @user
+            - @language
             - @auth
             - @request
             - @ext.manager
@@ -27,6 +29,7 @@ services:
             - @controller.helper
             - @template
             - @user
+            - @language
             - @request
             - %core.root_path%
             - %core.adm_relative_path%

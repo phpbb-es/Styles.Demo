@@ -26,7 +26,7 @@ require($phpbb_root_path . 'includes/functions_module.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('acp/common');
-$user->add_lang_ext('vinabb/stylesdemo', 'demo');
+$language->add_lang_ext('vinabb/stylesdemo', 'demo');
 
 // Do not access this file once ACP mode is disabled
 if (!$config['vinabb_stylesdemo_acp_enable'])

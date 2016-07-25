@@ -28,6 +28,9 @@ class main
 	/** @var \phpbb\user */
     protected $user;
 
+	/** @var \phpbb\language\language */
+	protected $language;
+
 	/** @var \phpbb\auth\auth */
     protected $auth;
 
@@ -60,6 +63,7 @@ class main
 	* @param \phpbb\controller\helper $helper
 	* @param \phpbb\template\template $template
 	* @param \phpbb\user $user
+	* @param \phpbb\language\language $language
 	* @param \phpbb\auth\auth $auth
 	* @param \phpbb\request\request $request
 	* @param \phpbb\extension\manager $ext_manager
@@ -74,6 +78,7 @@ class main
 								\phpbb\controller\helper $helper,
 								\phpbb\template\template $template,
 								\phpbb\user $user,
+								\phpbb\language\language $language,
 								\phpbb\auth\auth $auth,
 								\phpbb\request\request $request,
 								\phpbb\extension\manager $ext_manager,
@@ -88,6 +93,7 @@ class main
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->user = $user;
+		$this->language = $language;
 		$this->auth = $auth;
 		$this->request = $request;
 		$this->ext_manager = $ext_manager;
@@ -281,11 +287,11 @@ class main
 				{
 					$style_name = $json['acp'][$style_varname]['name'];
 					$phpbb_version = $json['acp'][$style_varname]['phpbb_version'];
-					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['version'];
-					$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['author_name'];
-					$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['presets'];
-					$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['responsive'] == 1) ? $this->user->lang('YES') : $this->user->lang('NO'));
-					$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->user->lang('FREE') . '</code>');
+					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['version'];
+					$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['author_name'];
+					$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['presets'];
+					$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['responsive'] == 1) ? $this->language->lang('YES') : $this->language->lang('NO'));
+					$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->language->lang('FREE') . '</code>');
 					$style_details = 'http://vinabb.vn/bb/item/' . $json['acp'][$style_varname]['id'];
 					$style_download = $json['acp'][$style_varname]['url'];
 					$style_price = $json['acp'][$style_varname]['price'];
@@ -296,32 +302,32 @@ class main
 				{
 					$style_name = $cfg['name'];
 					$phpbb_version = $cfg['phpbb_version'];
-					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_version'];
+					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_version'];
 
 					if (isset($cfg['style_author']) && !empty($cfg['style_author']))
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_author'];
+						$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_author'];
 					}
 					else
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> ' . $cfg['copyright'];
+						$style_info .= '<br><strong>' . $this->language->lang('COPYRIGHT') . $this->language->lang('COLON') . '</strong> ' . $cfg['copyright'];
 					}
 
 					if (isset($cfg['style_presets']) && is_numeric($cfg['style_presets']))
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_presets'];
+						$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_presets'];
 					}
 
 					if (isset($cfg['style_responsive']) && ($cfg['style_responsive'] == 0 || $cfg['style_reponsive'] == 1))
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . (($cfg['style_responsive'] == 1) ? $this->user->lang('YES') : $this->user->lang('NO'));
+						$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . (($cfg['style_responsive'] == 1) ? $this->language->lang('YES') : $this->language->lang('NO'));
 					}
 
 					if (isset($cfg['style_price']) && is_numeric($cfg['style_price']))
 					{
 						$style_price = $cfg['style_price'];
 						$style_price_label = (isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : $style_price;
-						$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($style_price) ? "<code>$style_price_label</code>" : '<code class=green>' . $this->user->lang('FREE') . '</code>');
+						$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . (($style_price) ? "<code>$style_price_label</code>" : '<code class=green>' . $this->language->lang('FREE') . '</code>');
 					}
 					else
 					{
@@ -336,14 +342,14 @@ class main
 				$this->template->assign_block_vars('styles', array(
 					'VARNAME'		=> $style_varname,
 					'NAME'			=> $style_name,
-					'PHPBB'			=> $this->user->lang('PHPBB_BADGE', $phpbb_version),
-					'PHPBB_INFO'	=> '<strong>' . $this->user->lang('PHPBB_VERSION') . $this->user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
+					'PHPBB'			=> $this->language->lang('PHPBB_BADGE', $phpbb_version),
+					'PHPBB_INFO'	=> '<strong>' . $this->language->lang('PHPBB_VERSION') . $this->language->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
 					'IMG'			=> $style_img,
 					'INFO'			=> $style_info,
 					'DETAILS'		=> $style_details,
 					'DOWNLOAD'		=> $style_download,
 					'PRICE'			=> $style_price,
-					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
+					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->language->lang('FREE'),
 					'URL'			=> append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $style_dir, false, $this->user->session_id),
 					'URL_LANG'		=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'l=1&amp;s=' . $style_dir),
 				));
@@ -435,11 +441,11 @@ class main
 				{
 					$style_name = $json['frontend'][$style_varname]['name'];
 					$phpbb_version = $json['frontend'][$style_varname]['phpbb_version'];
-					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['version'];
-					$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['author_name'];
-					$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['presets'];
-					$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['responsive'] == 1) ? $this->user->lang('YES') : $this->user->lang('NO'));
-					$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->user->lang('FREE') . '</code>');
+					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['version'];
+					$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['author_name'];
+					$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['presets'];
+					$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['responsive'] == 1) ? $this->language->lang('YES') : $this->language->lang('NO'));
+					$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->language->lang('FREE') . '</code>');
 					$style_details = 'http://vinabb.vn/bb/item/' . $json['frontend'][$style_varname]['id'];
 					$style_download = $json['frontend'][$style_varname]['url'];
 					$style_price = $json['frontend'][$style_varname]['price'];
@@ -450,11 +456,11 @@ class main
 				{
 					$style_name = constants::DEFAULT_STYLE_NAME;
 					$phpbb_version = $cfg['phpbb_version'];
-					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_version'];
-					$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> ' . $cfg['copyright'];
-					$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> 0';
-					$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . $this->user->lang('YES');
-					$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> <code class=green>' . $this->user->lang('FREE') . '</code>';
+					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_version'];
+					$style_info .= '<br><strong>' . $this->language->lang('COPYRIGHT') . $this->language->lang('COLON') . '</strong> ' . $cfg['copyright'];
+					$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> 0';
+					$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . $this->language->lang('YES');
+					$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> <code class=green>' . $this->language->lang('FREE') . '</code>';
 					$style_details = $style_download = constants::DEFAULT_STYLE_URL;
 					$style_price = 0;
 					$style_price_label = '';
@@ -464,32 +470,32 @@ class main
 				{
 					$style_name = $cfg['name'];
 					$phpbb_version = $cfg['phpbb_version'];
-					$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_version'];
+					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_version'];
 
 					if (isset($cfg['style_author']) && !empty($cfg['style_author']))
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_author'];
+						$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_author'];
 					}
 					else
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('COPYRIGHT') . $this->user->lang('COLON') . '</strong> ' . $cfg['copyright'];
+						$style_info .= '<br><strong>' . $this->language->lang('COPYRIGHT') . $this->language->lang('COLON') . '</strong> ' . $cfg['copyright'];
 					}
 
 					if (isset($cfg['style_presets']) && is_numeric($cfg['style_presets']))
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $cfg['style_presets'];
+						$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_presets'];
 					}
 
 					if (isset($cfg['style_responsive']) && ($cfg['style_responsive'] == 0 || $cfg['style_reponsive'] == 1))
 					{
-						$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . (($cfg['style_responsive'] == 1) ? $this->user->lang('YES') : $this->user->lang('NO'));
+						$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . (($cfg['style_responsive'] == 1) ? $this->language->lang('YES') : $this->language->lang('NO'));
 					}
 
 					if (isset($cfg['style_price']) && is_numeric($cfg['style_price']))
 					{
 						$style_price = $cfg['style_price'];
 						$style_price_label = (isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : $style_price;
-						$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . (($style_price) ? "<code>$style_price_label</code>" : '<code class=green>' . $this->user->lang('FREE') . '</code>');
+						$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . (($style_price) ? "<code>$style_price_label</code>" : '<code class=green>' . $this->language->lang('FREE') . '</code>');
 					}
 					else
 					{
@@ -504,14 +510,14 @@ class main
 				$this->template->assign_block_vars('styles', array(
 					'VARNAME'		=> $style_varname,
 					'NAME'			=> $style_name,
-					'PHPBB'			=> $this->user->lang('PHPBB_BADGE', $phpbb_version),
-					'PHPBB_INFO'	=> '<strong>' . $this->user->lang('PHPBB_VERSION') . $this->user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
+					'PHPBB'			=> $this->language->lang('PHPBB_BADGE', $phpbb_version),
+					'PHPBB_INFO'	=> '<strong>' . $this->language->lang('PHPBB_VERSION') . $this->language->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
 					'IMG'			=> $style_img,
 					'INFO'			=> $style_info,
 					'DETAILS'		=> $style_details,
 					'DOWNLOAD'		=> $style_download,
 					'PRICE'			=> $style_price,
-					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
+					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->language->lang('FREE'),
 					'URL'			=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'style=' . $row['style_id']),
 					'URL_LANG'		=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'l=1&amp;style=' . $row['style_id']),
 				));
@@ -544,7 +550,7 @@ class main
 				}
 			}
 
-			$lang_title = ($demo_lang == $this->config['default_lang']) ? $this->user->lang('LANG_SWITCH', $default_lang_name, $switch_lang_name) : $this->user->lang('LANG_SWITCH', $switch_lang_name, $default_lang_name);
+			$lang_title = ($demo_lang == $this->config['default_lang']) ? $this->language->lang('LANG_SWITCH', $default_lang_name, $switch_lang_name) : $this->language->lang('LANG_SWITCH', $switch_lang_name, $default_lang_name);
 		}
 
 		// Assign index specific vars
@@ -562,7 +568,7 @@ class main
 			'SWITCH_LANG'		=> $this->config['vinabb_stylesdemo_lang_switch'],
 			'SWITCH_LANG_NAME'	=> $switch_lang_name,
 			'LANG_TITLE'		=> $lang_title,
-			'MODE_TITLE'		=> ($mode == 'acp') ? $this->user->lang('MODE_FRONTEND') : $this->user->lang('MODE_ACP'),
+			'MODE_TITLE'		=> ($mode == 'acp') ? $this->language->lang('MODE_FRONTEND') : $this->language->lang('MODE_ACP'),
 
 			'EXT_ASSETS_PATH'	=> "{$this->ext_web_path}assets",
 

@@ -11,7 +11,7 @@ namespace vinabb\stylesdemo\controller;
 class user extends \phpbb\user
 {
 	/**
-	* Copied from phpBB 3.1.9 with 2 changes:
+	* Copied from phpBB 3.2.0-RC1 with 2 changes:
 	*
 	*	1. Enable &style=... for everybody
 	*		Original: if ($style_request && (!$config['override_user_style'] || $auth->acl_get('a_styles')) && !defined('ADMIN_START'))
@@ -40,6 +40,8 @@ class user extends \phpbb\user
 	{
 		global $db, $request, $template, $config, $auth, $phpEx, $phpbb_root_path, $cache;
 		global $phpbb_dispatcher;
+
+		$this->language->set_default_language($config['default_lang']);
 
 		if ($this->data['user_id'] != ANONYMOUS)
 		{
@@ -79,26 +81,26 @@ class user extends \phpbb\user
 		$lang_set_ext = array();
 
 		/**
-		* Event to load language files and modify user data on every page
-		*
-		* @event core.user_setup
-		* @var	array	user_data			Array with user's data row
-		* @var	string	user_lang_name		Basename of the user's langauge
-		* @var	string	user_date_format	User's date/time format
-		* @var	string	user_timezone		User's timezone, should be one of
-		*							http://www.php.net/manual/en/timezones.php
-		* @var	mixed	lang_set			String or array of language files
-		* @var	array	lang_set_ext		Array containing entries of format
-		* 					array(
-		* 						'ext_name' => (string) [extension name],
-		* 						'lang_set' => (string|array) [language files],
-		* 					)
-		* 					For performance reasons, only load translations
-		* 					that are absolutely needed globally using this
-		* 					event. Use local events otherwise.
-		* @var	mixed	style_id			Style we are going to display
-		* @since 3.1.0-a1
-		*/
+		 * Event to load language files and modify user data on every page
+		 *
+		 * @event core.user_setup
+		 * @var	array	user_data			Array with user's data row
+		 * @var	string	user_lang_name		Basename of the user's langauge
+		 * @var	string	user_date_format	User's date/time format
+		 * @var	string	user_timezone		User's timezone, should be one of
+		 *							http://www.php.net/manual/en/timezones.php
+		 * @var	mixed	lang_set			String or array of language files
+		 * @var	array	lang_set_ext		Array containing entries of format
+		 * 					array(
+		 * 						'ext_name' => (string) [extension name],
+		 * 						'lang_set' => (string|array) [language files],
+		 * 					)
+		 * 					For performance reasons, only load translations
+		 * 					that are absolutely needed globally using this
+		 * 					event. Use local events otherwise.
+		 * @var	mixed	style_id			Style we are going to display
+		 * @since 3.1.0-a1
+		 */
 		$vars = array(
 			'user_data',
 			'user_lang_name',
@@ -114,6 +116,8 @@ class user extends \phpbb\user
 		$this->lang_name = $user_lang_name;
 		$this->date_format = $user_date_format;
 
+		$this->language->set_user_language($user_lang_name);
+
 		try
 		{
 			$this->timezone = new \DateTimeZone($user_timezone);
@@ -122,17 +126,6 @@ class user extends \phpbb\user
 		{
 			// If the timezone the user has selected is invalid, we fall back to UTC.
 			$this->timezone = new \DateTimeZone('UTC');
-		}
-
-		// We include common language file here to not load it every time a custom language file is included
-		$lang = &$this->lang;
-
-		// Do not suppress error if in DEBUG mode
-		$include_result = (defined('DEBUG')) ? (include $this->lang_path . $this->lang_name . "/common.$phpEx") : (@include $this->lang_path . $this->lang_name . "/common.$phpEx");
-
-		if ($include_result === false)
-		{
-			die('Language file ' . $this->lang_path . $this->lang_name . "/common.$phpEx" . " couldn't be opened.");
 		}
 
 		$this->add_lang($lang_set);
@@ -144,7 +137,6 @@ class user extends \phpbb\user
 		}
 		unset($lang_set_ext);
 
-		// Added by Styles Demo
 		$acp_style_request = $request->variable('s', '');
 
 		if ($acp_style_request && defined('ADMIN_START'))
@@ -224,6 +216,7 @@ class user extends \phpbb\user
 		foreach ($check_for as $key => $default_value)
 		{
 			$this->style[$key] = (isset($parsed_items[$key])) ? $parsed_items[$key] : $default_value;
+
 			settype($this->style[$key], gettype($default_value));
 
 			if (is_string($default_value))
@@ -241,11 +234,11 @@ class user extends \phpbb\user
 		phpbb_user_session_handler();
 
 		/**
-		* Execute code at the end of user setup
-		*
-		* @event core.user_setup_after
-		* @since 3.1.6-RC1
-		*/
+		 * Execute code at the end of user setup
+		 *
+		 * @event core.user_setup_after
+		 * @since 3.1.6-RC1
+		 */
 		$phpbb_dispatcher->dispatch('core.user_setup_after');
 
 		// If this function got called from the error handler we are finished here.
@@ -315,7 +308,6 @@ class user extends \phpbb\user
 						SET session_viewonline = 1
 						WHERE session_user_id = ' . $this->data['user_id'];
 					$db->sql_query($sql);
-
 					$this->data['session_viewonline'] = 1;
 				}
 			}
@@ -328,7 +320,6 @@ class user extends \phpbb\user
 						SET session_viewonline = 0
 						WHERE session_user_id = ' . $this->data['user_id'];
 					$db->sql_query($sql);
-
 					$this->data['session_viewonline'] = 0;
 				}
 			}
@@ -343,6 +334,8 @@ class user extends \phpbb\user
 				redirect(append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=reg_details'));
 			}
 		}
+
+		$this->is_setup_flag = true;
 
 		return;
 	}
