@@ -119,13 +119,13 @@ class settings_module
 
 				if (!$this->filesystem->exists("{$this->ext_root_path}bin/"))
 				{
-					$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_FOUND', constants::EXT_PATH_IN_LANG . 'bin/');
+					$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_FOUND', "{$this->ext_root_path}bin/");
 				}
 				else
 				{
 					if (!$this->filesystem->is_writable("{$this->ext_root_path}bin/"))
 					{
-						$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_WRITE', constants::EXT_PATH_IN_LANG . 'bin/');
+						$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_WRITE', "{$this->ext_root_path}bin/");
 					}
 					else
 					{
@@ -142,7 +142,7 @@ class settings_module
 
 					if (!is_executable("{$this->ext_root_path}bin/{$phantomjs_filename}"))
 					{
-						$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_EXEC', constants::EXT_PATH_IN_LANG . "bin/{$phantomjs_filename}");
+						$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_EXEC', "{$this->ext_root_path}bin/{$phantomjs_filename}");
 					}
 				}
 			}
@@ -283,8 +283,8 @@ class settings_module
 			'SCREENSHOT_TYPE_JSON'		=> constants::SCREENSHOT_TYPE_JSON,
 			'SCREENSHOT_TYPE_PHANTOM'	=> constants::SCREENSHOT_TYPE_PHANTOM,
 			'OS_NAME'					=> $this->get_php_os_name(),
-			'GET_PHANTOM_FOR_OS'		=> $this->language->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
-			'GET_PHANTOM_NO_OS'			=> $this->language->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, constants::EXT_PATH_IN_LANG),
+			'GET_PHANTOM_FOR_OS'		=> $this->language->lang('GET_PHANTOM_' . ((PHP_INT_SIZE === 4 && $this->get_php_os_name(true) == 'LINUX') ? 'LINUX_32' : $this->get_php_os_name(true)), constants::PHANTOM_URL, $this->ext_root_path),
+			'GET_PHANTOM_NO_OS'			=> $this->language->lang('GET_PHANTOM_NO_OS', constants::PHANTOM_URL, $this->ext_root_path),
 
 			'LANG_SWITCH_OPTIONS'	=> $lang_switch_options,
 			'RESOLUTION_OPTIONS'	=> $resolution_options,
