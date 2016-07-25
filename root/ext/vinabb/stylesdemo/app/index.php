@@ -30,7 +30,7 @@ $user->setup('acp/common');
 // Do not access this file once ACP mode is disabled
 if (!$config['vinabb_stylesdemo_acp_enable'])
 {
-	trigger_error('ACP_STYLES_DISABLED', E_USER_WARNING);
+	trigger_error('NO_ADMIN', E_USER_ERROR);
 }
 
 // Some often used variables
