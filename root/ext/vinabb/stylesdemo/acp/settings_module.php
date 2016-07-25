@@ -19,20 +19,20 @@ class settings_module
 	{
 		global $phpbb_container, $phpEx;
 
+		$this->auth = $phpbb_container->get('auth');
 		$this->config = $phpbb_container->get('config');
 		$this->db = $phpbb_container->get('dbal.conn');
 		$this->log = $phpbb_container->get('log');
 		$this->request = $phpbb_container->get('request');
-		$this->ext_manager = $phpbb_container->get('ext.manager');
 		$this->template = $phpbb_container->get('template');
 		$this->user = $phpbb_container->get('user');
 		$this->language = $phpbb_container->get('language');
-		$this->auth = $phpbb_container->get('auth');
+		$this->ext_manager = $phpbb_container->get('ext.manager');
+		$this->filesystem = $phpbb_container->get('filesystem');
 
 		$this->tpl_name = 'settings_body';
 		$this->page_title = $this->language->lang('ACP_STYLES_DEMO');
 		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/stylesdemo', true);
-		$this->real_path = dirname(__DIR__) . '/';
 		$this->language->add_lang('acp_styles_demo', 'vinabb/stylesdemo');
 
 		add_form_key('vinabb/stylesdemo');
@@ -117,30 +117,30 @@ class settings_module
 			{
 				$phantomjs_filename = ($this->get_php_os_name(true) == 'WIN') ? 'phantomjs.exe' : 'phantomjs';
 
-				if (!file_exists("{$this->real_path}bin/"))
+				if (!$this->filesystem->exists("{$this->ext_root_path}bin/"))
 				{
 					$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_FOUND', constants::EXT_PATH_IN_LANG . 'bin/');
 				}
 				else
 				{
-					if (!is_writable("{$this->real_path}bin/"))
+					if (!$this->filesystem->is_writable("{$this->ext_root_path}bin/"))
 					{
 						$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_WRITE', constants::EXT_PATH_IN_LANG . 'bin/');
 					}
 					else
 					{
-						if (!file_exists("{$this->real_path}bin/images/"))
+						if (!$this->filesystem->exists("{$this->ext_root_path}bin/images/"))
 						{
-							mkdir("{$this->real_path}bin/images/");
+							$this->filesystem->mkdir("{$this->ext_root_path}bin/images/");
 						}
 
-						if (!file_exists("{$this->real_path}bin/js/"))
+						if (!$this->filesystem->exists("{$this->ext_root_path}bin/js/"))
 						{
-							mkdir("{$this->real_path}bin/js/");
+							$this->filesystem->mkdir("{$this->ext_root_path}bin/js/");
 						}
 					}
 
-					if (!is_executable("{$this->real_path}bin/{$phantomjs_filename}"))
+					if (!is_executable("{$this->ext_root_path}bin/{$phantomjs_filename}"))
 					{
 						$errors[] = $this->language->lang('ERROR_PHANTOM_NOT_EXEC', constants::EXT_PATH_IN_LANG . "bin/{$phantomjs_filename}");
 					}
@@ -185,7 +185,7 @@ class settings_module
 					{
 						$suffix = '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'] . $file_ext;
 
-						if (file_exists("{$this->real_path}bin/{$scan_dir}/"))
+						if ($this->filesystem->exists("{$this->ext_root_path}bin/{$scan_dir}/"))
 						{
 							$scan_files = array_diff(scandir("{$this->ext_root_path}bin/{$scan_dir}/"), array('..', '.', '.htaccess'));
 
@@ -193,7 +193,7 @@ class settings_module
 							{
 								if (substr($scan_file, strlen($suffix) * -1) == $suffix)
 								{
-									unlink("{$this->ext_root_path}bin/{$scan_dir}/{$scan_file}");
+									$this->filesystem->remove("{$this->ext_root_path}bin/{$scan_dir}/{$scan_file}");
 								}
 							}
 						}
