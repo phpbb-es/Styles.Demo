@@ -105,7 +105,6 @@ class main
 
 		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/stylesdemo', true);
 		$this->ext_web_path = $this->path_helper->update_web_root_path($this->ext_root_path);
-		$this->real_path = dirname(__DIR__) . '/';
 		$this->set_time_limit = false;
 	}
 
@@ -229,7 +228,7 @@ class main
 					case constants::SCREENSHOT_TYPE_PHANTOM:
 						$screenshot_filename = 'acp_' . $style_varname . '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'];
 
-						if (file_exists("{$this->real_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT))
+						if (file_exists("{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT))
 						{
 							$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 						}
@@ -243,11 +242,11 @@ class main
 							}
 
 							$preview_url = generate_board_url() . "/ext/vinabb/stylesdemo/app/index.{$this->php_ext}?s={$style_dir}&sid={$this->user->session_id}";
-							$script = file_get_contents("{$this->real_path}assets/js/phantom.js");
+							$script = file_get_contents("{$this->ext_root_path}assets/js/phantom.js");
 							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "./ext/vinabb/stylesdemo/bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
 
 							// Create .js data file for PhantomJS
-							file_put_contents("{$this->real_path}bin/js/{$screenshot_filename}.js", $script);
+							file_put_contents("{$this->ext_root_path}bin/js/{$screenshot_filename}.js", $script);
 
 							// Phantom! Summon... Summon...
 							try
@@ -259,7 +258,7 @@ class main
 									$this->set_time_limit = true;
 								}
 
-								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$screenshot_filename}.js");
+								exec("{$this->ext_root_path}bin/phantomjs {$this->ext_root_path}bin/js/{$screenshot_filename}.js");
 
 								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 							}
@@ -271,7 +270,7 @@ class main
 					break;
 
 					default:
-						if (file_exists("{$this->real_path}assets/screenshots/acp/{$style_varname}" . constants::SCREENSHOT_EXT))
+						if (file_exists("{$this->ext_root_path}assets/screenshots/acp/{$style_varname}" . constants::SCREENSHOT_EXT))
 						{
 							$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}" . constants::SCREENSHOT_EXT;
 						}
@@ -390,7 +389,7 @@ class main
 					case constants::SCREENSHOT_TYPE_PHANTOM:
 						$screenshot_filename = $style_varname . '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'];
 
-						if (file_exists("{$this->real_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT))
+						if (file_exists("{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT))
 						{
 							$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 						}
@@ -404,16 +403,16 @@ class main
 							}
 
 							$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
-							$script = file_get_contents("{$this->real_path}assets/js/phantom.js");
+							$script = file_get_contents("{$this->ext_root_path}assets/js/phantom.js");
 							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "./ext/vinabb/stylesdemo/bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
 
 							// Create .js data file for PhantomJS
-							file_put_contents("{$this->real_path}bin/js/{$screenshot_filename}.js", $script);
+							file_put_contents("{$this->ext_root_path}bin/js/{$screenshot_filename}.js", $script);
 
 							// Phantom! Summon... Summon...
 							try
 							{
-								exec("{$this->real_path}bin/phantomjs {$this->real_path}bin/js/{$screenshot_filename}.js");
+								exec("{$this->ext_root_path}bin/phantomjs {$this->ext_root_path}bin/js/{$screenshot_filename}.js");
 
 								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 							}
@@ -425,7 +424,7 @@ class main
 					break;
 
 					default:
-						if (file_exists("{$this->real_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT))
+						if (file_exists("{$this->ext_root_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT))
 						{
 							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT;
 						}

@@ -81,26 +81,26 @@ class user extends \phpbb\user
 		$lang_set_ext = array();
 
 		/**
-		 * Event to load language files and modify user data on every page
-		 *
-		 * @event core.user_setup
-		 * @var	array	user_data			Array with user's data row
-		 * @var	string	user_lang_name		Basename of the user's langauge
-		 * @var	string	user_date_format	User's date/time format
-		 * @var	string	user_timezone		User's timezone, should be one of
-		 *							http://www.php.net/manual/en/timezones.php
-		 * @var	mixed	lang_set			String or array of language files
-		 * @var	array	lang_set_ext		Array containing entries of format
-		 * 					array(
-		 * 						'ext_name' => (string) [extension name],
-		 * 						'lang_set' => (string|array) [language files],
-		 * 					)
-		 * 					For performance reasons, only load translations
-		 * 					that are absolutely needed globally using this
-		 * 					event. Use local events otherwise.
-		 * @var	mixed	style_id			Style we are going to display
-		 * @since 3.1.0-a1
-		 */
+		* Event to load language files and modify user data on every page
+		*
+		* @event core.user_setup
+		* @var	array	user_data			Array with user's data row
+		* @var	string	user_lang_name		Basename of the user's langauge
+		* @var	string	user_date_format	User's date/time format
+		* @var	string	user_timezone		User's timezone, should be one of
+		*							http://www.php.net/manual/en/timezones.php
+		* @var	mixed	lang_set			String or array of language files
+		* @var	array	lang_set_ext		Array containing entries of format
+		* 					array(
+		* 						'ext_name' => (string) [extension name],
+		* 						'lang_set' => (string|array) [language files],
+		* 					)
+		* 					For performance reasons, only load translations
+		* 					that are absolutely needed globally using this
+		* 					event. Use local events otherwise.
+		* @var	mixed	style_id			Style we are going to display
+		* @since 3.1.0-a1
+		*/
 		$vars = array(
 			'user_data',
 			'user_lang_name',
@@ -128,12 +128,12 @@ class user extends \phpbb\user
 			$this->timezone = new \DateTimeZone('UTC');
 		}
 
-		$this->add_lang($lang_set);
+		$this->language->add_lang($lang_set);
 		unset($lang_set);
 
 		foreach ($lang_set_ext as $ext_lang_pair)
 		{
-			$this->add_lang_ext($ext_lang_pair['ext_name'], $ext_lang_pair['lang_set']);
+			$this->language->add_lang($ext_lang_pair['lang_set'], $ext_lang_pair['ext_name']);
 		}
 		unset($lang_set_ext);
 
@@ -234,11 +234,11 @@ class user extends \phpbb\user
 		phpbb_user_session_handler();
 
 		/**
-		 * Execute code at the end of user setup
-		 *
-		 * @event core.user_setup_after
-		 * @since 3.1.6-RC1
-		 */
+		* Execute code at the end of user setup
+		*
+		* @event core.user_setup_after
+		* @since 3.1.6-RC1
+		*/
 		$phpbb_dispatcher->dispatch('core.user_setup_after');
 
 		// If this function got called from the error handler we are finished here.
@@ -308,6 +308,7 @@ class user extends \phpbb\user
 						SET session_viewonline = 1
 						WHERE session_user_id = ' . $this->data['user_id'];
 					$db->sql_query($sql);
+
 					$this->data['session_viewonline'] = 1;
 				}
 			}
@@ -320,6 +321,7 @@ class user extends \phpbb\user
 						SET session_viewonline = 0
 						WHERE session_user_id = ' . $this->data['user_id'];
 					$db->sql_query($sql);
+
 					$this->data['session_viewonline'] = 0;
 				}
 			}
