@@ -26,12 +26,11 @@ require($phpbb_root_path . 'includes/functions_module.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('acp/common');
-$user->add_lang_ext('vinabb/stylesdemo', 'demo');
 
 // Do not access this file once ACP mode is disabled
 if (!$config['vinabb_stylesdemo_acp_enable'])
 {
-	trigger_error('ACP_STYLES_DISABLED', E_USER_WARNING);
+	trigger_error('NO_ADMIN', E_USER_ERROR);
 }
 
 // Some often used variables
@@ -54,7 +53,7 @@ $style = $request->variable('s', '');
 
 if (empty($style) || !file_exists("./styles/{$style}/"))
 {
-	trigger_error('NO_ACP_STYLES', E_USER_WARNING);
+	trigger_error('NO_STYLE_DATA', E_USER_ERROR);
 }
 
 $style_dir = "./styles/{$style}/style";

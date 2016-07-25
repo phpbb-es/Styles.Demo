@@ -242,7 +242,7 @@ class listener implements EventSubscriberInterface
 			|| $this->request->is_set_post('submituser')
 		))
 		{
-			trigger_error($this->user->lang['UNAVAILABLE_IN_DEMO'], E_USER_WARNING);
+			trigger_error($this->user->lang('UNAVAILABLE_IN_DEMO'), E_USER_WARNING);
 		}
 	}
 }
