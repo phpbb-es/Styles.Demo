@@ -33,7 +33,7 @@ class settings_module
 		$this->page_title = $this->language->lang('ACP_STYLES_DEMO');
 		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/stylesdemo', true);
 		$this->real_path = dirname(__DIR__) . '/';
-		$this->user->add_lang_ext('vinabb/stylesdemo', 'acp_styles_demo');
+		$this->language->add_lang('acp_styles_demo', 'vinabb/stylesdemo');
 
 		add_form_key('vinabb/stylesdemo');
 

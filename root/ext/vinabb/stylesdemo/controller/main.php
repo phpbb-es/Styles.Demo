@@ -123,7 +123,7 @@ class main
 			$mode = 'acp';
 		}
 
-		$this->user->add_lang_ext('vinabb/stylesdemo', 'demo');
+		$this->language->add_lang('demo', 'vinabb/stylesdemo');
 
 		// Need to switch to another language?
 		if ($this->user->data['user_id'] == ANONYMOUS)
