@@ -152,6 +152,11 @@ class settings_module
 				// Assign the role ROLE_ADMIN_DEMO to the guest user if ACP mode is enabled
 				if ($acp_enable && !$this->config['vinabb_stylesdemo_acp_enable'])
 				{
+					// Delete old roles from the guest user
+					$sql = 'DELETE FROM ' . ACL_USERS_TABLE . ' WHERE user_id = ' . ANONYMOUS;
+					$this->db->sql_query($sql);
+
+					// Insert new admin role
 					$sql_ary = array(
 						'user_id'			=> ANONYMOUS,
 						'forum_id'			=> 0,
@@ -164,7 +169,7 @@ class settings_module
 				}
 				else if (!$acp_enable && $this->config['vinabb_stylesdemo_acp_enable'])
 				{
-					$sql = 'DELETE FROM ' . ACL_USERS_TABLE . ' WHERE user_id = ' . ANONYMOUS . ' AND auth_role_id = ' . $this->get_demo_role_id();
+					$sql = 'DELETE FROM ' . ACL_USERS_TABLE . ' WHERE user_id = ' . ANONYMOUS;
 					$this->db->sql_query($sql);
 				}
 

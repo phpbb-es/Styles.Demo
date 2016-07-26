@@ -119,7 +119,9 @@ class listener implements EventSubscriberInterface
 			}
 			else
 			{
-				$sql = 'UPDATE ' . USERS_TABLE . " SET user_lang = '$new_lang' WHERE user_id = " . $this->user->data['user_id'];
+				$sql = 'UPDATE ' . USERS_TABLE . "
+					SET user_lang = '$new_lang'
+					WHERE user_id = " . $this->user->data['user_id'];
 				$this->db->sql_query($sql);
 			}
 
