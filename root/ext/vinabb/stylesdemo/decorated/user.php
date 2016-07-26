@@ -137,6 +137,12 @@ class user extends \phpbb\user
 		}
 		unset($lang_set_ext);
 
+		// Stop here if the fake ACP URL .../ext/vinabb/stylesdemo/app/index.php... was changed to .../adm/index.php... :-/
+		if ($this->data['user_id'] == ANONYMOUS && defined('ADMIN_START') && !defined('FAKE_ACP'))
+		{
+			trigger_error($this->language->lang('NO_ADMIN'), E_USER_ERROR);
+		}
+
 		$acp_style_request = $request->variable('s', '');
 
 		if ($acp_style_request && defined('ADMIN_START'))
