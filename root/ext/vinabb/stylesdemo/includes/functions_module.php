@@ -44,7 +44,7 @@ class fake_p_master extends p_master
 	*/
 	function load_active($mode = false, $module_url = false, $execute_module = true, $style = '')
 	{
-		global $phpbb_root_path, $phpbb_admin_path, $phpEx, $user, $template, $request;
+		global $phpbb_root_path, $phpbb_admin_path, $phpEx, $user, $language, $template, $request;
 
 		$module_path = $this->include_path . $this->p_class;
 		$icat = $request->variable('icat', '');
@@ -54,19 +54,19 @@ class fake_p_master extends p_master
 			trigger_error('MODULE_NOT_ACCESS', E_USER_ERROR);
 		}
 
-		// new modules use the full class names, old ones are always called <type>_<name>, e.g. acp_board
+		// New modules use the full class names, old ones are always called <type>_<name>, e.g. acp_board
 		if (!class_exists($this->p_name))
 		{
 			if (!file_exists("$module_path/{$this->p_name}.$phpEx"))
 			{
-				trigger_error($user->lang('MODULE_NOT_FIND', "$module_path/{$this->p_name}.$phpEx"), E_USER_ERROR);
+				trigger_error($language->lang('MODULE_NOT_FIND', "$module_path/{$this->p_name}.$phpEx"), E_USER_ERROR);
 			}
 
 			include("$module_path/{$this->p_name}.$phpEx");
 
 			if (!class_exists($this->p_name))
 			{
-				trigger_error($user->lang('MODULE_FILE_INCORRECT_CLASS', "$module_path/{$this->p_name}.$phpEx", $this->p_name), E_USER_ERROR);
+				trigger_error($language->lang('MODULE_FILE_INCORRECT_CLASS', "$module_path/{$this->p_name}.$phpEx", $this->p_name), E_USER_ERROR);
 			}
 		}
 
@@ -83,7 +83,7 @@ class fake_p_master extends p_master
 		// We pre-define the action parameter we are using all over the place
 		if (defined('IN_ADMIN'))
 		{
-			/*
+			/**
 			* If this is an extension module, we'll try to automatically set
 			* the style paths for the extension (the ext author can change them
 			* if necessary).
@@ -117,7 +117,7 @@ class fake_p_master extends p_master
 		}
 		else
 		{
-			/*
+			/**
 			* If this is an extension module, we'll try to automatically set
 			* the style paths for the extension (the ext author can change them
 			* if necessary).
