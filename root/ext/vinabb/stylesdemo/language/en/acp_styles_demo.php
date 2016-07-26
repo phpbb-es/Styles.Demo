@@ -25,7 +25,7 @@ if (empty($lang) || !is_array($lang))
 */
 
 $lang = array_merge($lang, array(
-	'ACP_STYLES_DEMO_EXPLAIN'	=> 'Thanks you for testing “Styles Demo”. Check for stable versions as soon at <a href="https://github.com/VinaBB/Styles.Demo">GitHub</a>.',
+	'ACP_STYLES_DEMO_EXPLAIN'	=> 'Thanks you for using “Styles Demo”. Check for new versions at <a href="https://github.com/VinaBB/Styles.Demo">GitHub</a>.',
 
 	'DEFAULT_LANGUAGE'	=> 'Default language',
 
