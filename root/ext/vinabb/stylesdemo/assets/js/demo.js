@@ -26,7 +26,7 @@ $.each($styles,
 			var tooltip = '';
 		}
 
-		var priceRibbon = (object.price > 0) ? '<div class="ribbon"><span>' + object.price_label + '</span></div>' : '';
+		var priceRibbon = (object.price) ? '<div class="ribbon"><span>' + object.price_label + '</span></div>' : '';
 
 		$styleList.append('<a class="style pull-left" data-id="' + key + '" ' + tooltip + '><img src="' + object.img + '" alt="' + object.name + '" width="300" height="300"><span data-toggle="popover" data-content="' + object.info + '" class="title">' + object.name + '</span><span class="badge"><i class="fa fa-star"></i> ' + object.phpbb + '</span>' + priceRibbon + '</a>');
 
@@ -50,7 +50,7 @@ $('.get-btn').click(
 			$('#styleName').html($styles[$current_style]['name']);
 			$('#styleInfo').html($styles[$current_style]['phpbb_info'] + '<br>' + $styles[$current_style]['info']);
 
-			if ($styles[$current_style]['price'] > 0)
+			if ($styles[$current_style]['price'])
 			{
 				$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
 				$('#downloadPurchase').prop('class', 'btn btn-danger');
@@ -83,7 +83,7 @@ $('#downloadPurchase').click(
 		{
 			$('#styleInfoDialog').modal('hide');
 
-			if ($styles[$current_style]['price'] > 0)
+			if ($styles[$current_style]['price'])
 			{
 				window.open($styles[$current_style]['download']);
 			}
@@ -321,7 +321,7 @@ $(document).ready(
 		}
 
 		// Update language button
-		if ($('#langButton').length > 0)
+		if ($('#langButton').length)
 		{
 			if ($current_lang == $default_lang)
 			{
@@ -338,7 +338,7 @@ $(document).ready(
 		}
 
 		// Update get button
-		if ($styles[$current_style].price > 0)
+		if ($styles[$current_style].price)
 		{
 			$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
 			$('#getButton').attr('data-original-title', $label_purchase);
@@ -358,7 +358,7 @@ $(document).ready(
 		}
 
 		// Update style name + price label
-		var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
+		var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
 		$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
 
 		switcher_viewport_buttons();
@@ -400,7 +400,7 @@ $('.style').click(
 			);
 
 			// Update get button
-			if ($styles[$current_style].price > 0)
+			if ($styles[$current_style].price)
 			{
 				$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
 				$('#getButton').attr('data-original-title', $label_purchase);
@@ -420,7 +420,7 @@ $('.style').click(
 			}
 
 			// Update style name + price label
-			var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
+			var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
 			$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
 
 			$styleIframe.prop('src', $styles[$current_style].url);
