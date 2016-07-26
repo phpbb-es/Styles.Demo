@@ -3,7 +3,10 @@
 $(document).ready(
 	function()
 	{
+		// Fix form action href
 		$('form').prop('action', window.location.href);
+
+		// Fix link href
 		$('a').each(
 			function()
 			{
@@ -14,20 +17,22 @@ $(document).ready(
 			}
 		);
 
-		{% if S_GUEST %}
-		//$('input[type=submit]').prop('disabled', true);
-		//$('input[type=submit]').addClass('disabled');
+		// Fix forum/module icons
+		$('img').each(
+				function()
+				{
+					if (this.src.indexOf('/app/images/') != -1)
+					{
+						$(this).prop('src', this.src.replace('/app/images/', '/app/styles/{{ STYLE_DIRNAME }}/images/'));
+					}
+				}
+		);
 
-		/*var buttonIDs = ['submit', 'update', 'securesubmit', 'unsecuresubmit'];
-
-		buttonIDs.forEach(
-			function(id)
-			{
-	    		$('#' + id).prop('disabled', true);
-				$('#' + id).addClass('disabled');
-			}
-		);*/
-		{% endif %}
+		// Fix CAPTCHA preview image
+		if ($('#captcha_preview').length)
+		{
+			$('#captcha_preview').prop('src', $('#captcha_preview').prop('src').replace('{{ PREFIX_URL }}', '{{ PREFIX_URL_ALT }}/ext/vinabb/stylesdemo/app/'));
+		}
 	}
 );
 </script>
