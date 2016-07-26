@@ -57,6 +57,11 @@ class ext extends \phpbb\extension\base
 		$auth = $this->container->get('auth');
 		$log = $this->container->get('log');
 
+		// Delete old roles from the guest user
+		$sql = 'DELETE FROM ' . ACL_USERS_TABLE . ' WHERE user_id = ' . ANONYMOUS;
+		$db->sql_query($sql);
+
+		// Insert new admin role
 		$sql_ary = array(
 			'user_id'			=> ANONYMOUS,
 			'forum_id'			=> 0,
@@ -83,7 +88,7 @@ class ext extends \phpbb\extension\base
 		$auth = $this->container->get('auth');
 		$log = $this->container->get('log');
 
-		$sql = 'DELETE FROM ' . ACL_USERS_TABLE . ' WHERE user_id = ' . ANONYMOUS . ' AND auth_role_id = ' . $this->get_demo_role_id();
+		$sql = 'DELETE FROM ' . ACL_USERS_TABLE . ' WHERE user_id = ' . ANONYMOUS;
 		$db->sql_query($sql);
 
 		// Clear permissions cache
