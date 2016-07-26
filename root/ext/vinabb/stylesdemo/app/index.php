@@ -21,7 +21,7 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 require($phpbb_root_path . 'common.' . $phpEx);
 require($phpbb_root_path . 'includes/functions_acp.' . $phpEx);
 require($phpbb_root_path . 'includes/functions_admin.' . $phpEx);
-require($phpbb_root_path . 'includes/functions_module.' . $phpEx);
+require('./../includes/functions_module.' . $phpEx);
 
 // Start session management
 $user->session_begin();
@@ -162,7 +162,7 @@ $template->assign_vars(array(
 ));
 
 // Instantiate new module
-$module = new p_master();
+$module = new fake_p_master();
 
 // Instantiate module system and generate list of available modules
 $module->list_modules('acp');
@@ -181,7 +181,7 @@ if ($no_submit)
 }
 else
 {
-	$module->load_active();
+	$module->load_active(false, false, true, $style);
 }
 
 // Generate the page
