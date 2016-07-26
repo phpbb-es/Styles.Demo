@@ -31,6 +31,15 @@ class user extends \phpbb\user
 	*				$_EXTRA_URL = array('s=' . $acp_style_request);
 	*			}
 	*
+	*	3. STOP NOW if the fake ACP URL was changed to the real ACP URL with admin session
+	*		Before (2.) above
+	*		Added:
+	*			// Stop here if the fake ACP URL .../ext/vinabb/stylesdemo/app/index.php... was changed to .../adm/index.php... :-/
+	*			if ($this->data['user_id'] == ANONYMOUS && defined('ADMIN_START') && !defined('FAKE_ACP'))
+	*			{
+	*				trigger_error($this->lang('NO_ADMIN'), E_USER_ERROR);
+	*			}
+	*
 	*	REMEMBER TO UPDATE CODE CHANGES FOR LATER PHPBB VERSIONS IF NEEDED
 	*
 	* @param bool $lang_set
@@ -144,7 +153,12 @@ class user extends \phpbb\user
 		}
 		unset($lang_set_ext);
 
-		// Added by Styles Demo
+		// Stop here if the fake ACP URL .../ext/vinabb/stylesdemo/app/index.php... was changed to .../adm/index.php... :-/
+		if ($this->data['user_id'] == ANONYMOUS && defined('ADMIN_START') && !defined('FAKE_ACP'))
+		{
+			trigger_error($this->lang('NO_ADMIN'), E_USER_ERROR);
+		}
+
 		$acp_style_request = $request->variable('s', '');
 
 		if ($acp_style_request && defined('ADMIN_START'))
