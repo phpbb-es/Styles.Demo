@@ -568,7 +568,6 @@ class main
 
 			'S_LANG_ENABLE'	=> !empty($lang_title) ? true : false,
 			'S_ACP_ENABLE'	=> ($this->config['vinabb_stylesdemo_acp_enable'] && $has_acp_styles) ? true : false,
-			'S_JSON_ENABLE'	=> ($this->config['vinabb_stylesdemo_json_enable'] && !empty($this->config['vinabb_stylesdemo_json_url'])) ? true : false,
 
 			'U_MODE'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => ($mode == 'acp') ? '' : 'acp')),
 		));

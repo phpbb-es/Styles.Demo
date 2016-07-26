@@ -26,7 +26,7 @@ $.each($styles,
 			var tooltip = '';
 		}
 
-		var priceRibbon = (object.price > 0) ? '<div class="ribbon"><span>' + object.price_label + '</span></div>' : '';
+		var priceRibbon = (object.price) ? '<div class="ribbon"><span>' + object.price_label + '</span></div>' : '';
 
 		$styleList.append('<a class="style pull-left" data-id="' + key + '" ' + tooltip + '><img src="' + object.img + '" alt="' + object.name + '" width="300" height="300"><span data-toggle="popover" data-content="' + object.info + '" class="title">' + object.name + '</span><span class="badge"><i class="fa fa-star"></i> ' + object.phpbb + '</span>' + priceRibbon + '</a>');
 
@@ -50,15 +50,22 @@ $('.get-btn').click(
 			$('#styleName').html($styles[$current_style]['name']);
 			$('#styleInfo').html($styles[$current_style]['phpbb_info'] + '<br>' + $styles[$current_style]['info']);
 
-			if ($styles[$current_style]['price'] > 0)
+			if ($styles[$current_style]['price'])
 			{
 				$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
 				$('#downloadPurchase').prop('class', 'btn btn-danger');
 			}
 			else
 			{
-				$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
-				$('#downloadPurchase').prop('class', 'btn btn-success');
+				if ($styles[$current_style]['download'])
+				{
+					$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
+					$('#downloadPurchase').prop('class', 'btn btn-success');
+				}
+				else
+				{
+					$('#downloadPurchase').remove();
+				}
 			}
 
 			$('#styleInfoDialog').modal('show');
@@ -76,7 +83,7 @@ $('#downloadPurchase').click(
 		{
 			$('#styleInfoDialog').modal('hide');
 
-			if ($styles[$current_style]['price'] > 0)
+			if ($styles[$current_style]['price'])
 			{
 				window.open($styles[$current_style]['download']);
 			}
@@ -116,13 +123,13 @@ $('.lang-btn').click(
 		{
 			$('#langButton').prop('class', 'fa fa-globe show-tooltip');
 			$('#langButton').tooltip('hide');
-			$('#langButton').prop('data-original-title', $default_to_switch_title);
+			$('#langButton').attr('data-original-title', $default_to_switch_title);
 		}
 		else
 		{
 			$('#langButton').prop('class', 'fa fa-star show-tooltip');
 			$('#langButton').tooltip('hide');
-			$('#langButton').prop('data-original-title', $switch_to_default_title);
+			$('#langButton').attr('data-original-title', $switch_to_default_title);
 		}
 
 		// Pre-loading effects
@@ -314,39 +321,44 @@ $(document).ready(
 		}
 
 		// Update language button
-		if ($('#langButton').length > 0)
+		if ($('#langButton').length)
 		{
 			if ($current_lang == $default_lang)
 			{
 				$('#langButton').prop('class', 'fa fa-globe show-tooltip');
 				$('#langButton').tooltip('hide');
-				$('#langButton').prop('data-original-title', $default_to_switch_title);
+				$('#langButton').attr('data-original-title', $default_to_switch_title);
 			}
 			else
 			{
 				$('#langButton').prop('class', 'fa fa-star show-tooltip');
 				$('#langButton').tooltip('hide');
-				$('#langButton').prop('data-original-title', $switch_to_default_title);
+				$('#langButton').attr('data-original-title', $switch_to_default_title);
 			}
 		}
 
 		// Update get button
-		if ($('#getButton').length > 0)
+		if ($styles[$current_style].price)
 		{
-			if ($styles[$current_style].price > 0)
+			$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+			$('#getButton').attr('data-original-title', $label_purchase);
+		}
+		else
+		{
+			if ($styles[$current_style].download)
 			{
-				$('#getButton').prop('data-original-title', $label_purchase);
-				$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+				$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
+				$('#getButton').attr('data-original-title', $label_download);
 			}
 			else
 			{
-				$('#getButton').prop('data-original-title', $label_download);
-				$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
+				$('#getButton').prop('class', 'fa fa-info-circle animate-pulse show-tooltip');
+				$('#getButton').attr('data-original-title', $label_info);
 			}
 		}
 
 		// Update style name + price label
-		var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
+		var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
 		$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
 
 		switcher_viewport_buttons();
@@ -388,22 +400,27 @@ $('.style').click(
 			);
 
 			// Update get button
-			if ($('#getButton').length > 0)
+			if ($styles[$current_style].price)
 			{
-				if ($styles[$current_style].price > 0)
+				$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+				$('#getButton').attr('data-original-title', $label_purchase);
+			}
+			else
+			{
+				if ($styles[$current_style].download)
 				{
-					$('#getButton').prop('data-original-title', $label_purchase);
-					$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+					$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
+					$('#getButton').attr('data-original-title', $label_download);
 				}
 				else
 				{
-					$('#getButton').prop('data-original-title', $label_download);
-					$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
+					$('#getButton').prop('class', 'fa fa-info-circle animate-pulse show-tooltip');
+					$('#getButton').attr('data-original-title', $label_info);
 				}
 			}
 
 			// Update style name + price label
-			var styleIsFree = ($styles[$current_style].price > 0) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
+			var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
 			$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
 
 			$styleIframe.prop('src', $styles[$current_style].url);
