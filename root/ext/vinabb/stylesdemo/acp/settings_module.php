@@ -64,7 +64,7 @@ class settings_module
 			}
 
 			// Get from the form
-			$logo_text = $this->request->variable('logo_text', '');
+			$logo_text = $this->request->variable('logo_text', '', true);
 			$auto_toggle = $this->request->variable('auto_toggle', true);
 			$phone_width = max(constants::MIN_PHONE_WIDTH, $this->request->variable('phone_width', 0));
 			$tablet_width = max($phone_width + constants::MIN_PHONE_WIDTH, $this->request->variable('tablet_width', 0));
