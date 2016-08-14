@@ -142,11 +142,11 @@ $('.lang-btn').click(
 			}
 		);
 
-		// Also add the last-page parameter z=... to URL
+		// Also add the switch-lang parameter l=1 and the last-page parameter z=... to URL
 		if ($current_style in $styles)
 		{
 			switcher_viewport_buttons();
-			$styleIframe.prop('src', $styles[$current_style].url_lang + '&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '').replace(/&amp;/g, '&')));
+			$styleIframe.prop('src', $styles[$current_style].url + '&l=1&z=' + encodeURIComponent($lastViewIframe.replace($prefixUrl, '').replace(/&amp;/g, '&')));
 			location.hash = '#' + $current_style;
 		}
 
