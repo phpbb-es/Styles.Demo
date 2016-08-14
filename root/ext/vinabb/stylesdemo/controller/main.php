@@ -334,7 +334,6 @@ class main
 					'PRICE'			=> $style_price,
 					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
 					'URL'			=> append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $style_dir, false, $this->user->session_id),
-					'URL_LANG'		=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'l=1&amp;s=' . $style_dir),
 				));
 			}
 		}
@@ -502,7 +501,6 @@ class main
 					'PRICE'			=> $style_price,
 					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
 					'URL'			=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'style=' . $row['style_id']),
-					'URL_LANG'		=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'l=1&amp;style=' . $row['style_id']),
 				));
 			}
 			$this->db->sql_freeresult($result);
