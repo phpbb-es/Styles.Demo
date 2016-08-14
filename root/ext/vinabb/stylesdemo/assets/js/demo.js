@@ -4,8 +4,8 @@
 * MIT licenced
 */
 
-// Global "use strict", wrap it up in functions if you can't deal with it...
-"use strict";
+// Global 'use strict', wrap it up in functions if you can't deal with it...
+'use strict';
 
 var $viewportButtons = $('.phone-btn, .tablet-btn, .desktop-btn'),
 	$styleList = $('.styles-list'),
