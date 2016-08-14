@@ -119,17 +119,6 @@ class main
 
 		$this->user->add_lang_ext('vinabb/stylesdemo', 'demo');
 
-		// Need to switch to another language?
-		if ($this->user->data['user_id'] == ANONYMOUS)
-		{
-			$demo_lang = $this->request->variable($this->config['cookie_name'] . '_lang', '', true, \phpbb\request\request_interface::COOKIE);
-			$demo_lang = empty($demo_lang) ? $this->config['default_lang'] : $demo_lang;
-		}
-		else
-		{
-			$demo_lang = $this->user->data['user_lang'];
-		}
-
 		// Get more style data from mom server
 		$json = array();
 
@@ -544,7 +533,7 @@ class main
 				}
 			}
 
-			$lang_title = ($demo_lang == $this->config['default_lang']) ? $this->user->lang('LANG_SWITCH', $default_lang_name, $switch_lang_name) : $this->user->lang('LANG_SWITCH', $switch_lang_name, $default_lang_name);
+			$lang_title = ($this->user->lang_name == $this->config['default_lang']) ? $this->user->lang('LANG_SWITCH', $default_lang_name, $switch_lang_name) : $this->user->lang('LANG_SWITCH', $switch_lang_name, $default_lang_name);
 		}
 
 		// Assign index specific vars
@@ -556,7 +545,7 @@ class main
 			'TABLET_WIDTH'	=> $this->config['vinabb_stylesdemo_tablet_width'],
 
 			'DEFAULT_STYLE'		=> constants::DEFAULT_STYLE,
-			'CURRENT_LANG'		=> $demo_lang,
+			'CURRENT_LANG'		=> $this->user->lang_name,
 			'DEFAULT_LANG'		=> $this->config['default_lang'],
 			'DEFAULT_LANG_NAME'	=> $default_lang_name,
 			'SWITCH_LANG'		=> $this->config['vinabb_stylesdemo_lang_switch'],
