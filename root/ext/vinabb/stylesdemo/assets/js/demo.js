@@ -358,7 +358,7 @@ $(document).ready(
 		}
 
 		// Update style name + price label
-		var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
+		var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger hidden-xs">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success hidden-xs">' + $label_free + '</span>';
 		$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
 
 		switcher_viewport_buttons();
@@ -420,7 +420,7 @@ $('.style').click(
 			}
 
 			// Update style name + price label
-			var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success">' + $label_free + '</span>';
+			var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger hidden-xs">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success hidden-xs">' + $label_free + '</span>';
 			$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
 
 			$styleIframe.prop('src', $styles[$current_style].url);

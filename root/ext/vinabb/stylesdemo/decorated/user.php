@@ -11,7 +11,7 @@ namespace vinabb\stylesdemo\decorated;
 class user extends \phpbb\user
 {
 	/**
-	* Copied from phpBB 3.2.0-RC1 with 2 changes:
+	* Copied from phpBB 3.2.0-RC1 with 3 changes:
 	*
 	*	1. Enable &style=... for everybody
 	*		Original: if ($style_request && (!$config['override_user_style'] || $auth->acl_get('a_styles')) && !defined('ADMIN_START'))
