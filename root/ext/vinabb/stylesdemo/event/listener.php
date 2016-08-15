@@ -77,6 +77,7 @@ class listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.user_setup'				=> 'update_lang',
+			'core.user_setup_after'			=> 'redirect_to_demo',
 			'core.page_header'				=> 'add_page_header_link',
 			'core.adm_page_header_after'	=> 'update_tpl_vars',
 		);
@@ -120,6 +121,22 @@ class listener implements EventSubscriberInterface
 			}
 
 			redirect(append_sid($this->phpbb_root_path . $last_page));
+		}
+	}
+
+	/**
+	* Redirect to the demo page if any visitors go to our demo board directly
+	*
+	* @param $event
+	*/
+	public function redirect_to_demo($event)
+	{
+		$style = $this->request->variable('style', 0);
+		$acp_style = $this->request->variable('s', '');
+
+		if (!$style && !$acp_style && !in_array($this->user->page['page_name'], array("app.{$this->php_ext}/demo/", "app.{$this->php_ext}/demo/acp", "app.{$this->php_ext}/demo/acp/")) && $this->user->data['user_type'] != USER_FOUNDER)
+		{
+			redirect($this->helper->route('vinabb_stylesdemo_route', array('mode' => '')));
 		}
 	}
 
