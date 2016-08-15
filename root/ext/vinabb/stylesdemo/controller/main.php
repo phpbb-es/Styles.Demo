@@ -192,6 +192,12 @@ class main
 				trigger_error('NO_ACP_STYLES');
 			}
 
+			// If the registration is enabled and registered users access the fake ACP, just logout them as guest
+			if ($this->user->data['is_registered'] && !$this->auth->acl_get('a_'))
+			{
+				$this->user->session_kill();
+			}
+
 			foreach ($style_dirs as $style_dir)
 			{
 				// Get data from style.cfg
