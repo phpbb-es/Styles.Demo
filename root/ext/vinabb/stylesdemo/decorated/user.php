@@ -11,7 +11,7 @@ namespace vinabb\stylesdemo\decorated;
 class user extends \phpbb\user
 {
 	/**
-	* Copied from phpBB 3.2.0-RC1 with 3 changes:
+	* Copied from phpBB 3.2.0-RC1 with 4 changes:
 	*
 	*	1. Enable &style=... for everybody
 	*		Original: if ($style_request && (!$config['override_user_style'] || $auth->acl_get('a_styles')) && !defined('ADMIN_START'))
@@ -39,6 +39,13 @@ class user extends \phpbb\user
 	*			{
 	*				trigger_error($this->language->lang('NO_ADMIN'), E_USER_ERROR);
 	*			}
+	*
+	*	4. Fix the disabled message for guests, since they have 'a_' permissions
+	*		Original: if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && !$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
+	*		Changed: if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS))
+	*
+	*		Original: if (!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
+	*		Changed: if ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS)
 	*
 	*	REMEMBER TO UPDATE CODE CHANGES FOR LATER PHPBB VERSIONS IF NEEDED
 	*
@@ -280,7 +287,7 @@ class user extends \phpbb\user
 		}
 
 		// Is board disabled and user not an admin or moderator?
-		if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && !$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
+		if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS))
 		{
 			if ($this->data['is_bot'])
 			{
@@ -299,7 +306,7 @@ class user extends \phpbb\user
 				// Set board disabled to true to let the admins/mods get the proper notification
 				$config['board_disable'] = '1';
 
-				if (!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
+				if ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS)
 				{
 					if ($this->data['is_bot'])
 					{
