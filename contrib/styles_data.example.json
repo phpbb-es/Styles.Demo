@@ -504,6 +504,20 @@
 			"screenshot": "",
 			"url": "http://rockettheme.com/phpbb/styles/fresco"
 		},
+		"forumus": {
+			"id": 89,
+			"author_id": 87,
+			"author_name": "ThemeLooks",
+			"name": "ForumUS",
+			"version": "1.0.0",
+			"phpbb_version": "3.1.9",
+			"presets": 23,
+			"responsive": 1,
+			"price": 17,
+			"price_label": "$17",
+			"screenshot": "",
+			"url": "https://themeforest.net/item/forumus/17057432"
+		},
 		"graffito": {
 			"id": 37,
 			"author_id": 4,
