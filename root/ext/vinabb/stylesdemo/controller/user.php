@@ -40,6 +40,13 @@ class user extends \phpbb\user
 	*				trigger_error($this->lang('NO_ADMIN'), E_USER_ERROR);
 	*			}
 	*
+	*	4. Fix the disabled message for guests, since they have 'a_' permissions
+	*		Original: if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && !$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
+	*		Changed: if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS))
+	*
+	*		Original: if (!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
+	*		Changed: if ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS)
+	*
 	*	REMEMBER TO UPDATE CODE CHANGES FOR LATER PHPBB VERSIONS IF NEEDED
 	*
 	* @param bool $lang_set
@@ -286,7 +293,7 @@ class user extends \phpbb\user
 		}
 
 		// Is board disabled and user not an admin or moderator?
-		if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && !$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
+		if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS))
 		{
 			if ($this->data['is_bot'])
 			{
@@ -305,7 +312,7 @@ class user extends \phpbb\user
 				// Set board disabled to true to let the admins/mods get the proper notification
 				$config['board_disable'] = '1';
 
-				if (!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
+				if ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS)
 				{
 					if ($this->data['is_bot'])
 					{
