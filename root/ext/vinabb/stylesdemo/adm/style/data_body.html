@@ -1,0 +1,183 @@
+{% include 'overall_header.html' %}
+
+{% if S_EDIT %}
+	<a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
+
+	<h1>{{ PAGE_TITLE }}</h1>
+	<p>{{ lang('ACP_MANAGE_STYLE_DATA_EXPLAIN') }}</p>
+
+	<form id="acp_styles_demo_edit" method="post" action="{{ U_ACTION }}">
+
+	<fieldset>
+		<legend>{{ lang('EDIT_STYLE_DATA') }}</legend>
+		<dl>
+			<dt><label for="style_name">{{ lang('STYLE_NAME') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="text" name="style_name" id="style_name" value="{{ NAME }}" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_version">{{ lang('VERSION') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="text" name="style_version" id="style_version" value="{{ STYLE_VERSION }}" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_phpbb_version">{{ lang('PHPBB_VERSION') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="text" name="style_phpbb_version" id="style_phpbb_version" value="{{ PHPBB_VERSION }}" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_author">{{ lang('DESIGNER') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="text" name="style_author" id="style_author" value="{{ AUTHOR }}" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_author_url">{{ lang('DESIGNER_URL') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="url" name="style_author_url" id="style_author_url" value="{{ AUTHOR_URL }}" size="40" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_presets">{{ lang('PRESETS') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="number" name="style_presets" id="style_presets" value="{{ PRESETS }}" min="0"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_responsive">{{ lang('RESPONSIVE') }}{{ lang('COLON') }}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="style_responsive" value="1" id="style_responsive"{% if RESPONSIVE %} checked{% endif %}> {{ lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="style_responsive" value="0"{% if not RESPONSIVE %} checked{% endif %}> {{ lang('NO') }}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="style_price">{{ lang('PRICE') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="number" name="style_price" id="style_price" value="{{ PRICE }}" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_price_label">{{ lang('PRICE_LABEL') }}{{ lang('COLON') }}</label><br><span>{{ lang('PRICE_LABEL_EXPLAIN') }}</span></dt>
+			<dd><input type="text" name="style_price_label" id="style_price_label" value="{{ PRICE_LABEL }}" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_download">{{ lang('LINK_DOWNLOAD') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="url" name="style_download" id="style_download" value="{{ DOWNLOAD }}" size="40" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_mirror">{{ lang('LINK_MIRROR') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="text" name="style_mirror" id="style_mirror" value="{{ MIRROR }}" size="40" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_details">{{ lang('LINK_DETAILS') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_DETAILS_EXPLAIN') }}</span></dt>
+			<dd><input type="url" name="style_details" id="style_details" value="{{ DETAILS }}" size="40" maxlength="255"></dd>
+		</dl>
+		<dl>
+			<dt><label for="style_support">{{ lang('LINK_SUPPORT') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_SUPPORT_EXPLAIN') }}</span></dt>
+			<dd><input type="url" name="style_support" id="style_support" value="{{ SUPPORT }}" size="40" maxlength="255"></dd>
+		</dl>
+		{{ S_HIDDEN_FIELDS }}
+
+	<p class="submit-buttons">
+		<input class="button1" type="submit" name="submit" id="submit" value="{{ lang('SUBMIT') }}">
+		<input class="button2" type="reset" name="reset" id="reset" value="{{ lang('RESET') }}">
+		{{ S_FORM_TOKEN }}
+	</p>
+	</fieldset>
+	</form>
+
+{% else %}
+
+	<h1>{{ PAGE_TITLE }}</h1>
+	<p>{{ lang('ACP_MANAGE_STYLE_DATA_EXPLAIN') }}</p>
+
+	<fieldset>
+		<legend>{{ lang('UPDATE_TOOLS') }}</legend>
+		<form id="update_version_form" method="post" action="{{ U_ACTION }}" data-ajax="true">
+			<dl>
+				<dt><label for="update_version">{{ lang('CFG_UPDATE_VERSION') }}</label><br><span>{{ lang('CFG_UPDATE_VERSION_EXPLAIN') }}</span></dt>
+				<dd><input type="hidden" name="action" value="version"><input class="button2" type="submit" name="update_version" id="update_version" value="{{ lang('RUN') }}"></dd>
+			</dl>
+		</form>
+
+		<form id="update_phpbb_version_form" method="post" action="{{ U_ACTION }}" data-ajax="true">
+			<dl>
+				<dt><label for="update_phpbb_version">{{ lang('CFG_UPDATE_PHPBB_VERSION') }}</label><br><span>{{ lang('CFG_UPDATE_PHPBB_VERSION_EXPLAIN') }}</span></dt>
+				<dd><input type="hidden" name="action" value="phpbb_version"><input class="button2" type="submit" name="update_phpbb_version" id="update_phpbb_version" value="{{ lang('RUN') }}"></dd>
+			</dl>
+		</form>
+	</fieldset>
+
+	{% if pagination %}
+	<div class="pagination">
+		<span style="float: {{ S_CONTENT_FLOW_BEGIN }};">&raquo; {{ lang(TOTAL_STYLES_LANG, TOTAL_STYLES) }}</span>
+		{% include 'pagination.html' %}
+	</div>
+	{% endif %}
+
+	<table class="table1 zebra-table">
+	<thead>
+	<tr>
+		<th>{{ lang('STYLE_NAME') }}</th>
+		<th>{{ lang('VERSION') }}</th>
+		<th>{{ lang('PHPBB_VERSION') }}</th>
+		<th>{{ lang('PATH') }}</th>
+		<th>{{ lang('ACTION') }}</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for style in styles %}
+	<tr>
+		<td style="text-align: {{ S_CONTENT_FLOW_BEGIN }};">{{ style.NAME }}</td>
+		<td style="text-align: center;">{% if style.VERSION %}{{ style.VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
+		<td style="text-align: center;">{% if style.PHPBB_VERSION %}{{ style.PHPBB_VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
+		<td style="text-align: {{ S_CONTENT_FLOW_BEGIN }};">{{ style.PATH }}</td>
+		<td>&nbsp;<a href="{{ style.U_EDIT }}">{{ ICON_EDIT }}</a>&nbsp;</td>
+	</tr>
+	{% else %}
+	<tr class="row3">
+		<td colspan="5">{{ lang('ACP_NO_ITEMS') }}</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+
+	{% if pagination %}
+	<div class="pagination">
+		<span style="float: {{ S_CONTENT_FLOW_BEGIN }};">&raquo; {{ lang(TOTAL_STYLES_LANG, TOTAL_STYLES) }}</span>
+		{% include 'pagination.html' %}
+	</div>
+	{% endif %}
+'
+	{% if S_ACP_STYLES %}
+	<br><br><hr>
+
+	<h1>{{ lang('ACP_ADD_ACP_STYLE') }}</h1>
+	<p>{{ ADD_STYLE_EXPLAIN }}</p>
+
+	{% if HAS_AVAILABLE_STYLES %}
+	<form id="acp_styles_demo_add" method="post" action="{{ U_ACTION }}">
+		<table class="table1 zebra-table">
+		<thead>
+		<tr>
+			<th>{{ lang('STYLE_NAME') }}</th>
+			<th>{{ lang('VERSION') }}</th>
+			<th>{{ lang('PHPBB_VERSION') }}</th>
+			<th>{{ lang('PATH') }}</th>
+			<th>{{ lang('SELECT') }}</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for style in install_styles %}
+		<tr>
+			<td style="text-align: {{ S_CONTENT_FLOW_BEGIN }};">{{ style.NAME }}</td>
+			<td style="text-align: center;">{% if style.VERSION %}{{ style.VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
+			<td style="text-align: center;">{% if style.PHPBB_VERSION %}{{ style.PHPBB_VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
+			<td style="text-align: {{ S_CONTENT_FLOW_BEGIN }};">{{ style.PATH }}</td>
+			<td>&nbsp;<input type="checkbox" name="styles[]" id="styles" value="{{ style.PATH }}">&nbsp;</td>
+		</tr>
+		{% endfor %}
+		</tbody>
+		</table>
+
+		<fieldset class="quick">
+			<input class="button2" type="submit" name="submit" value="{{ lang('ADD') }}" />
+			<p class="small"><a href="#" onclick="marklist('acp_styles_demo_add', 'styles', true); return false;">{{ lang('MARK_ALL') }}</a> &bull; <a href="#" onclick="marklist('acp_styles_demo_add', 'styles', false); return false;">{{ lang('UNMARK_ALL') }}</a></p>
+		</fieldset>
+
+		{{ S_FORM_TOKEN }}
+	</form>
+	{% endif %}
+	{% endif %}
+{% endif %}
+
+{% include 'overall_footer.html' %}
