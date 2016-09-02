@@ -136,7 +136,11 @@ class listener implements EventSubscriberInterface
 
 		if (!$style && !$acp_style && !in_array($this->user->page['page_name'], array("app.{$this->php_ext}/demo/", "app.{$this->php_ext}/demo/acp", "app.{$this->php_ext}/demo/acp/")) && $this->user->data['user_type'] != USER_FOUNDER && !defined('IN_LOGIN'))
 		{
-			redirect($this->helper->route('vinabb_stylesdemo_route', array('mode' => '')));
+			$response = new \Symfony\Component\HttpFoundation\RedirectResponse(
+				$this->helper->route('vinabb_stylesdemo_route', array('mode' => '')),
+				301
+			);
+			$response->send();
 		}
 	}
 
