@@ -65,7 +65,7 @@ class styles_table extends migration
 	{
 		return array(
 			'drop_columns'	=> array(
-				$this->table_prefix . 'products'	=> array(
+				$this->table_prefix . 'styles'	=> array(
 					'style_version',
 					'style_phpbb_version',
 					'style_author',
