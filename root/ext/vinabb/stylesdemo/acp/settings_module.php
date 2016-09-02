@@ -73,6 +73,7 @@ class settings_module
 			$acp_enable = $this->request->variable('acp_enable', false);
 			$json_enable = $this->request->variable('json_enable', false);
 			$json_url = $this->request->variable('json_url', '');
+			$support_url = $this->request->variable('support_url', '');
 			$screenshot_type = $this->request->variable('screenshot_type', constants::SCREENSHOT_TYPE_LOCAL);
 			$screenshot_width = max(constants::MIN_SCREEN_WIDTH, $this->request->variable('screenshot_width', 0));
 			$screenshot_height = isset($resolutions[$screenshot_width]['height']) ? $resolutions[$screenshot_width]['height'] : constants::MIN_SCREEN_HEIGHT;
@@ -214,6 +215,7 @@ class settings_module
 				$this->config->set('vinabb_stylesdemo_acp_enable', $acp_enable);
 				$this->config->set('vinabb_stylesdemo_json_enable', $json_enable);
 				$this->config->set('vinabb_stylesdemo_json_url', $json_url);
+				$this->config->set('vinabb_stylesdemo_support_url', $support_url);
 				$this->config->set('vinabb_stylesdemo_screenshot_type', $screenshot_type);
 				$this->config->set('vinabb_stylesdemo_screenshot_width', $screenshot_width);
 				$this->config->set('vinabb_stylesdemo_screenshot_height', $screenshot_height);
@@ -282,6 +284,7 @@ class settings_module
 			'ACP_ENABLE'		=> isset($acp_enable) ? $acp_enable : $this->config['vinabb_stylesdemo_acp_enable'],
 			'JSON_ENABLE'		=> isset($json_enable) ? $json_enable : $this->config['vinabb_stylesdemo_json_enable'],
 			'JSON_URL'			=> (isset($json_url) && !empty($json_url)) ? $json_url : $this->config['vinabb_stylesdemo_json_url'],
+			'SUPPORT_URL'		=> (isset($support_url) && !empty($support_url)) ? $support_url : $this->config['vinabb_stylesdemo_support_url'],
 
 			'SCREENSHOT_TYPE'			=> isset($screenshot_type) ? $screenshot_type : $this->config['vinabb_stylesdemo_screenshot_type'],
 			'SCREENSHOT_TYPE_LOCAL'		=> constants::SCREENSHOT_TYPE_LOCAL,
