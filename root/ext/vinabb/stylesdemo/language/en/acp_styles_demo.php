@@ -25,10 +25,21 @@ if (empty($lang) || !is_array($lang))
 */
 
 $lang = array_merge($lang, array(
-	'ACP_STYLES_DEMO_EXPLAIN'	=> 'Thanks you for using “Styles Demo”. Check for new versions at <a href="https://github.com/VinaBB/Styles.Demo">GitHub</a>.',
+	'ACP_ADD_ACP_STYLE'				=> 'Add new ACP styles',
+	'ACP_ADD_ACP_STYLE_EXPLAIN'		=> 'This panel just add ACP styles to the demo page, it install nothing to your system since phpBB does not support this.',
+	'ACP_ADD_ACP_STYLE_UNAVAILABLE'	=> 'Please copy new ACP styles to the directory <samp>%s</samp>.',
+	'ACP_MANAGE_STYLE_DATA_EXPLAIN'	=> 'Local data for demo styles if the remote JSON file is not used. Each time you update styles to new versions, you would also like update style version and phpBB version values from updated .cfg files.',
+	'ACP_STYLES_DEMO_EXPLAIN'		=> 'Thanks you for using “Styles Demo”. Check for new versions at <a href="https://github.com/VinaBB/Styles.Demo">GitHub</a>.',
+
+	'CFG_UPDATE_PHPBB_VERSION'			=> 'Update phpBB version from <var>style.cfg</var>',
+	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Only if the style version from this file is newer than which was stored in database.',
+	'CFG_UPDATE_VERSION'				=> 'Update version from <var>style.cfg</var>',
+	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Only if the phpBB version from this file is newer than which was stored in database.',
 
 	'DEFAULT_LANGUAGE'	=> 'Default language',
+	'DESIGNER_URL'		=> 'Designer homepage',
 
+	'EDIT_STYLE_DATA'				=> 'Edit style data',
 	'ERROR_JSON_URL_NOT_RESPONSE'	=> 'The JSON URL does not response.',
 	'ERROR_JSON_URL_NOT_VALID'		=> 'The JSON URL is not valid.',
 	'ERROR_PHANTOM_NOT_EXEC'		=> 'The file “%s” must be executable.',
@@ -42,9 +53,22 @@ $lang = array_merge($lang, array(
 	'GET_PHANTOM_NO_OS'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and get the appropriate download package for your server OS. Extracted it and copy the directory “bin” to the following path: %2$s. You must grant the executable permission to the directory “bin”.',
 	'GET_PHANTOM_WIN'		=> 'Visit the PhantomJS <a href="%1$s">download page</a> and download the file <samp>phantomjs-2.x.x-windows.zip</samp>. Extracted it and copy the directory “bin” to the following path: %2$s. You must grant the permission “Read &amp; execute” to the file “bin/phantomjs.exe”.',
 
+	'LINK_DETAILS'			=> 'Details link',
+	'LINK_DETAILS_EXPLAIN'	=> 'Information page or source link.',
+	'LINK_DOWNLOAD'			=> 'Download link',
+	'LINK_MIRROR'			=> 'Mirror links',
+	'LINK_SUPPORT'			=> 'Support link',
+	'LINK_SUPPORT_DEFAULT'	=> 'Global support link',
+	'LINK_SUPPORT_EXPLAIN'	=> 'Leave this field blank to use the global support link.',
+
 	'NO_EXTRA_LANG_TO_SELECT'	=> 'No extra languages to select.',
+	'NO_STYLE'					=> 'The style does not exist.',
+	'NO_STYLE_ID'				=> 'No styles specified.',
 
 	'OS_NAME_USING'	=> 'Your server is running on %s.',
+
+	'PRICE_LABEL'			=> 'Price with currency',
+	'PRICE_LABEL_EXPLAIN'	=> 'Leave this field blank if free.',
 
 	'RESOLUTION_SVGA'		=> 'SVGA (%1$d x %2$d)',
 	'RESOLUTION_XGA'		=> 'XGA (%1$d x %2$d)',
@@ -68,21 +92,12 @@ $lang = array_merge($lang, array(
 	'SCREENSHOT_TYPE_PHANTOM'			=> 'Use PhantomJS to create',
 	'SELECT_RESOLUTION'					=> 'Select a resolution',
 	'SELECT_LANGUAGE'					=> 'Select a language',
+	'STYLE_DATA_UPDATED' 				=> 'The style data has been updated.',
 	'STYLES_DEMO_ACP_ENABLE'			=> 'Enable demo for ACP styles',
 	'STYLES_DEMO_ACP_ENABLE_EXPLAIN'	=> 'When enabled, guests will be assigned administrator permissions to access the fake ACP. However, no changes saved in this demo mode.',
 	'STYLES_DEMO_AUTO_TOGGLE'			=> 'Close style bar when switch to another style',
 	'STYLES_DEMO_JSON_ENABLE'			=> 'Style data source',
-	'STYLES_DEMO_JSON_ENABLE_NO'		=> 'Local <var>style.cfg</var>',
-	'STYLES_DEMO_JSON_ENABLE_NO_DESC'	=> 'You can define in this file more variables:<br>
-	<code>
-		<br>style_author = {designer name}
-		<br>style_presets = {number of presets}
-		<br>style_responsive = {1 if supported responsive, 0 if not}
-		<br>style_price = {price of the style, 0 if free}
-		<br>style_price_label = {price with currency symbol, empty if free}
-		<br>style_details = {link_to_source_info_page}
-		<br>style_download = {direct_link_to_file if free download or purchase_link if paid}
-	</code>',
+	'STYLES_DEMO_JSON_ENABLE_NO'		=> 'Database',
 	'STYLES_DEMO_JSON_ENABLE_YES'		=> 'Remote JSON file',
 	'STYLES_DEMO_JSON_URL'				=> 'JSON URL',
 	'STYLES_DEMO_JSON_URL_EXPLAIN'		=> 'Enter the URL of JSON data file.',
@@ -94,4 +109,6 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_TABLET_WIDTH'			=> 'Tablet mode width',
 	'STYLES_DEMO_URL'					=> 'Styles Demo',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'The style demo settings have been updated.',
+
+	'UPDATE_TOOLS'	=> 'Update tools',
 ));
