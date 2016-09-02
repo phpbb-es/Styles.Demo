@@ -300,6 +300,13 @@ $styleIframe.load(
 $(document).ready(
 	function()
 	{
+		// Do not keep ?sid=... in the URL address
+		if (top.location.href.indexOf('?sid=') != -1 && history.pushState)
+		{
+			var newURL = top.location.protocol + "//" + top.location.host + top.location.pathname;
+			window.history.pushState({path: newURL}, '', newURL);
+		}
+
 		$current_style = location.hash.replace('#', '');
 
 		if (!($current_style in $styles) || $current_style === '')

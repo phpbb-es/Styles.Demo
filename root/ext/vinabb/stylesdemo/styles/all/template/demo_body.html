@@ -7,9 +7,9 @@
 
 	<title>{{ lang('STYLES_DEMO') }}</title>
 
-	<link href="{{ EXT_ASSETS_PATH }}/css/bootstrap.min.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet">
-	<link href="{{ EXT_ASSETS_PATH }}/css/demo.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet">
-	<link href="{{ EXT_ASSETS_PATH }}/css/font-awesome.min.css?assets_version={{ T_ASSETS_VERSION }}" rel="stylesheet">
+	<link href="{{ EXT_ASSETS_PATH }}/css/bootstrap.min.css?v={{ T_ASSETS_VERSION }}" rel="stylesheet">
+	<link href="{{ EXT_ASSETS_PATH }}/css/demo.css?v={{ T_ASSETS_VERSION }}" rel="stylesheet">
+	<link href="{{ EXT_ASSETS_PATH }}/css/font-awesome.min.css?v={{ T_ASSETS_VERSION }}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
 
 	<!-- Do not iframe our iframe! -->
@@ -103,6 +103,7 @@
 	<!-- List all the styles here -->
 	<script type="text/javascript">
 		var $styles,
+			$sid = '{{ SESSION_ID }}',
 			$prefixUrl = '{{ PREFIX_URL }}',
 			$autoToggle = {{ AUTO_TOGGLE }},
 			$tabletWidth = '{{ TABLET_WIDTH }}',
@@ -140,12 +141,12 @@
 		};
 	</script>
 
-	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/jquery.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
-	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/detectmobilebrowser.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
-	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/jquery.mousewheel.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
-	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/bootstrap.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
-	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/jquery.caroufredsel.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
-	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/jquery.touchswipe.min.js?assets_version={{ T_ASSETS_VERSION }}"></script>
-	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/demo.js?assets_version={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/jquery.min.js?v={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/detectmobilebrowser.min.js?v={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/jquery.mousewheel.min.js?v={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/bootstrap.min.js?v={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/jquery.caroufredsel.min.js?v={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/jquery.touchswipe.min.js?v={{ T_ASSETS_VERSION }}"></script>
+	<script type="text/javascript" src="{{ EXT_ASSETS_PATH }}/js/demo.js?v={{ T_ASSETS_VERSION }}"></script>
 </body>
 </html>
