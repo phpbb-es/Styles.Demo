@@ -307,11 +307,18 @@ $(document).ready(
 			window.history.pushState({path: newURL}, '', newURL);
 		}
 
+		// Convert <url>?style=<style_varname> into <url>#<style_varname> in the URL address
+		if (top.location.href.indexOf('?style=') != -1 && history.pushState)
+		{
+			var newURL = top.location.protocol + "//" + top.location.host + top.location.pathname + top.location.search.replace('?style=', '#');
+			window.history.pushState({path: newURL}, '', newURL);
+		}
+
 		$current_style = location.hash.replace('#', '');
 
 		if (!($current_style in $styles) || $current_style === '')
 		{
-			$current_style = location.search.replace('?select=', '');
+			$current_style = location.search.replace('?style=', '');
 
 			if (!($current_style in $styles) || $current_style === '')
 			{
