@@ -17,6 +17,7 @@ class styles_table extends migration
 		return array(
 			'add_columns'	=> array(
 				$this->table_prefix . 'styles'	=> array(
+					'style_acp'				=> array('BOOL', 0),
 					'style_version'			=> array('VCHAR:20', ''),
 					'style_phpbb_version'	=> array('VCHAR:20', ''),
 					'style_author'			=> array('VCHAR_UNI', ''),
