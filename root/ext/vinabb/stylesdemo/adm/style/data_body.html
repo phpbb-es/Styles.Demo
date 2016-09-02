@@ -1,0 +1,68 @@
+{% include 'overall_header.html' %}
+
+{% if S_EDIT %}
+	<a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
+
+	<h1>{{ lang('ACP_MANAGE_STYLE_DATA') }}</h1>
+	<p>{{ lang('ACP_MANAGE_STYLE_DATA_EXPLAIN') }}</p>
+
+	<form id="acp_styles_demo_data_edit" method="post" action="{{ U_ACTION }}">
+
+	<fieldset>
+		<legend>{{ lang('EDIT_STYLE_DATA') }}</legend>
+		<dl>
+			<dt><label for="word">{L_WORD}</label></dt>
+			<dd><input id="word" type="text" name="word" value="{WORD}" maxlength="255" /></dd>
+		</dl>
+		{S_HIDDEN_FIELDS}
+
+	<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="save" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{{ S_FORM_TOKEN }}
+	</p>
+	</fieldset>
+	</form>
+
+{% else %}
+
+	<h1>{{ lang('ACP_MANAGE_STYLE_DATA') }}</h1>
+	<p>{{ lang('ACP_MANAGE_STYLE_DATA_EXPLAIN') }}</p>
+
+	<form id="acp_styles_demo_data_list" method="post" action="{{ U_ACTION }}">
+
+	<fieldset class="tabulated">
+	<legend>{L_ACP_WORDS}</legend>
+	<p class="quick">
+		{{ S_HIDDEN_FIELDS }}
+		<input class="button2" name="add" type="submit" value="{{ lang('ADD_STYLE') }}" />
+	</p>
+
+	<table class="table1 zebra-table">
+	<thead>
+	<tr>
+		<th>{{ lang('STYLE_NAME') }}</th>
+		<th>{{ lang('VERSION') }}</th>
+		<th>{{ lang('ACTION') }}</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for style in loops.styles %}
+	<tr>
+		<td style="text-align: center;">{{ style.NAME }}</td>
+		<td style="text-align: center;">{{ style.VERSION }}</td>
+		<td>&nbsp;<a href="{{ style.U_EDIT }}">{{ ICON_EDIT }}</a>&nbsp;</td>
+	</tr>
+	{% else %}
+	<tr class="row3">
+		<td colspan="3">{{ lang('ACP_NO_ITEMS') }}</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+	{{ S_FORM_TOKEN }}
+	</fieldset>
+	</form>
+{% endif %}
+
+{% include 'overall_footer.html' %}
