@@ -85,14 +85,14 @@
 		<form id="update_version_form" method="post" action="{{ U_ACTION }}" data-ajax="true">
 			<dl>
 				<dt><label for="update_version">{{ lang('CFG_UPDATE_VERSION') }}</label><br><span>{{ lang('CFG_UPDATE_VERSION_EXPLAIN') }}</span></dt>
-				<dd><input type="hidden" name="action" value="version"><input class="button2" type="submit" name="update_version" id="update_version" value="{{ lang('RUN') }}"></dd>
+				<dd><input type="hidden" name="action" value="update_version"><input class="button2" type="submit" name="update_version" id="update_version" value="{{ lang('RUN') }}"></dd>
 			</dl>
 		</form>
 
 		<form id="update_phpbb_version_form" method="post" action="{{ U_ACTION }}" data-ajax="true">
 			<dl>
 				<dt><label for="update_phpbb_version">{{ lang('CFG_UPDATE_PHPBB_VERSION') }}</label><br><span>{{ lang('CFG_UPDATE_PHPBB_VERSION_EXPLAIN') }}</span></dt>
-				<dd><input type="hidden" name="action" value="phpbb_version"><input class="button2" type="submit" name="update_phpbb_version" id="update_phpbb_version" value="{{ lang('RUN') }}"></dd>
+				<dd><input type="hidden" name="action" value="update_phpbb_version"><input class="button2" type="submit" name="update_phpbb_version" id="update_phpbb_version" value="{{ lang('RUN') }}"></dd>
 			</dl>
 		</form>
 	</fieldset>
@@ -121,7 +121,7 @@
 		<td style="text-align: center;">{% if style.VERSION %}{{ style.VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
 		<td style="text-align: center;">{% if style.PHPBB_VERSION %}{{ style.PHPBB_VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
 		<td style="text-align: {{ S_CONTENT_FLOW_BEGIN }};">{{ style.PATH }}</td>
-		<td>&nbsp;<a href="{{ style.U_EDIT }}">{{ ICON_EDIT }}</a>&nbsp;</td>
+		<td>&nbsp;{% if style.ACTIVE %}{% if style.U_DISABLE %}<a href="{{ style.U_DISABLE }}">{{ ICON_DISABLE }}</a>{% else %}{{ ICON_DISABLE }}{% endif %}{% else %}<a href="{{ style.U_ENABLE }}">{{ ICON_ENABLE }}</a>{% endif %} <a href="{{ style.U_EDIT }}">{{ ICON_EDIT }}</a>&nbsp;</td>
 	</tr>
 	{% else %}
 	<tr class="row3">

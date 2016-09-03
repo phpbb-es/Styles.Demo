@@ -17,8 +17,9 @@ class data_module
 
 	public function main($id, $mode)
 	{
-		global $phpbb_container, $phpEx;
+		global $phpbb_container, $phpbb_root_path, $phpEx;
 
+		$this->auth = $phpbb_container->get('auth');
 		$this->config = $phpbb_container->get('config');
 		$this->db = $phpbb_container->get('dbal.conn');
 		$this->log = $phpbb_container->get('log');
@@ -146,6 +147,11 @@ class data_module
 					trigger_error($this->user->lang['NO_STYLE_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
+				if ($style_id == $this->config['default_style'])
+				{
+					trigger_error($this->user->lang['ERROR_DISABLE_DEFAULT_STYLE'] . adm_back_link($this->u_action), E_USER_WARNING);
+				}
+
 				$sql = 'SELECT *
 					FROM ' . $this->style_table . "
 					WHERE style_id = $style_id";
@@ -163,6 +169,62 @@ class data_module
 					WHERE style_id = $style_id";
 				$this->db->sql_query($sql);
 			break;
+
+			case 'update_version':
+			case 'update_phpbb_version':
+				$update_count = 0;
+				$confirm_lang = ($action == 'update_version') ? 'CFG_UPDATE_VERSION_CONFIRM' : 'CFG_UPDATE_PHPBB_VERSION_CONFIRM';
+				$success_lang = ($action == 'update_version') ? 'CFG_UPDATE_VERSION_SUCCESS' : 'CFG_UPDATE_PHPBB_VERSION_SUCCESS';
+
+				if (!confirm_box(true))
+				{
+					confirm_box(false, $this->lausernguage->lang($confirm_lang), build_hidden_fields(array(
+						'i'			=> $id,
+						'mode'		=> $mode,
+						'action'	=> $action,
+					)));
+				}
+				else
+				{
+					if (!$this->auth->acl_get('a_board'))
+					{
+						trigger_error($this->user->lang['NO_AUTH_OPERATION'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}
+
+					$cfg_field = ($action == 'update_version') ? 'style_version' : 'phpbb_version';
+					$sql_field = ($action == 'update_version') ? 'style_version' : 'style_phpbb_version';
+
+					$sql = "SELECT style_id, style_path, $sql_field
+						FROM " . $this->style_table;
+					$result = $this->db->sql_query($sql);
+
+					while ($row = $this->db->sql_fetchrow($result))
+					{
+						// Get data from style.cfg
+						$cfg = parse_cfg_file("{$phpbb_root_path}styles/{$row['style_path']}/style.cfg");
+
+						if (isset($cfg[$cfg_field]) && version_compare($cfg[$cfg_field], $row[$sql_field], '>'))
+						{
+							$sql = 'UPDATE ' . $this->style_table . "
+								SET $sql_field = '" . $cfg[$cfg_field] . "'
+								WHERE style_id = " . $row['style_id'];
+							$this->db->sql_query($sql);
+
+							$update_count++;
+						}
+					}
+					$this->db->sql_freeresult($result);
+
+					if ($this->request->is_ajax())
+					{
+						trigger_error($this->user->lang($success_lang, $update_count));
+					}
+				}
+
+				$this->template->assign_vars(array(
+					'U_ACTION'	=> $this->u_action . "&action=$action",
+				));
+			break;
 		}
 
 		// Manage styles
@@ -174,23 +236,26 @@ class data_module
 		foreach ($styles as $row)
 		{
 			$this->template->assign_block_vars('styles', array(
-					'NAME'			=> $row['style_name'],
-					'PATH'			=> $row['style_path'],
-					'VERSION'		=> $row['style_version'],
-					'PHPBB_VERSION'	=> $row['style_phpbb_version'],
-					'AUTHOR'		=> $row['style_author'],
-					'AUTHOR_URL'	=> $row['style_author_url'],
-					'PRESETS'		=> $row['style_presets'],
-					'RESPONSIVE'	=> ($row['style_responsive']) ? true : false,
-					'PRICE'			=> $row['style_price'],
-					'PRICE_LABEL'	=> $row['style_price_label'],
-					'DOWNLOAD'		=> $row['style_download'],
-					'MIRROR'		=> $row['style_mirror'],
-					'DETAILS'		=> $row['style_details'],
-					'SUPPORT'		=> $row['style_support'],
+				'NAME'			=> $row['style_name'],
+				'ACTIVE'		=> ($row['style_active']) ? true : false,
+				'PATH'			=> $row['style_path'],
+				'VERSION'		=> $row['style_version'],
+				'PHPBB_VERSION'	=> $row['style_phpbb_version'],
+				'AUTHOR'		=> $row['style_author'],
+				'AUTHOR_URL'	=> $row['style_author_url'],
+				'PRESETS'		=> $row['style_presets'],
+				'RESPONSIVE'	=> ($row['style_responsive']) ? true : false,
+				'PRICE'			=> $row['style_price'],
+				'PRICE_LABEL'	=> $row['style_price_label'],
+				'DOWNLOAD'		=> $row['style_download'],
+				'MIRROR'		=> $row['style_mirror'],
+				'DETAILS'		=> $row['style_details'],
+				'SUPPORT'		=> $row['style_support'],
 
-					'U_EDIT'	=> $this->u_action . '&action=edit&id=' . $row['style_id'])
-			);
+				'U_ENABLE'	=> $this->u_action . '&action=enable&id=' . $row['style_id'],
+				'U_DISABLE'	=> ($row['style_id'] == $this->config['default_style']) ? '' : $this->u_action . '&action=disable&id=' . $row['style_id'],
+				'U_EDIT'	=> $this->u_action . '&action=edit&id=' . $row['style_id'],
+			));
 		}
 
 		$this->pagination->generate_template_pagination($this->u_action, 'pagination', 'start', $style_count, $per_page, $start);
