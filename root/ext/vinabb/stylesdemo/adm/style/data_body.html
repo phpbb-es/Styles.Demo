@@ -54,8 +54,17 @@
 			<dd><input type="url" name="style_download" id="style_download" value="{{ DOWNLOAD }}" size="40" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_mirror">{{ lang('LINK_MIRROR') }}{{ lang('COLON') }}</label></dt>
-			<dd><input type="text" name="style_mirror" id="style_mirror" value="{{ MIRROR }}" size="40" maxlength="255"></dd>
+			<dt><label>{{ lang('LINK_MIRROR') }}{{ lang('COLON') }}</label></dt>
+			<dd>
+				{% for mirror in mirrors %}
+					{% if loop.first %}<span id="mirror_tpl">{% endif %}
+					<input type="text" name="style_mirror_names[]" id="style_mirror_name" value="{{ mirror.NAME }}" placeholder="{{ lang('LINK_MIRROR_NAME') ~ lang('COLON') }}" size="10" maxlength="255">
+					<input type="url" name="style_mirror_urls[]" id="style_mirror_url" value="{{ mirror.URL }}"  placeholder="{{ lang('LINK_MIRROR_URL') ~ lang('COLON') }}" size="28" maxlength="255">
+					<br><hr>
+					{% if loop.first %}</span>{% endif %}
+				{% endfor %}
+			</dd>
+			<dd><input type="button" class="button1" id="mirror_add_btn" value="{{ lang('LINK_MIRROR_ADD') }}"></dd>
 		</dl>
 		<dl>
 			<dt><label for="style_details">{{ lang('LINK_DETAILS') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_DETAILS_EXPLAIN') }}</span></dt>
@@ -121,7 +130,7 @@
 		<td style="text-align: center;">{% if style.VERSION %}{{ style.VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
 		<td style="text-align: center;">{% if style.PHPBB_VERSION %}{{ style.PHPBB_VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
 		<td style="text-align: {{ S_CONTENT_FLOW_BEGIN }};">{{ style.PATH }}</td>
-		<td>&nbsp;{% if style.ACTIVE %}{% if style.U_DISABLE %}<a href="{{ style.U_DISABLE }}">{{ ICON_DISABLE }}</a>{% else %}{{ ICON_DISABLE }}{% endif %}{% else %}<a href="{{ style.U_ENABLE }}">{{ ICON_ENABLE }}</a>{% endif %} <a href="{{ style.U_EDIT }}">{{ ICON_EDIT }}</a> {% if style.U_UNINSTALL %}<a href="{{ style.U_UNINSTALL }}">{{ ICON_DELETE }}</a>{% else %}{{ ICON_DELETE_DISABLED }}{% endif %}&nbsp;</td>
+		<td>&nbsp;{% if style.ACTIVE %}{% if style.U_DISABLE %}<a href="{{ style.U_DISABLE }}">{{ ICON_DISABLE }}</a>{% else %}{{ ICON_DISABLE }}{% endif %}{% else %}<a href="{{ style.U_ENABLE }}">{{ ICON_ENABLE }}</a>{% endif %} <a href="{{ style.U_EDIT }}">{{ ICON_EDIT }}</a> {% if style.U_DELETE %}<a href="{{ style.U_DELETE }}"{% if S_ACP_STYLES %} data-ajax="row_delete"{% endif %}>{{ ICON_DELETE }}</a>{% else %}{{ ICON_DELETE_DISABLED }}{% endif %}&nbsp;</td>
 	</tr>
 	{% else %}
 	<tr class="row3">
@@ -137,7 +146,7 @@
 		{% include 'pagination.html' %}
 	</div>
 	{% endif %}
-'
+
 	{% if S_ACP_STYLES %}
 	<br><br><hr>
 
@@ -163,15 +172,16 @@
 			<td style="text-align: center;">{% if style.VERSION %}{{ style.VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
 			<td style="text-align: center;">{% if style.PHPBB_VERSION %}{{ style.PHPBB_VERSION }}{% else %}{{ lang('ELLIPSIS') }}{% endif %}</td>
 			<td style="text-align: {{ S_CONTENT_FLOW_BEGIN }};">{{ style.PATH }}</td>
-			<td>&nbsp;<input type="checkbox" name="styles[]" id="styles" value="{{ style.PATH }}">&nbsp;</td>
+			<td>&nbsp;<input type="checkbox" name="add_styles[]" id="styles" value="{{ style.PATH }}">&nbsp;</td>
 		</tr>
 		{% endfor %}
 		</tbody>
 		</table>
 
 		<fieldset class="quick">
-			<input class="button2" type="submit" name="submit" value="{{ lang('ADD') }}" />
-			<p class="small"><a href="#" onclick="marklist('acp_styles_demo_add', 'styles', true); return false;">{{ lang('MARK_ALL') }}</a> &bull; <a href="#" onclick="marklist('acp_styles_demo_add', 'styles', false); return false;">{{ lang('UNMARK_ALL') }}</a></p>
+			<input type="hidden" name="action" value="add">
+			<input class="button2" type="submit" name="submit" value="{{ lang('ADD') }}">
+			<p class="small"><a href="#" onclick="marklist('acp_styles_demo_add', 'add_styles', true); return false;">{{ lang('MARK_ALL') }}</a> &bull; <a href="#" onclick="marklist('acp_styles_demo_add', 'add_styles', false); return false;">{{ lang('UNMARK_ALL') }}</a></p>
 		</fieldset>
 
 		{{ S_FORM_TOKEN }}
@@ -181,3 +191,39 @@
 {% endif %}
 
 {% include 'overall_footer.html' %}
+
+<script>
+	// Avoid conflicts with other libraries
+	(function($)
+	{
+		'use strict';
+
+		var authorTpl,
+			$elem = {
+				author: $('#mirror_tpl'),
+				addAuthor: $('#mirror_add_btn')
+			};
+
+		$(function()
+		{
+			authorTpl = $elem.author.first().clone();
+		});
+
+		$elem.addAuthor.on('click', function()
+		{
+			var count = $elem.author.length,
+				$author = authorTpl.clone();
+
+			$author.find('input').each(function()
+			{
+				var $this = $(this);
+				$this.attr('value', '');
+				$this.attr('id', $this.attr('id') + count);
+			});
+
+			$(this).before($author);
+		});
+	})
+	// Avoid conflicts with other libraries
+	(jQuery);
+</script>
