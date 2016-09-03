@@ -32,14 +32,27 @@ $lang = array_merge($lang, array(
 	'ACP_STYLES_DEMO_EXPLAIN'		=> 'Thanks you for using “Styles Demo”. Check for new versions at <a href="https://github.com/VinaBB/Styles.Demo">GitHub</a>.',
 
 	'CFG_UPDATE_PHPBB_VERSION'			=> 'Update phpBB version from <var>style.cfg</var>',
+	'CFG_UPDATE_PHPBB_VERSION_CONFIRM'	=> 'Are you sure you want to update phpBB version from .cfg files?',
 	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Only if the style version from this file is newer than which was stored in database.',
+	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> array(
+		0	=> 'No newer phpBB versions from .cfg files.',
+		1	=> '%d style has been updated.',
+		2	=> '%d styles have been updated.',
+	),
 	'CFG_UPDATE_VERSION'				=> 'Update version from <var>style.cfg</var>',
+	'CFG_UPDATE_VERSION_CONFIRM'		=> 'Are you sure you want to update style version from .cfg files?',
 	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Only if the phpBB version from this file is newer than which was stored in database.',
+	'CFG_UPDATE_VERSION_SUCCESS'		=> array(
+		0	=> 'No newer style versions from .cfg files.',
+		1	=> '%d style has been updated.',
+		2	=> '%d styles have been updated.',
+	),
 
 	'DEFAULT_LANGUAGE'	=> 'Default language',
 	'DESIGNER_URL'		=> 'Designer homepage',
 
 	'EDIT_STYLE_DATA'				=> 'Edit style data',
+	'ERROR_DISABLE_DEFAULT_STYLE'	=> 'You could not disable the default style.',
 	'ERROR_JSON_URL_NOT_RESPONSE'	=> 'The JSON URL does not response.',
 	'ERROR_JSON_URL_NOT_VALID'		=> 'The JSON URL is not valid.',
 	'ERROR_PHANTOM_NOT_EXEC'		=> 'The file “%s” must be executable.',
