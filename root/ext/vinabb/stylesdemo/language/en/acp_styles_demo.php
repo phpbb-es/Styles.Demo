@@ -26,22 +26,22 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'ACP_ADD_ACP_STYLE'				=> 'Add new ACP styles',
-	'ACP_ADD_ACP_STYLE_EXPLAIN'		=> 'This panel just add ACP styles to the demo page, it install nothing to your system since phpBB does not support this.',
+	'ACP_ADD_ACP_STYLE_EXPLAIN'		=> 'This panel just add ACP styles to the demo page, it installs nothing to your system since phpBB does not support this.',
 	'ACP_ADD_ACP_STYLE_UNAVAILABLE'	=> 'Please copy new ACP styles to the directory <samp>%s</samp>.',
 	'ACP_MANAGE_STYLE_DATA_EXPLAIN'	=> 'Local data for demo styles if the remote JSON file is not used. Each time you update styles to new versions, you would also like update style version and phpBB version values from updated .cfg files.',
-	'ACP_STYLES_DEMO_EXPLAIN'		=> 'Thanks you for using “Styles Demo”. Check for new versions at <a href="https://github.com/VinaBB/Styles.Demo">GitHub</a>.',
+	'ACP_STYLES_DEMO_EXPLAIN'		=> 'Thanks you for using “Styles Demo”. Check for new versions at <a href="https://github.com/VinaBB/Styles.Demo/releases">GitHub</a>.',
 
 	'CFG_UPDATE_PHPBB_VERSION'			=> 'Update phpBB version from <var>style.cfg</var>',
 	'CFG_UPDATE_PHPBB_VERSION_CONFIRM'	=> 'Are you sure you want to update phpBB version from .cfg files?',
-	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Only if the style version from this file is newer than which was stored in database.',
+	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Only if the phpBB version from this file is newer than which was stored in database.',
 	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> array(
 		0	=> 'No newer phpBB versions from .cfg files.',
 		1	=> '%d style has been updated.',
 		2	=> '%d styles have been updated.',
 	),
-	'CFG_UPDATE_VERSION'				=> 'Update version from <var>style.cfg</var>',
+	'CFG_UPDATE_VERSION'				=> 'Update style version from <var>style.cfg</var>',
 	'CFG_UPDATE_VERSION_CONFIRM'		=> 'Are you sure you want to update style version from .cfg files?',
-	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Only if the phpBB version from this file is newer than which was stored in database.',
+	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Only if the style version from this file is newer than which was stored in database.',
 	'CFG_UPDATE_VERSION_SUCCESS'		=> array(
 		0	=> 'No newer style versions from .cfg files.',
 		1	=> '%d style has been updated.',

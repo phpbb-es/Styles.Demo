@@ -29,19 +29,19 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_ACP_STYLE_EXPLAIN'		=> 'Công cụ này chỉ thêm giao diện quản trị vào trang xem thử, nó không cài đặt bất cứ thứ gì vào hệ thống vì phpBB không hỗ trợ chức năng này.',
 	'ACP_ADD_ACP_STYLE_UNAVAILABLE'	=> 'Vui lòng chép các giao diện quản trị mới vào thư mục <samp>%s</samp>.',
 	'ACP_MANAGE_STYLE_DATA_EXPLAIN'	=> 'Nguồn dữ liệu cho trang xem thử giao diện nếu không dùng tập tin JSON. Mỗi lần bạn cập nhật phiên bản mới cho các giao diện, bạn cũng cần phải cập nhật lại giá trị phiên bản giao diện và phiên bản phpBB từ những tập tin .cfg mới.',
-	'ACP_STYLES_DEMO_EXPLAIN'		=> 'Cảm ơn bạn đã sử dụng “Styles Demo”. Kiểm tra các phiên bản mới tại <a href="https://github.com/VinaBB/Styles.Demo">GitHub</a>.',
+	'ACP_STYLES_DEMO_EXPLAIN'		=> 'Cảm ơn bạn đã sử dụng “Styles Demo”. Kiểm tra các phiên bản mới tại <a href="https://github.com/VinaBB/Styles.Demo/releases">GitHub</a>.',
 
 	'CFG_UPDATE_PHPBB_VERSION'			=> 'Cập nhật phiên bản phpBB từ <var>style.cfg</var>',
 	'CFG_UPDATE_PHPBB_VERSION_CONFIRM'	=> 'Bạn chắc chắn muốn cập nhật phiên bản phpBB từ tập tin .cfg?',
-	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Chỉ cập nhật nếu phiên bản giao diện từ tập tin này mới hơn phiên bản đã lưu trong cơ sở dữ liệu.',
+	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Chỉ cập nhật nếu phiên bản phpBB từ tập tin này mới hơn phiên bản đã lưu trong cơ sở dữ liệu.',
 	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> array(
 		0	=> 'Không có phiên bản phpBB nào mới hơn từ tập tin .cfg.',
 		1	=> 'Đã cập nhật %d giao diện.',
 		2	=> 'Đã cập nhật %d giao diện.',
 	),
-	'CFG_UPDATE_VERSION'				=> 'Cập nhật phiên bản từ <var>style.cfg</var>',
+	'CFG_UPDATE_VERSION'				=> 'Cập nhật phiên bản giao diện từ <var>style.cfg</var>',
 	'CFG_UPDATE_VERSION_CONFIRM'		=> 'Bạn chắc chắn muốn cập nhật phiên bản giao diện từ tập tin .cfg?',
-	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Chỉ cập nhật nếu phiên bản phpBB từ tập tin này mới hơn phiên bản đã lưu trong cơ sở dữ liệu.',
+	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Chỉ cập nhật nếu phiên bản giao diện từ tập tin này mới hơn phiên bản đã lưu trong cơ sở dữ liệu.',
 	'CFG_UPDATE_VERSION_SUCCESS'		=> array(
 		0	=> 'Không có phiên bản giao diện nào mới hơn từ tập tin .cfg.',
 		1	=> 'Đã cập nhật %d giao diện.',

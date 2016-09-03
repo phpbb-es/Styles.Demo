@@ -110,10 +110,10 @@ class data_module
 							$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACP_STYLE_ADD', false, array(implode(', ', array_keys($style_names))));
 						}
 
+						$duplicate_message = '';
+
 						if (sizeof($duplicate_styles))
 						{
-							$duplicate_message = '';
-
 							foreach ($duplicate_styles as $path	=> $name)
 							{
 								$duplicate_message .= (empty($duplicate_message) ? '' : '<br>') . $this->language->lang('ERROR_DUPLICATE_STYLE_PATH', $this->ext_root_path . 'app/styles/' . $path) . ' | ' . $this->language->lang('ERROR_DUPLICATE_STYLE_NAME', $name);
@@ -278,7 +278,7 @@ class data_module
 
 					if ($style_id)
 					{
-						$this->db->sql_query('UPDATE ' . STYLES_TABLE . ' SET ' . $this->db->sql_build_array('UPDATE', $sql_ary) . ' WHERE style_id = ' . $style_id);
+						$this->db->sql_query('UPDATE ' . $this->style_table . ' SET ' . $this->db->sql_build_array('UPDATE', $sql_ary) . ' WHERE style_id = ' . $style_id);
 					}
 
 					$log_action = ($mode == 'acp') ? 'LOG_ACP_STYLE_DATA_EDIT' : 'LOG_STYLE_DATA_EDIT';
@@ -394,7 +394,7 @@ class data_module
 					while ($row = $this->db->sql_fetchrow($result))
 					{
 						// Get data from style.cfg
-						$cfg = parse_cfg_file("{$phpbb_root_path}styles/{$row['style_path']}/style.cfg");
+						$cfg = ($mode == 'acp') ? parse_cfg_file("{$this->ext_root_path}app/styles/{$row['style_path']}/style.cfg") : parse_cfg_file("{$phpbb_root_path}styles/{$row['style_path']}/style.cfg");
 
 						if (isset($cfg[$cfg_field]) && version_compare($cfg[$cfg_field], $row[$sql_field], '>'))
 						{
