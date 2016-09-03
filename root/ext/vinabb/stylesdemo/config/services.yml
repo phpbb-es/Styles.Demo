@@ -1,3 +1,6 @@
+imports:
+    - { resource: tables.yml }
+
 services:
     vinabb.stylesdemo.decorated:
         class: vinabb\stylesdemo\decorated\user
@@ -19,6 +22,7 @@ services:
             - '@ext.manager'
             - '@path_helper'
             - '@file_downloader'
+            - '%vinabb.stylesdemo.tables.acp_styles%'
             - '%core.root_path%'
             - '%core.adm_relative_path%'
             - '%core.php_ext%'
