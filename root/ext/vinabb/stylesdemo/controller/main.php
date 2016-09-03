@@ -266,13 +266,14 @@ class main
 			// Remote data
 			if (isset($json[$json_tree][$style_varname]))
 			{
-				$style_name = $json[$json_tree][$style_varname]['name'];
-				$phpbb_version = $json[$json_tree][$style_varname]['phpbb_version'];
-				$style_price = $json[$json_tree][$style_varname]['price'];
-				$style_price_label = $json[$json_tree][$style_varname]['price_label'];
-				$style_download = $json[$json_tree][$style_varname]['download'];
-				$style_details = $json[$json_tree][$style_varname]['details'];
-				$style_support = $json[$json_tree][$style_varname]['support'];
+				$style_name = isset($json[$json_tree][$style_varname]['name']) ? $json[$json_tree][$style_varname]['name'] : $row['style_name'];
+				$phpbb_version = isset($json[$json_tree][$style_varname]['phpbb_version']) ? $json[$json_tree][$style_varname]['phpbb_version'] : '';
+				$style_price = isset($json[$json_tree][$style_varname]['price']) ? $json[$json_tree][$style_varname]['price'] : 0;
+				$style_price_label = isset($json[$json_tree][$style_varname]['price_label']) ? $json[$json_tree][$style_varname]['price_label'] : '';
+				$style_download = isset($json[$json_tree][$style_varname]['download']) ? $json[$json_tree][$style_varname]['download'] : '';
+				$style_mirror = (isset($json[$json_tree][$style_varname]['mirror']) && is_array($json[$json_tree][$style_varname]['mirror'])) ? $json[$json_tree][$style_varname]['mirror'] : '';
+				$style_details = isset($json[$json_tree][$style_varname]['details']) ? $json[$json_tree][$style_varname]['details'] : '';
+				$style_support = isset($json[$json_tree][$style_varname]['support']) ? $json[$json_tree][$style_varname]['support'] : '';
 
 				// Build style info
 				$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . ((isset($json['frontend'][$style_varname]['version']) && !empty($json['frontend'][$style_varname]['version'])) ? $json['frontend'][$style_varname]['version'] : $this->user->lang('ELLIPSIS'));
@@ -289,6 +290,7 @@ class main
 				$style_price = $row['style_price'];
 				$style_price_label = $row['style_price_label'];
 				$style_download = $row['style_download'];
+				$style_mirror = !empty($row['style_mirror']) ? unserialize($row['style_mirror']) : '';
 				$style_details = $row['style_details'];
 				$style_support = $row['style_support'];
 
@@ -303,6 +305,7 @@ class main
 			// Preview iframe URL
 			$preview_url = ($mode == 'acp') ? append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $row['style_path'], false, $this->user->session_id) : append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'style=' . $row['style_id']);
 
+			// Styles
 			$this->template->assign_block_vars('styles', array(
 				'VARNAME'		=> $style_varname,
 				'NAME'			=> $style_name,
@@ -317,9 +320,24 @@ class main
 				'INFO'			=> $style_info,
 				'URL'			=> $preview_url,
 			));
+
+			// Mirrors of each style
+			if (is_array($style_mirror) && sizeof($style_mirror))
+			{
+				$i = 1;
+				foreach ($style_mirror as $mirror_name => $mirror_url)
+				{
+					$this->template->assign_block_vars('styles.mirrors', array(
+						'NAME'	=> !empty($mirror_name) ? $mirror_name : $this->user->lang('MIRROR_LABEL', $i),
+						'URL'	=> $mirror_url,
+					));
+
+					$i++;
+				}
+			}
 		}
 		$this->db->sql_freeresult($result);
-		
+
 		// Get lang info
 		$lang_title = $default_lang_name = $switch_lang_name = '';
 
