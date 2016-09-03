@@ -334,7 +334,7 @@ class main
 				'download'		=> $style_download,
 				'mirror'		=> sizeof($style_mirror_data) ? $style_mirror_data : null,
 				'details'		=> $style_details,
-				'support'		=> $style_support,
+				'support'		=> !empty($style_support) ? $style_support : $this->config['vinabb_stylesdemo_support_link'],
 				'img'			=> $style_img,
 				'info'			=> $style_info,
 				'url'			=> $preview_url,
