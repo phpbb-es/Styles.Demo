@@ -32,14 +32,27 @@ $lang = array_merge($lang, array(
 	'ACP_STYLES_DEMO_EXPLAIN'		=> 'Cảm ơn bạn đã sử dụng “Styles Demo”. Kiểm tra các phiên bản mới tại <a href="https://github.com/VinaBB/Styles.Demo">GitHub</a>.',
 
 	'CFG_UPDATE_PHPBB_VERSION'			=> 'Cập nhật phiên bản phpBB từ <var>style.cfg</var>',
+	'CFG_UPDATE_PHPBB_VERSION_CONFIRM'	=> 'Bạn chắc chắn muốn cập nhật phiên bản phpBB từ tập tin .cfg?',
 	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Chỉ cập nhật nếu phiên bản giao diện từ tập tin này mới hơn phiên bản đã lưu trong cơ sở dữ liệu.',
+	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> array(
+		0	=> 'Không có phiên bản phpBB nào mới hơn từ tập tin .cfg.',
+		1	=> 'Đã cập nhật %d giao diện.',
+		2	=> 'Đã cập nhật %d giao diện.',
+	),
 	'CFG_UPDATE_VERSION'				=> 'Cập nhật phiên bản từ <var>style.cfg</var>',
+	'CFG_UPDATE_VERSION_CONFIRM'		=> 'Bạn chắc chắn muốn cập nhật phiên bản giao diện từ tập tin .cfg?',
 	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Chỉ cập nhật nếu phiên bản phpBB từ tập tin này mới hơn phiên bản đã lưu trong cơ sở dữ liệu.',
+	'CFG_UPDATE_VERSION_SUCCESS'		=> array(
+		0	=> 'Không có phiên bản giao diện nào mới hơn từ tập tin .cfg.',
+		1	=> 'Đã cập nhật %d giao diện.',
+		2	=> 'Đã cập nhật %d giao diện.',
+	),
 
 	'DEFAULT_LANGUAGE'	=> 'Ngôn ngữ mặc định',
 	'DESIGNER_URL'		=> 'Trang chủ người thiết kế',
 
 	'EDIT_STYLE_DATA'				=> 'Sửa dữ liệu giao diện',
+	'ERROR_DISABLE_DEFAULT_STYLE'	=> 'Không thể tắt giao diện mặc định.',
 	'ERROR_JSON_URL_NOT_RESPONSE'	=> 'Liên kết JSON không phản hồi.',
 	'ERROR_JSON_URL_NOT_VALID'		=> 'Liên kết JSON không hợp lệ.',
 	'ERROR_PHANTOM_NOT_EXEC'		=> 'Tập tin “%s” phải được cấp phép thực thi.',
