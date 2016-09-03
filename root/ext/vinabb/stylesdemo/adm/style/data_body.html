@@ -64,7 +64,7 @@
 					{% if loop.first %}</span>{% endif %}
 				{% endfor %}
 			</dd>
-			<dd><input type="button" class="button1" id="mirror_add_btn" value="{{ lang('LINK_MIRROR_ADD') }}"></dd>
+			<dd><input type="button" class="button1" id="mirror_btn" value="{{ lang('LINK_MIRROR_ADD') }}"></dd>
 		</dl>
 		<dl>
 			<dt><label for="style_details">{{ lang('LINK_DETAILS') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_DETAILS_EXPLAIN') }}</span></dt>
@@ -198,30 +198,30 @@
 	{
 		'use strict';
 
-		var authorTpl,
-			$elem = {
-				author: $('#mirror_tpl'),
-				addAuthor: $('#mirror_add_btn')
-			};
+		var mirrorHTML,
+				$elements = {
+					mirror: $('#mirror_tpl'),
+					mirrorBtn: $('#mirror_btn')
+				};
 
 		$(function()
 		{
-			authorTpl = $elem.author.first().clone();
+			mirrorHTML = $elements.mirror.first().clone();
 		});
 
-		$elem.addAuthor.on('click', function()
+		$elements.mirrorBtn.on('click', function()
 		{
-			var count = $elem.author.length,
-				$author = authorTpl.clone();
+			var count = $elements.mirror.length,
+					$mirror = mirrorHTML.clone();
 
-			$author.find('input').each(function()
+			$mirror.find('input').each(function()
 			{
 				var $this = $(this);
 				$this.attr('value', '');
 				$this.attr('id', $this.attr('id') + count);
 			});
 
-			$(this).before($author);
+			$(this).before($mirror);
 		});
 	})
 	// Avoid conflicts with other libraries
