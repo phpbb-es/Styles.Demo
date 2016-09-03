@@ -27,11 +27,7 @@ class constants
 	// PhantomJS
 	const PHANTOM_URL = 'http://phantomjs.org/download.html';
 
-	// Default style
+	// Styles
 	const DEFAULT_STYLE = 'prosilver';// Do not change it! This is not the default style of your board.
-	const DEFAULT_STYLE_NAME = 'proSilver';
-	const DEFAULT_STYLE_URL = 'https://www.phpbb.com/';
-
-	// Styles per page
 	const STYLES_PER_PAGE = 20;
 }

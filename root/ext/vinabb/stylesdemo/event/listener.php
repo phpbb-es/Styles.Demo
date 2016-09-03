@@ -9,7 +9,6 @@
 namespace vinabb\stylesdemo\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use vinabb\stylesdemo\includes\constants;
 
 class listener implements EventSubscriberInterface
 {
@@ -106,7 +105,7 @@ class listener implements EventSubscriberInterface
 	public function update_lang($event)
 	{
 		$switch_lang = $this->request->variable('l', false);
-		$last_page = $this->request->variable('z', '');
+		$last_page = str_replace('&amp;', '&', $this->request->variable('z', ''));
 
 		if ($this->user->data['user_id'] == ANONYMOUS)
 		{
@@ -135,7 +134,11 @@ class listener implements EventSubscriberInterface
 				$this->db->sql_query($sql);
 			}
 
-			redirect(append_sid($this->phpbb_root_path . $last_page));
+			$response = new \Symfony\Component\HttpFoundation\RedirectResponse(
+				append_sid($this->phpbb_root_path . $last_page),
+				301
+			);
+			$response->send();
 		}
 	}
 
