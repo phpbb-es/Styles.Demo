@@ -28,7 +28,7 @@ $.each($styles,
 
 		var priceRibbon = (object.price) ? '<div class="ribbon"><span>' + object.price_label + '</span></div>' : '';
 
-		$styleList.append('<a class="style pull-left" data-id="' + key + '" ' + tooltip + '><img src="' + object.img + '" alt="' + object.name + '" width="300" height="300"><span data-toggle="popover" data-content="' + object.info + '" class="title">' + object.name + '</span><span class="badge"><i class="fa fa-star"></i> ' + object.phpbb + '</span>' + priceRibbon + '</a>');
+		$styleList.append('<a class="style pull-left" data-id="' + key + '" ' + tooltip + '><img src="' + object.img + '" alt="' + object.name + '" width="300" height="300"><span data-toggle="popover" data-content="' + object.info.replace(/"/g, '\'') + '" class="title">' + object.name + '</span><span class="badge"><i class="fa fa-star"></i> ' + object.phpbb + '</span>' + priceRibbon + '</a>');
 
 		// Display style info
 		$('.title').popover(
@@ -83,7 +83,7 @@ $('#downloadPurchase').click(
 		{
 			$('#styleInfoDialog').modal('hide');
 
-			if ($styles[$current_style]['price'])
+			if ($styles[$current_style]['price'] || !$downloadDirect)
 			{
 				window.open($styles[$current_style]['download']);
 			}
@@ -105,6 +105,20 @@ $('#viewDetails').click(
 		{
 			$('#styleInfoDialog').modal('hide');
 			window.open($styles[$current_style]['details']);
+		}
+
+		return false;
+	}
+);
+
+// Support button on click
+$('#getSupport').click(
+	function()
+	{
+		if ($current_style in $styles)
+		{
+			$('#styleInfoDialog').modal('hide');
+			window.open($styles[$current_style]['support']);
 		}
 
 		return false;
@@ -154,7 +168,7 @@ $('.lang-btn').click(
 	}
 );
 
-// Bail out if mobile, it does not behave good, damn idevices...
+// Bail out if mobile, it does not behave good...
 /*if (jQuery.browser.mobile)
 {
 	if ($current_style in $styles)
@@ -359,16 +373,52 @@ $(document).ready(
 		}
 		else
 		{
-			if ($styles[$current_style].download)
-			{
-				$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
-				$('#getButton').attr('data-original-title', $label_download);
-			}
-			else
-			{
-				$('#getButton').prop('class', 'fa fa-info-circle animate-pulse show-tooltip');
-				$('#getButton').attr('data-original-title', $label_info);
-			}
+			$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
+			$('#getButton').attr('data-original-title', $label_download);
+		}
+
+		// Update buttons on styleInfoDialog
+		if ($styles[$current_style].support.length)
+		{
+			$('#getSupport').prop('disabled', false);
+		}
+		else
+		{
+			$('#getSupport').prop('disabled', true);
+		}
+
+		if ($styles[$current_style].details.length)
+		{
+			$('#viewDetails').prop('disabled', false);
+		}
+		else
+		{
+			$('#viewDetails').prop('disabled', true);
+		}
+
+		if ($styles[$current_style].download.length)
+		{
+			$('#downloadPurchase').prop('disabled', false);
+		}
+		else
+		{
+			$('#downloadPurchase').prop('disabled', true);
+		}
+
+		if ($styles[$current_style].mirror !== null)
+		{
+			$('#getMirror').prop('disabled', false);
+
+			$.each($styles[$current_style].mirror,
+				function (key, object)
+				{
+					$('#mirrorList').append('<li><a href="' + object.url + '"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;' + object.name + '</a></li>');
+				}
+			);
+		}
+		else
+		{
+			$('#getMirror').prop('disabled', true);
 		}
 
 		// Update style name + price label
@@ -421,16 +471,55 @@ $('.style').click(
 			}
 			else
 			{
-				if ($styles[$current_style].download)
-				{
-					$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
-					$('#getButton').attr('data-original-title', $label_download);
-				}
-				else
-				{
-					$('#getButton').prop('class', 'fa fa-info-circle animate-pulse show-tooltip');
-					$('#getButton').attr('data-original-title', $label_info);
-				}
+				$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
+				$('#getButton').attr('data-original-title', $label_download);
+			}
+
+			// Update buttons on styleInfoDialog
+			if ($styles[$current_style]['support'].length)
+			{
+				$('#getSupport').prop('disabled', false);
+			}
+			else
+			{
+				$('#getSupport').prop('disabled', true);
+			}
+
+			if ($styles[$current_style]['details'].length)
+			{
+				$('#viewDetails').prop('disabled', false);
+			}
+			else
+			{
+				$('#viewDetails').prop('disabled', true);
+			}
+
+			if ($styles[$current_style]['download'].length)
+			{
+				$('#downloadPurchase').prop('disabled', false);
+			}
+			else
+			{
+				$('#downloadPurchase').prop('disabled', true);
+			}
+
+			// Reset the mirror list
+			$('#mirrorList').html('');
+
+			if ($styles[$current_style]['mirror'] !== null)
+			{
+				$('#getMirror').prop('disabled', false);
+
+				$.each($styles[$current_style]['mirror'],
+					function (key, object)
+					{
+						$('#mirrorList').append('<li><a href="' + object.url + '"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;' + object.name + '</a></li>');
+					}
+				);
+			}
+			else
+			{
+				$('#getMirror').prop('disabled', true);
 			}
 
 			// Update style name + price label

@@ -93,8 +93,15 @@
 					<span id="styleInfo"></span>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="viewDetails"><i class="fa fa-info-circle"></i> {{ lang('DETAILS') }}</button>
-					<button type="button" class="btn btn-success" id="downloadPurchase"><i class="fa fa-download"></i> {{ lang('DOWNLOAD') }}</button>
+					<div class="dropdown pull-{{ S_CONTENT_FLOW_BEGIN }}">
+						<button type="button" class="btn btn-info dropdown-toggle" id="getMirror" data-toggle="dropdown"><i class="fa fa-link"></i> {{ lang('MIRRORS') }} <span class="caret"></span></button>
+						<ul class="dropdown-menu" id="mirrorList"></ul>
+					</div>
+					<div class="pull-{{ S_CONTENT_FLOW_END }}">
+						<button type="button" class="btn btn-warning" id="getSupport"><i class="fa fa-comments"></i> {{ lang('SUPPORT') }}</button>
+						<button type="button" class="btn btn-primary" id="viewDetails"><i class="fa fa-info-circle"></i> {{ lang('DETAILS') }}</button>
+						<button type="button" class="btn btn-success" id="downloadPurchase"><i class="fa fa-download"></i> {{ lang('DOWNLOAD') }}</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -105,6 +112,7 @@
 		var $styles = {{ STYLE_DATA }},
 			$prefixUrl = '{{ PREFIX_URL }}',
 			$autoToggle = {{ AUTO_TOGGLE }},
+			$downloadDirect = {{ DOWNLOAD_DIRECT }},
 			$tabletWidth = '{{ TABLET_WIDTH }}',
 			$phoneWidth = '{{ PHONE_WIDTH }}',
 			$current_style = '{{ DEFAULT_STYLE }}',
@@ -115,7 +123,6 @@
 			$switch_to_default_title = "{{ lang('LANG_SWITCH', SWITCH_LANG_NAME, DEFAULT_LANG_NAME)|e('js') }}",
 			$label_download = "{{ lang('DOWNLOAD')|e('js') }}",
 			$label_purchase = "{{ lang('PURCHASE')|e('js') }}",
-			$label_info = "{{ lang('INFORMATION')|e('js') }}",
 			$label_free = "{{ lang('FREE')|e('js') }}",
 			$s_content_direction = '{{ S_CONTENT_DIRECTION }}',
 			$s_content_flow_begin = '{{ S_CONTENT_FLOW_BEGIN }}',
