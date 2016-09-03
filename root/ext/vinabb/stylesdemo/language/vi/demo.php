@@ -43,6 +43,8 @@ $lang = array_merge($lang, array(
 
 	'LANG_SWITCH'	=> '%1$s » %2$s',
 
+	'MIRROR_LABEL'	=> 'Nguồn #%d',
+	'MIRRORS'		=> 'Dự phòng',
 	'MODE_ACP'		=> 'Chuyển sang giao diện quản trị',
 	'MODE_FRONTEND'	=> 'Chuyển sang giao diện chính',
 
