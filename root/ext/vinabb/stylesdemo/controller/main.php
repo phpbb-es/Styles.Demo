@@ -185,7 +185,9 @@ class main
 			}
 		}
 
-		// Build the style list
+		// Build the style data
+		$style_data = array();
+
 		$sql = 'SELECT *
 			FROM ' . (($mode == 'acp') ? $this->acp_styles_table : STYLES_TABLE) . '
 			WHERE style_active = 1
@@ -305,36 +307,38 @@ class main
 			// Preview iframe URL
 			$preview_url = ($mode == 'acp') ? append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $row['style_path'], false, $this->user->session_id) : append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'style=' . $row['style_id']);
 
-			// Styles
-			$this->template->assign_block_vars('styles', array(
-				'VARNAME'		=> $style_varname,
-				'NAME'			=> $style_name,
-				'PHPBB'			=> $this->user->lang('PHPBB_BADGE', $phpbb_version),
-				'PHPBB_INFO'	=> '<strong>' . $this->user->lang('PHPBB_VERSION') . $this->user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
-				'PRICE'			=> $style_price,
-				'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
-				'DOWNLOAD'		=> $style_download,
-				'DETAILS'		=> $style_details,
-				'SUPPORT'		=> $style_support,
-				'IMG'			=> $style_img,
-				'INFO'			=> $style_info,
-				'URL'			=> $preview_url,
-			));
-
 			// Mirrors of each style
+			$style_mirror_data = array();
+
 			if (is_array($style_mirror) && sizeof($style_mirror))
 			{
 				$i = 1;
 				foreach ($style_mirror as $mirror_name => $mirror_url)
 				{
-					$this->template->assign_block_vars('styles.mirrors', array(
-						'NAME'	=> !empty($mirror_name) ? $mirror_name : $this->user->lang('MIRROR_LABEL', $i),
-						'URL'	=> $mirror_url,
-					));
+					$style_mirror_data[] = array(
+						'name'	=> !empty($mirror_name) ? $mirror_name : $this->user->lang('MIRROR_LABEL', $i),
+						'url'	=> $mirror_url,
+					);
 
 					$i++;
 				}
 			}
+
+			// Add each row to $style_data which to be exported to Javascript
+			$style_data[$style_varname] = array(
+				'name'			=> $style_name,
+				'phpbb'			=> $this->user->lang('PHPBB_BADGE', $phpbb_version),
+				'phpbb_info'	=> '<strong>' . $this->user->lang('PHPBB_VERSION') . $this->user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
+				'price'			=> $style_price,
+				'price_label'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
+				'download'		=> $style_download,
+				'mirror'		=> sizeof($style_mirror_data) ? $style_mirror_data : null,
+				'details'		=> $style_details,
+				'support'		=> $style_support,
+				'img'			=> $style_img,
+				'info'			=> $style_info,
+				'url'			=> $preview_url,
+			);
 		}
 		$this->db->sql_freeresult($result);
 
@@ -368,6 +372,7 @@ class main
 
 		// Assign index specific vars
 		$this->template->assign_vars(array(
+			'STYLE_DATA'	=> json_encode($style_data),
 			'PREFIX_URL'	=> generate_board_url() . '/',
 			'LOGO_TEXT'		=> $this->config['vinabb_stylesdemo_logo_text'],
 			'AUTO_TOGGLE'	=> ($this->config['vinabb_stylesdemo_auto_toggle']) ? 'true' : 'false',
