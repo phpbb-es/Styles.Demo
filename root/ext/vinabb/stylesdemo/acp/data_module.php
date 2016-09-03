@@ -344,6 +344,8 @@ class data_module
 							WHERE style_id = $style_id";
 						$this->db->sql_query($sql);
 
+						$this->config->increment('vinabb_stylesdemo_num_acp_styles', -1, true);
+
 						$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACP_STYLE_ADD', false, array($style_name));
 
 						trigger_error($this->user->lang('STYLE_DATA_DELETED') . adm_back_link($this->u_action));
