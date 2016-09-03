@@ -17,7 +17,7 @@ class data_module
 
 	public function main($id, $mode)
 	{
-		global $phpbb_container, $phpbb_root_path, $phpEx;
+		global $phpbb_container, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
 		$this->auth = $phpbb_container->get('auth');
 		$this->config = $phpbb_container->get('config');
@@ -96,10 +96,10 @@ class data_module
 					}
 
 					$style_id = $this->request->variable('id', 0);
-					$style_name = $this->request->variable('style_name', '');
-					$style_version = $this->request->variable('style_version', '');
-					$style_phpbb_version = $this->request->variable('style_phpbb_version', '');
-					$style_author = $this->request->variable('style_author', '');
+					$style_name = $this->request->variable('style_name', '', true);
+					$style_version = strtoupper($this->request->variable('style_version', ''));
+					$style_phpbb_version = strtoupper($this->request->variable('style_phpbb_version', ''));
+					$style_author = $this->request->variable('style_author', '', true);
 					$style_author_url = $this->request->variable('style_author_url', '');
 					$style_presets = $this->request->variable('style_presets', 0);
 					$style_responsive = $this->request->variable('style_responsive', false);
@@ -178,7 +178,7 @@ class data_module
 
 				if (!confirm_box(true))
 				{
-					confirm_box(false, $this->lausernguage->lang($confirm_lang), build_hidden_fields(array(
+					confirm_box(false, $this->user->lang($confirm_lang), build_hidden_fields(array(
 						'i'			=> $id,
 						'mode'		=> $mode,
 						'action'	=> $action,
@@ -206,7 +206,7 @@ class data_module
 						if (isset($cfg[$cfg_field]) && version_compare($cfg[$cfg_field], $row[$sql_field], '>'))
 						{
 							$sql = 'UPDATE ' . $this->style_table . "
-								SET $sql_field = '" . $cfg[$cfg_field] . "'
+								SET $sql_field = '" . strtoupper($cfg[$cfg_field]) . "'
 								WHERE style_id = " . $row['style_id'];
 							$this->db->sql_query($sql);
 
@@ -252,9 +252,10 @@ class data_module
 				'DETAILS'		=> $row['style_details'],
 				'SUPPORT'		=> $row['style_support'],
 
-				'U_ENABLE'	=> $this->u_action . '&action=enable&id=' . $row['style_id'],
-				'U_DISABLE'	=> ($row['style_id'] == $this->config['default_style']) ? '' : $this->u_action . '&action=disable&id=' . $row['style_id'],
-				'U_EDIT'	=> $this->u_action . '&action=edit&id=' . $row['style_id'],
+				'U_ENABLE'		=> $this->u_action . "&action=enable&start=$start&id=" . $row['style_id'],
+				'U_DISABLE'		=> ($row['style_id'] == $this->config['default_style']) ? '' : $this->u_action . "&action=disable&start=$start&id=" . $row['style_id'],
+				'U_EDIT'		=> $this->u_action . '&action=edit&id=' . $row['style_id'],
+				'U_UNINSTALL'	=> ($row['style_id'] == $this->config['default_style']) ? '' : append_sid("{$phpbb_admin_path}index.$phpEx", 'i=acp_styles&action=uninstall&hash=' . generate_link_hash('uninstall') . '&id=' . $row['style_id']),
 			));
 		}
 
