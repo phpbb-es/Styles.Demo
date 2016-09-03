@@ -43,6 +43,8 @@ $lang = array_merge($lang, array(
 
 	'LANG_SWITCH'	=> '%1$s » %2$s',
 
+	'MIRROR_LABEL'	=> 'Mirror #%d',
+	'MIRRORS'		=> 'Mirrors',
 	'MODE_ACP'		=> 'Switch to ACP Demo',
 	'MODE_FRONTEND'	=> 'Switch to Front-end Demo',
 
