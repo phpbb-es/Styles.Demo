@@ -1,2 +1,2 @@
-services:
+parameters:
     vinabb.stylesdemo.tables.acp_styles: '%core.table_prefix%acp_styles'
