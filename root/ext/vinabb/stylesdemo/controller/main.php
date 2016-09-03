@@ -47,6 +47,9 @@ class main
 	protected $file_downloader;
 
 	/** @var string */
+	protected $acp_styles_table;
+
+	/** @var string */
 	protected $phpbb_root_path;
 
 	/** @var string */
@@ -69,6 +72,7 @@ class main
 	* @param \phpbb\extension\manager $ext_manager
 	* @param \phpbb\path_helper $path_helper
 	* @param \phpbb\file_downloader $file_downloader
+	* @param string $acp_styles_table
 	* @param string $phpbb_root_path
 	* @param string $phpbb_admin_path
 	* @param string $php_ext
@@ -84,6 +88,7 @@ class main
 								\phpbb\extension\manager $ext_manager,
 								\phpbb\path_helper $path_helper,
 								\phpbb\file_downloader $file_downloader,
+								$acp_styles_table,
 								$phpbb_root_path,
 								$phpbb_admin_path,
 								$php_ext)
@@ -99,6 +104,7 @@ class main
 		$this->ext_manager = $ext_manager;
 		$this->path_helper = $path_helper;
 		$this->file_downloader = $file_downloader;
+		$this->acp_styles_table = $acp_styles_table;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->phpbb_admin_path = $this->phpbb_root_path . $phpbb_admin_path;
 		$this->php_ext = $php_ext;
@@ -163,22 +169,7 @@ class main
 			}
 		}
 
-		// Get the extra ACP style list from <ext>/app/styles/
-		$style_dirs = array();
-		$scan_dirs = array_diff(scandir("{$this->ext_root_path}app/styles/"), array('..', '.', '.htaccess', '_example'));
-
-		foreach ($scan_dirs as $scan_dir)
-		{
-			if (is_dir("{$this->ext_root_path}app/styles/{$scan_dir}/") && file_exists("{$this->ext_root_path}app/styles/{$scan_dir}/style.cfg"))
-			{
-				$style_dirs[] = $scan_dir;
-			}
-		}
-
-		// Do not switch to ACP mode since there is no admin styles
-		$has_acp_styles = sizeof($style_dirs) ? true : false;
-
-		// ACP styles
+		// Checking for ACP styles
 		if ($mode == 'acp')
 		{
 			if ((!$this->auth->acl_get('a_') || $this->user->data['user_id'] == ANONYMOUS) && !$this->config['vinabb_stylesdemo_acp_enable'])
@@ -187,7 +178,7 @@ class main
 			}
 
 			// Nothing to preview
-			if (!$has_acp_styles)
+			if (!$this->config['vinabb_stylesdemo_num_acp_styles'])
 			{
 				trigger_error('NO_ACP_STYLES');
 			}
@@ -197,325 +188,142 @@ class main
 			{
 				$this->user->session_kill();
 			}
-
-			foreach ($style_dirs as $style_dir)
-			{
-				// Get data from style.cfg
-				$cfg = parse_cfg_file("{$this->ext_root_path}app/styles/{$style_dir}/style.cfg");
-
-				// Style varname
-				$style_varname = $this->style_varname_normalize($style_dir);
-
-				// Style screenshot
-				switch ($this->config['vinabb_stylesdemo_screenshot_type'])
-				{
-					case constants::SCREENSHOT_TYPE_JSON:
-						if (!empty($json['acp'][$style_varname]['screenshot']))
-						{
-							$style_img = $json['acp'][$style_varname]['screenshot'];
-						}
-						else
-						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
-						}
-					break;
-
-					case constants::SCREENSHOT_TYPE_PHANTOM:
-						$screenshot_filename = 'acp_' . $style_varname . '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'];
-
-						if (file_exists("{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT))
-						{
-							$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
-						}
-						else
-						{
-							if (!$this->set_time_limit)
-							{
-								set_time_limit(0);
-
-								$this->set_time_limit = true;
-							}
-
-							$preview_url = generate_board_url() . "/ext/vinabb/stylesdemo/app/index.{$this->php_ext}?s={$style_dir}&sid={$this->user->session_id}";
-							$script = file_get_contents("{$this->ext_root_path}assets/js/phantom.js");
-							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
-
-							// Create .js data file for PhantomJS
-							file_put_contents("{$this->ext_root_path}bin/js/{$screenshot_filename}.js", $script);
-
-							// Phantom! Summon... Summon...
-							try
-							{
-								if (!$this->set_time_limit)
-								{
-									set_time_limit(0);
-
-									$this->set_time_limit = true;
-								}
-
-								exec("{$this->ext_root_path}bin/phantomjs {$this->ext_root_path}bin/js/{$screenshot_filename}.js");
-
-								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
-							}
-							catch (\phpbb\exception\runtime_exception $e)
-							{
-								$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
-							}
-						}
-					break;
-
-					default:
-						if (file_exists("{$this->ext_root_path}assets/screenshots/acp/{$style_varname}" . constants::SCREENSHOT_EXT))
-						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/acp/{$style_varname}" . constants::SCREENSHOT_EXT;
-						}
-						else
-						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/acp/default.png";
-						}
-					break;
-				}
-
-				// Remote data
-				if (isset($json['acp'][$style_varname]))
-				{
-					$style_name = $json['acp'][$style_varname]['name'];
-					$phpbb_version = $json['acp'][$style_varname]['phpbb_version'];
-					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['version'];
-					$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['author_name'];
-					$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $json['acp'][$style_varname]['presets'];
-					$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['responsive'] == 1) ? $this->language->lang('YES') : $this->language->lang('NO'));
-					$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . (($json['acp'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->language->lang('FREE') . '</code>');
-					$style_details = 'http://vinabb.vn/bb/item/' . $json['acp'][$style_varname]['id'];
-					$style_download = $json['acp'][$style_varname]['url'];
-					$style_price = $json['acp'][$style_varname]['price'];
-					$style_price_label = $json['acp'][$style_varname]['price_label'];
-				}
-				// Only local data
-				else
-				{
-					$style_name = $cfg['name'];
-					$phpbb_version = $cfg['phpbb_version'];
-					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_version'];
-
-					if (isset($cfg['style_author']) && !empty($cfg['style_author']))
-					{
-						$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_author'];
-					}
-					else
-					{
-						$style_info .= '<br><strong>' . $this->language->lang('COPYRIGHT') . $this->language->lang('COLON') . '</strong> ' . $cfg['copyright'];
-					}
-
-					if (isset($cfg['style_presets']) && is_numeric($cfg['style_presets']))
-					{
-						$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_presets'];
-					}
-
-					if (isset($cfg['style_responsive']) && ($cfg['style_responsive'] == 0 || $cfg['style_reponsive'] == 1))
-					{
-						$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . (($cfg['style_responsive'] == 1) ? $this->language->lang('YES') : $this->language->lang('NO'));
-					}
-
-					if (isset($cfg['style_price']) && is_numeric($cfg['style_price']))
-					{
-						$style_price = $cfg['style_price'];
-						$style_price_label = (isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : $style_price;
-						$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . (($style_price) ? "<code>$style_price_label</code>" : '<code class=green>' . $this->language->lang('FREE') . '</code>');
-					}
-					else
-					{
-						$style_price = 0;
-						$style_price_label = '';
-					}
-
-					$style_details = (isset($cfg['style_details']) && !empty($cfg['style_details'])) ? $cfg['style_details'] : '#';
-					$style_download = (isset($cfg['style_download']) && !empty($cfg['style_download'])) ? $cfg['style_download'] : '#';
-				}
-
-				$this->template->assign_block_vars('styles', array(
-					'VARNAME'		=> $style_varname,
-					'NAME'			=> $style_name,
-					'PHPBB'			=> $this->language->lang('PHPBB_BADGE', $phpbb_version),
-					'PHPBB_INFO'	=> '<strong>' . $this->language->lang('PHPBB_VERSION') . $this->language->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
-					'IMG'			=> $style_img,
-					'INFO'			=> $style_info,
-					'DETAILS'		=> $style_details,
-					'DOWNLOAD'		=> $style_download,
-					'PRICE'			=> $style_price,
-					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->language->lang('FREE'),
-					'URL'			=> append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $style_dir, false, $this->user->session_id),
-				));
-			}
 		}
-		// Front-end styles
-		else
+
+		// Build the style list
+		$sql = 'SELECT *
+			FROM ' . (($mode == 'acp') ? $this->acp_styles_table : STYLES_TABLE) . '
+			WHERE style_active = 1
+			ORDER BY ' . (($this->config['vinabb_stylesdemo_json_enable']) ? 'style_path' : 'style_name');
+		$result = $this->db->sql_query($sql);
+
+		while ($row = $this->db->sql_fetchrow($result))
 		{
-			// Build the style list
-			$sql = 'SELECT *
-				FROM ' . STYLES_TABLE . '
-				WHERE style_active = 1
-				ORDER BY style_path';
-			$result = $this->db->sql_query($sql);
+			// Style varname
+			$style_varname = $this->style_varname_normalize($row['style_path']);
 
-			while ($row = $this->db->sql_fetchrow($result))
+			// JSON tree
+			$json_tree = ($mode == 'acp') ? 'acp' : 'frontend';
+			
+			// Style screenshot
+			switch ($this->config['vinabb_stylesdemo_screenshot_type'])
 			{
-				// Get data from style.cfg
-				$cfg = parse_cfg_file($this->phpbb_root_path . 'styles/' . $row['style_path'] . '/style.cfg');
+				case constants::SCREENSHOT_TYPE_JSON:
+					if (!empty($json[$json_tree][$style_varname]['screenshot']))
+					{
+						$style_img = $json[$json_tree][$style_varname]['screenshot'];
+					}
+					else
+					{
+						$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
+					}
+				break;
 
-				// Style varname
-				$style_varname = $this->style_varname_normalize($row['style_path']);
+				case constants::SCREENSHOT_TYPE_PHANTOM:
+					$screenshot_filename = (($mode == 'acp') ? 'acp_' : '') . $style_varname . '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'];
 
-				// Style screenshot
-				switch ($this->config['vinabb_stylesdemo_screenshot_type'])
-				{
-					case constants::SCREENSHOT_TYPE_JSON:
-						if (!empty($json['frontend'][$style_varname]['screenshot']))
+					if (file_exists("{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT))
+					{
+						$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
+					}
+					else
+					{
+						if (!$this->set_time_limit)
 						{
-							$style_img = $json['frontend'][$style_varname]['screenshot'];
+							set_time_limit(0);
+
+							$this->set_time_limit = true;
 						}
-						else
-						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
-						}
-					break;
 
-					case constants::SCREENSHOT_TYPE_PHANTOM:
-						$screenshot_filename = $style_varname . '_' . $this->config['vinabb_stylesdemo_screenshot_width'] . 'x' . $this->config['vinabb_stylesdemo_screenshot_height'];
+						$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
+						$script = file_get_contents("{$this->ext_root_path}assets/js/phantom.js");
+						$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
 
-						if (file_exists("{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT))
+						// Create .js data file for PhantomJS
+						file_put_contents("{$this->ext_root_path}bin/js/{$screenshot_filename}.js", $script);
+
+						// Phantom! Summon... Summon...
+						try
 						{
+							exec("{$this->ext_root_path}bin/phantomjs {$this->ext_root_path}bin/js/{$screenshot_filename}.js");
+
 							$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
 						}
-						else
-						{
-							if (!$this->set_time_limit)
-							{
-								set_time_limit(0);
-
-								$this->set_time_limit = true;
-							}
-
-							$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
-							$script = file_get_contents("{$this->ext_root_path}assets/js/phantom.js");
-							$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
-
-							// Create .js data file for PhantomJS
-							file_put_contents("{$this->ext_root_path}bin/js/{$screenshot_filename}.js", $script);
-
-							// Phantom! Summon... Summon...
-							try
-							{
-								exec("{$this->ext_root_path}bin/phantomjs {$this->ext_root_path}bin/js/{$screenshot_filename}.js");
-
-								$style_img = "{$this->ext_web_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT;
-							}
-							catch (\phpbb\exception\runtime_exception $e)
-							{
-								$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
-							}
-						}
-					break;
-
-					default:
-						if (file_exists("{$this->ext_root_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT))
-						{
-							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT;
-						}
-						else
+						catch (\phpbb\exception\runtime_exception $e)
 						{
 							$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
 						}
+					}
 					break;
-				}
 
-				// Remote data
-				if (isset($json['frontend'][$style_varname]))
-				{
-					$style_name = $json['frontend'][$style_varname]['name'];
-					$phpbb_version = $json['frontend'][$style_varname]['phpbb_version'];
-					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['version'];
-					$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['author_name'];
-					$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $json['frontend'][$style_varname]['presets'];
-					$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['responsive'] == 1) ? $this->language->lang('YES') : $this->language->lang('NO'));
-					$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . (($json['frontend'][$style_varname]['price']) ? '<code>' . $json['frontend'][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->language->lang('FREE') . '</code>');
-					$style_details = 'http://vinabb.vn/bb/item/' . $json['frontend'][$style_varname]['id'];
-					$style_download = $json['frontend'][$style_varname]['url'];
-					$style_price = $json['frontend'][$style_varname]['price'];
-					$style_price_label = $json['frontend'][$style_varname]['price_label'];
-				}
-				// prosilver
-				else if ($style_varname == constants::DEFAULT_STYLE)
-				{
-					$style_name = constants::DEFAULT_STYLE_NAME;
-					$phpbb_version = $cfg['phpbb_version'];
-					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_version'];
-					$style_info .= '<br><strong>' . $this->language->lang('COPYRIGHT') . $this->language->lang('COLON') . '</strong> ' . $cfg['copyright'];
-					$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> 0';
-					$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . $this->language->lang('YES');
-					$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> <code class=green>' . $this->language->lang('FREE') . '</code>';
-					$style_details = $style_download = constants::DEFAULT_STYLE_URL;
-					$style_price = 0;
-					$style_price_label = '';
-				}
-				// Only local data
-				else
-				{
-					$style_name = $cfg['name'];
-					$phpbb_version = $cfg['phpbb_version'];
-					$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_version'];
-
-					if (isset($cfg['style_author']) && !empty($cfg['style_author']))
+				default:
+					if (file_exists("{$this->ext_root_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT))
 					{
-						$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_author'];
+						$style_img = "{$this->ext_web_path}assets/screenshots/frontend/{$style_varname}" . constants::SCREENSHOT_EXT;
 					}
 					else
 					{
-						$style_info .= '<br><strong>' . $this->language->lang('COPYRIGHT') . $this->language->lang('COLON') . '</strong> ' . $cfg['copyright'];
+						$style_img = "{$this->ext_web_path}assets/screenshots/frontend/default.png";
 					}
-
-					if (isset($cfg['style_presets']) && is_numeric($cfg['style_presets']))
-					{
-						$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $cfg['style_presets'];
-					}
-
-					if (isset($cfg['style_responsive']) && ($cfg['style_responsive'] == 0 || $cfg['style_reponsive'] == 1))
-					{
-						$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . (($cfg['style_responsive'] == 1) ? $this->language->lang('YES') : $this->language->lang('NO'));
-					}
-
-					if (isset($cfg['style_price']) && is_numeric($cfg['style_price']))
-					{
-						$style_price = $cfg['style_price'];
-						$style_price_label = (isset($cfg['style_price_label']) && !empty($cfg['style_price_label'])) ? $cfg['style_price_label'] : $style_price;
-						$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . (($style_price) ? "<code>$style_price_label</code>" : '<code class=green>' . $this->language->lang('FREE') . '</code>');
-					}
-					else
-					{
-						$style_price = 0;
-						$style_price_label = '';
-					}
-
-					$style_details = (isset($cfg['style_details']) && !empty($cfg['style_details'])) ? $cfg['style_details'] : '#';
-					$style_download = (isset($cfg['style_download']) && !empty($cfg['style_download'])) ? $cfg['style_download'] : '#';
-				}
-
-				$this->template->assign_block_vars('styles', array(
-					'VARNAME'		=> $style_varname,
-					'NAME'			=> $style_name,
-					'PHPBB'			=> $this->language->lang('PHPBB_BADGE', $phpbb_version),
-					'PHPBB_INFO'	=> '<strong>' . $this->language->lang('PHPBB_VERSION') . $this->language->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
-					'IMG'			=> $style_img,
-					'INFO'			=> $style_info,
-					'DETAILS'		=> $style_details,
-					'DOWNLOAD'		=> $style_download,
-					'PRICE'			=> $style_price,
-					'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->language->lang('FREE'),
-					'URL'			=> append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'style=' . $row['style_id']),
-				));
+					break;
 			}
-			$this->db->sql_freeresult($result);
+
+			// Remote data
+			if (isset($json[$json_tree][$style_varname]))
+			{
+				$style_name = $json[$json_tree][$style_varname]['name'];
+				$phpbb_version = $json[$json_tree][$style_varname]['phpbb_version'];
+				$style_price = $json[$json_tree][$style_varname]['price'];
+				$style_price_label = $json[$json_tree][$style_varname]['price_label'];
+				$style_download = $json[$json_tree][$style_varname]['download'];
+				$style_details = $json[$json_tree][$style_varname]['details'];
+				$style_support = $json[$json_tree][$style_varname]['support'];
+
+				// Build style info
+				$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . ((isset($json['frontend'][$style_varname]['version']) && !empty($json['frontend'][$style_varname]['version'])) ? $json['frontend'][$style_varname]['version'] : $this->language->lang('ELLIPSIS'));
+				$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['author']) && !empty($json[$json_tree][$style_varname]['author'])) ? $json[$json_tree][$style_varname]['author'] : $this->language->lang('ELLIPSIS'));
+				$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . (isset($json[$json_tree][$style_varname]['presets']) ? $json[$json_tree][$style_varname]['presets'] : 0);
+				$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['responsive']) && $json[$json_tree][$style_varname]['responsive']) ? $this->language->lang('YES') : $this->language->lang('NO'));
+				$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['price']) && $json[$json_tree][$style_varname]['price']) ? '<code>' . $json[$json_tree][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->language->lang('FREE') . '</code>');
+			}
+			// Only local data
+			else
+			{
+				$style_name = $row['style_name'];
+				$phpbb_version = $row['style_phpbb_version'];
+				$style_price = $row['style_price'];
+				$style_price_label = $row['style_price_label'];
+				$style_download = $row['style_download'];
+				$style_details = $row['style_details'];
+				$style_support = $row['style_support'];
+
+				// Build style info
+				$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . (!empty($row['style_version']) ? $row['style_version'] : $this->language->lang('ELLIPSIS'));
+				$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . (!empty($row['style_author']) ? $row['style_author'] : $this->language->lang('ELLIPSIS'));
+				$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $row['style_presets'];
+				$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . ($row['style_responsive'] ? $this->language->lang('YES') : $this->language->lang('NO'));
+				$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . ($row['style_price'] ? '<code>' . $row['style_price_label'] . '</code>' : '<code class=green>' . $this->language->lang('FREE') . '</code>');
+			}
+
+			// Preview iframe URL
+			$preview_url = ($mode == 'acp') ? append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $row['style_path'], false, $this->user->session_id) : append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'style=' . $row['style_id']);
+
+			$this->template->assign_block_vars('styles', array(
+				'VARNAME'		=> $style_varname,
+				'NAME'			=> $style_name,
+				'PHPBB'			=> $this->language->lang('PHPBB_BADGE', $phpbb_version),
+				'PHPBB_INFO'	=> '<strong>' . $this->language->lang('PHPBB_VERSION') . $this->language->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
+				'PRICE'			=> $style_price,
+				'PRICE_LABEL'	=> ($style_price) ? $style_price_label : $this->language->lang('FREE'),
+				'DOWNLOAD'		=> $style_download,
+				'DETAILS'		=> $style_details,
+				'SUPPORT'		=> $style_support,
+				'IMG'			=> $style_img,
+				'INFO'			=> $style_info,
+				'URL'			=> $preview_url,
+			));
 		}
+		$this->db->sql_freeresult($result);
 
 		// Get lang info
 		$lang_title = $default_lang_name = $switch_lang_name = '';
@@ -565,12 +373,12 @@ class main
 			'EXT_ASSETS_PATH'	=> "{$this->ext_web_path}assets",
 
 			'S_LANG_ENABLE'	=> !empty($lang_title) ? true : false,
-			'S_ACP_ENABLE'	=> ($this->config['vinabb_stylesdemo_acp_enable'] && $has_acp_styles) ? true : false,
+			'S_ACP_ENABLE'	=> ($this->config['vinabb_stylesdemo_acp_enable'] && $this->config['vinabb_stylesdemo_num_acp_styles']) ? true : false,
 
 			'U_MODE'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => ($mode == 'acp') ? '' : 'acp')),
 		));
 
-		return $this->helper->render('demo_body.html', $mode);
+		return $this->helper->render('demo_body.html', '');
 	}
 
 	/*
@@ -592,7 +400,7 @@ class main
 		$name = str_replace('-', ' ', $name);
 		$name = str_replace('.', ' ', $name);
 		$name = str_replace('@', 'a', $name);
-		$name = strtolower(trim($name));
+		$name = strtolower(trim(utf8_clean_string($name)));
 		$name = str_replace(' ', $underscore, $name);
 
 		return $name;
