@@ -21,7 +21,8 @@ class data_modules extends migration
 	{
 		return array(
 			// New config items
-			array('config.add', array('vinabb_stylesdemo_support_link', '')),
+			array('config.add', array('vinabb_stylesdemo_download_direct', 1)),
+			array('config.add', array('vinabb_stylesdemo_support_url', '')),
 			array('config.add', array('vinabb_stylesdemo_num_acp_styles', 0, true)),
 
 			// Style data management modules

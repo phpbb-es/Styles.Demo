@@ -279,10 +279,10 @@ class main
 
 				// Build style info
 				$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . ((isset($json['frontend'][$style_varname]['version']) && !empty($json['frontend'][$style_varname]['version'])) ? $json['frontend'][$style_varname]['version'] : $this->user->lang('ELLIPSIS'));
-				$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['author']) && !empty($json[$json_tree][$style_varname]['author'])) ? $json[$json_tree][$style_varname]['author'] : $this->user->lang('ELLIPSIS'));
+				$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['author']) && !empty($json[$json_tree][$style_varname]['author'])) ? (!empty($json[$json_tree][$style_varname]['style_author_url']) ? "<a href=\"{$json[$json_tree][$style_varname]['style_author_url']}\">{$json[$json_tree][$style_varname]['style_author']}</a>" : $json[$json_tree][$style_varname]['style_author']) : $this->user->lang('ELLIPSIS'));
 				$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . (isset($json[$json_tree][$style_varname]['presets']) ? $json[$json_tree][$style_varname]['presets'] : 0);
 				$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['responsive']) && $json[$json_tree][$style_varname]['responsive']) ? $this->user->lang('YES') : $this->user->lang('NO'));
-				$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['price']) && $json[$json_tree][$style_varname]['price']) ? '<code>' . $json[$json_tree][$style_varname]['price_label'] . '</code>' : '<code class=green>' . $this->user->lang('FREE') . '</code>');
+				$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['price']) && $json[$json_tree][$style_varname]['price']) ? '<code>' . $json[$json_tree][$style_varname]['price_label'] . '</code>' : '<code class="green">' . $this->user->lang('FREE') . '</code>');
 			}
 			// Only local data
 			else
@@ -298,10 +298,10 @@ class main
 
 				// Build style info
 				$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . (!empty($row['style_version']) ? $row['style_version'] : $this->user->lang('ELLIPSIS'));
-				$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . (!empty($row['style_author']) ? $row['style_author'] : $this->user->lang('ELLIPSIS'));
+				$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . (!empty($row['style_author']) ? (!empty($row['style_author_url']) ? "<a href=\"{$row['style_author_url']}\">{$row['style_author']}</a>" : $row['style_author']) : $this->user->lang('ELLIPSIS'));
 				$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $row['style_presets'];
 				$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . ($row['style_responsive'] ? $this->user->lang('YES') : $this->user->lang('NO'));
-				$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . ($row['style_price'] ? '<code>' . $row['style_price_label'] . '</code>' : '<code class=green>' . $this->user->lang('FREE') . '</code>');
+				$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . ($row['style_price'] ? '<code>' . $row['style_price_label'] . '</code>' : '<code class="green">' . $this->user->lang('FREE') . '</code>');
 			}
 
 			// Preview iframe URL
@@ -334,7 +334,7 @@ class main
 				'download'		=> $style_download,
 				'mirror'		=> sizeof($style_mirror_data) ? $style_mirror_data : null,
 				'details'		=> $style_details,
-				'support'		=> !empty($style_support) ? $style_support : $this->config['vinabb_stylesdemo_support_link'],
+				'support'		=> !empty($style_support) ? $style_support : $this->config['vinabb_stylesdemo_support_url'],
 				'img'			=> $style_img,
 				'info'			=> $style_info,
 				'url'			=> $preview_url,
@@ -372,12 +372,13 @@ class main
 
 		// Assign index specific vars
 		$this->template->assign_vars(array(
-			'STYLE_DATA'	=> json_encode($style_data),
-			'PREFIX_URL'	=> generate_board_url() . '/',
-			'LOGO_TEXT'		=> $this->config['vinabb_stylesdemo_logo_text'],
-			'AUTO_TOGGLE'	=> ($this->config['vinabb_stylesdemo_auto_toggle']) ? 'true' : 'false',
-			'PHONE_WIDTH'	=> $this->config['vinabb_stylesdemo_phone_width'],
-			'TABLET_WIDTH'	=> $this->config['vinabb_stylesdemo_tablet_width'],
+			'STYLE_DATA'		=> json_encode($style_data),
+			'PREFIX_URL'		=> generate_board_url() . '/',
+			'LOGO_TEXT'			=> $this->config['vinabb_stylesdemo_logo_text'],
+			'AUTO_TOGGLE'		=> ($this->config['vinabb_stylesdemo_auto_toggle']) ? 'true' : 'false',
+			'DOWNLOAD_DIRECT'	=> ($this->config['vinabb_stylesdemo_download_direct']) ? 'true' : 'false',
+			'PHONE_WIDTH'		=> $this->config['vinabb_stylesdemo_phone_width'],
+			'TABLET_WIDTH'		=> $this->config['vinabb_stylesdemo_tablet_width'],
 
 			'DEFAULT_STYLE'		=> constants::DEFAULT_STYLE,
 			'CURRENT_LANG'		=> $this->user->lang_name,

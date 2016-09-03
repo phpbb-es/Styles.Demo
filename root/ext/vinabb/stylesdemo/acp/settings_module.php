@@ -65,6 +65,7 @@ class settings_module
 			// Get from the form
 			$logo_text = $this->request->variable('logo_text', '', true);
 			$auto_toggle = $this->request->variable('auto_toggle', true);
+			$download_direct = $this->request->variable('download_direct', true);
 			$phone_width = max(constants::MIN_PHONE_WIDTH, $this->request->variable('phone_width', 0));
 			$tablet_width = max($phone_width + constants::MIN_PHONE_WIDTH, $this->request->variable('tablet_width', 0));
 			$lang_enable = $this->request->variable('lang_enable', false);
@@ -207,6 +208,7 @@ class settings_module
 
 				$this->config->set('vinabb_stylesdemo_logo_text', $logo_text);
 				$this->config->set('vinabb_stylesdemo_auto_toggle', $auto_toggle);
+				$this->config->set('vinabb_stylesdemo_download_direct', $download_direct);
 				$this->config->set('vinabb_stylesdemo_phone_width',$phone_width);
 				$this->config->set('vinabb_stylesdemo_tablet_width', $tablet_width);
 				$this->config->set('vinabb_stylesdemo_lang_enable', $lang_enable);
@@ -275,6 +277,7 @@ class settings_module
 
 			'LOGO_TEXT'			=> (isset($logo_text) && !empty($logo_text)) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
 			'AUTO_TOGGLE'		=> isset($auto_toggle) ? $auto_toggle : $this->config['vinabb_stylesdemo_auto_toggle'],
+			'DOWNLOAD_DIRECT'	=> isset($download_direct) ? $download_direct : $this->config['vinabb_stylesdemo_download_direct'],
 			'PHONE_WIDTH'		=> isset($phone_width) ? $phone_width : $this->config['vinabb_stylesdemo_phone_width'],
 			'TABLET_WIDTH'		=> isset($tablet_width) ? $tablet_width : $this->config['vinabb_stylesdemo_tablet_width'],
 			'MIN_PHONE_WIDTH'	=> constants::MIN_PHONE_WIDTH,

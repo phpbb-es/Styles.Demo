@@ -67,6 +67,7 @@ $lang = array_merge($lang, array(
 		2	=> '%d giao diện',
 	),
 	'STYLES_DEMO'			=> 'Xem thử giao diện',
+	'SUPPORT'				=> 'Hỗ trợ',
 
 	'TABLET'	=> 'Máy tính bảng',
 

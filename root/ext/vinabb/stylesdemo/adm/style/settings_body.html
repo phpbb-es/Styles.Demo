@@ -20,6 +20,13 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt><label for="download_direct">{{ lang('STYLES_DEMO_DOWNLOAD_DIRECT') }}{{ lang('COLON') }}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="download_direct" value="1" id="download_direct"{% if DOWNLOAD_DIRECT %} checked{% endif %}> {{ lang('STYLES_DEMO_DOWNLOAD_DIRECT_YES') }}</label>
+				<label><input type="radio" class="radio" name="download_direct" value="0"{% if not DOWNLOAD_DIRECT %} checked{% endif %}> {{ lang('STYLES_DEMO_DOWNLOAD_DIRECT_NO') }}</label>
+			</dd>
+		</dl>
+		<dl>
 			<dt><label for="phone_width">{{ lang('STYLES_DEMO_PHONE_WIDTH') }}{{ lang('COLON') }}</label></dt>
 			<dd><input id="phone_width" type="number" min="{{ MIN_PHONE_WIDTH }}" name="phone_width" value="{{ PHONE_WIDTH }}"> {{ lang('PIXEL') }}</dd>
 		</dl>
