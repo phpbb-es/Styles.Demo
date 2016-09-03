@@ -32,6 +32,8 @@ services:
             - '@user'
             - '@language'
             - '@request'
+            - '@ext.manager'
+            - '@path_helper'
             - '%core.root_path%'
             - '%core.adm_relative_path%'
             - '%core.php_ext%'

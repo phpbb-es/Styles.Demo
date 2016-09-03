@@ -34,6 +34,12 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\request\request */
     protected $request;
 
+	/** @var \phpbb\extension\manager */
+	protected $ext_manager;
+
+	/** @var \phpbb\path_helper */
+	protected $path_helper;
+
 	/** @var string */
 	protected $phpbb_root_path;
 
@@ -53,6 +59,8 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\user $user
 	* @param \phpbb\language\language $language
 	* @param \phpbb\request\request $request
+	* @param \phpbb\extension\manager $ext_manager
+	* @param \phpbb\path_helper $path_helper
 	* @param string $phpbb_root_path
 	* @param string $php_ext
 	*/
@@ -63,6 +71,8 @@ class listener implements EventSubscriberInterface
 								\phpbb\user $user,
 								\phpbb\language\language $language,
 								\phpbb\request\request $request,
+								\phpbb\extension\manager $ext_manager,
+								\phpbb\path_helper $path_helper,
 								$phpbb_root_path,
 								$phpbb_admin_path,
 								$php_ext)
@@ -74,9 +84,14 @@ class listener implements EventSubscriberInterface
 		$this->user = $user;
 		$this->language = $language;
 		$this->request = $request;
+		$this->ext_manager = $ext_manager;
+		$this->path_helper = $path_helper;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->php_ext = $php_ext;
+
+		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/stylesdemo', true);
+		$this->ext_web_path = $this->path_helper->update_web_root_path($this->ext_root_path);
 	}
 
 	static public function getSubscribedEvents()
@@ -174,6 +189,9 @@ class listener implements EventSubscriberInterface
 			'ADMIN_ROOT_PATH'	=> $this->phpbb_admin_path,
 			'PREFIX_URL'		=> generate_board_url() . '/' . $this->phpbb_admin_path,
 			'PREFIX_URL_ALT'	=> generate_board_url(),
+
+			'ICON_ENABLE'	=> '<img src="' . htmlspecialchars($this->ext_web_path) . 'adm/images/icon_disabled.gif" alt="' . $this->language->lang('ENABLE') . '" title="' . $this->language->lang('ENABLE') . '">',
+			'ICON_DISABLE'	=> '<img src="' . htmlspecialchars($this->ext_web_path) . 'adm/images/icon_enabled.gif" alt="' . $this->language->lang('DISABLE') . '" title="' . $this->language->lang('DISABLE') . '">',
 
 			'S_GUEST'	=> ($this->user->data['user_id'] == ANONYMOUS) ? true : false,
 
