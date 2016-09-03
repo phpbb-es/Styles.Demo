@@ -313,7 +313,7 @@ class main
 			if (is_array($style_mirror) && sizeof($style_mirror))
 			{
 				$i = 1;
-				foreach ($style_mirror as $mirror_name => $mirror_url)
+				foreach ($style_mirror as $mirror_url => $mirror_name)
 				{
 					$style_mirror_data[] = array(
 						'name'	=> !empty($mirror_name) ? $mirror_name : $this->user->lang('MIRROR_LABEL', $i),
