@@ -16,6 +16,9 @@ class main
 	/** @var \phpbb\db\driver\driver_interface */
     protected $db;
 
+	/** @var \phpbb\cache\driver\driver_interface */
+	protected $cache;
+
 	/** @var \phpbb\config\config */
     protected $config;
 
@@ -62,6 +65,7 @@ class main
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver_interface $db
+	* @param \phpbb\cache\driver\driver_interface $cache
 	* @param \phpbb\config\config $config
 	* @param \phpbb\controller\helper $helper
 	* @param \phpbb\template\template $template
@@ -78,6 +82,7 @@ class main
 	* @param string $php_ext
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db,
+								\phpbb\cache\driver\driver_interface $cache,
 								\phpbb\config\config $config,
 								\phpbb\controller\helper $helper,
 								\phpbb\template\template $template,
@@ -94,6 +99,7 @@ class main
 								$php_ext)
 	{
 		$this->db = $db;
+		$this->cache = $cache;
 		$this->config = $config;
 		$this->helper = $helper;
 		$this->template = $template;
@@ -352,26 +358,28 @@ class main
 
 		if ($this->config['vinabb_stylesdemo_lang_enable'] && !empty($this->config['vinabb_stylesdemo_lang_switch']) && $this->config['vinabb_stylesdemo_lang_switch'] != $this->config['default_lang'])
 		{
-			$sql = 'SELECT *
-				FROM ' . LANG_TABLE . '
-				WHERE ' . $this->db->sql_in_set('lang_iso', array($this->config['default_lang'], $this->config['vinabb_stylesdemo_lang_switch'])) . '
-				ORDER BY lang_english_name';
-			$result = $this->db->sql_query($sql);
-			$rows = $this->db->sql_fetchrowset($result);
-			$this->db->sql_freeresult($result);
+			// Get language data from cache
+			$lang_data = $this->cache->get('_lang_data');
 
-			foreach ($rows as $row)
+			if ($lang_data === false)
 			{
-				if ($row['lang_iso'] == $this->config['default_lang'])
+				$sql = 'SELECT lang_iso, lang_local_name
+					FROM ' . LANG_TABLE;
+				$result = $this->db->sql_query($sql);
+
+				$lang_data = array();
+				while ($row = $this->db->sql_fetchrow($result))
 				{
-					$default_lang_name = $row['lang_local_name'];
+					$lang_data[$row['lang_iso']] = $row['lang_local_name'];
 				}
-				else
-				{
-					$switch_lang_name = $row['lang_local_name'];
-				}
+				$this->db->sql_freeresult($result);
+
+				// Write language data to cache
+				$this->cache->put('_lang_data', $lang_data);
 			}
 
+			$default_lang_name = $lang_data[$this->config['default_lang']];
+			$switch_lang_name = $lang_data[$this->config['vinabb_stylesdemo_lang_switch']];
 			$lang_title = ($this->user->lang_name == $this->config['default_lang']) ? $this->language->lang('LANG_SWITCH', $default_lang_name, $switch_lang_name) : $this->language->lang('LANG_SWITCH', $switch_lang_name, $default_lang_name);
 		}
 

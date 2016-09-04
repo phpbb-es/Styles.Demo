@@ -12,6 +12,7 @@ services:
         class: vinabb\stylesdemo\controller\main
         arguments:
             - '@dbal.conn'
+            - '@cache.driver'
             - '@config'
             - '@controller.helper'
             - '@template'
@@ -30,6 +31,7 @@ services:
         class: vinabb\stylesdemo\event\listener
         arguments:
             - '@dbal.conn'
+            - '@cache.driver'
             - '@config'
             - '@controller.helper'
             - '@template'
