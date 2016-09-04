@@ -15,6 +15,9 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\db\driver\driver_interface */
     protected $db;
 
+	/** @var \phpbb\cache\driver\driver_interface */
+	protected $cache;
+
 	/** @var \phpbb\config\config */
     protected $config;
 
@@ -49,6 +52,7 @@ class listener implements EventSubscriberInterface
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver_interface $db
+	* @param \phpbb\cache\driver\driver_interface $cache
 	* @param \phpbb\config\config $config
 	* @param \phpbb\controller\helper $helper
 	* @param \phpbb\template\template $template
@@ -60,6 +64,7 @@ class listener implements EventSubscriberInterface
 	* @param string $php_ext
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db,
+								\phpbb\cache\driver\driver_interface $cache,
 								\phpbb\config\config $config,
 								\phpbb\controller\helper $helper,
 								\phpbb\template\template $template,
@@ -72,6 +77,7 @@ class listener implements EventSubscriberInterface
 								$php_ext)
 	{
 		$this->db = $db;
+		$this->cache = $cache;
 		$this->config = $config;
 		$this->helper = $helper;
 		$this->template = $template;
@@ -94,6 +100,7 @@ class listener implements EventSubscriberInterface
 			'core.user_setup_after'			=> 'redirect_to_demo',
 			'core.page_header'				=> 'add_page_header_link',
 			'core.adm_page_header_after'	=> 'update_tpl_vars',
+			'core.add_log'					=> 'purge_lang_cache',
 		);
 	}
 
@@ -204,5 +211,18 @@ class listener implements EventSubscriberInterface
 			'T_RANKS_PATH'			=> "{$this->phpbb_root_path}{$this->config['ranks_path']}/",
 			'T_UPLOAD_PATH'			=> "{$this->phpbb_root_path}{$this->config['upload_path']}/",
 		));
+	}
+
+	/**
+	* Refresh language data when install/uninstall a language pack
+	*
+	* @param $event
+	*/
+	public function purge_lang_cache($event)
+	{
+		if ($event['log_operation'] == 'LOG_LANGUAGE_PACK_INSTALLED' || $event['log_operation'] == 'LOG_LANGUAGE_PACK_DELETED')
+		{
+			$this->cache->destroy('_lang_data');
+		}
 	}
 }
