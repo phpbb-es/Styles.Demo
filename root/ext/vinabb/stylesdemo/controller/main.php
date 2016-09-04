@@ -284,8 +284,8 @@ class main
 				$style_support = isset($json[$json_tree][$style_varname]['support']) ? $json[$json_tree][$style_varname]['support'] : '';
 
 				// Build style info
-				$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . ((isset($json['frontend'][$style_varname]['version']) && !empty($json['frontend'][$style_varname]['version'])) ? $json['frontend'][$style_varname]['version'] : $this->user->lang('ELLIPSIS'));
-				$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['author']) && !empty($json[$json_tree][$style_varname]['author'])) ? (!empty($json[$json_tree][$style_varname]['author_url']) ? "<a href=\"{$json[$json_tree][$style_varname]['author_url']}\">{$json[$json_tree][$style_varname]['author']}</a>" : $json[$json_tree][$style_varname]['author']) : $this->user->lang('ELLIPSIS'));
+				$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . ((isset($json['frontend'][$style_varname]['version']) && !empty($json['frontend'][$style_varname]['version'])) ? $json['frontend'][$style_varname]['version'] : $this->user->lang('UNKNOWN'));
+				$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['author']) && !empty($json[$json_tree][$style_varname]['author'])) ? (!empty($json[$json_tree][$style_varname]['author_url']) ? "<a href=\"{$json[$json_tree][$style_varname]['author_url']}\">{$json[$json_tree][$style_varname]['author']}</a>" : $json[$json_tree][$style_varname]['author']) : $this->user->lang('UNKNOWN'));
 				$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . (isset($json[$json_tree][$style_varname]['presets']) ? $json[$json_tree][$style_varname]['presets'] : 0);
 				$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['responsive']) && $json[$json_tree][$style_varname]['responsive']) ? $this->user->lang('YES') : $this->user->lang('NO'));
 				$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['price']) && $json[$json_tree][$style_varname]['price']) ? '<code>' . $json[$json_tree][$style_varname]['price_label'] . '</code>' : '<code class="green">' . $this->user->lang('FREE') . '</code>');
@@ -303,8 +303,8 @@ class main
 				$style_support = $row['style_support'];
 
 				// Build style info
-				$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . (!empty($row['style_version']) ? $row['style_version'] : $this->user->lang('ELLIPSIS'));
-				$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . (!empty($row['style_author']) ? (!empty($row['style_author_url']) ? "<a href=\"{$row['style_author_url']}\">{$row['style_author']}</a>" : $row['style_author']) : $this->user->lang('ELLIPSIS'));
+				$style_info = '<strong>' . $this->user->lang('VERSION') . $this->user->lang('COLON') . '</strong> ' . (!empty($row['style_version']) ? $row['style_version'] : $this->user->lang('UNKNOWN'));
+				$style_info .= '<br><strong>' . $this->user->lang('DESIGNER') . $this->user->lang('COLON') . '</strong> ' . (!empty($row['style_author']) ? (!empty($row['style_author_url']) ? "<a href=\"{$row['style_author_url']}\">{$row['style_author']}</a>" : $row['style_author']) : $this->user->lang('UNKNOWN'));
 				$style_info .= '<br><strong>' . $this->user->lang('PRESETS') . $this->user->lang('COLON') . '</strong> ' . $row['style_presets'];
 				$style_info .= '<br><strong>' . $this->user->lang('RESPONSIVE') . $this->user->lang('COLON') . '</strong> ' . ($row['style_responsive'] ? $this->user->lang('YES') : $this->user->lang('NO'));
 				$style_info .= '<br><strong>' . $this->user->lang('PRICE') . $this->user->lang('COLON') . '</strong> ' . ($row['style_price'] ? '<code>' . $row['style_price_label'] . '</code>' : '<code class="green">' . $this->user->lang('FREE') . '</code>');

@@ -71,5 +71,7 @@ $lang = array_merge($lang, array(
 
 	'TABLET'	=> 'Tablet',
 
+	'UNKNOWN'	=> 'Unknown',
+
 	'VERSION'	=> 'Version',
 ));

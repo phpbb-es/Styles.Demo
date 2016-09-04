@@ -71,5 +71,7 @@ $lang = array_merge($lang, array(
 
 	'TABLET'	=> 'Máy tính bảng',
 
+	'UNKNOWN'	=> 'Không biết',
+
 	'VERSION'	=> 'Phiên bản',
 ));
