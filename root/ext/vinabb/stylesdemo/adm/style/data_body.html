@@ -57,11 +57,11 @@
 			<dt><label>{{ lang('LINK_MIRROR') }}{{ lang('COLON') }}</label></dt>
 			<dd>
 				{% for mirror in loops.mirrors %}
-					{% if loop.first %}<span id="mirror_tpl">{% endif %}
-					<input type="text" name="style_mirror_names[]" id="style_mirror_name" value="{{ mirror.NAME }}" placeholder="{{ lang('LINK_MIRROR_NAME') ~ lang('COLON') }}" size="10" maxlength="255">
-					<input type="url" name="style_mirror_urls[]" id="style_mirror_url" value="{{ mirror.URL }}"  placeholder="{{ lang('LINK_MIRROR_URL') ~ lang('COLON') }}" size="28" maxlength="255">
+				{% if loop.first %}<span id="mirror_tpl">{% endif %}
+					<input type="text" name="style_mirror_names[]" id="style_mirror_name{% if not loop.first %}_{{ loop.index }}{% endif %}" value="{{ mirror.NAME }}" placeholder="{{ lang('LINK_MIRROR_NAME') ~ lang('COLON') }}" size="10" maxlength="255">
+					<input type="url" name="style_mirror_urls[]" id="style_mirror_url{% if not loop.first %}_{{ loop.index }}{% endif %}" value="{{ mirror.URL }}"  placeholder="{{ lang('LINK_MIRROR_URL') ~ lang('COLON') }}" size="28" maxlength="255">
 					<br><hr>
-					{% if loop.first %}</span>{% endif %}
+				{% if loop.first %}</span>{% endif %}
 				{% endfor %}
 			</dd>
 			<dd><input type="button" class="button1" id="mirror_btn" value="{{ lang('LINK_MIRROR_ADD') }}"></dd>
@@ -198,27 +198,23 @@
 	{
 		'use strict';
 
-		var mirrorHTML,
-			$elements = {
-				mirror: $('#mirror_tpl'),
-				mirrorBtn: $('#mirror_btn')
-			};
+		var mirrorHTML;
 
 		$(function()
 		{
-			mirrorHTML = $elements.mirror.first().clone();
+			mirrorHTML = $('#mirror_tpl').clone();
 		});
 
-		$elements.mirrorBtn.on('click', function()
+		$('#mirror_btn').on('click', function()
 		{
-			var count = $elements.mirror.length,
-				$mirror = mirrorHTML.clone();
+			var count = $("input[name='style_mirror_names[]']").length + 1,
+				$mirror = mirrorHTML.clone().removeAttr('id');
 
 			$mirror.find('input').each(function()
 			{
 				var $this = $(this);
 				$this.attr('value', '');
-				$this.attr('id', $this.attr('id') + count);
+				$this.attr('id', $this.attr('id') + '_' + count);
 			});
 
 			$(this).before($mirror);
