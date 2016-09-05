@@ -3,11 +3,11 @@
 	"type": "phpbb-extension",
 	"description": "Style preview utility for demo phpBB sites.",
 	"homepage": "http://vinabb.vn/",
-	"version": "1.1.1",
-	"time": "2016-07-26",
+	"version": "1.1.2",
+	"time": "2016-09-05",
 	"license": "GPL-2.0",
 	"authors": [{
-		"name": "nedka",
+		"name": "Khoa Nguyen",
 		"email": "nedka@vinabb.vn",
 		"homepage": "http://nedka.vn/",
 		"role": "Developer"
