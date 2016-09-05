@@ -214,7 +214,7 @@ class main
 				case constants::SCREENSHOT_TYPE_JSON:
 					if (!empty($json[$json_tree][$style_varname]['screenshot']))
 					{
-						$style_img = $json[$json_tree][$style_varname]['screenshot'];
+						$style_img = htmlspecialchars_decode($json[$json_tree][$style_varname]['screenshot']);
 					}
 					else
 					{
@@ -323,7 +323,7 @@ class main
 				{
 					$style_mirror_data[] = array(
 						'name'	=> !empty($mirror_name) ? $mirror_name : $this->user->lang('MIRROR_LABEL', $i),
-						'url'	=> $mirror_url,
+						'url'	=> htmlspecialchars_decode($mirror_url),
 					);
 
 					$i++;
@@ -337,10 +337,10 @@ class main
 				'phpbb_info'	=> '<strong>' . $this->user->lang('PHPBB_VERSION') . $this->user->lang('COLON') . '</strong> <kbd>' . (!empty($phpbb_version) ? $phpbb_version : $this->user->lang('UNKNOWN')) . '</kbd>',
 				'price'			=> $style_price,
 				'price_label'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
-				'download'		=> $style_download,
+				'download'		=> htmlspecialchars_decode($style_download),
 				'mirror'		=> sizeof($style_mirror_data) ? $style_mirror_data : null,
-				'details'		=> $style_details,
-				'support'		=> !empty($style_support) ? $style_support : $this->config['vinabb_stylesdemo_support_url'],
+				'details'		=> htmlspecialchars_decode($style_details),
+				'support'		=> htmlspecialchars_decode(!empty($style_support) ? $style_support : $this->config['vinabb_stylesdemo_support_url']),
 				'img'			=> $style_img,
 				'info'			=> $style_info,
 				'url'			=> $preview_url,
