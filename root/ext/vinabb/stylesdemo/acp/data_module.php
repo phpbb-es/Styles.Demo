@@ -268,8 +268,6 @@ class data_module
 
 					foreach ($style_mirror_urls as $style_mirror_url)
 					{
-						$style_mirror_url = htmlspecialchars($style_mirror_url);
-
 						if (!empty($style_mirror_url) && !isset($style_mirrors[$style_mirror_url]))
 						{
 							$style_mirrors[$style_mirror_url] = (isset($style_mirror_names[$i]) && !empty($style_mirror_names[$i])) ? $style_mirror_names[$i] : '';

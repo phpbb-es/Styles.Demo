@@ -194,8 +194,8 @@ class listener implements EventSubscriberInterface
 			'PREFIX_URL'		=> generate_board_url() . '/' . $this->phpbb_admin_path,
 			'PREFIX_URL_ALT'	=> generate_board_url(),
 
-			'ICON_ENABLE'	=> '<img src="' . htmlspecialchars($this->ext_web_path) . 'adm/images/icon_disabled.gif" alt="' . $this->user->lang('ENABLE') . '" title="' . $this->user->lang('ENABLE') . '">',
-			'ICON_DISABLE'	=> '<img src="' . htmlspecialchars($this->ext_web_path) . 'adm/images/icon_enabled.gif" alt="' . $this->user->lang('DISABLE') . '" title="' . $this->user->lang('DISABLE') . '">',
+			'ICON_ENABLE'	=> '<img src="' . $this->ext_web_path . 'adm/images/icon_disabled.gif" alt="' . $this->user->lang('ENABLE') . '" title="' . $this->user->lang('ENABLE') . '">',
+			'ICON_DISABLE'	=> '<img src="' . $this->ext_web_path . 'adm/images/icon_enabled.gif" alt="' . $this->user->lang('DISABLE') . '" title="' . $this->user->lang('DISABLE') . '">',
 
 			'S_GUEST'	=> ($this->user->data['user_id'] == ANONYMOUS) ? true : false,
 
