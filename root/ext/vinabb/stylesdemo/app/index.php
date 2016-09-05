@@ -162,7 +162,7 @@ $template->assign_vars(array(
 ));
 
 // Instantiate new module
-$module = new fake_p_master();
+$module = new \vinabb\stylesdemo\includes\fake_p_master();
 
 // Instantiate module system and generate list of available modules
 $module->list_modules('acp');
