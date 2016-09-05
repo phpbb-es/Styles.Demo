@@ -252,10 +252,10 @@ class user extends \phpbb\user
 			$this->style[$key] = (isset($parsed_items[$key])) ? $parsed_items[$key] : $default_value;
 			settype($this->style[$key], gettype($default_value));
 
-			if (is_string($default_value))
+			/*if (is_string($default_value))
 			{
 				$this->style[$key] = htmlspecialchars($this->style[$key]);
-			}
+			}*/
 		}
 
 		$template->set_style();
