@@ -23,6 +23,12 @@
 		"display-name": "Styles Demo",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.2.0-RC1,<3.3.0@dev"
+		},
+		"version-check": {
+			"host": "raw.githubusercontent.com",
+			"directory": "/VinaBB/Styles.Demo/master",
+			"filename": "update.json",
+			"ssl": true
 		}
 	}
 }
