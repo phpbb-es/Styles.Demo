@@ -243,7 +243,7 @@ class main
 							$this->set_time_limit = true;
 						}
 
-						$preview_url = generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
+						$preview_url = ($mode == 'acp') ? generate_board_url() . "/ext/vinabb/stylesdemo/app/index.{$this->php_ext}?s={$style_varname}&sid={$this->user->session_id}" : generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
 						$script = file_get_contents("{$this->ext_root_path}assets/js/phantom.js");
 						$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
 
