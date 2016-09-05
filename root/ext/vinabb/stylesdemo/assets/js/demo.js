@@ -47,17 +47,17 @@ $('.get-btn').click(
 	{
 		if ($current_style in $styles)
 		{
-			$('#styleName').html($styles[$current_style]['name']);
-			$('#styleInfo').html($styles[$current_style]['phpbb_info'] + '<br>' + $styles[$current_style]['info']);
+			$('#styleName').html($styles[$current_style].name);
+			$('#styleInfo').html($styles[$current_style].phpbb_info + '<br>' + $styles[$current_style].info);
 
-			if ($styles[$current_style]['price'])
+			if ($styles[$current_style].price)
 			{
 				$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
 				$('#downloadPurchase').prop('class', 'btn btn-danger');
 			}
 			else
 			{
-				if ($styles[$current_style]['download'])
+				if ($styles[$current_style].download)
 				{
 					$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
 					$('#downloadPurchase').prop('class', 'btn btn-success');
@@ -83,13 +83,13 @@ $('#downloadPurchase').click(
 		{
 			$('#styleInfoDialog').modal('hide');
 
-			if ($styles[$current_style]['price'] || !$downloadDirect)
+			if ($styles[$current_style].price || !$downloadDirect)
 			{
-				window.open($styles[$current_style]['download']);
+				window.open($styles[$current_style].download);
 			}
 			else
 			{
-				top.location.href = $styles[$current_style]['download'];
+				top.location.href = $styles[$current_style].download;
 			}
 		}
 
@@ -104,7 +104,7 @@ $('#viewDetails').click(
 		if ($current_style in $styles)
 		{
 			$('#styleInfoDialog').modal('hide');
-			window.open($styles[$current_style]['details']);
+			window.open($styles[$current_style].details);
 		}
 
 		return false;
@@ -118,7 +118,7 @@ $('#getSupport').click(
 		if ($current_style in $styles)
 		{
 			$('#styleInfoDialog').modal('hide');
-			window.open($styles[$current_style]['support']);
+			window.open($styles[$current_style].support);
 		}
 
 		return false;
@@ -381,19 +381,23 @@ $(document).ready(
 		if ($styles[$current_style].support.length)
 		{
 			$('#getSupport').prop('disabled', false);
+			$("#getSupport").removeClass('hidden');
 		}
 		else
 		{
 			$('#getSupport').prop('disabled', true);
+			$("#getSupport").addClass('hidden');
 		}
 
 		if ($styles[$current_style].details.length)
 		{
 			$('#viewDetails').prop('disabled', false);
+			$("#viewDetails").removeClass('hidden');
 		}
 		else
 		{
 			$('#viewDetails').prop('disabled', true);
+			$("#viewDetails").addClass('hidden');
 		}
 
 		if ($styles[$current_style].download.length)
@@ -405,9 +409,15 @@ $(document).ready(
 			$('#downloadPurchase').prop('disabled', true);
 		}
 
-		if ($styles[$current_style].mirror !== null)
+		if ($styles[$current_style].price || $styles[$current_style].mirror === null)
+		{
+			$('#getMirror').prop('disabled', true);
+			$("#mirrorArea").addClass('hidden');
+		}
+		else
 		{
 			$('#getMirror').prop('disabled', false);
+			$("#mirrorArea").removeClass('hidden');
 
 			$.each($styles[$current_style].mirror,
 				function (key, object)
@@ -415,10 +425,6 @@ $(document).ready(
 					$('#mirrorList').append('<li><a href="' + object.url + '"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;' + object.name + '</a></li>');
 				}
 			);
-		}
-		else
-		{
-			$('#getMirror').prop('disabled', true);
 		}
 
 		// Update style name + price label
@@ -476,25 +482,29 @@ $('.style').click(
 			}
 
 			// Update buttons on styleInfoDialog
-			if ($styles[$current_style]['support'].length)
+			if ($styles[$current_style].support.length)
 			{
 				$('#getSupport').prop('disabled', false);
+				$("#getSupport").removeClass('hidden');
 			}
 			else
 			{
 				$('#getSupport').prop('disabled', true);
+				$("#getSupport").addClass('hidden');
 			}
 
-			if ($styles[$current_style]['details'].length)
+			if ($styles[$current_style].details.length)
 			{
 				$('#viewDetails').prop('disabled', false);
+				$("#viewDetails").removeClass('hidden');
 			}
 			else
 			{
 				$('#viewDetails').prop('disabled', true);
+				$("#viewDetails").addClass('hidden');
 			}
 
-			if ($styles[$current_style]['download'].length)
+			if ($styles[$current_style].download.length)
 			{
 				$('#downloadPurchase').prop('disabled', false);
 			}
@@ -506,20 +516,22 @@ $('.style').click(
 			// Reset the mirror list
 			$('#mirrorList').html('');
 
-			if ($styles[$current_style]['mirror'] !== null)
+			if ($styles[$current_style].price || $styles[$current_style].mirror === null)
+			{
+				$('#getMirror').prop('disabled', true);
+				$("#mirrorArea").addClass('hidden');
+			}
+			else
 			{
 				$('#getMirror').prop('disabled', false);
+				$("#mirrorArea").removeClass('hidden');
 
-				$.each($styles[$current_style]['mirror'],
+				$.each($styles[$current_style].mirror,
 					function (key, object)
 					{
 						$('#mirrorList').append('<li><a href="' + object.url + '"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;' + object.name + '</a></li>');
 					}
 				);
-			}
-			else
-			{
-				$('#getMirror').prop('disabled', true);
 			}
 
 			// Update style name + price label
