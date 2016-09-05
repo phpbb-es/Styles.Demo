@@ -290,7 +290,7 @@ class main
 
 				// Build style info
 				$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . ((isset($json['frontend'][$style_varname]['version']) && !empty($json['frontend'][$style_varname]['version'])) ? $json['frontend'][$style_varname]['version'] : $this->language->lang('UNKNOWN'));
-				$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['author']) && !empty($json[$json_tree][$style_varname]['author'])) ? (!empty($json[$json_tree][$style_varname]['author_url']) ? "<a href=\"{$json[$json_tree][$style_varname]['author_url']}\">{$json[$json_tree][$style_varname]['author']}</a>" : $json[$json_tree][$style_varname]['author']) : $this->language->lang('UNKNOWN'));
+				$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $this->display_author_info(isset($json[$json_tree][$style_varname]['style_author']) ? $json[$json_tree][$style_varname]['style_author'] : '', isset($json[$json_tree][$style_varname]['style_author_url']) ? $json[$json_tree][$style_varname]['style_author_url'] : '');
 				$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . (isset($json[$json_tree][$style_varname]['presets']) ? $json[$json_tree][$style_varname]['presets'] : 0);
 				$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['responsive']) && $json[$json_tree][$style_varname]['responsive']) ? $this->language->lang('YES') : $this->language->lang('NO'));
 				$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . ((isset($json[$json_tree][$style_varname]['price']) && $json[$json_tree][$style_varname]['price']) ? '<code>' . $json[$json_tree][$style_varname]['price_label'] . '</code>' : '<code class="green">' . $this->language->lang('FREE') . '</code>');
@@ -309,7 +309,7 @@ class main
 
 				// Build style info
 				$style_info = '<strong>' . $this->language->lang('VERSION') . $this->language->lang('COLON') . '</strong> ' . (!empty($row['style_version']) ? $row['style_version'] : $this->language->lang('UNKNOWN'));
-				$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . (!empty($row['style_author']) ? (!empty($row['style_author_url']) ? "<a href=\"{$row['style_author_url']}\">{$row['style_author']}</a>" : $row['style_author']) : $this->language->lang('UNKNOWN'));
+				$style_info .= '<br><strong>' . $this->language->lang('DESIGNER') . $this->language->lang('COLON') . '</strong> ' . $this->display_author_info($row['style_author'], $row['style_author_url']);
 				$style_info .= '<br><strong>' . $this->language->lang('PRESETS') . $this->language->lang('COLON') . '</strong> ' . $row['style_presets'];
 				$style_info .= '<br><strong>' . $this->language->lang('RESPONSIVE') . $this->language->lang('COLON') . '</strong> ' . ($row['style_responsive'] ? $this->language->lang('YES') : $this->language->lang('NO'));
 				$style_info .= '<br><strong>' . $this->language->lang('PRICE') . $this->language->lang('COLON') . '</strong> ' . ($row['style_price'] ? '<code>' . $row['style_price_label'] . '</code>' : '<code class="green">' . $this->language->lang('FREE') . '</code>');
@@ -411,6 +411,35 @@ class main
 		));
 
 		return $this->helper->render('demo_body.html', '');
+	}
+
+	/**
+	* Display author name with URL
+	*
+	* @param $name
+	* @param $url
+	*
+	* @return string
+	*/
+	protected function display_author_info($name, $url)
+	{
+		$url = htmlspecialchars_decode($url);
+		$info = $this->language->lang('UNKNOWN');
+
+		if (!empty($name) && !empty($url))
+		{
+			$info = '<a href="' . $url . '">' . $name . '</a>';
+		}
+		else if (!empty($name) && empty($url))
+		{
+			$info = $name;
+		}
+		else if (empty($name) && !empty($url))
+		{
+			$info = '<a href="' . $url . '">' . $this->language->lang('UNKNOWN') . '</a>';
+		}
+
+		return $info;
 	}
 
 	/*
