@@ -50,11 +50,11 @@
 			<dd><input type="text" name="style_price_label" id="style_price_label" value="{{ PRICE_LABEL }}" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_download">{{ lang('LINK_DOWNLOAD') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_download">{{ lang('LINK_DOWNLOAD') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_DOWNLOAD_EXPLAIN') }}</span></dt>
 			<dd><input type="url" name="style_download" id="style_download" value="{{ DOWNLOAD }}" size="40" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label>{{ lang('LINK_MIRROR') }}{{ lang('COLON') }}</label></dt>
+			<dt><label>{{ lang('LINK_MIRROR') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_MIRROR_EXPLAIN') }}</span></dt>
 			<dd>
 				{% for mirror in mirrors %}
 				{% if loop.first %}<span id="mirror_tpl">{% endif %}
