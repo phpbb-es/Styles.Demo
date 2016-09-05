@@ -61,8 +61,8 @@
 		<dl>
 			<dt><label for="json_enable">{{ lang('STYLES_DEMO_JSON_ENABLE') }}{{ lang('COLON') }}</label></dt>
 			<dd>
-				<label><input type="radio" class="radio" name="json_enable" value="1" id="json_enable"{% if JSON_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('json_enable_yes_options', 1);phpbb.toggleDisplay('json_enable_no_options', -1)"> {{ lang('STYLES_DEMO_JSON_ENABLE_YES') }}</label>
-				<label><input type="radio" class="radio" name="json_enable" value="0"{% if not JSON_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('json_enable_yes_options', -1);phpbb.toggleDisplay('json_enable_no_options', 1)"> {{ lang('STYLES_DEMO_JSON_ENABLE_NO') }}</label>
+				<label><input type="radio" class="radio" name="json_enable" value="1" id="json_enable"{% if JSON_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('json_enable_yes_options', 1)"> {{ lang('STYLES_DEMO_JSON_ENABLE_YES') }}</label>
+				<label><input type="radio" class="radio" name="json_enable" value="0"{% if not JSON_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('json_enable_yes_options', -1)"> {{ lang('STYLES_DEMO_JSON_ENABLE_NO') }}</label>
 			</dd>
 		</dl>
 		<div id="json_enable_yes_options"{% if not JSON_ENABLE %} style="display: none;"{% endif %}>
@@ -71,12 +71,10 @@
 				<dd><input type="url" name="json_url" id="json_url" size="40" maxlength="255" value="{{ JSON_URL }}"></dd>
 			</dl>
 		</div>
-		<div id="json_enable_no_options"{% if JSON_ENABLE %} style="display: none;"{% endif %}>
-			<dl>
-				<dt><label for="support_url">{{ lang('LINK_SUPPORT_DEFAULT') }}{{ lang('COLON') }}</label></dt>
-				<dd><input type="url" name="support_url" id="support_url" size="40" maxlength="255" value="{{ SUPPORT_URL }}"></dd>
-			</dl>
-		</div>
+		<dl>
+			<dt><label for="support_url">{{ lang('LINK_SUPPORT_DEFAULT') }}{{ lang('COLON') }}</label></dt>
+			<dd><input type="url" name="support_url" id="support_url" size="40" maxlength="255" value="{{ SUPPORT_URL }}"></dd>
+		</dl>
 		<dl>
 			<dt><label for="screenshot_type">{{ lang('SCREENSHOT_TYPE') }}{{ lang('COLON') }}</label><br><span>{{ lang('SCREENSHOT_TYPE_EXPLAIN') }}</span></dt>
 			<dd>
