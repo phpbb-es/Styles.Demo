@@ -30,4 +30,7 @@ class constants
 	// Styles
 	const DEFAULT_STYLE = 'prosilver';// Do not change it! This is not the default style of your board.
 	const STYLES_PER_PAGE = 20;
+
+	// Currency symbol
+	const CURRENCY_SYMBOL = '$%d';
 }
