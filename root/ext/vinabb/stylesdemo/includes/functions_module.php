@@ -6,6 +6,8 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
+namespace vinabb\stylesdemo\includes;
+
 /**
  * @ignore
  */
@@ -17,7 +19,7 @@ if (!defined('IN_PHPBB'))
 global $phpbb_root_path, $phpEx;
 require($phpbb_root_path . 'includes/functions_module.' . $phpEx);
 
-class fake_p_master extends p_master
+class fake_p_master extends \p_master
 {
 	/**
 	* Copied from phpBB 3.2.0-RC1 with one change:
