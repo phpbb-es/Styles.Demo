@@ -19,14 +19,15 @@ class settings_module
 	{
 		global $phpbb_container, $phpEx;
 
+		$this->auth = $phpbb_container->get('auth');
 		$this->config = $phpbb_container->get('config');
 		$this->db = $phpbb_container->get('dbal.conn');
 		$this->log = $phpbb_container->get('log');
 		$this->request = $phpbb_container->get('request');
-		$this->ext_manager = $phpbb_container->get('ext.manager');
 		$this->template = $phpbb_container->get('template');
 		$this->user = $phpbb_container->get('user');
-		$this->auth = $phpbb_container->get('auth');
+		$this->helper = $phpbb_container->get('controller.helper');
+		$this->ext_manager = $phpbb_container->get('ext.manager');
 
 		$this->tpl_name = 'settings_body';
 		$this->page_title = $this->user->lang('ACP_STYLES_DEMO');
@@ -273,7 +274,7 @@ class settings_module
 
 		// Output
 		$this->template->assign_vars(array(
-			'STYLES_DEMO_URL'	=> generate_board_url() . (($this->config['enable_mod_rewrite']) ? '' : "/app.$phpEx") . '/demo/',
+			'STYLES_DEMO_URL'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => '')),
 
 			'LOGO_TEXT'			=> (isset($logo_text) && !empty($logo_text)) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
 			'AUTO_TOGGLE'		=> isset($auto_toggle) ? $auto_toggle : $this->config['vinabb_stylesdemo_auto_toggle'],
