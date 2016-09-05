@@ -1,0 +1,13 @@
+{
+	"stable": {
+		"1.1": {
+			"current": "1.1.2",
+			"download": "https://github.com/VinaBB/Styles.Demo/releases/download/release-1.1.2/Styles.Demo.1.1.2.zip",
+			"announcement": "http://vinabb.vn/viewtopic.php?f=7&t=16",
+			"eol": null,
+			"security": false
+		}
+	},
+	"unstable": {
+	}
+}
