@@ -179,7 +179,7 @@ class data_module
 				// Parse mirror data
 				if (!empty($style_data['style_mirror']))
 				{
-					$style_data['style_mirror'] = unserialize($style_data['style_mirror']);
+					$style_data['style_mirror'] = json_decode($style_data['style_mirror'], true);
 
 					foreach ($style_data['style_mirror'] as $mirror_url => $mirror_name)
 					{
@@ -287,7 +287,7 @@ class data_module
 						'style_price'			=> $style_price,
 						'style_price_label'		=> $style_price_label,
 						'style_download'		=> $style_download,
-						'style_mirror'			=> (sizeof($style_mirrors)) ? serialize($style_mirrors) : '',
+						'style_mirror'			=> (sizeof($style_mirrors)) ? json_encode($style_mirrors) : '',
 						'style_details'			=> $style_details,
 						'style_support'			=> $style_support,
 					);

@@ -298,7 +298,7 @@ class main
 				$style_price = $row['style_price'];
 				$style_price_label = $row['style_price_label'];
 				$style_download = $row['style_download'];
-				$style_mirror = !empty($row['style_mirror']) ? unserialize($row['style_mirror']) : '';
+				$style_mirror = !empty($row['style_mirror']) ? json_decode($row['style_mirror'], true) : '';
 				$style_details = $row['style_details'];
 				$style_support = $row['style_support'];
 
