@@ -334,7 +334,7 @@ class main
 			$style_data[$style_varname] = array(
 				'name'			=> $style_name,
 				'phpbb'			=> $this->user->lang('PHPBB_BADGE', $phpbb_version),
-				'phpbb_info'	=> '<strong>' . $this->user->lang('PHPBB_VERSION') . $this->user->lang('COLON') . '</strong> <kbd>' . $phpbb_version . '</kbd>',
+				'phpbb_info'	=> '<strong>' . $this->user->lang('PHPBB_VERSION') . $this->user->lang('COLON') . '</strong> <kbd>' . (!empty($phpbb_version) ? $phpbb_version : $this->user->lang('UNKNOWN')) . '</kbd>',
 				'price'			=> $style_price,
 				'price_label'	=> ($style_price) ? $style_price_label : $this->user->lang('FREE'),
 				'download'		=> $style_download,
