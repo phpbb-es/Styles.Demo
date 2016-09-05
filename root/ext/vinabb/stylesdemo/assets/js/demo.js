@@ -346,95 +346,14 @@ $(document).ready(
 			}
 		}
 
-		// Update get button
-		if ($styles[$current_style].download || $styles[$current_style].mirror !== null)
-		{
-			if ($styles[$current_style].price)
-			{
-				$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
-				$('#getButton').attr('data-original-title', $label_purchase);
-			}
-			else
-			{
-				$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
-				$('#getButton').attr('data-original-title', $label_download);
-			}
-		}
-		else
-		{
-			$('#getButton').prop('class', 'fa fa-info-circle animate-pulse show-tooltip');
-			$('#getButton').attr('data-original-title', $label_info);
-		}
+		// Update buttons
+		$(this).changeElements($styles[$current_style]);
 
-		// Update buttons on styleInfoDialog
-		if ($styles[$current_style].support.length)
-		{
-			$('#getSupport').prop('disabled', false);
-			$("#getSupport").removeClass('hidden');
-		}
-		else
-		{
-			$('#getSupport').prop('disabled', true);
-			$("#getSupport").addClass('hidden');
-		}
-
-		if ($styles[$current_style].details.length)
-		{
-			$('#viewDetails').prop('disabled', false);
-			$("#viewDetails").removeClass('hidden');
-		}
-		else
-		{
-			$('#viewDetails').prop('disabled', true);
-			$("#viewDetails").addClass('hidden');
-		}
-
-		if ($styles[$current_style].download.length)
-		{
-			$('#downloadPurchase').prop('disabled', false);
-
-			if ($styles[$current_style].price)
-			{
-				$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
-				$('#downloadPurchase').prop('class', 'btn btn-danger');
-			}
-			else
-			{
-				$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
-				$('#downloadPurchase').prop('class', 'btn btn-success');
-			}
-		}
-		else
-		{
-			$('#downloadPurchase').prop('disabled', true);
-			$("#downloadPurchase").addClass('hidden');
-		}
-
-		if ($styles[$current_style].price || $styles[$current_style].mirror === null)
-		{
-			$('#getMirror').prop('disabled', true);
-			$("#mirrorArea").addClass('hidden');
-		}
-		else
-		{
-			$('#getMirror').prop('disabled', false);
-			$("#mirrorArea").removeClass('hidden');
-
-			$.each($styles[$current_style].mirror,
-				function (key, object)
-				{
-					$('#mirrorList').append('<li><a href="' + object.url + '"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;' + object.name + '</a></li>');
-				}
-			);
-		}
-
-		// Update style name + price label
-		var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger hidden-xs">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success hidden-xs">' + $label_free + '</span>';
-		$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
-
+		// Update iframe URL
 		switcher_viewport_buttons();
 		$styleIframe.prop('src', $styles[$current_style].url);
 
+		// Tooltip
 		$('.style').tooltip(
 			{
 				container: 'body',
@@ -443,7 +362,6 @@ $(document).ready(
 				trigger: 'hover'
 			}
 		);
-
 		$('.show-tooltip').tooltip({placement: 'bottom'});
 	}
 );
@@ -470,100 +388,14 @@ $('.style').click(
 				}
 			);
 
-			// Update get button
-			if ($styles[$current_style].download || $styles[$current_style].mirror !== null)
-			{
-				if ($styles[$current_style].price)
-				{
-					$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
-					$('#getButton').attr('data-original-title', $label_purchase);
-				}
-				else
-				{
-					$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
-					$('#getButton').attr('data-original-title', $label_download);
-				}
-			}
-			else
-			{
-				$('#getButton').prop('class', 'fa fa-info-circle animate-pulse show-tooltip');
-				$('#getButton').attr('data-original-title', $label_info);
-			}
+			// Update buttons
+			$(this).changeElements($styles[$current_style]);
 
-			// Update buttons on styleInfoDialog
-			if ($styles[$current_style].support.length)
-			{
-				$('#getSupport').prop('disabled', false);
-				$("#getSupport").removeClass('hidden');
-			}
-			else
-			{
-				$('#getSupport').prop('disabled', true);
-				$("#getSupport").addClass('hidden');
-			}
-
-			if ($styles[$current_style].details.length)
-			{
-				$('#viewDetails').prop('disabled', false);
-				$("#viewDetails").removeClass('hidden');
-			}
-			else
-			{
-				$('#viewDetails').prop('disabled', true);
-				$("#viewDetails").addClass('hidden');
-			}
-
-			if ($styles[$current_style].download.length)
-			{
-				$('#downloadPurchase').prop('disabled', false);
-
-				if ($styles[$current_style].price)
-				{
-					$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
-					$('#downloadPurchase').prop('class', 'btn btn-danger');
-				}
-				else
-				{
-					$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
-					$('#downloadPurchase').prop('class', 'btn btn-success');
-				}
-			}
-			else
-			{
-				$('#downloadPurchase').prop('disabled', true);
-				$("#downloadPurchase").addClass('hidden');
-			}
-
-			// Reset the mirror list
-			$('#mirrorList').html('');
-
-			if ($styles[$current_style].price || $styles[$current_style].mirror === null)
-			{
-				$('#getMirror').prop('disabled', true);
-				$("#mirrorArea").addClass('hidden');
-			}
-			else
-			{
-				$('#getMirror').prop('disabled', false);
-				$("#mirrorArea").removeClass('hidden');
-
-				$.each($styles[$current_style].mirror,
-					function (key, object)
-					{
-						$('#mirrorList').append('<li><a href="' + object.url + '"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;' + object.name + '</a></li>');
-					}
-				);
-			}
-
-			// Update style name + price label
-			var styleIsFree = ($styles[$current_style].price) ? '<span class="label label-danger hidden-xs">' + $styles[$current_style].price_label + '</span>' : '<span class="label label-success hidden-xs">' + $label_free + '</span>';
-			$('.style-switcher a').html('<strong>' + $styles[$current_style].name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
-
+			// Update iframe URL
+			switcher_viewport_buttons();
 			$styleIframe.prop('src', $styles[$current_style].url);
 			location.hash = '#' + $current_style;
 		}
-
-		switcher_viewport_buttons();
 
 		return false;
 	}
@@ -576,3 +408,101 @@ $styleIframe.load(
     	$lastViewIframe = this.contentWindow.location.href;
 	}
 );
+
+// Change elements based on the current selection style
+(function($)
+{
+	$.fn.changeElements = function(object)
+	{
+		// Update get button
+		if (object.download || object.mirror !== null)
+		{
+			if (object.price)
+			{
+				$('#getButton').prop('class', 'fa fa-shopping-cart animate-pulse show-tooltip');
+				$('#getButton').attr('data-original-title', $label_purchase);
+			}
+			else
+			{
+				$('#getButton').prop('class', 'fa fa-download animate-pulse show-tooltip');
+				$('#getButton').attr('data-original-title', $label_download);
+			}
+		}
+		else
+		{
+			$('#getButton').prop('class', 'fa fa-info-circle animate-pulse show-tooltip');
+			$('#getButton').attr('data-original-title', $label_info);
+		}
+
+		// Update buttons on styleInfoDialog
+		if (object.support.length)
+		{
+			$('#getSupport').prop('disabled', false);
+			$("#getSupport").removeClass('hidden');
+		}
+		else
+		{
+			$('#getSupport').prop('disabled', true);
+			$("#getSupport").addClass('hidden');
+		}
+
+		if (object.details.length)
+		{
+			$('#viewDetails').prop('disabled', false);
+			$("#viewDetails").removeClass('hidden');
+		}
+		else
+		{
+			$('#viewDetails').prop('disabled', true);
+			$("#viewDetails").addClass('hidden');
+		}
+
+		if (object.download.length)
+		{
+			$('#downloadPurchase').prop('disabled', false);
+
+			if (object.price)
+			{
+				$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
+				$('#downloadPurchase').prop('class', 'btn btn-danger');
+			}
+			else
+			{
+				$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
+				$('#downloadPurchase').prop('class', 'btn btn-success');
+			}
+		}
+		else
+		{
+			$('#downloadPurchase').prop('disabled', true);
+			$("#downloadPurchase").addClass('hidden');
+		}
+
+		// Reset the mirror list
+		$('#mirrorList').html('');
+
+		if (object.price || object.mirror === null)
+		{
+			$('#getMirror').prop('disabled', true);
+			$("#mirrorArea").addClass('hidden');
+		}
+		else
+		{
+			$('#getMirror').prop('disabled', false);
+			$("#mirrorArea").removeClass('hidden');
+
+			$.each(object.mirror,
+				function (key, object)
+				{
+					$('#mirrorList').append('<li><a href="' + object.url + '"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;' + object.name + '</a></li>');
+				}
+			);
+		}
+
+		// Update style name + price label
+		var styleIsFree = (object.price) ? '<span class="label label-danger hidden-xs">' + object.price_label + '</span>' : '<span class="label label-success hidden-xs">' + $label_free + '</span>';
+		$('.style-switcher a').html('<strong>' + object.name + '</strong>' + '&nbsp;&nbsp;' + styleIsFree);
+
+		return this;
+	};
+})(jQuery);
