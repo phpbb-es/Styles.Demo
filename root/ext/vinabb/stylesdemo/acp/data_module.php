@@ -243,6 +243,25 @@ class data_module
 						}
 					}
 
+					// Check items based on the style price
+					if ($style_price)
+					{
+						// Try to format price label with the entered price value
+						if (empty($style_price_label))
+						{
+							$style_price_label = sprintf(constants::CURRENCY_SYMBOL, $style_price);
+						}
+
+						// Mirrors are not available for commercial styles
+						unset($style_mirror_urls);
+						$style_mirror_urls = array();
+					}
+					else
+					{
+						// Empty price label if free
+						$style_price_label = '';
+					}
+
 					// Get mirror links
 					$i = 0;
 					$style_mirrors = array();
