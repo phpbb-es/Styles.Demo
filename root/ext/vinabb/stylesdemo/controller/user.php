@@ -153,7 +153,7 @@ class user extends \phpbb\user
 
 		if ($include_result === false)
 		{
-			die('Language file ' . $this->lang_path . $this->lang_name . "/common.$phpEx" . " couldn't be opened.");
+			trigger_error('Language file ' . $this->lang_path . $this->lang_name . "/common.$phpEx" . " couldn't be opened.");
 		}
 
 		$this->add_lang($lang_set);
