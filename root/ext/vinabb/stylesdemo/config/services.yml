@@ -30,14 +30,12 @@ services:
     vinabb.stylesdemo.listener:
         class: vinabb\stylesdemo\event\listener
         arguments:
-            - '@dbal.conn'
             - '@cache.driver'
             - '@config'
             - '@controller.helper'
             - '@template'
             - '@user'
             - '@language'
-            - '@request'
             - '@ext.manager'
             - '@path_helper'
             - '%core.root_path%'

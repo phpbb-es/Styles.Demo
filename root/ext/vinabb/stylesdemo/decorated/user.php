@@ -11,43 +11,10 @@ namespace vinabb\stylesdemo\decorated;
 class user extends \phpbb\user
 {
 	/**
+	* Setup basic user-specific items (style, language...)
+	*
 	* Copied from phpBB 3.2.0-RC1 with 4 changes:
-	*
-	*	1. Enable &style=... for everybody
-	*		Original: if ($style_request && (!$config['override_user_style'] || $auth->acl_get('a_styles')) && !defined('ADMIN_START'))
-	*		Removed: && (!$config['override_user_style'] || $auth->acl_get('a_styles'))
-	*		Result: if ($style_request && !defined('ADMIN_START'))
-	*
-	*	2. Save the ACP style parameter &s=... in every URL within the ACP
-	*		Before (1.) above
-	*		Added:
-	*			$acp_style_request = $request->variable('s', '');
-	*
-	*			if ($acp_style_request && defined('ADMIN_START'))
-	*			{
-	*				global $SID, $_EXTRA_URL;
-	*
-	*				$SID .= '&amp;s=' . $acp_style_request;
-	*				$_EXTRA_URL = array('s=' . $acp_style_request);
-	*			}
-	*
-	*	3. STOP NOW if the fake ACP URL was changed to the real ACP URL with admin session
-	*		Before (2.) above
-	*		Added:
-	*			// Stop here if the fake ACP URL .../ext/vinabb/stylesdemo/app/index.php... was changed to .../adm/index.php... :-/
-	*			if ($this->data['user_id'] == ANONYMOUS && defined('ADMIN_START') && !defined('FAKE_ACP'))
-	*			{
-	*				trigger_error($this->language->lang('NO_ADMIN'), E_USER_ERROR);
-	*			}
-	*
-	*	4. Fix the disabled message for guests, since they have 'a_' permissions
-	*		Original: if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && !$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
-	*		Changed: if ($config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS))
-	*
-	*		Original: if (!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_'))
-	*		Changed: if ((!$auth->acl_gets('a_', 'm_') && !$auth->acl_getf_global('m_')) || $this->data['user_id'] == ANONYMOUS)
-	*
-	*	REMEMBER TO UPDATE CODE CHANGES FOR LATER PHPBB VERSIONS IF NEEDED
+	* REMEMBER TO UPDATE CODE CHANGES FOR LATER PHPBB VERSIONS IF NEEDED
 	*
 	* @param bool $lang_set
 	* @param bool $style_id
@@ -55,7 +22,7 @@ class user extends \phpbb\user
 	function setup($lang_set = false, $style_id = false)
 	{
 		global $db, $request, $template, $config, $auth, $phpEx, $phpbb_root_path, $cache;
-		global $phpbb_dispatcher;
+		global $phpbb_dispatcher, $phpbb_container;
 
 		$this->language->set_default_language($config['default_lang']);
 
@@ -91,6 +58,44 @@ class user extends \phpbb\user
 
 			$user_date_format = $config['default_dateformat'];
 			$user_timezone = $config['board_timezone'];
+		}
+
+		// Switch languages if the parameter &l=1
+		$switch_lang = $request->variable('l', false);
+		$last_page = str_replace('&amp;', '&', $request->variable('z', ''));
+
+		if ($this->data['user_id'] == ANONYMOUS)
+		{
+			$demo_lang = $request->variable($config['cookie_name'] . '_lang', '', true, \phpbb\request\request_interface::COOKIE);
+			$demo_lang = empty($demo_lang) ? $config['default_lang'] : $demo_lang;
+		}
+		else
+		{
+			$demo_lang = $this->data['user_lang'];
+		}
+
+		// Need to switch to another language?
+		if ($switch_lang && $config['vinabb_stylesdemo_lang_enable'] && !empty($config['vinabb_stylesdemo_lang_switch']) && $config['vinabb_stylesdemo_lang_switch'] != $config['default_lang'])
+		{
+			$new_lang = ($demo_lang == $config['default_lang']) ? $config['vinabb_stylesdemo_lang_switch'] : $config['default_lang'];
+
+			if ($this->data['user_id'] == ANONYMOUS)
+			{
+				$this->set_cookie('lang', $new_lang, 0, false);
+			}
+			else
+			{
+				$sql = 'UPDATE ' . USERS_TABLE . "
+					SET user_lang = '$new_lang'
+					WHERE user_id = " . $this->data['user_id'];
+				$db->sql_query($sql);
+			}
+
+			$response = new \Symfony\Component\HttpFoundation\RedirectResponse(
+				append_sid($phpbb_root_path . $last_page),
+				301
+			);
+			$response->send();
 		}
 
 		$user_data = $this->data;
@@ -255,6 +260,18 @@ class user extends \phpbb\user
 		// After calling it we continue script execution...
 		phpbb_user_session_handler();
 
+		// Redirect to the demo page if any visitors go to our demo board directly
+		if (!$style_request && !$acp_style_request && !in_array($this->page['page_name'], array("app.$phpEx/demo/", "app.$phpEx/demo/acp", "app.$phpEx/demo/acp/")) && $this->data['user_type'] != USER_FOUNDER && !defined('IN_LOGIN'))
+		{
+			$helper = $phpbb_container->get('controller.helper');
+
+			$response = new \Symfony\Component\HttpFoundation\RedirectResponse(
+				$helper->route('vinabb_stylesdemo_route', array('mode' => '')),
+				301
+			);
+			$response->send();
+		}
+		
 		/**
 		* Execute code at the end of user setup
 		*
