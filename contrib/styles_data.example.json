@@ -1104,6 +1104,22 @@
 			"details": "",
 			"support": ""
 		},
+		"prosilver": {
+			"name": "proSilver",
+			"author": "phpBB Limited",
+			"author_url": "https://www.phpbb.com/",
+			"version": "3.1.9",
+			"phpbb_version": "3.1.9",
+			"presets": 0,
+			"responsive": true,
+			"price": 0,
+			"price_label": "",
+			"screenshot": "",
+			"download": "https://www.phpbb.com/downloads/",
+			"mirror": null,
+			"details": "https://www.phpbb.com/about/",
+			"support": "https://www.phpbb.com/support/"
+		},
 		"prosocial": {
 			"name": "proSocial",
 			"author": "kas5986",
@@ -1426,5 +1442,21 @@
 		}
 	},
 	"acp": {
+		"prosilver": {
+			"name": "proSilver",
+			"author": "phpBB Limited",
+			"author_url": "https://www.phpbb.com/",
+			"version": "3.1.9",
+			"phpbb_version": "3.1.9",
+			"presets": 0,
+			"responsive": true,
+			"price": 0,
+			"price_label": "",
+			"screenshot": "",
+			"download": "https://www.phpbb.com/downloads/",
+			"mirror": null,
+			"details": "https://www.phpbb.com/about/",
+			"support": "https://www.phpbb.com/support/"
+		}
 	}
 }
