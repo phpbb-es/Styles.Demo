@@ -385,7 +385,7 @@ class main
 
 		// Assign index specific vars
 		$this->template->assign_vars(array(
-			'STYLE_DATA'		=> json_encode($style_data),
+			'STYLE_DATA'		=> json_encode($style_data, JSON_NUMERIC_CHECK),
 			'PREFIX_URL'		=> generate_board_url() . '/',
 			'LOGO_TEXT'			=> $this->config['vinabb_stylesdemo_logo_text'],
 			'AUTO_TOGGLE'		=> ($this->config['vinabb_stylesdemo_auto_toggle']) ? 'true' : 'false',
