@@ -205,6 +205,9 @@ class main
 			// Style varname
 			$style_varname = $this->style_varname_normalize($row['style_path']);
 
+			// Default style
+			$default_style = ($mode == '' && $row['style_id'] == $this->config['default_style']) ? $style_varname : constants::DEFAULT_STYLE;
+
 			// JSON tree
 			$json_tree = ($mode == 'acp') ? 'acp' : 'frontend';
 
@@ -388,7 +391,7 @@ class main
 			'PHONE_WIDTH'		=> $this->config['vinabb_stylesdemo_phone_width'],
 			'TABLET_WIDTH'		=> $this->config['vinabb_stylesdemo_tablet_width'],
 
-			'DEFAULT_STYLE'		=> constants::DEFAULT_STYLE,
+			'DEFAULT_STYLE'		=> $default_style,
 			'CURRENT_LANG'		=> $this->user->lang_name,
 			'DEFAULT_LANG'		=> $this->config['default_lang'],
 			'DEFAULT_LANG_NAME'	=> $default_lang_name,
