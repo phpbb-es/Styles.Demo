@@ -104,7 +104,7 @@ class user extends \phpbb\user
 		/**
 		* Event to load language files and modify user data on every page
 		*
-		* @event vinabb.stylesdemo.user_setup
+		* @event core.user_setup
 		* @var	array	user_data			Array with user's data row
 		* @var	string	user_lang_name		Basename of the user's langauge
 		* @var	string	user_date_format	User's date/time format
@@ -120,7 +120,7 @@ class user extends \phpbb\user
 		* 					that are absolutely needed globally using this
 		* 					event. Use local events otherwise.
 		* @var	mixed	style_id			Style we are going to display
-		* @since 1.2.3
+		* @since 3.1.0-a1
 		*/
 		$vars = array(
 			'user_data',
@@ -131,7 +131,7 @@ class user extends \phpbb\user
 			'lang_set_ext',
 			'style_id',
 		);
-		extract($phpbb_dispatcher->trigger_event('vinabb.stylesdemo.user_setup', compact($vars)));
+		extract($phpbb_dispatcher->trigger_event('core.user_setup', compact($vars)));
 
 		$this->data = $user_data;
 		$this->lang_name = $user_lang_name;
@@ -275,10 +275,10 @@ class user extends \phpbb\user
 		/**
 		* Execute code at the end of user setup
 		*
-		* @event vinabb.stylesdemo.user_setup_after
-		* @since 1.2.3
+		* @event core.user_setup_after
+		* @since 3.1.6-RC1
 		*/
-		$phpbb_dispatcher->dispatch('vinabb.stylesdemo.user_setup_after');
+		$phpbb_dispatcher->dispatch('core.user_setup_after');
 
 		// If this function got called from the error handler we are finished here.
 		if (defined('IN_ERROR_HANDLER'))
