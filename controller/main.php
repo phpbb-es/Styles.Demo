@@ -197,7 +197,7 @@ class main
 		$sql = 'SELECT *
 			FROM ' . (($mode == 'acp') ? $this->acp_styles_table : STYLES_TABLE) . '
 			WHERE style_active = 1
-			ORDER BY ' . (($this->config['vinabb_stylesdemo_json_enable']) ? 'style_path' : 'style_name');
+			ORDER BY ' . $this->db->sql_lower_text(($this->config['vinabb_stylesdemo_json_enable']) ? 'style_path' : 'style_name');
 		$result = $this->db->sql_query($sql);
 
 		while ($row = $this->db->sql_fetchrow($result))
