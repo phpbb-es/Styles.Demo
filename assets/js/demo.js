@@ -309,7 +309,11 @@ $(document).ready(
 			window.history.pushState({path: newURL}, '', newURL);
 		}
 
-		$current_style = location.hash.replace('#', '');
+		// Is the style specified?
+		if (location.hash.indexOf('#') != -1)
+		{
+			$current_style = location.hash.replace('#', '');
+		}
 
 		if (!($current_style in $styles) || $current_style === '')
 		{
