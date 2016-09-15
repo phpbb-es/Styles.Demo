@@ -198,6 +198,7 @@ class main
 
 		// Build the style data
 		$style_data = array();
+		$default_style = constants::DEFAULT_STYLE;
 
 		$sql = 'SELECT *
 			FROM ' . (($mode == 'acp') ? $this->acp_styles_table : STYLES_TABLE) . '
@@ -211,7 +212,10 @@ class main
 			$style_varname = $this->style_varname_normalize($row['style_path']);
 
 			// Default style
-			$default_style = ($mode == '' && $row['style_id'] == $this->config['default_style']) ? $style_varname : constants::DEFAULT_STYLE;
+			if ($mode == '' && $row['style_id'] == $this->config['default_style'])
+			{
+				$default_style = $style_varname;
+			}
 
 			// JSON tree
 			$json_tree = ($mode == 'acp') ? 'acp' : 'frontend';
