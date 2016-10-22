@@ -168,6 +168,7 @@ class user extends \phpbb\user
 		// Stop here if the fake ACP URL .../ext/vinabb/stylesdemo/app/index.php... was changed to .../adm/index.php... :-/
 		if ($this->data['user_id'] == ANONYMOUS && defined('ADMIN_START') && !defined('FAKE_ACP'))
 		{
+			send_status_line(403, 'Forbidden');
 			trigger_error($this->lang('NO_ADMIN'), E_USER_ERROR);
 		}
 

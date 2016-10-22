@@ -175,6 +175,7 @@ class main
 		{
 			if ((!$this->auth->acl_get('a_') || $this->user->data['user_id'] == ANONYMOUS) && !$this->config['vinabb_stylesdemo_acp_enable'])
 			{
+				send_status_line(403, 'Forbidden');
 				trigger_error('ACP_STYLES_DISABLED');
 			}
 
