@@ -14,31 +14,31 @@ use vinabb\stylesdemo\includes\constants;
 class main
 {
 	/** @var \phpbb\db\driver\driver_interface */
-    protected $db;
+	protected $db;
 
 	/** @var \phpbb\cache\driver\driver_interface */
 	protected $cache;
 
 	/** @var \phpbb\config\config */
-    protected $config;
+	protected $config;
 
 	/** @var \phpbb\controller\helper */
-    protected $helper;
+	protected $helper;
 
 	/** @var \phpbb\template\template */
-    protected $template;
+	protected $template;
 
 	/** @var \phpbb\user */
-    protected $user;
+	protected $user;
 
 	/** @var \phpbb\language\language */
 	protected $language;
 
 	/** @var \phpbb\auth\auth */
-    protected $auth;
+	protected $auth;
 
 	/** @var \phpbb\request\request */
-    protected $request;
+	protected $request;
 
 	/** @var \phpbb\extension\manager */
 	protected $ext_manager;
