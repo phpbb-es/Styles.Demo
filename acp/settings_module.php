@@ -167,7 +167,7 @@ class settings_module
 						'auth_role_id'		=> $this->get_demo_role_id(),
 						'auth_setting'		=> 0
 					);
-			
+
 					$this->db->sql_query('INSERT INTO ' . ACL_USERS_TABLE . ' ' . $this->db->sql_build_array('INSERT', $sql_ary));
 				}
 				else if (!$acp_enable && $this->config['vinabb_stylesdemo_acp_enable'])
@@ -229,7 +229,7 @@ class settings_module
 			}
 			else
 			{
-				trigger_error(implode('<br>', $errors) . adm_back_link($this->u_action), E_USER_WARNING);				
+				trigger_error(implode('<br>', $errors) . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 		}
 
