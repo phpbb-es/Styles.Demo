@@ -9,33 +9,33 @@
 	<fieldset>
 		<legend>{{ lang('SETTINGS') }}</legend>
 		<dl>
-			<dt><label for="logo_text">{{ lang('STYLES_DEMO_LOGO_TEXT') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="logo_text">{{ lang('STYLES_DEMO_LOGO_TEXT') ~ lang('COLON') }}</label></dt>
 			<dd><input id="logo_text" type="text" size="40" maxlength="255" name="logo_text" value="{{ LOGO_TEXT }}"></dd>
 		</dl>
 		<dl>
-			<dt><label for="auto_toggle">{{ lang('STYLES_DEMO_AUTO_TOGGLE') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="auto_toggle">{{ lang('STYLES_DEMO_AUTO_TOGGLE') ~ lang('COLON') }}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="auto_toggle" value="1" id="auto_toggle"{% if AUTO_TOGGLE %} checked{% endif %}> {{ lang('YES') }}</label>
 				<label><input type="radio" class="radio" name="auto_toggle" value="0"{% if not AUTO_TOGGLE %} checked{% endif %}> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		<dl>
-			<dt><label for="download_direct">{{ lang('STYLES_DEMO_DOWNLOAD_DIRECT') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="download_direct">{{ lang('STYLES_DEMO_DOWNLOAD_DIRECT') ~ lang('COLON') }}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="download_direct" value="1" id="download_direct"{% if DOWNLOAD_DIRECT %} checked{% endif %}> {{ lang('STYLES_DEMO_DOWNLOAD_DIRECT_YES') }}</label>
 				<label><input type="radio" class="radio" name="download_direct" value="0"{% if not DOWNLOAD_DIRECT %} checked{% endif %}> {{ lang('STYLES_DEMO_DOWNLOAD_DIRECT_NO') }}</label>
 			</dd>
 		</dl>
 		<dl>
-			<dt><label for="phone_width">{{ lang('STYLES_DEMO_PHONE_WIDTH') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="phone_width">{{ lang('STYLES_DEMO_PHONE_WIDTH') ~ lang('COLON') }}</label></dt>
 			<dd><input id="phone_width" type="number" min="{{ MIN_PHONE_WIDTH }}" name="phone_width" value="{{ PHONE_WIDTH }}"> {{ lang('PIXEL') }}</dd>
 		</dl>
 		<dl>
-			<dt><label for="tablet_width">{{ lang('STYLES_DEMO_TABLET_WIDTH') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="tablet_width">{{ lang('STYLES_DEMO_TABLET_WIDTH') ~ lang('COLON') }}</label></dt>
 			<dd><input id="tablet_width" type="number" min="{{ PHONE_WIDTH + MIN_PHONE_WIDTH }}" name="tablet_width" value="{{ TABLET_WIDTH }}"> {{ lang('PIXEL') }}</dd>
 		</dl>
 		<dl>
-			<dt><label for="lang_enable">{{ lang('STYLES_DEMO_LANG_ENABLE') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="lang_enable">{{ lang('STYLES_DEMO_LANG_ENABLE') ~ lang('COLON') }}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="lang_enable" value="1" id="lang_enable"{% if LANG_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('lang_enable_options', 1)"> {{ lang('YES') }}</label>
 				<label><input type="radio" class="radio" name="lang_enable" value="0"{% if not LANG_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('lang_enable_options', -1)"> {{ lang('NO') }}</label>
@@ -43,23 +43,23 @@
 		</dl>
 		<div id="lang_enable_options"{% if not LANG_ENABLE %} style="display: none;"{% endif %}>
 			<dl>
-				<dt><label>{{ lang('DEFAULT_LANGUAGE') }}{{ lang('COLON') }}</label></dt>
+				<dt><label>{{ lang('DEFAULT_LANGUAGE') ~ lang('COLON') }}</label></dt>
 				<dd><strong>{{ DEFAULT_LANG }}</strong></dd>
 			</dl>
 			<dl>
-				<dt><label for="lang_switch">{{ lang('STYLES_DEMO_LANG_SWITCH') }}{{ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_LANG_SWITCH_EXPLAIN') }}</span></dt>
+				<dt><label for="lang_switch">{{ lang('STYLES_DEMO_LANG_SWITCH') ~ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_LANG_SWITCH_EXPLAIN') }}</span></dt>
 				<dd>{% if LANG_SWITCH_OPTIONS %}<select name="lang_switch" id="lang_switch">{{ LANG_SWITCH_OPTIONS }}</select>{% else %}{{ lang('NO_EXTRA_LANG_TO_SELECT') }}{% endif %}</dd>
 			</dl>
 		</div>
 		<dl>
-			<dt><label for="acp_enable">{{ lang('STYLES_DEMO_ACP_ENABLE') }}{{ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_ACP_ENABLE_EXPLAIN') }}</span></dt>
+			<dt><label for="acp_enable">{{ lang('STYLES_DEMO_ACP_ENABLE') ~ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_ACP_ENABLE_EXPLAIN') }}</span></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="acp_enable" value="1" id="acp_enable"{% if ACP_ENABLE %} checked{% endif %}> {{ lang('YES') }}</label>
 				<label><input type="radio" class="radio" name="acp_enable" value="0"{% if not ACP_ENABLE %} checked{% endif %}> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		<dl>
-			<dt><label for="json_enable">{{ lang('STYLES_DEMO_JSON_ENABLE') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="json_enable">{{ lang('STYLES_DEMO_JSON_ENABLE') ~ lang('COLON') }}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="json_enable" value="1" id="json_enable"{% if JSON_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('json_enable_yes_options', 1)"> {{ lang('STYLES_DEMO_JSON_ENABLE_YES') }}</label>
 				<label><input type="radio" class="radio" name="json_enable" value="0"{% if not JSON_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('json_enable_yes_options', -1)"> {{ lang('STYLES_DEMO_JSON_ENABLE_NO') }}</label>
@@ -67,16 +67,16 @@
 		</dl>
 		<div id="json_enable_yes_options"{% if not JSON_ENABLE %} style="display: none;"{% endif %}>
 			<dl>
-				<dt><label for="json_url">{{ lang('STYLES_DEMO_JSON_URL') }}{{ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_JSON_URL_EXPLAIN') }}</span></dt>
+				<dt><label for="json_url">{{ lang('STYLES_DEMO_JSON_URL') ~ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_JSON_URL_EXPLAIN') }}</span></dt>
 				<dd><input type="url" name="json_url" id="json_url" size="40" maxlength="255" value="{{ JSON_URL }}"></dd>
 			</dl>
 		</div>
 		<dl>
-			<dt><label for="support_url">{{ lang('LINK_SUPPORT_DEFAULT') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="support_url">{{ lang('LINK_SUPPORT_DEFAULT') ~ lang('COLON') }}</label></dt>
 			<dd><input type="url" name="support_url" id="support_url" size="40" maxlength="255" value="{{ SUPPORT_URL }}"></dd>
 		</dl>
 		<dl>
-			<dt><label for="screenshot_type">{{ lang('SCREENSHOT_TYPE') }}{{ lang('COLON') }}</label><br><span>{{ lang('SCREENSHOT_TYPE_EXPLAIN') }}</span></dt>
+			<dt><label for="screenshot_type">{{ lang('SCREENSHOT_TYPE') ~ lang('COLON') }}</label><br><span>{{ lang('SCREENSHOT_TYPE_EXPLAIN') }}</span></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_LOCAL }}" id="screenshot_type"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_LOCAL %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', -1);phpbb.toggleDisplay('resolution_options', -1)"> {{ lang('SCREENSHOT_TYPE_LOCAL') }}</label>
 				<label><input type="radio" class="radio" name="screenshot_type" value="{{ SCREENSHOT_TYPE_JSON }}"{% if SCREENSHOT_TYPE == SCREENSHOT_TYPE_JSON %} checked{% endif %} onclick="phpbb.toggleDisplay('screenshot_type_phantom', -1);phpbb.toggleDisplay('resolution_options', -1)"> {{ lang('SCREENSHOT_TYPE_JSON') }}</label>
@@ -88,7 +88,7 @@
 		</dl>
 		<div id="resolution_options"{% if SCREENSHOT_TYPE != SCREENSHOT_TYPE_PHANTOM %} style="display: none;"{% endif %}>
 			<dl>
-				<dt><label for="screenshot_width">{{ lang('SCREENSHOT_RESOLUTION') }}{{ lang('COLON') }}</label><br><span>{{ lang('SCREENSHOT_RESOLUTION_EXPLAIN') }}</span></dt>
+				<dt><label for="screenshot_width">{{ lang('SCREENSHOT_RESOLUTION') ~ lang('COLON') }}</label><br><span>{{ lang('SCREENSHOT_RESOLUTION_EXPLAIN') }}</span></dt>
 				<dd><select name="screenshot_width" id="screenshot_width">{{ RESOLUTION_OPTIONS }}</select></dd>
 			</dl>
 		</div>

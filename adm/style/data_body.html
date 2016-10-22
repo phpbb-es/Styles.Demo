@@ -11,50 +11,50 @@
 	<fieldset>
 		<legend>{{ lang('EDIT_STYLE_DATA') }}</legend>
 		<dl>
-			<dt><label for="style_name">{{ lang('STYLE_NAME') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_name">{{ lang('STYLE_NAME') ~ lang('COLON') }}</label></dt>
 			<dd><input type="text" name="style_name" id="style_name" value="{{ NAME }}" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_version">{{ lang('VERSION') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_version">{{ lang('VERSION') ~ lang('COLON') }}</label></dt>
 			<dd><input type="text" name="style_version" id="style_version" value="{{ STYLE_VERSION }}" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_phpbb_version">{{ lang('PHPBB_VERSION') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_phpbb_version">{{ lang('PHPBB_VERSION') ~ lang('COLON') }}</label></dt>
 			<dd><input type="text" name="style_phpbb_version" id="style_phpbb_version" value="{{ PHPBB_VERSION }}" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_author">{{ lang('DESIGNER') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_author">{{ lang('DESIGNER') ~ lang('COLON') }}</label></dt>
 			<dd><input type="text" name="style_author" id="style_author" value="{{ AUTHOR }}" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_author_url">{{ lang('DESIGNER_URL') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_author_url">{{ lang('DESIGNER_URL') ~ lang('COLON') }}</label></dt>
 			<dd><input type="url" name="style_author_url" id="style_author_url" value="{{ AUTHOR_URL }}" size="40" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_presets">{{ lang('PRESETS') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_presets">{{ lang('PRESETS') ~ lang('COLON') }}</label></dt>
 			<dd><input type="number" name="style_presets" id="style_presets" value="{{ PRESETS }}" min="0"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_responsive">{{ lang('RESPONSIVE') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_responsive">{{ lang('RESPONSIVE') ~ lang('COLON') }}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="style_responsive" value="1" id="style_responsive"{% if RESPONSIVE %} checked{% endif %}> {{ lang('YES') }}</label>
 				<label><input type="radio" class="radio" name="style_responsive" value="0"{% if not RESPONSIVE %} checked{% endif %}> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		<dl>
-			<dt><label for="style_price">{{ lang('PRICE') }}{{ lang('COLON') }}</label></dt>
+			<dt><label for="style_price">{{ lang('PRICE') ~ lang('COLON') }}</label></dt>
 			<dd><input type="number" name="style_price" id="style_price" value="{{ PRICE }}" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_price_label">{{ lang('PRICE_LABEL') }}{{ lang('COLON') }}</label><br><span>{{ lang('PRICE_LABEL_EXPLAIN') }}</span></dt>
+			<dt><label for="style_price_label">{{ lang('PRICE_LABEL') ~ lang('COLON') }}</label><br><span>{{ lang('PRICE_LABEL_EXPLAIN') }}</span></dt>
 			<dd><input type="text" name="style_price_label" id="style_price_label" value="{{ PRICE_LABEL }}" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_download">{{ lang('LINK_DOWNLOAD') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_DOWNLOAD_EXPLAIN') }}</span></dt>
+			<dt><label for="style_download">{{ lang('LINK_DOWNLOAD') ~ lang('COLON') }}</label><br><span>{{ lang('LINK_DOWNLOAD_EXPLAIN') }}</span></dt>
 			<dd><input type="url" name="style_download" id="style_download" value="{{ DOWNLOAD }}" size="40" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label>{{ lang('LINK_MIRROR') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_MIRROR_EXPLAIN') }}</span></dt>
+			<dt><label>{{ lang('LINK_MIRROR') ~ lang('COLON') }}</label><br><span>{{ lang('LINK_MIRROR_EXPLAIN') }}</span></dt>
 			<dd>
 				{% for mirror in mirrors %}
 				{% if loop.first %}<span id="mirror_tpl">{% endif %}
@@ -67,11 +67,11 @@
 			<dd><input type="button" class="button1" id="mirror_btn" value="{{ lang('LINK_MIRROR_ADD') }}"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_details">{{ lang('LINK_DETAILS') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_DETAILS_EXPLAIN') }}</span></dt>
+			<dt><label for="style_details">{{ lang('LINK_DETAILS') ~ lang('COLON') }}</label><br><span>{{ lang('LINK_DETAILS_EXPLAIN') }}</span></dt>
 			<dd><input type="url" name="style_details" id="style_details" value="{{ DETAILS }}" size="40" maxlength="255"></dd>
 		</dl>
 		<dl>
-			<dt><label for="style_support">{{ lang('LINK_SUPPORT') }}{{ lang('COLON') }}</label><br><span>{{ lang('LINK_SUPPORT_EXPLAIN') }}</span></dt>
+			<dt><label for="style_support">{{ lang('LINK_SUPPORT') ~ lang('COLON') }}</label><br><span>{{ lang('LINK_SUPPORT_EXPLAIN') }}</span></dt>
 			<dd><input type="url" name="style_support" id="style_support" value="{{ SUPPORT }}" size="40" maxlength="255"></dd>
 		</dl>
 		{{ S_HIDDEN_FIELDS }}
