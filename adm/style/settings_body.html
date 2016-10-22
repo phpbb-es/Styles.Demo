@@ -48,7 +48,7 @@
 			</dl>
 			<dl>
 				<dt><label for="lang_switch">{{ lang('STYLES_DEMO_LANG_SWITCH') }}{{ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_LANG_SWITCH_EXPLAIN') }}</span></dt>
-				<dd>{% if LANG_SWITCH_OPTIONS is not empty %}<select name="lang_switch" id="lang_switch">{{ LANG_SWITCH_OPTIONS }}</select>{% else %}{{ lang('NO_EXTRA_LANG_TO_SELECT') }}{% endif %}</dd>
+				<dd>{% if LANG_SWITCH_OPTIONS %}<select name="lang_switch" id="lang_switch">{{ LANG_SWITCH_OPTIONS }}</select>{% else %}{{ lang('NO_EXTRA_LANG_TO_SELECT') }}{% endif %}</dd>
 			</dl>
 		</div>
 		<dl>
