@@ -26,7 +26,7 @@ class styles_table extends migration
 					'style_price'			=> array('BINT', 0),
 					'style_price_label'		=> array('VCHAR_UNI', ''),
 					'style_download'		=> array('VCHAR', ''),
-					'style_mirror'			=> array('TEXT', NULL),
+					'style_mirror'			=> array('TEXT', null),
 					'style_details'			=> array('VCHAR', ''),
 					'style_support'			=> array('VCHAR', ''),
 				),
@@ -34,7 +34,7 @@ class styles_table extends migration
 			'add_tables'	=> array(
 				$this->table_prefix . 'acp_styles'	=> array(
 					'COLUMNS'	=> array(
-						'style_id'				=> array('UINT', NULL, 'auto_increment'),
+						'style_id'				=> array('UINT', null, 'auto_increment'),
 						'style_name'			=> array('VCHAR_UNI:255', ''),
 						'style_copyright'		=> array('VCHAR_UNI', ''),
 						'style_active'			=> array('BOOL', 1),
@@ -48,7 +48,7 @@ class styles_table extends migration
 						'style_price'			=> array('BINT', 0),
 						'style_price_label'		=> array('VCHAR_UNI', ''),
 						'style_download'		=> array('VCHAR', ''),
-						'style_mirror'			=> array('TEXT', NULL),
+						'style_mirror'			=> array('TEXT', null),
 						'style_details'			=> array('VCHAR', ''),
 						'style_support'			=> array('VCHAR', ''),
 					),
