@@ -378,7 +378,7 @@ class data_module
 						)));
 					}
 				}
-			breaK;
+			break;
 
 			case 'update_version':
 			case 'update_phpbb_version':
