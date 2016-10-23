@@ -412,8 +412,8 @@ class main
 
 			'EXT_ASSETS_PATH'	=> "{$this->ext_web_path}assets",
 
-			'S_LANG_ENABLE'	=> !empty($lang_title) ? true : false,
-			'S_ACP_ENABLE'	=> ($this->config['vinabb_stylesdemo_acp_enable'] && $this->config['vinabb_stylesdemo_num_acp_styles']) ? true : false,
+			'S_LANG_ENABLE'	=> !empty($lang_title),
+			'S_ACP_ENABLE'	=> $this->config['vinabb_stylesdemo_acp_enable'] && $this->config['vinabb_stylesdemo_num_acp_styles'],
 
 			'U_MODE'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => ($mode == 'acp') ? '' : 'acp')),
 		));

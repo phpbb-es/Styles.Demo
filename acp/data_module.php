@@ -163,7 +163,7 @@ class data_module
 					'AUTHOR'		=> isset($style_data['style_author']) ? $style_data['style_author'] : '',
 					'AUTHOR_URL'	=> isset($style_data['style_author_url']) ? $style_data['style_author_url'] : '',
 					'PRESETS'		=> isset($style_data['style_presets']) ? $style_data['style_presets'] : 0,
-					'RESPONSIVE'	=> (isset($style_data['style_responsive']) && $style_data['style_responsive']) ? true : false,
+					'RESPONSIVE'	=> isset($style_data['style_responsive']) && $style_data['style_responsive'],
 					'PRICE'			=> isset($style_data['style_price']) ? $style_data['style_price'] : 0,
 					'PRICE_LABEL'	=> isset($style_data['style_price_label']) ? $style_data['style_price_label'] : '',
 					'DOWNLOAD'		=> isset($style_data['style_download']) ? $style_data['style_download'] : '',
@@ -288,7 +288,7 @@ class data_module
 						'style_price'			=> $style_price,
 						'style_price_label'		=> $style_price_label,
 						'style_download'		=> $style_download,
-						'style_mirror'			=> (sizeof($style_mirrors)) ? json_encode($style_mirrors) : '',
+						'style_mirror'			=> sizeof($style_mirrors) ? json_encode($style_mirrors) : '',
 						'style_details'			=> $style_details,
 						'style_support'			=> $style_support,
 					);
@@ -456,14 +456,14 @@ class data_module
 
 			$this->template->assign_block_vars('styles', array(
 				'NAME'			=> $row['style_name'],
-				'ACTIVE'		=> ($row['style_active']) ? true : false,
+				'ACTIVE'		=> $row['style_active'],
 				'PATH'			=> $row['style_path'],
 				'VERSION'		=> $row['style_version'],
 				'PHPBB_VERSION'	=> $row['style_phpbb_version'],
 				'AUTHOR'		=> $row['style_author'],
 				'AUTHOR_URL'	=> $row['style_author_url'],
 				'PRESETS'		=> $row['style_presets'],
-				'RESPONSIVE'	=> ($row['style_responsive']) ? true : false,
+				'RESPONSIVE'	=> $row['style_responsive'],
 				'PRICE'			=> $row['style_price'],
 				'PRICE_LABEL'	=> $row['style_price_label'],
 				'DOWNLOAD'		=> $row['style_download'],
@@ -486,7 +486,7 @@ class data_module
 
 			'U_ACTION'			=> $this->u_action . "&action=$action&start=$start",
 
-			'S_ACP_STYLES'		=> ($mode == 'acp') ? true : false,
+			'S_ACP_STYLES'		=> $mode == 'acp',
 			'S_HIDDEN_FIELDS'	=> $s_hidden_fields,
 		));
 
