@@ -391,8 +391,8 @@ class main
 			'STYLE_DATA'		=> json_encode($style_data, JSON_NUMERIC_CHECK),
 			'PREFIX_URL'		=> generate_board_url() . '/',
 			'LOGO_TEXT'			=> $this->config['vinabb_stylesdemo_logo_text'],
-			'AUTO_TOGGLE'		=> $this->config['vinabb_stylesdemo_auto_toggle'],
-			'DOWNLOAD_DIRECT'	=> $this->config['vinabb_stylesdemo_download_direct'],
+			'AUTO_TOGGLE'		=> $this->config['vinabb_stylesdemo_auto_toggle'] ? 'true' : 'false',
+			'DOWNLOAD_DIRECT'	=> $this->config['vinabb_stylesdemo_download_direct'] ? 'true' : 'false',
 			'PHONE_WIDTH'		=> $this->config['vinabb_stylesdemo_phone_width'],
 			'TABLET_WIDTH'		=> $this->config['vinabb_stylesdemo_tablet_width'],
 
