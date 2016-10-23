@@ -276,7 +276,7 @@ class settings_module
 		$this->template->assign_vars(array(
 			'STYLES_DEMO_URL'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => '')),
 
-			'LOGO_TEXT'			=> (isset($logo_text) && !empty($logo_text)) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
+			'LOGO_TEXT'			=> isset($logo_text) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
 			'AUTO_TOGGLE'		=> isset($auto_toggle) ? $auto_toggle : $this->config['vinabb_stylesdemo_auto_toggle'],
 			'DOWNLOAD_DIRECT'	=> isset($download_direct) ? $download_direct : $this->config['vinabb_stylesdemo_download_direct'],
 			'PHONE_WIDTH'		=> isset($phone_width) ? $phone_width : $this->config['vinabb_stylesdemo_phone_width'],
@@ -286,8 +286,8 @@ class settings_module
 			'LANG_ENABLE'		=> isset($lang_enable) ? $lang_enable : $this->config['vinabb_stylesdemo_lang_enable'],
 			'ACP_ENABLE'		=> isset($acp_enable) ? $acp_enable : $this->config['vinabb_stylesdemo_acp_enable'],
 			'JSON_ENABLE'		=> isset($json_enable) ? $json_enable : $this->config['vinabb_stylesdemo_json_enable'],
-			'JSON_URL'			=> (isset($json_url) && !empty($json_url)) ? $json_url : $this->config['vinabb_stylesdemo_json_url'],
-			'SUPPORT_URL'		=> (isset($support_url) && !empty($support_url)) ? $support_url : $this->config['vinabb_stylesdemo_support_url'],
+			'JSON_URL'			=> isset($json_url) ? $json_url : $this->config['vinabb_stylesdemo_json_url'],
+			'SUPPORT_URL'		=> isset($support_url) ? $support_url : $this->config['vinabb_stylesdemo_support_url'],
 
 			'SCREENSHOT_TYPE'			=> isset($screenshot_type) ? $screenshot_type : $this->config['vinabb_stylesdemo_screenshot_type'],
 			'SCREENSHOT_TYPE_LOCAL'		=> constants::SCREENSHOT_TYPE_LOCAL,
