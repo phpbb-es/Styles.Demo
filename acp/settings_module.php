@@ -338,7 +338,7 @@ class settings_module
 			break;
 
 			case 'DARWIN';
-				return ($get_lang_key) ? 'MAC' : 'Mac OS X';
+				return ($get_lang_key) ? 'MAC' : 'macOS';
 			break;
 
 			case 'LINUX';
