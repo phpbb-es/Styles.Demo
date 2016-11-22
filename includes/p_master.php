@@ -8,18 +8,7 @@
 
 namespace vinabb\stylesdemo\includes;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-global $phpbb_root_path, $phpEx;
-require($phpbb_root_path . 'includes/functions_module.' . $phpEx);
-
-class fake_p_master extends \p_master
+class p_master extends \p_master
 {
 	/**
 	* Copied from phpBB 3.1.9 with one change:
