@@ -9,19 +9,15 @@
 /**
 * Welcome you to APP: Admin Preview Panel
 */
-define('IN_PHPBB', true);
-define('IN_ADMIN', true);
-define('ADMIN_START', true);
-define('NEED_SID', true);
-define('FAKE_ACP', true);
 
 // Include files
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../../../../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
+require('define.' . $phpEx);
 require($phpbb_root_path . 'common.' . $phpEx);
 require($phpbb_root_path . 'includes/functions_acp.' . $phpEx);
 require($phpbb_root_path . 'includes/functions_admin.' . $phpEx);
-require('./../includes/functions_module.' . $phpEx);
+require($phpbb_root_path . 'includes/functions_module.' . $phpEx);
 
 // Start session management
 $user->session_begin();
@@ -163,7 +159,7 @@ $template->assign_vars(array(
 ));
 
 // Instantiate new module
-$module = new \vinabb\stylesdemo\includes\fake_p_master();
+$module = new \vinabb\stylesdemo\includes\p_master();
 
 // Instantiate module system and generate list of available modules
 $module->list_modules('acp');

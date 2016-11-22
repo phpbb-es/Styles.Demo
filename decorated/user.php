@@ -272,7 +272,7 @@ class user extends \phpbb\user
 			);
 			$response->send();
 		}
-		
+
 		/**
 		* Execute code at the end of user setup
 		*

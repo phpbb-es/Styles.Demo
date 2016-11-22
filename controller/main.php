@@ -220,7 +220,7 @@ class main
 
 			// JSON tree
 			$json_tree = ($mode == 'acp') ? 'acp' : 'frontend';
-			
+
 			// Style screenshot
 			switch ($this->config['vinabb_stylesdemo_screenshot_type'])
 			{
