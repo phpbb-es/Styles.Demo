@@ -11,6 +11,12 @@ namespace vinabb\stylesdemo\migrations;
 use phpbb\db\migration\migration;
 use vinabb\stylesdemo\includes\constants;
 
+/**
+* Migration: release_1_0_0
+* To do:	Add config items
+*			Add the module category ACP_CAT_STYLES_DEMO
+*			Add the setting module
+*/
 class release_1_0_0 extends migration
 {
 	public function update_data()
@@ -31,20 +37,12 @@ class release_1_0_0 extends migration
 			array('config.add', array('vinabb_stylesdemo_screenshot_height', 768)),
 
 			// Modules
-			array('module.add', array(
-				'acp',
-				'ACP_CAT_DOT_MODS',
-				'ACP_CAT_STYLES_DEMO'
-			)),
+			array('module.add', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_CAT_STYLES_DEMO')),
 
-			array('module.add', array(
-				'acp',
-				'ACP_CAT_STYLES_DEMO',
-				array(
-					'module_basename'	=> '\vinabb\stylesdemo\acp\settings_module',
-					'modes'				=> array('settings'),
-				),
-			)),
+			array('module.add', array('acp', 'ACP_CAT_STYLES_DEMO', array(
+				'module_basename'	=> '\vinabb\stylesdemo\acp\settings_module',
+				'modes'				=> array('settings')
+			))),
 
 			// Add the new role "Demo Admin"
 			array('permission.role_add', array(constants::ROLE_ADMIN_DEMO, 'a_', constants::ROLE_ADMIN_DEMO . '_DESC')),
@@ -91,7 +89,7 @@ class release_1_0_0 extends migration
 			array('permission.permission_set', array(constants::ROLE_ADMIN_DEMO, 'a_userdel')),
 			array('permission.permission_set', array(constants::ROLE_ADMIN_DEMO, 'a_viewauth')),
 			array('permission.permission_set', array(constants::ROLE_ADMIN_DEMO, 'a_viewlogs')),
-			array('permission.permission_set', array(constants::ROLE_ADMIN_DEMO, 'a_words')),
+			array('permission.permission_set', array(constants::ROLE_ADMIN_DEMO, 'a_words'))
 		);
 	}
 }
