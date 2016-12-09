@@ -305,9 +305,9 @@ class settings_module
 	}
 
 	/**
-	* Get role_id by the role_name ROLE_ADMIN_DEMO
+	* Get ID of the role name ROLE_ADMIN_DEMO
 	*
-	* @return int The role ID
+	* @return int
 	*/
 	protected function get_demo_role_id()
 	{
@@ -333,24 +333,19 @@ class settings_module
 		switch (strtoupper(PHP_OS))
 		{
 			case 'WINNT';
-				return ($get_lang_key) ? 'WIN' : 'Windows';
-			break;
+			return ($get_lang_key) ? 'WIN' : 'Windows';
 
 			case 'DARWIN';
-				return ($get_lang_key) ? 'MAC' : 'macOS';
-			break;
+			return ($get_lang_key) ? 'MAC' : 'macOS';
 
 			case 'LINUX';
-				return ($get_lang_key) ? 'LINUX' : 'Linux';
-			break;
+			return ($get_lang_key) ? 'LINUX' : 'Linux';
 
 			case 'FREEBSD':
-				return ($get_lang_key) ? 'BSD' : 'FreeBSD';
-			break;
+			return ($get_lang_key) ? 'BSD' : 'FreeBSD';
 
 			default:
-				return '';
-			break;
+			return '';
 		}
 	}
 }
