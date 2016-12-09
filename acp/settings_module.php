@@ -332,13 +332,13 @@ class settings_module
 	{
 		switch (strtoupper(PHP_OS))
 		{
-			case 'WINNT';
+			case 'WINNT':
 			return ($get_lang_key) ? 'WIN' : 'Windows';
 
-			case 'DARWIN';
+			case 'DARWIN':
 			return ($get_lang_key) ? 'MAC' : 'macOS';
 
-			case 'LINUX';
+			case 'LINUX':
 			return ($get_lang_key) ? 'LINUX' : 'Linux';
 
 			case 'FREEBSD':
