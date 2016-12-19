@@ -53,7 +53,7 @@ class acp_style extends style_data implements acp_style_interface
 	*/
 	protected function prepare_data()
 	{
-		return [
+		return array(
 			'style_id'				=> 'integer',
 			'style_name'			=> 'string',
 			'style_copyright'		=> 'string',
@@ -73,7 +73,7 @@ class acp_style extends style_data implements acp_style_interface
 			'style_mirror'			=> 'string',
 			'style_details'			=> 'string',
 			'style_support'			=> 'string'
-		];
+		);
 	}
 
 	/**
@@ -115,7 +115,7 @@ class acp_style extends style_data implements acp_style_interface
 	public function import($data)
 	{
 		// Clear out any saved data
-		$this->data = [];
+		$this->data = array();
 
 		// Go through the basic fields and set them to our data array
 		foreach ($this->prepare_data() as $field => $type)

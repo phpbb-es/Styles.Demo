@@ -53,7 +53,7 @@ class style extends acp_style implements style_interface
 	*/
 	protected function prepare_data()
 	{
-		return [
+		return array(
 			'style_id'				=> 'integer',
 			'style_name'			=> 'string',
 			'style_copyright'		=> 'string',
@@ -76,7 +76,7 @@ class style extends acp_style implements style_interface
 			'style_mirror'			=> 'string',
 			'style_details'			=> 'string',
 			'style_support'			=> 'string'
-		];
+		);
 	}
 
 	/**
