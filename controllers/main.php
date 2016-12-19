@@ -6,7 +6,7 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace vinabb\stylesdemo\controller;
+namespace vinabb\stylesdemo\controllers;
 
 use Symfony\Component\HttpFoundation\Response;
 use vinabb\stylesdemo\includes\constants;
@@ -53,10 +53,7 @@ class main
 	protected $acp_styles_table;
 
 	/** @var string */
-	protected $phpbb_root_path;
-
-	/** @var string */
-	protected $phpbb_admin_path;
+	protected $root_path;
 
 	/** @var string */
 	protected $php_ext;
@@ -77,26 +74,26 @@ class main
 	* @param \phpbb\path_helper $path_helper
 	* @param \phpbb\file_downloader $file_downloader
 	* @param string $acp_styles_table
-	* @param string $phpbb_root_path
-	* @param string $phpbb_admin_path
+	* @param string $root_path
 	* @param string $php_ext
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db,
-								\phpbb\cache\driver\driver_interface $cache,
-								\phpbb\config\config $config,
-								\phpbb\controller\helper $helper,
-								\phpbb\template\template $template,
-								\phpbb\user $user,
-								\phpbb\language\language $language,
-								\phpbb\auth\auth $auth,
-								\phpbb\request\request $request,
-								\phpbb\extension\manager $ext_manager,
-								\phpbb\path_helper $path_helper,
-								\phpbb\file_downloader $file_downloader,
-								$acp_styles_table,
-								$phpbb_root_path,
-								$phpbb_admin_path,
-								$php_ext)
+	public function __construct(
+		\phpbb\db\driver\driver_interface $db,
+		\phpbb\cache\driver\driver_interface $cache,
+		\phpbb\config\config $config,
+		\phpbb\controller\helper $helper,
+		\phpbb\template\template $template,
+		\phpbb\user $user,
+		\phpbb\language\language $language,
+		\phpbb\auth\auth $auth,
+		\phpbb\request\request $request,
+		\phpbb\extension\manager $ext_manager,
+		\phpbb\path_helper $path_helper,
+		\phpbb\file_downloader $file_downloader,
+		$acp_styles_table,
+		$root_path,
+		$php_ext
+	)
 	{
 		$this->db = $db;
 		$this->cache = $cache;
@@ -111,8 +108,7 @@ class main
 		$this->path_helper = $path_helper;
 		$this->file_downloader = $file_downloader;
 		$this->acp_styles_table = $acp_styles_table;
-		$this->phpbb_root_path = $phpbb_root_path;
-		$this->phpbb_admin_path = $this->phpbb_root_path . $phpbb_admin_path;
+		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 
 		$this->ext_root_path = $this->ext_manager->get_extension_path('vinabb/stylesdemo', true);
@@ -324,7 +320,7 @@ class main
 			}
 
 			// Preview iframe URL
-			$preview_url = ($mode == 'acp') ? append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $row['style_path'], false, $this->user->session_id) : append_sid("{$this->phpbb_root_path}index.{$this->php_ext}", 'style=' . $row['style_id']);
+			$preview_url = ($mode == 'acp') ? append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $row['style_path'], false, $this->user->session_id) : append_sid("{$this->root_path}index.{$this->php_ext}", 'style=' . $row['style_id']);
 
 			// Mirrors of each style
 			$style_mirror_data = array();
