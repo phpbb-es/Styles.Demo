@@ -24,14 +24,14 @@ class styles_table extends migration
 	*/
 	public function update_schema()
 	{
-		return array(
-			'add_columns'	=> array(
+		return [
+			'add_columns'	=> [
 				$this->table_prefix . 'styles'	=> $this->get_schema_styles()
-			),
-			'add_tables'	=> array(
+			],
+			'add_tables'	=> [
 				$this->table_prefix . 'acp_styles'	=> $this->get_schema_acp_styles()
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -41,20 +41,20 @@ class styles_table extends migration
 	*/
 	protected function get_schema_styles()
 	{
-		return array(
-			'style_version'			=> array('VCHAR:20', ''),
-			'style_phpbb_version'	=> array('VCHAR:20', ''),
-			'style_author'			=> array('VCHAR_UNI', ''),
-			'style_author_url'		=> array('VCHAR', ''),
-			'style_presets'			=> array('UINT', 0),
-			'style_responsive'		=> array('BOOL', 0),
-			'style_price'			=> array('BINT', 0),
-			'style_price_label'		=> array('VCHAR_UNI', ''),
-			'style_download'		=> array('VCHAR', ''),
-			'style_mirror'			=> array('TEXT', null),
-			'style_details'			=> array('VCHAR', ''),
-			'style_support'			=> array('VCHAR', '')
-		);
+		return [
+			'style_version'			=> ['VCHAR:20', ''],
+			'style_phpbb_version'	=> ['VCHAR:20', ''],
+			'style_author'			=> ['VCHAR_UNI', ''],
+			'style_author_url'		=> ['VCHAR', ''],
+			'style_presets'			=> ['UINT', 0],
+			'style_responsive'		=> ['BOOL', 0],
+			'style_price'			=> ['BINT', 0],
+			'style_price_label'		=> ['VCHAR_UNI', ''],
+			'style_download'		=> ['VCHAR', ''],
+			'style_mirror'			=> ['TEXT', null],
+			'style_details'			=> ['VCHAR', ''],
+			'style_support'			=> ['VCHAR', '']
+		];
 	}
 
 	/**
@@ -64,31 +64,31 @@ class styles_table extends migration
 	*/
 	protected function get_schema_acp_styles()
 	{
-		return array(
-			'COLUMNS'	=> array(
-				'style_id'				=> array('UINT', null, 'auto_increment'),
-				'style_name'			=> array('VCHAR_UNI:255', ''),
-				'style_copyright'		=> array('VCHAR_UNI', ''),
-				'style_active'			=> array('BOOL', 1),
-				'style_path'			=> array('VCHAR:100', ''),
-				'style_version'			=> array('VCHAR:20', ''),
-				'style_phpbb_version'	=> array('VCHAR:20', ''),
-				'style_author'			=> array('VCHAR_UNI', ''),
-				'style_author_url'		=> array('VCHAR', ''),
-				'style_presets'			=> array('UINT', 0),
-				'style_responsive'		=> array('BOOL', 0),
-				'style_price'			=> array('BINT', 0),
-				'style_price_label'		=> array('VCHAR_UNI', ''),
-				'style_download'		=> array('VCHAR', ''),
-				'style_mirror'			=> array('TEXT', null),
-				'style_details'			=> array('VCHAR', ''),
-				'style_support'			=> array('VCHAR', '')
-			),
+		return [
+			'COLUMNS'	=> [
+				'style_id'				=> ['UINT', null, 'auto_increment'],
+				'style_name'			=> ['VCHAR_UNI:255', ''],
+				'style_copyright'		=> ['VCHAR_UNI', ''],
+				'style_active'			=> ['BOOL', 1],
+				'style_path'			=> ['VCHAR:100', ''],
+				'style_version'			=> ['VCHAR:20', ''],
+				'style_phpbb_version'	=> ['VCHAR:20', ''],
+				'style_author'			=> ['VCHAR_UNI', ''],
+				'style_author_url'		=> ['VCHAR', ''],
+				'style_presets'			=> ['UINT', 0],
+				'style_responsive'		=> ['BOOL', 0],
+				'style_price'			=> ['BINT', 0],
+				'style_price_label'		=> ['VCHAR_UNI', ''],
+				'style_download'		=> ['VCHAR', ''],
+				'style_mirror'			=> ['TEXT', null],
+				'style_details'			=> ['VCHAR', ''],
+				'style_support'			=> ['VCHAR', '']
+			],
 			'PRIMARY_KEY'	=> 'style_id',
-			'KEYS'	=> array(
-				'style_name'	=> array('UNIQUE', 'style_name')
-			)
-		);
+			'KEYS'	=> [
+				'style_name'	=> ['UNIQUE', 'style_name']
+			]
+		];
 	}
 
 	/**
@@ -98,9 +98,9 @@ class styles_table extends migration
 	*/
 	public function revert_schema()
 	{
-		return array(
-			'drop_columns'	=> array(
-				$this->table_prefix . 'styles'	=> array(
+		return [
+			'drop_columns'	=> [
+				$this->table_prefix . 'styles'	=> [
 					'style_version',
 					'style_phpbb_version',
 					'style_author',
@@ -113,9 +113,9 @@ class styles_table extends migration
 					'style_mirror',
 					'style_details',
 					'style_support'
-				)
-			),
-			'drop_tables'	=> array($this->table_prefix . 'acp_styles'),
-		);
+				]
+			],
+			'drop_tables'	=> [$this->table_prefix . 'acp_styles']
+		];
 	}
 }

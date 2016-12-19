@@ -24,7 +24,7 @@ class data_modules extends migration
 	*/
 	static public function depends_on()
 	{
-		return array('\vinabb\stylesdemo\migrations\release_1_0_0');
+		return ['\vinabb\stylesdemo\migrations\release_1_0_0'];
 	}
 
 	/**
@@ -34,17 +34,17 @@ class data_modules extends migration
 	*/
 	public function update_data()
 	{
-		return array(
+		return [
 			// New config items
-			array('config.add', array('vinabb_stylesdemo_download_direct', 1)),
-			array('config.add', array('vinabb_stylesdemo_support_url', '')),
-			array('config.add', array('vinabb_stylesdemo_num_acp_styles', 0, true)),
+			['config.add', ['vinabb_stylesdemo_download_direct', 1]],
+			['config.add', ['vinabb_stylesdemo_support_url', '']],
+			['config.add', ['vinabb_stylesdemo_num_acp_styles', 0, true]],
 
 			// Style data management modules
-			array('module.add', array('acp', 'ACP_CAT_STYLES_DEMO', array(
+			['module.add', ['acp', 'ACP_CAT_STYLES_DEMO', [
 				'module_basename'	=> '\vinabb\stylesdemo\acp\data_module',
-				'modes'				=> array('frontend', 'acp')
-			)))
-		);
+				'modes'				=> ['frontend', 'acp']
+			]]]
+		];
 	}
 }

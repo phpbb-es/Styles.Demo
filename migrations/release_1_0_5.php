@@ -23,7 +23,7 @@ class release_1_0_5 extends migration
 	*/
 	static public function depends_on()
 	{
-		return array('\vinabb\stylesdemo\migrations\release_1_0_0');
+		return ['\vinabb\stylesdemo\migrations\release_1_0_0'];
 	}
 
 	/**
@@ -33,9 +33,9 @@ class release_1_0_5 extends migration
 	*/
 	public function update_data()
 	{
-		return array(
-			array('config.remove', array('vinabb_stylesdemo_lang_enable')),
-			array('config.remove', array('vinabb_stylesdemo_json_enable'))
-		);
+		return [
+			['config.remove', ['vinabb_stylesdemo_lang_enable']],
+			['config.remove', ['vinabb_stylesdemo_json_enable']]
+		];
 	}
 }
