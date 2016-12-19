@@ -1,7 +1,7 @@
 # Styles Demo
 For phpBB 3.1.2+ - 3.2.0
 
-Tested phpBB versions: 3.1.2, 3.1.9, 3.2.0-RC1
+Tested phpBB versions: 3.1.2, 3.1.10, 3.2.0-RC2
 
 ## Build Status
 * **[master]** (For phpBB 3.2) [![Build Status](https://travis-ci.org/VinaBB/Styles.Demo.svg?branch=master)](https://travis-ci.org/VinaBB/Styles.Demo)
