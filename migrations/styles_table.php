@@ -115,7 +115,7 @@ class styles_table extends migration
 					'style_support'
 				)
 			),
-			'drop_tables'	=> array($this->table_prefix . 'acp_styles'),
+			'drop_tables'	=> array($this->table_prefix . 'acp_styles')
 		);
 	}
 }
