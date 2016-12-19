@@ -6,7 +6,7 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace vinabb\stylesdemo\controller;
+namespace vinabb\stylesdemo\controllers;
 
 class user extends \phpbb\user
 {
