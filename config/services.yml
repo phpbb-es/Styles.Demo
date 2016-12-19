@@ -3,11 +3,29 @@ imports:
 
 services:
     user:
-        class: vinabb\stylesdemo\controller\user
+        class: vinabb\stylesdemo\controllers\user
         arguments:
             - '%datetime.class%'
+    vinabb.stylesdemo.helper:
+        class: vinabb\stylesdemo\controllers\helper
+        arguments:
+            - '@auth'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+    vinabb.stylesdemo.entities.style:
+        class: vinabb\stylesdemo\entities\style
+        arguments:
+            - '@dbal.conn'
+            - '%core.root_path%'
+            - '%tables.styles%'
+    vinabb.stylesdemo.entities.acp_style:
+        class: vinabb\stylesdemo\entities\acp_style
+        arguments:
+            - '@dbal.conn'
+            - '%vinabb.stylesdemo.tables.acp_styles%'
     vinabb.stylesdemo.controller:
-        class: vinabb\stylesdemo\controller\main
+        class: vinabb\stylesdemo\controllers\main
         arguments:
             - '@dbal.conn'
             - '@cache.driver'
@@ -22,10 +40,9 @@ services:
             - '@file_downloader'
             - '%vinabb.stylesdemo.tables.acp_styles%'
             - '%core.root_path%'
-            - '%core.adm_relative_path%'
             - '%core.php_ext%'
     vinabb.stylesdemo.listener:
-        class: vinabb\stylesdemo\event\listener
+        class: vinabb\stylesdemo\events\listener
         arguments:
             - '@cache.driver'
             - '@config'
