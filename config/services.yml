@@ -24,6 +24,18 @@ services:
         arguments:
             - '@dbal.conn'
             - '%vinabb.stylesdemo.tables.acp_styles%'
+    vinabb.web.operators.style:
+        class: vinabb\stylesdemo\operators\style
+        arguments:
+            - '@service_container'
+            - '@dbal.conn'
+            - '%tables.styles%'
+    vinabb.web.operators.acp_style:
+        class: vinabb\stylesdemo\operators\acp_style
+        arguments:
+            - '@service_container'
+            - '@dbal.conn'
+            - '%vinabb.stylesdemo.tables.acp_styles%'
     vinabb.stylesdemo.controller:
         class: vinabb\stylesdemo\controllers\main
         arguments:
