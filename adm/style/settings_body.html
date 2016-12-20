@@ -35,22 +35,13 @@
 			<dd><input id="tablet_width" type="number" min="{{ PHONE_WIDTH + MIN_PHONE_WIDTH }}" name="tablet_width" value="{{ TABLET_WIDTH }}"> {{ lang('PIXEL') }}</dd>
 		</dl>
 		<dl>
-			<dt><label for="lang_enable">{{ lang('STYLES_DEMO_LANG_ENABLE') ~ lang('COLON') }}</label></dt>
-			<dd>
-				<label><input type="radio" class="radio" name="lang_enable" value="1" id="lang_enable"{% if LANG_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('lang_enable_options', 1)"> {{ lang('YES') }}</label>
-				<label><input type="radio" class="radio" name="lang_enable" value="0"{% if not LANG_ENABLE %} checked{% endif %} onclick="phpbb.toggleDisplay('lang_enable_options', -1)"> {{ lang('NO') }}</label>
-			</dd>
+			<dt><label>{{ lang('DEFAULT_LANGUAGE') ~ lang('COLON') }}</label></dt>
+			<dd><strong>{{ DEFAULT_LANG }}</strong></dd>
 		</dl>
-		<div id="lang_enable_options"{% if not LANG_ENABLE %} style="display: none;"{% endif %}>
-			<dl>
-				<dt><label>{{ lang('DEFAULT_LANGUAGE') ~ lang('COLON') }}</label></dt>
-				<dd><strong>{{ DEFAULT_LANG }}</strong></dd>
-			</dl>
-			<dl>
-				<dt><label for="lang_switch">{{ lang('STYLES_DEMO_LANG_SWITCH') ~ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_LANG_SWITCH_EXPLAIN') }}</span></dt>
-				<dd>{% if LANG_SWITCH_OPTIONS %}<select name="lang_switch" id="lang_switch">{{ LANG_SWITCH_OPTIONS }}</select>{% else %}{{ lang('NO_EXTRA_LANG_TO_SELECT') }}{% endif %}</dd>
-			</dl>
-		</div>
+		<dl>
+			<dt><label for="lang_switch">{{ lang('STYLES_DEMO_LANG_SWITCH') ~ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_LANG_SWITCH_EXPLAIN') }}</span></dt>
+			<dd>{% if LANG_SWITCH_OPTIONS %}<select name="lang_switch" id="lang_switch">{{ LANG_SWITCH_OPTIONS }}</select>{% else %}{{ lang('NO_EXTRA_LANG_TO_SELECT') }}{% endif %}</dd>
+		</dl>
 		<dl>
 			<dt><label for="acp_enable">{{ lang('STYLES_DEMO_ACP_ENABLE') ~ lang('COLON') }}</label><br><span>{{ lang('STYLES_DEMO_ACP_ENABLE_EXPLAIN') }}</span></dt>
 			<dd>
