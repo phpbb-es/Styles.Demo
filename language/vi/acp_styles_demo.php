@@ -37,7 +37,7 @@ $lang = array_merge($lang, array(
 	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> array(
 		0	=> 'Không có phiên bản phpBB nào mới hơn từ tập tin .cfg.',
 		1	=> 'Đã cập nhật %d giao diện.',
-		2	=> 'Đã cập nhật %d giao diện.',
+		2	=> 'Đã cập nhật %d giao diện.'
 	),
 	'CFG_UPDATE_VERSION'				=> 'Cập nhật phiên bản giao diện từ <var>style.cfg</var>',
 	'CFG_UPDATE_VERSION_CONFIRM'		=> 'Bạn chắc chắn muốn cập nhật phiên bản giao diện từ tập tin .cfg?',
@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'CFG_UPDATE_VERSION_SUCCESS'		=> array(
 		0	=> 'Không có phiên bản giao diện nào mới hơn từ tập tin .cfg.',
 		1	=> 'Đã cập nhật %d giao diện.',
-		2	=> 'Đã cập nhật %d giao diện.',
+		2	=> 'Đã cập nhật %d giao diện.'
 	),
 	'CONFIRM_DELETE_STYLE_DATA'			=> 'Bạn chắc chắn muốn gỡ bỏ giao diện này?',
 
@@ -138,5 +138,5 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_URL'					=> 'Xem thử giao diện',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'Đã cập nhật thiết lập xem thử giao diện.',
 
-	'UPDATE_TOOLS'	=> 'Công cụ cập nhật',
+	'UPDATE_TOOLS'	=> 'Công cụ cập nhật'
 ));

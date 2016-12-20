@@ -29,5 +29,5 @@ $lang = array_merge($lang, array(
 
 	'LOG_ACP_STYLE_ADD'			=> '<strong>Đã thêm giao diện quản trị mới</strong><br />» %s',
 	'LOG_ACP_STYLE_DATA_EDIT'	=> '<strong>Đã sửa dữ liệu giao diện quản trị</strong><br>» %s',
-	'LOG_ACP_STYLE_DELETE'		=> '<strong>Đã gỡ bỏ giao diện quản trị</strong><br />» %s',
+	'LOG_ACP_STYLE_DELETE'		=> '<strong>Đã gỡ bỏ giao diện quản trị</strong><br />» %s'
 ));

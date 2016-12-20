@@ -29,5 +29,5 @@ $lang = array_merge($lang, array(
 
 	'LOG_ACP_STYLE_ADD'			=> '<strong>Added new ACP style</strong><br />» %s',
 	'LOG_ACP_STYLE_DATA_EDIT'	=> '<strong>Edited ACP style data</strong><br>» %s',
-	'LOG_ACP_STYLE_DELETE'		=> '<strong>Removed ACP style</strong><br />» %s',
+	'LOG_ACP_STYLE_DELETE'		=> '<strong>Removed ACP style</strong><br />» %s'
 ));

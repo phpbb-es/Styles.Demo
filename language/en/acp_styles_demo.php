@@ -37,7 +37,7 @@ $lang = array_merge($lang, array(
 	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> array(
 		0	=> 'No newer phpBB versions from .cfg files.',
 		1	=> '%d style has been updated.',
-		2	=> '%d styles have been updated.',
+		2	=> '%d styles have been updated.'
 	),
 	'CFG_UPDATE_VERSION'				=> 'Update style version from <var>style.cfg</var>',
 	'CFG_UPDATE_VERSION_CONFIRM'		=> 'Are you sure you want to update style version from .cfg files?',
@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'CFG_UPDATE_VERSION_SUCCESS'		=> array(
 		0	=> 'No newer style versions from .cfg files.',
 		1	=> '%d style has been updated.',
-		2	=> '%d styles have been updated.',
+		2	=> '%d styles have been updated.'
 	),
 	'CONFIRM_DELETE_STYLE_DATA'			=> 'Are you sure you want to remove this style?',
 
@@ -138,5 +138,5 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_URL'					=> 'Styles Demo',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'The style demo settings have been updated.',
 
-	'UPDATE_TOOLS'	=> 'Update tools',
+	'UPDATE_TOOLS'	=> 'Update tools'
 ));

@@ -27,7 +27,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_STYLES'			=> array(
 		1	=> '%d ACP style',
-		2	=> '%d ACP styles',
+		2	=> '%d ACP styles'
 	),
 	'ACP_STYLES_DISABLED'	=> 'The ACP style preview has been disabled.',
 
@@ -64,7 +64,7 @@ $lang = array_merge($lang, array(
 	'STYLE_NAME'			=> 'Style name',
 	'STYLES'				=> array(
 		1	=> '%d style',
-		2	=> '%d styles',
+		2	=> '%d styles'
 	),
 	'STYLES_DEMO'			=> 'Styles Demo',
 	'SUPPORT'				=> 'Support',
@@ -73,5 +73,5 @@ $lang = array_merge($lang, array(
 
 	'UNKNOWN'	=> 'Unknown',
 
-	'VERSION'	=> 'Version',
+	'VERSION'	=> 'Version'
 ));

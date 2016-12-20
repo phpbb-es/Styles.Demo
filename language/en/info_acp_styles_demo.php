@@ -33,5 +33,5 @@ $lang = array_merge($lang, array(
 	'ROLE_ADMIN_DEMO'		=> 'Demo Admin',
 	'ROLE_ADMIN_DEMO_DESC'	=> 'Use only for demo phpBB boards.',
 
-	'UNAVAILABLE_IN_DEMO'	=> 'No changes saved in demo mode.',
+	'UNAVAILABLE_IN_DEMO'	=> 'No changes saved in demo mode.'
 ));

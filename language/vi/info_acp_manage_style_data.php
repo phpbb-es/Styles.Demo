@@ -27,5 +27,5 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_MANAGE_STYLE_DATA'	=> 'Quản lý giao diện',
 
-	'LOG_STYLE_DATA_EDIT'	=> '<strong>Đã sửa dữ liệu giao diện</strong><br>» %s',
+	'LOG_STYLE_DATA_EDIT'	=> '<strong>Đã sửa dữ liệu giao diện</strong><br>» %s'
 ));

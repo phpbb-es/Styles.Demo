@@ -27,7 +27,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_STYLES'			=> array(
 		1	=> '%d giao diện quản trị',
-		2	=> '%d giao diện quản trị',
+		2	=> '%d giao diện quản trị'
 	),
 	'ACP_STYLES_DISABLED'	=> 'Chức năng xem thử giao diện quản trị đã tắt.',
 
@@ -64,7 +64,7 @@ $lang = array_merge($lang, array(
 	'STYLE_NAME'			=> 'Tên giao diện',
 	'STYLES'				=> array(
 		1	=> '%d giao diện',
-		2	=> '%d giao diện',
+		2	=> '%d giao diện'
 	),
 	'STYLES_DEMO'			=> 'Xem thử giao diện',
 	'SUPPORT'				=> 'Hỗ trợ',
@@ -73,5 +73,5 @@ $lang = array_merge($lang, array(
 
 	'UNKNOWN'	=> 'Không biết',
 
-	'VERSION'	=> 'Phiên bản',
+	'VERSION'	=> 'Phiên bản'
 ));

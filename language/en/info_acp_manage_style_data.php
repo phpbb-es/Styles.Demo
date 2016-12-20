@@ -27,5 +27,5 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_MANAGE_STYLE_DATA'	=> 'Manage styles',
 
-	'LOG_STYLE_DATA_EDIT'	=> '<strong>Edited style data</strong><br>» %s',
+	'LOG_STYLE_DATA_EDIT'	=> '<strong>Edited style data</strong><br>» %s'
 ));

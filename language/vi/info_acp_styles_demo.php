@@ -33,5 +33,5 @@ $lang = array_merge($lang, array(
 	'ROLE_ADMIN_DEMO'		=> 'Quản trị giả lập',
 	'ROLE_ADMIN_DEMO_DESC'	=> 'Chỉ dùng cho chức năng xem thử giao diện.',
 
-	'UNAVAILABLE_IN_DEMO'	=> 'Không lưu thay đổi trong chế độ giả lập.',
+	'UNAVAILABLE_IN_DEMO'	=> 'Không lưu thay đổi trong chế độ giả lập.'
 ));
