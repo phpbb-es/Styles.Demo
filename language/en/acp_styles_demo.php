@@ -130,7 +130,6 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_JSON_ENABLE_YES'		=> 'Remote JSON file',
 	'STYLES_DEMO_JSON_URL'				=> 'JSON URL',
 	'STYLES_DEMO_JSON_URL_EXPLAIN'		=> 'Enter the URL of JSON data file.',
-	'STYLES_DEMO_LANG_ENABLE'			=> 'Enable language switcher',
 	'STYLES_DEMO_LANG_SWITCH'			=> 'Switch language',
 	'STYLES_DEMO_LANG_SWITCH_EXPLAIN'	=> 'The switch and default language must be different.',
 	'STYLES_DEMO_LOGO_TEXT'				=> 'Hover logo text',

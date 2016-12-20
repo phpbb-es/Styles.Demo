@@ -130,7 +130,6 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_JSON_ENABLE_YES'		=> 'Từ tập tin JSON',
 	'STYLES_DEMO_JSON_URL'				=> 'Liên kết JSON',
 	'STYLES_DEMO_JSON_URL_EXPLAIN'		=> 'Liên kết của tập tin dữ liệu JSON.',
-	'STYLES_DEMO_LANG_ENABLE'			=> 'Cho phép chuyển ngôn ngữ',
 	'STYLES_DEMO_LANG_SWITCH'			=> 'Ngôn ngữ chuyển',
 	'STYLES_DEMO_LANG_SWITCH_EXPLAIN'	=> 'Ngôn ngữ chuyển và mặc định phải khác nhau.',
 	'STYLES_DEMO_LOGO_TEXT'				=> 'Giới thiệu',
