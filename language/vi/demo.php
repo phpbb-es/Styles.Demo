@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 /**
@@ -24,11 +24,11 @@ if (empty($lang) || !is_array($lang))
  * and the files must not contain a BOM.
  */
 
-$lang = array_merge($lang, array(
-	'ACP_STYLES'			=> array(
+$lang = array_merge($lang, [
+	'ACP_STYLES'			=> [
 		1	=> '%d giao diện quản trị',
-		2	=> '%d giao diện quản trị',
-	),
+		2	=> '%d giao diện quản trị'
+	],
 	'ACP_STYLES_DISABLED'	=> 'Chức năng xem thử giao diện quản trị đã tắt.',
 
 	'CLOSE'		=> 'Đóng',
@@ -62,10 +62,10 @@ $lang = array_merge($lang, array(
 	'SELECT_STYLE'			=> 'Chọn giao diện…',
 	'SELECT_STYLE_EXPLAIN'	=> 'Chọn giao diện xem thử',
 	'STYLE_NAME'			=> 'Tên giao diện',
-	'STYLES'				=> array(
+	'STYLES'				=> [
 		1	=> '%d giao diện',
-		2	=> '%d giao diện',
-	),
+		2	=> '%d giao diện'
+	],
 	'STYLES_DEMO'			=> 'Xem thử giao diện',
 	'SUPPORT'				=> 'Hỗ trợ',
 
@@ -73,5 +73,5 @@ $lang = array_merge($lang, array(
 
 	'UNKNOWN'	=> 'Không biết',
 
-	'VERSION'	=> 'Phiên bản',
-));
+	'VERSION'	=> 'Phiên bản'
+]);

@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 /**
@@ -24,7 +24,7 @@ if (empty($lang) || !is_array($lang))
 * and the files must not contain a BOM.
 */
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_ADD_ACP_STYLE'				=> 'Add new ACP styles',
 	'ACP_ADD_ACP_STYLE_EXPLAIN'		=> 'This panel just add ACP styles to the demo page, it installs nothing to your system since phpBB does not support this.',
 	'ACP_ADD_ACP_STYLE_UNAVAILABLE'	=> 'Please copy new ACP styles to the directory <samp>%s</samp>.',
@@ -34,19 +34,19 @@ $lang = array_merge($lang, array(
 	'CFG_UPDATE_PHPBB_VERSION'			=> 'Update phpBB version from <var>style.cfg</var>',
 	'CFG_UPDATE_PHPBB_VERSION_CONFIRM'	=> 'Are you sure you want to update phpBB version from .cfg files?',
 	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Only if the phpBB version from this file is newer than which was stored in database.',
-	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> array(
+	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> [
 		0	=> 'No newer phpBB versions from .cfg files.',
 		1	=> '%d style has been updated.',
-		2	=> '%d styles have been updated.',
-	),
+		2	=> '%d styles have been updated.'
+	],
 	'CFG_UPDATE_VERSION'				=> 'Update style version from <var>style.cfg</var>',
 	'CFG_UPDATE_VERSION_CONFIRM'		=> 'Are you sure you want to update style version from .cfg files?',
 	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Only if the style version from this file is newer than which was stored in database.',
-	'CFG_UPDATE_VERSION_SUCCESS'		=> array(
+	'CFG_UPDATE_VERSION_SUCCESS'		=> [
 		0	=> 'No newer style versions from .cfg files.',
 		1	=> '%d style has been updated.',
-		2	=> '%d styles have been updated.',
-	),
+		2	=> '%d styles have been updated.'
+	],
 	'CONFIRM_DELETE_STYLE_DATA'			=> 'Are you sure you want to remove this style?',
 
 	'DEFAULT_LANGUAGE'	=> 'Default language',
@@ -138,5 +138,5 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_URL'					=> 'Styles Demo',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'The style demo settings have been updated.',
 
-	'UPDATE_TOOLS'	=> 'Update tools',
-));
+	'UPDATE_TOOLS'	=> 'Update tools'
+]);

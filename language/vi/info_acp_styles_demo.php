@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 /**
@@ -24,7 +24,7 @@ if (empty($lang) || !is_array($lang))
 * and the files must not contain a BOM.
 */
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_CAT_STYLES_DEMO'	=> 'Xem thử giao diện',
 	'ACP_STYLES_DEMO'		=> 'Thiết lập xem thử giao diện',
 
@@ -33,5 +33,5 @@ $lang = array_merge($lang, array(
 	'ROLE_ADMIN_DEMO'		=> 'Quản trị giả lập',
 	'ROLE_ADMIN_DEMO_DESC'	=> 'Chỉ dùng cho chức năng xem thử giao diện.',
 
-	'UNAVAILABLE_IN_DEMO'	=> 'Không lưu thay đổi trong chế độ giả lập.',
-));
+	'UNAVAILABLE_IN_DEMO'	=> 'Không lưu thay đổi trong chế độ giả lập.'
+]);

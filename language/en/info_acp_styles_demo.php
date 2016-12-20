@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 /**
@@ -24,7 +24,7 @@ if (empty($lang) || !is_array($lang))
 * and the files must not contain a BOM.
 */
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_CAT_STYLES_DEMO'	=> 'Styles Demo',
 	'ACP_STYLES_DEMO'		=> 'Style demo settings',
 
@@ -33,5 +33,5 @@ $lang = array_merge($lang, array(
 	'ROLE_ADMIN_DEMO'		=> 'Demo Admin',
 	'ROLE_ADMIN_DEMO_DESC'	=> 'Use only for demo phpBB boards.',
 
-	'UNAVAILABLE_IN_DEMO'	=> 'No changes saved in demo mode.',
-));
+	'UNAVAILABLE_IN_DEMO'	=> 'No changes saved in demo mode.'
+]);

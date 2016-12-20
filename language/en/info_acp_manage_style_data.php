@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 /**
@@ -24,8 +24,8 @@ if (empty($lang) || !is_array($lang))
 * and the files must not contain a BOM.
 */
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_MANAGE_STYLE_DATA'	=> 'Manage styles',
 
-	'LOG_STYLE_DATA_EDIT'	=> '<strong>Edited style data</strong><br>» %s',
-));
+	'LOG_STYLE_DATA_EDIT'	=> '<strong>Edited style data</strong><br>» %s'
+]);

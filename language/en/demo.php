@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 /**
@@ -24,11 +24,11 @@ if (empty($lang) || !is_array($lang))
 * and the files must not contain a BOM.
 */
 
-$lang = array_merge($lang, array(
-	'ACP_STYLES'			=> array(
+$lang = array_merge($lang, [
+	'ACP_STYLES'			=> [
 		1	=> '%d ACP style',
-		2	=> '%d ACP styles',
-	),
+		2	=> '%d ACP styles'
+	],
 	'ACP_STYLES_DISABLED'	=> 'The ACP style preview has been disabled.',
 
 	'CLOSE'		=> 'Close',
@@ -62,10 +62,10 @@ $lang = array_merge($lang, array(
 	'SELECT_STYLE'			=> 'Select a style…',
 	'SELECT_STYLE_EXPLAIN'	=> 'Select a style to preview',
 	'STYLE_NAME'			=> 'Style name',
-	'STYLES'				=> array(
+	'STYLES'				=> [
 		1	=> '%d style',
-		2	=> '%d styles',
-	),
+		2	=> '%d styles'
+	],
 	'STYLES_DEMO'			=> 'Styles Demo',
 	'SUPPORT'				=> 'Support',
 
@@ -73,5 +73,5 @@ $lang = array_merge($lang, array(
 
 	'UNKNOWN'	=> 'Unknown',
 
-	'VERSION'	=> 'Version',
-));
+	'VERSION'	=> 'Version'
+]);

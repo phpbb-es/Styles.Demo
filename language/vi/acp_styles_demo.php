@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 /**
@@ -24,7 +24,7 @@ if (empty($lang) || !is_array($lang))
 * and the files must not contain a BOM.
 */
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_ADD_ACP_STYLE'				=> 'Thêm giao diện quản trị mới',
 	'ACP_ADD_ACP_STYLE_EXPLAIN'		=> 'Công cụ này chỉ thêm giao diện quản trị vào trang xem thử, nó không cài đặt bất cứ thứ gì vào hệ thống vì phpBB không hỗ trợ chức năng này.',
 	'ACP_ADD_ACP_STYLE_UNAVAILABLE'	=> 'Vui lòng chép các giao diện quản trị mới vào thư mục <samp>%s</samp>.',
@@ -34,19 +34,19 @@ $lang = array_merge($lang, array(
 	'CFG_UPDATE_PHPBB_VERSION'			=> 'Cập nhật phiên bản phpBB từ <var>style.cfg</var>',
 	'CFG_UPDATE_PHPBB_VERSION_CONFIRM'	=> 'Bạn chắc chắn muốn cập nhật phiên bản phpBB từ tập tin .cfg?',
 	'CFG_UPDATE_PHPBB_VERSION_EXPLAIN'	=> 'Chỉ cập nhật nếu phiên bản phpBB từ tập tin này mới hơn phiên bản đã lưu trong cơ sở dữ liệu.',
-	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> array(
+	'CFG_UPDATE_PHPBB_VERSION_SUCCESS'	=> [
 		0	=> 'Không có phiên bản phpBB nào mới hơn từ tập tin .cfg.',
 		1	=> 'Đã cập nhật %d giao diện.',
-		2	=> 'Đã cập nhật %d giao diện.',
-	),
+		2	=> 'Đã cập nhật %d giao diện.'
+	],
 	'CFG_UPDATE_VERSION'				=> 'Cập nhật phiên bản giao diện từ <var>style.cfg</var>',
 	'CFG_UPDATE_VERSION_CONFIRM'		=> 'Bạn chắc chắn muốn cập nhật phiên bản giao diện từ tập tin .cfg?',
 	'CFG_UPDATE_VERSION_EXPLAIN'		=> 'Chỉ cập nhật nếu phiên bản giao diện từ tập tin này mới hơn phiên bản đã lưu trong cơ sở dữ liệu.',
-	'CFG_UPDATE_VERSION_SUCCESS'		=> array(
+	'CFG_UPDATE_VERSION_SUCCESS'		=> [
 		0	=> 'Không có phiên bản giao diện nào mới hơn từ tập tin .cfg.',
 		1	=> 'Đã cập nhật %d giao diện.',
-		2	=> 'Đã cập nhật %d giao diện.',
-	),
+		2	=> 'Đã cập nhật %d giao diện.'
+	],
 	'CONFIRM_DELETE_STYLE_DATA'			=> 'Bạn chắc chắn muốn gỡ bỏ giao diện này?',
 
 	'DEFAULT_LANGUAGE'	=> 'Ngôn ngữ mặc định',
@@ -138,5 +138,5 @@ $lang = array_merge($lang, array(
 	'STYLES_DEMO_URL'					=> 'Xem thử giao diện',
 	'STYLES_DEMO_SETTINGS_UPDATED'		=> 'Đã cập nhật thiết lập xem thử giao diện.',
 
-	'UPDATE_TOOLS'	=> 'Công cụ cập nhật',
-));
+	'UPDATE_TOOLS'	=> 'Công cụ cập nhật'
+]);
