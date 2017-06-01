@@ -13,9 +13,22 @@ use vinabb\stylesdemo\includes\constants;
 class settings
 {
 	/** @var string */
-	public $u_action;
+	protected $u_action;
 
-	public function main($id, $mode)
+	/**
+	* Set form action URL
+	*
+	* @param string $u_action Form action
+	*/
+	public function set_form_action($u_action)
+	{
+		$this->u_action = $u_action;
+	}
+
+	/**
+	* Extension settings
+	*/
+	public function display_settings()
 	{
 		global $phpbb_container;
 
