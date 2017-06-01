@@ -1,5 +1,5 @@
 # Styles Demo
-For phpBB 3.1.2+ and 3.2.0
+For phpBB 3.1.2+ and 3.2.0+
 
 Tested phpBB versions: 3.1.2, 3.1.10, 3.2.0
 
