@@ -44,7 +44,6 @@ class data_module
 		add_form_key('vinabb/stylesdemo');
 
 		$s_hidden_fields = '';
-		$errors = array();
 
 		switch ($action)
 		{
