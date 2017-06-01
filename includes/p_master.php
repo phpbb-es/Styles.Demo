@@ -11,7 +11,7 @@ namespace vinabb\stylesdemo\includes;
 class p_master extends \p_master
 {
 	/**
-	* Copied from phpBB 3.2.0-RC2 with one change:
+	* Copied from phpBB 3.2.0 with one change:
 	*
 	*	Fix the style path for ACP modules which come within extensions
 	*
