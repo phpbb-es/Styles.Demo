@@ -13,7 +13,7 @@ use vinabb\stylesdemo\includes\constants;
 /**
 * Controller for the extension helper
 */
-class helper implements helper_interface
+class helper
 {
 	/** @var \phpbb\auth\auth $auth */
 	protected $auth;
