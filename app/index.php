@@ -50,6 +50,7 @@ $style = $request->variable('s', '');
 
 if (empty($style) || !file_exists("./styles/{$style}/"))
 {
+	send_status_line(404, 'Not Found');
 	trigger_error('NO_STYLE_DATA', E_USER_ERROR);
 }
 
