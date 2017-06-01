@@ -34,7 +34,7 @@ class data_module
 
 		$this->tpl_name = 'data_body';
 		$this->page_title = ($mode == 'acp') ? $this->language->lang('ACP_MANAGE_ACP_STYLE_DATA') : $this->language->lang('ACP_MANAGE_STYLE_DATA');
-		$this->language->add_lang(array('demo', 'acp_styles_demo'), 'vinabb/stylesdemo');
+		$this->language->add_lang(['demo', 'acp_styles_demo', 'vinabb/stylesdemo']);
 
 		$action = $this->request->variable('action', '');
 
@@ -53,17 +53,17 @@ class data_module
 			case 'add':
 				if ($mode == 'acp')
 				{
-					$add_styles = $this->request->variable('add_styles', array(''));
+					$add_styles = $this->request->variable('add_styles', []);
 
 					// Submit
 					if ($this->request->is_set_post('submit') && sizeof($add_styles))
 					{
-						$sql_ary = array();
-						$style_names = array();
-						$duplicate_styles = array();
+						$sql_ary = [];
+						$style_names = [];
+						$duplicate_styles = [];
 
 						// Get existing ACP styles
-						$existing_styles = array();
+						$existing_styles = [];
 
 						$sql = "SELECT style_name, style_path
 							FROM " . $this->style_table;
@@ -89,13 +89,13 @@ class data_module
 								$style_names[$style_name] = $add_style;
 
 								// If not duplicate, add to SQL array
-								$sql_ary[] = array(
+								$sql_ary[] = [
 									'style_name'			=> $style_name,
 									'style_copyright'		=> isset($cfg['copyright']) ? $cfg['copyright'] : '',
 									'style_path'			=> $add_style,
 									'style_version'			=> isset($cfg['style_version']) ? $cfg['style_version'] : '',
-									'style_phpbb_version'	=> isset($cfg['phpbb_version']) ? $cfg['phpbb_version'] : '',
-								);
+									'style_phpbb_version'	=> isset($cfg['phpbb_version']) ? $cfg['phpbb_version'] : ''
+								];
 							}
 							else
 							{
@@ -107,7 +107,7 @@ class data_module
 						{
 							$this->db->sql_multi_insert($this->style_table, $sql_ary);
 							$this->config->increment('vinabb_stylesdemo_num_acp_styles', sizeof($style_names), true);
-							$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACP_STYLE_ADD', false, array(implode(', ', array_keys($style_names))));
+							$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACP_STYLE_ADD', false, [implode(', ', array_keys($style_names))]);
 						}
 
 						$duplicate_message = '';
@@ -156,7 +156,7 @@ class data_module
 
 				$s_hidden_fields .= '<input type="hidden" name="id" value="' . $style_id . '" />';
 
-				$this->template->assign_vars(array(
+				$this->template->assign_vars([
 					'NAME'			=> isset($style_data['style_name']) ? $style_data['style_name'] : '',
 					'STYLE_VERSION'	=> isset($style_data['style_version']) ? $style_data['style_version'] : '',
 					'PHPBB_VERSION'	=> isset($style_data['style_phpbb_version']) ? $style_data['style_phpbb_version'] : '',
@@ -174,8 +174,8 @@ class data_module
 					'U_BACK'	=> $this->u_action . "&start=$start",
 
 					'S_EDIT'			=> true,
-					'S_HIDDEN_FIELDS'	=> $s_hidden_fields,
-				));
+					'S_HIDDEN_FIELDS'	=> $s_hidden_fields
+				]);
 
 				// Parse mirror data
 				if (!empty($style_data['style_mirror']))
@@ -184,19 +184,19 @@ class data_module
 
 					foreach ($style_data['style_mirror'] as $mirror_url => $mirror_name)
 					{
-						$this->template->assign_block_vars('mirrors', array(
+						$this->template->assign_block_vars('mirrors', [
 							'URL'	=> $mirror_url,
-							'NAME'	=> !empty($mirror_name) ? $mirror_name : '',
-						));
+							'NAME'	=> !empty($mirror_name) ? $mirror_name : ''
+						]);
 					}
 				}
 				// Add an empty line for input
 				else
 				{
-					$this->template->assign_block_vars('mirrors', array(
+					$this->template->assign_block_vars('mirrors', [
 						'URL'	=> '',
-						'NAME'	=> '',
-					));
+						'NAME'	=> ''
+					]);
 				}
 
 				// Submit
@@ -218,8 +218,8 @@ class data_module
 					$style_price = $this->request->variable('style_price', 0);
 					$style_price_label = $this->request->variable('style_price_label', '');
 					$style_download = $this->request->variable('style_download', '');
-					$style_mirror_names = $this->request->variable('style_mirror_names', array(''));
-					$style_mirror_urls = $this->request->variable('style_mirror_urls', array(''));
+					$style_mirror_names = $this->request->variable('style_mirror_names', ['']);
+					$style_mirror_urls = $this->request->variable('style_mirror_urls', ['']);
 					$style_details = $this->request->variable('style_details', '');
 					$style_support = $this->request->variable('style_support', '');
 
@@ -255,7 +255,7 @@ class data_module
 
 						// Mirrors are not available for commercial styles
 						unset($style_mirror_urls);
-						$style_mirror_urls = array();
+						$style_mirror_urls = [];
 					}
 					else
 					{
@@ -265,7 +265,7 @@ class data_module
 
 					// Get mirror links
 					$i = 0;
-					$style_mirrors = array();
+					$style_mirrors = [];
 
 					foreach ($style_mirror_urls as $style_mirror_url)
 					{
@@ -277,7 +277,7 @@ class data_module
 						$i++;
 					}
 
-					$sql_ary = array(
+					$sql_ary = [
 						'style_name'			=> $style_name,
 						'style_version'			=> $style_version,
 						'style_phpbb_version'	=> $style_phpbb_version,
@@ -290,8 +290,8 @@ class data_module
 						'style_download'		=> $style_download,
 						'style_mirror'			=> sizeof($style_mirrors) ? json_encode($style_mirrors) : '',
 						'style_details'			=> $style_details,
-						'style_support'			=> $style_support,
-					);
+						'style_support'			=> $style_support
+					];
 
 					if ($style_id)
 					{
@@ -299,7 +299,7 @@ class data_module
 					}
 
 					$log_action = ($mode == 'acp') ? 'LOG_ACP_STYLE_DATA_EDIT' : 'LOG_STYLE_DATA_EDIT';
-					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, $log_action, false, array($style_name));
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, $log_action, false, [$style_name]);
 
 					trigger_error($this->language->lang('STYLE_DATA_UPDATED') . adm_back_link($this->u_action));
 				}
@@ -364,18 +364,18 @@ class data_module
 
 						$this->config->increment('vinabb_stylesdemo_num_acp_styles', -1, true);
 
-						$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACP_STYLE_ADD', false, array($style_name));
+						$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACP_STYLE_ADD', false, [$style_name]);
 
 						trigger_error($this->language->lang('STYLE_DATA_DELETED') . adm_back_link($this->u_action));
 					}
 					else
 					{
-						confirm_box(false, $this->language->lang['CONFIRM_DELETE_STYLE_DATA'], build_hidden_fields(array(
+						confirm_box(false, $this->language->lang['CONFIRM_DELETE_STYLE_DATA'], build_hidden_fields([
 							'i'			=> $id,
 							'mode'		=> $mode,
 							'id'		=> $style_id,
 							'action'	=> 'delete',
-						)));
+						]));
 					}
 				}
 			break;
@@ -388,11 +388,11 @@ class data_module
 
 				if (!confirm_box(true))
 				{
-					confirm_box(false, $this->language->lang($confirm_lang), build_hidden_fields(array(
+					confirm_box(false, $this->language->lang($confirm_lang), build_hidden_fields([
 						'i'			=> $id,
 						'mode'		=> $mode,
 						'action'	=> $action,
-					)));
+					]));
 				}
 				else
 				{
@@ -431,14 +431,14 @@ class data_module
 					}
 				}
 
-				$this->template->assign_vars(array(
-					'U_ACTION'	=> $this->u_action . "&action=$action",
-				));
+				$this->template->assign_vars([
+					'U_ACTION'	=> $this->u_action . "&action=$action"
+				]);
 			break;
 		}
 
 		// Manage styles
-		$styles = array();
+		$styles = [];
 		$style_count = 0;
 
 		$start = $this->list_styles($this->style_table, $styles, $style_count, $per_page, $start);
@@ -454,7 +454,7 @@ class data_module
 				$u_delete = ($row['style_id'] == $this->config['default_style']) ? '' : append_sid("{$phpbb_admin_path}index.$phpEx", 'i=acp_styles&action=uninstall&hash=' . generate_link_hash('uninstall') . '&id=' . $row['style_id']);
 			}
 
-			$this->template->assign_block_vars('styles', array(
+			$this->template->assign_block_vars('styles', [
 				'NAME'			=> $row['style_name'],
 				'ACTIVE'		=> $row['style_active'],
 				'PATH'			=> $row['style_path'],
@@ -474,27 +474,27 @@ class data_module
 				'U_ENABLE'		=> $this->u_action . "&action=enable&start=$start&id=" . $row['style_id'],
 				'U_DISABLE'		=> ($mode == 'frontend' && $row['style_id'] == $this->config['default_style']) ? '' : $this->u_action . "&action=disable&start=$start&id=" . $row['style_id'],
 				'U_EDIT'		=> $this->u_action . '&action=edit&id=' . $row['style_id'],
-				'U_DELETE'		=> $u_delete,
-			));
+				'U_DELETE'		=> $u_delete
+			]);
 		}
 
 		$this->pagination->generate_template_pagination($this->u_action, 'pagination', 'start', $style_count, $per_page, $start);
 
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'TOTAL_STYLES'		=> $style_count,
 			'TOTAL_STYLES_LANG'	=> ($mode == 'acp') ? 'ACP_STYLES' : 'STYLES',
 
 			'U_ACTION'			=> $this->u_action . "&action=$action&start=$start",
 
 			'S_ACP_STYLES'		=> $mode == 'acp',
-			'S_HIDDEN_FIELDS'	=> $s_hidden_fields,
-		));
+			'S_HIDDEN_FIELDS'	=> $s_hidden_fields
+		]);
 
 		// Add new ACP styles
 		if ($mode == 'acp')
 		{
 			// Get existing ACP styles
-			$existing_styles = array();
+			$existing_styles = [];
 
 			$sql = "SELECT style_name, style_path
 				FROM " . $this->style_table;
@@ -507,8 +507,8 @@ class data_module
 			$this->db->sql_freeresult($result);
 
 			// Available ACP styles to add from <ext>/app/styles/
-			$style_dirs = array();
-			$scan_dirs = array_diff(scandir("{$this->ext_root_path}app/styles/"), array('..', '.', '.htaccess', '_example'));
+			$style_dirs = [];
+			$scan_dirs = array_diff(scandir("{$this->ext_root_path}app/styles/"), ['..', '.', '.htaccess', '_example']);
 
 			foreach ($scan_dirs as $scan_dir)
 			{
@@ -523,18 +523,18 @@ class data_module
 				// Get data from style.cfg
 				$cfg = parse_cfg_file("{$this->ext_root_path}app/styles/{$style_dir}/style.cfg");
 
-				$this->template->assign_block_vars('install_styles', array(
+				$this->template->assign_block_vars('install_styles', [
 					'NAME'			=> isset($cfg['name']) ? $cfg['name'] : $style_dir,
 					'PATH'			=> $style_dir,
 					'VERSION'		=> isset($cfg['style_version']) ? $cfg['style_version'] : '',
-					'PHPBB_VERSION'	=> isset($cfg['phpbb_version']) ? $cfg['phpbb_version'] : '',
-				));
+					'PHPBB_VERSION'	=> isset($cfg['phpbb_version']) ? $cfg['phpbb_version'] : ''
+				]);
 			}
 
-			$this->template->assign_vars(array(
+			$this->template->assign_vars([
 				'HAS_AVAILABLE_STYLES'	=> sizeof($style_dirs) ? true : false,
-				'ADD_STYLE_EXPLAIN'		=> sizeof($style_dirs) ? $this->language->lang('ACP_ADD_ACP_STYLE_EXPLAIN') : $this->language->lang('ACP_ADD_ACP_STYLE_UNAVAILABLE', $this->ext_root_path . 'app/styles/'),
-			));
+				'ADD_STYLE_EXPLAIN'		=> sizeof($style_dirs) ? $this->language->lang('ACP_ADD_ACP_STYLE_EXPLAIN') : $this->language->lang('ACP_ADD_ACP_STYLE_UNAVAILABLE', $this->ext_root_path . 'app/styles/')
+			]);
 		}
 	}
 

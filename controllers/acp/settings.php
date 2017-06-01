@@ -38,23 +38,23 @@ class settings
 
 		add_form_key('vinabb/stylesdemo');
 
-		$errors = array();
+		$errors = [];
 
 		// Resolution data
-		$resolutions = array(
-			800		=> array('lang' => 'SVGA', 'height' => 600),
-			1024	=> array('lang' => 'XGA', 'height' => 768),
-			1280	=> array('lang' => 'WXGA', 'height' => 768),
-			1366	=> array('lang' => 'HD', 'height' => 768),
-			1440	=> array('lang' => 'WXGA_PLUS', 'height' => 900),
-			1600	=> array('lang' => 'HD_PLUS', 'height' => 900),
-			1920	=> array('lang' => 'FHD', 'height' => 1080),
-			2560	=> array('lang' => 'QHD', 'height' => 1440),
-			3440	=> array('lang' => 'WQHD', 'height' => 1440),
-			3840	=> array('lang' => 'UHD', 'height' => 2160),
-			5120	=> array('lang' => '5K', 'height' => 2880),
-			7680	=> array('lang' => '8K', 'height' => 4320),
-		);
+		$resolutions = [
+			800		=> ['lang' => 'SVGA', 'height' => 600],
+			1024	=> ['lang' => 'XGA', 'height' => 768],
+			1280	=> ['lang' => 'WXGA', 'height' => 768],
+			1366	=> ['lang' => 'HD', 'height' => 768],
+			1440	=> ['lang' => 'WXGA_PLUS', 'height' => 900],
+			1600	=> ['lang' => 'HD_PLUS', 'height' => 900],
+			1920	=> ['lang' => 'FHD', 'height' => 1080],
+			2560	=> ['lang' => 'QHD', 'height' => 1440],
+			3440	=> ['lang' => 'WQHD', 'height' => 1440],
+			3840	=> ['lang' => 'UHD', 'height' => 2160],
+			5120	=> ['lang' => '5K', 'height' => 2880],
+			7680	=> ['lang' => '8K', 'height' => 4320]
+		];
 
 		// Submit
 		if ($this->request->is_set_post('submit'))
@@ -160,13 +160,13 @@ class settings
 					$this->db->sql_query($sql);
 
 					// Insert new admin role
-					$sql_ary = array(
+					$sql_ary = [
 						'user_id'			=> ANONYMOUS,
 						'forum_id'			=> 0,
 						'auth_option_id'	=> 0,
 						'auth_role_id'		=> $this->get_demo_role_id(),
 						'auth_setting'		=> 0
-					);
+					];
 
 					$this->db->sql_query('INSERT INTO ' . ACL_USERS_TABLE . ' ' . $this->db->sql_build_array('INSERT', $sql_ary));
 				}
@@ -181,13 +181,13 @@ class settings
 					// Clear permissions cache
 					$this->auth->acl_clear_prefetch();
 
-					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), array('Anonymous'));
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), ['Anonymous']);
 				}
 
 				// Delete all screenshots which created by PhantomJS but with old resolution setting
 				if ($screenshot_type == constants::SCREENSHOT_TYPE_PHANTOM && $screenshot_width != $this->config['vinabb_stylesdemo_screenshot_width'])
 				{
-					$scan_dirs = array('images'	=> constants::SCREENSHOT_EXT, 'js' => '.js');
+					$scan_dirs = ['images'	=> constants::SCREENSHOT_EXT, 'js' => '.js'];
 
 					foreach ($scan_dirs as $scan_dir => $file_ext)
 					{
@@ -195,7 +195,7 @@ class settings
 
 						if ($this->filesystem->exists("{$this->ext_root_path}bin/{$scan_dir}/"))
 						{
-							$scan_files = array_diff(scandir("{$this->ext_root_path}bin/{$scan_dir}/"), array('..', '.', '.htaccess'));
+							$scan_files = array_diff(scandir("{$this->ext_root_path}bin/{$scan_dir}/"), ['..', '.', '.htaccess']);
 
 							foreach ($scan_files as $scan_file)
 							{
@@ -274,8 +274,8 @@ class settings
 		}
 
 		// Output
-		$this->template->assign_vars(array(
-			'STYLES_DEMO_URL'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => '')),
+		$this->template->assign_vars([
+			'STYLES_DEMO_URL'	=> $this->helper->route('vinabb_stylesdemo_route', ['mode' => '']),
 
 			'LOGO_TEXT'			=> isset($logo_text) ? $logo_text : $this->config['vinabb_stylesdemo_logo_text'],
 			'AUTO_TOGGLE'		=> isset($auto_toggle) ? $auto_toggle : $this->config['vinabb_stylesdemo_auto_toggle'],
@@ -301,8 +301,8 @@ class settings
 			'LANG_SWITCH_OPTIONS'	=> $lang_switch_options,
 			'RESOLUTION_OPTIONS'	=> $resolution_options,
 
-			'U_ACTION'	=> $this->u_action,
-		));
+			'U_ACTION'	=> $this->u_action
+		]);
 	}
 
 	/**

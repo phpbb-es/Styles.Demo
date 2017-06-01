@@ -133,7 +133,7 @@ class main
 		$this->language->add_lang('demo', 'vinabb/stylesdemo');
 
 		// Get more style data from mom server
-		$json = array();
+		$json = [];
 
 		if ($this->config['vinabb_stylesdemo_json_enable'] && !empty($this->config['vinabb_stylesdemo_json_url']))
 		{
@@ -194,7 +194,7 @@ class main
 		}
 
 		// Build the style data
-		$style_data = array();
+		$style_data = [];
 		$default_style = constants::DEFAULT_STYLE;
 
 		$sql = 'SELECT *
@@ -249,7 +249,7 @@ class main
 
 						$preview_url = ($mode == 'acp') ? generate_board_url() . "/ext/vinabb/stylesdemo/app/index.{$this->php_ext}?s={$style_varname}&sid={$this->user->session_id}" : generate_board_url() . "/index.{$this->php_ext}?style={$row['style_id']}";
 						$script = file_get_contents("{$this->ext_root_path}assets/js/phantom.js");
-						$script = str_replace(array('{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'), array($preview_url, "{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']), $script);
+						$script = str_replace(['{phantom.url}', '{phantom.img}', '{phantom.width}', '{phantom.height}'], [$preview_url, "{$this->ext_root_path}bin/images/{$screenshot_filename}" . constants::SCREENSHOT_EXT, $this->config['vinabb_stylesdemo_screenshot_width'], $this->config['vinabb_stylesdemo_screenshot_height']], $script);
 
 						// Create .js data file for PhantomJS
 						file_put_contents("{$this->ext_root_path}bin/js/{$screenshot_filename}.js", $script);
@@ -323,24 +323,24 @@ class main
 			$preview_url = ($mode == 'acp') ? append_sid("{$this->ext_root_path}app/index.{$this->php_ext}", 's=' . $row['style_path'], false, $this->user->session_id) : append_sid("{$this->root_path}index.{$this->php_ext}", 'style=' . $row['style_id']);
 
 			// Mirrors of each style
-			$style_mirror_data = array();
+			$style_mirror_data = [];
 
 			if (is_array($style_mirror) && sizeof($style_mirror))
 			{
 				$i = 1;
 				foreach ($style_mirror as $mirror_url => $mirror_name)
 				{
-					$style_mirror_data[] = array(
+					$style_mirror_data[] = [
 						'name'	=> !empty($mirror_name) ? $mirror_name : $this->language->lang('MIRROR_LABEL', $i),
-						'url'	=> htmlspecialchars_decode($mirror_url),
-					);
+						'url'	=> htmlspecialchars_decode($mirror_url)
+					];
 
 					$i++;
 				}
 			}
 
 			// Add each row to $style_data which to be exported to Javascript
-			$style_data[$style_varname] = array(
+			$style_data[$style_varname] = [
 				'name'			=> $style_name,
 				'phpbb'			=> $this->language->lang('PHPBB_BADGE', $phpbb_version),
 				'phpbb_info'	=> '<strong>' . $this->language->lang('PHPBB_VERSION') . $this->language->lang('COLON') . '</strong> <kbd>' . (!empty($phpbb_version) ? $phpbb_version : $this->language->lang('UNKNOWN')) . '</kbd>',
@@ -352,8 +352,8 @@ class main
 				'support'		=> htmlspecialchars_decode(!empty($style_support) ? $style_support : $this->config['vinabb_stylesdemo_support_url']),
 				'img'			=> $style_img,
 				'info'			=> $style_info,
-				'url'			=> $preview_url,
-			);
+				'url'			=> $preview_url
+			];
 		}
 		$this->db->sql_freeresult($result);
 
@@ -371,7 +371,7 @@ class main
 					FROM ' . LANG_TABLE;
 				$result = $this->db->sql_query($sql);
 
-				$lang_data = array();
+				$lang_data = [];
 				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$lang_data[$row['lang_iso']] = $row['lang_local_name'];
@@ -388,7 +388,7 @@ class main
 		}
 
 		// Assign index specific vars
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'STYLE_DATA'		=> json_encode($style_data, JSON_NUMERIC_CHECK),
 			'PREFIX_URL'		=> generate_board_url() . '/',
 			'LOGO_TEXT'			=> $this->config['vinabb_stylesdemo_logo_text'],
@@ -411,8 +411,8 @@ class main
 			'S_LANG_ENABLE'	=> !empty($lang_title),
 			'S_ACP_ENABLE'	=> $this->config['vinabb_stylesdemo_acp_enable'] && $this->config['vinabb_stylesdemo_num_acp_styles'],
 
-			'U_MODE'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => ($mode == 'acp') ? '' : 'acp')),
-		));
+			'U_MODE'	=> $this->helper->route('vinabb_stylesdemo_route', ['mode' => ($mode == 'acp') ? '' : 'acp'])
+		]);
 
 		return $this->helper->render('demo_body.html', '');
 	}

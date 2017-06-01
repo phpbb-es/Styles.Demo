@@ -15,12 +15,12 @@ class p_master extends \p_master
 	*
 	*	Fix the style path for ACP modules which come within extensions
 	*
-	*	$template->set_custom_style(array(
-	*		array(
+	*	$template->set_custom_style([
+	*		[
 	*			'name' 		=> 'adm',
-	*			'ext_path' 	=> 'adm/style/',
-	*		),
-	*	), array($module_style_dir, $phpbb_admin_path . 'style'));
+	*			'ext_path' 	=> 'adm/style/'
+	*		],
+	*	], [$module_style_dir, $phpbb_admin_path . 'style']);
 	*
 	*	Change:
 	*		$phpbb_admin_path . 'style'
@@ -88,12 +88,12 @@ class p_master extends \p_master
 
 				if (is_dir($module_style_dir))
 				{
-					$template->set_custom_style(array(
-						array(
+					$template->set_custom_style([
+						[
 							'name' 		=> 'adm',
-							'ext_path' 	=> 'adm/style/',
-						),
-					), array($module_style_dir, "styles/{$style}/style"));
+							'ext_path' 	=> 'adm/style/'
+						],
+					], [$module_style_dir, "styles/{$style}/style"]);
 				}
 			}
 
@@ -122,7 +122,7 @@ class p_master extends \p_master
 
 				if (is_dir($phpbb_root_path . $module_style_dir))
 				{
-					$template->set_style(array($module_style_dir, 'styles'));
+					$template->set_style([$module_style_dir, 'styles']);
 				}
 			}
 

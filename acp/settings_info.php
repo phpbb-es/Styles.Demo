@@ -12,17 +12,17 @@ class settings_info
 {
 	public function module()
 	{
-		return array(
+		return [
 			'filename'		=> '\vinabb\stylesdemo\acp\settings_module',
 			'title'			=> 'ACP_STYLES_DEMO',
 			'version'		=> '1.0.0',
-			'modes'			=> array(
-				'settings'	=> array(
+			'modes'			=> [
+				'settings'	=> [
 					'title'	=> 'ACP_STYLES_DEMO',
 					'auth'	=> 'ext_vinabb/stylesdemo && acl_a_board',
-					'cat'	=> array('ACP_CAT_STYLES_DEMO'),
-				),
-			),
-		);
+					'cat'	=> ['ACP_CAT_STYLES_DEMO']
+				],
+			]
+		];
 	}
 }

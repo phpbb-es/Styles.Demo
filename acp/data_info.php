@@ -12,22 +12,22 @@ class data_info
 {
 	public function module()
 	{
-		return array(
+		return [
 			'filename'		=> '\vinabb\stylesdemo\acp\data_module',
 			'title'			=> 'ACP_MANAGE_STYLE_DATA',
 			'version'		=> '1.0.0',
-			'modes'			=> array(
-				'frontend'	=> array(
+			'modes'			=> [
+				'frontend'	=> [
 					'title'	=> 'ACP_MANAGE_STYLE_DATA',
 					'auth'	=> 'ext_vinabb/stylesdemo && acl_a_board',
-					'cat'	=> array('ACP_CAT_STYLES_DEMO'),
-				),
-				'acp'		=> array(
+					'cat'	=> ['ACP_CAT_STYLES_DEMO']
+				],
+				'acp'		=> [
 					'title'	=> 'ACP_MANAGE_ACP_STYLE_DATA',
 					'auth'	=> 'ext_vinabb/stylesdemo && acl_a_board',
-					'cat'	=> array('ACP_CAT_STYLES_DEMO'),
-				),
-			),
-		);
+					'cat'	=> ['ACP_CAT_STYLES_DEMO']
+				],
+			]
+		];
 	}
 }

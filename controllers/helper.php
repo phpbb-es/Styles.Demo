@@ -54,18 +54,18 @@ class helper
 		$this->db->sql_query($sql);
 
 		// Insert new admin role
-		$sql_ary = array(
+		$sql_ary = [
 			'user_id'			=> ANONYMOUS,
 			'forum_id'			=> 0,
 			'auth_option_id'	=> 0,
 			'auth_role_id'		=> $this->get_demo_role_id(),
 			'auth_setting'		=> 0
-		);
+		];
 		$this->db->sql_query('INSERT INTO ' . ACL_USERS_TABLE . ' ' . $this->db->sql_build_array('INSERT', $sql_ary));
 
 		// Clear permissions cache
 		$this->auth->acl_clear_prefetch();
-		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), array(constants::ANONYMOUS_USERNAME));
+		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), [constants::ANONYMOUS_USERNAME]);
 	}
 
 	/**
@@ -79,7 +79,7 @@ class helper
 
 		// Clear permissions cache
 		$this->auth->acl_clear_prefetch();
-		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), array(constants::ANONYMOUS_USERNAME));
+		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_ACL_ADD_USER_GLOBAL_A_', time(), [constants::ANONYMOUS_USERNAME]);
 	}
 
 	/**

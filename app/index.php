@@ -66,7 +66,7 @@ if ($user->data['user_id'] == ANONYMOUS && (
 	// Restricted modules
 	($i == 'acp_php_info' || $i == 'acp_send_statistics')
 	// Common actions
-	|| in_array($action, array('enable', 'disable', 'enable_pre', 'disable_pre', 'activate', 'deactivate', 'move_up', 'move_down', 'install', 'uninstall', 'sync', 'progress_bar', 'create', 'delete', 'delete_data', 'delete_data_pre'))
+	|| in_array($action, ['enable', 'disable', 'enable_pre', 'disable_pre', 'activate', 'deactivate', 'move_up', 'move_down', 'install', 'uninstall', 'sync', 'progress_bar', 'create', 'delete', 'delete_data', 'delete_data_pre'])
 	// Common input names of the main submit button
 	|| $request->is_set_post('submit')
 	|| $request->is_set_post('update')
@@ -141,15 +141,15 @@ if ($user->data['user_id'] == ANONYMOUS && (
 $style_dir = "./styles/{$style}/style";
 
 // Set custom style for admin area
-$template->set_custom_style(array(
-	array(
+$template->set_custom_style([
+	[
 		'name' 		=> 'adm',
-		'ext_path' 	=> 'adm/style/',
-	),
-), $style_dir);
+		'ext_path' 	=> 'adm/style/'
+	],
+], $style_dir);
 
 // Template variables
-$template->assign_vars(array(
+$template->assign_vars([
 	'STYLE_DIRNAME'	=> $style,
 
 	'T_ASSETS_PATH'		=> generate_board_url() . '/assets',
@@ -157,7 +157,7 @@ $template->assign_vars(array(
 	'T_IMAGES_PATH'		=> "./styles/{$style}/images",
 
 	'S_PREVIEW_ACP'	=> true
-));
+]);
 
 // Instantiate new module
 $module = new \vinabb\stylesdemo\includes\p_master();
@@ -185,8 +185,8 @@ else
 // Generate the page
 adm_page_header($module->get_page_title());
 
-$template->set_filenames(array(
+$template->set_filenames([
 	'body' => $module->get_tpl_name()
-));
+]);
 
 adm_page_footer();

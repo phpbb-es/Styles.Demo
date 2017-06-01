@@ -99,7 +99,7 @@ class user extends \phpbb\user
 		}
 
 		$user_data = $this->data;
-		$lang_set_ext = array();
+		$lang_set_ext = [];
 
 		/**
 		* Event to load language files and modify user data on every page
@@ -122,15 +122,15 @@ class user extends \phpbb\user
 		* @var	mixed	style_id			Style we are going to display
 		* @since 3.1.0-a1
 		*/
-		$vars = array(
+		$vars = [
 			'user_data',
 			'user_lang_name',
 			'user_date_format',
 			'user_timezone',
 			'lang_set',
 			'lang_set_ext',
-			'style_id',
-		);
+			'style_id'
+		];
 		extract($phpbb_dispatcher->trigger_event('core.user_setup', compact($vars)));
 
 		$this->data = $user_data;
@@ -172,7 +172,7 @@ class user extends \phpbb\user
 			global $SID, $_EXTRA_URL;
 
 			$SID .= '&amp;s=' . $acp_style_request;
-			$_EXTRA_URL = array('s=' . $acp_style_request);
+			$_EXTRA_URL = ['s=' . $acp_style_request];
 		}
 
 		$style_request = $request->variable('style', 0);
@@ -183,7 +183,7 @@ class user extends \phpbb\user
 
 			$style_id = $style_request;
 			$SID .= '&amp;style=' . $style_id;
-			$_EXTRA_URL = array('style=' . $style_id);
+			$_EXTRA_URL = ['style=' . $style_id];
 		}
 		else
 		{
@@ -237,9 +237,9 @@ class user extends \phpbb\user
 		// Now parse the cfg file and cache it
 		$parsed_items = $cache->obtain_cfg_items($this->style);
 
-		$check_for = array(
+		$check_for = [
 			'pagination_sep'    => (string) ', '
-		);
+		];
 
 		foreach ($check_for as $key => $default_value)
 		{
@@ -262,12 +262,12 @@ class user extends \phpbb\user
 		phpbb_user_session_handler();
 
 		// Redirect to the demo page if any visitors go to our demo board directly
-		if (!$style_request && !$acp_style_request && !in_array($this->page['page_name'], array("app.$phpEx/demo/", "app.$phpEx/demo/acp", "app.$phpEx/demo/acp/")) && $this->data['user_type'] != USER_FOUNDER && !defined('IN_LOGIN'))
+		if (!$style_request && !$acp_style_request && !in_array($this->page['page_name'], ["app.$phpEx/demo/", "app.$phpEx/demo/acp", "app.$phpEx/demo/acp/"]) && $this->data['user_type'] != USER_FOUNDER && !defined('IN_LOGIN'))
 		{
 			$helper = $phpbb_container->get('controller.helper');
 
 			$response = new \Symfony\Component\HttpFoundation\RedirectResponse(
-				$helper->route('vinabb_stylesdemo_route', array('mode' => '')),
+				$helper->route('vinabb_stylesdemo_route', ['mode' => '']),
 				301
 			);
 			$response->send();

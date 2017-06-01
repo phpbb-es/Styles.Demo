@@ -59,17 +59,18 @@ class listener implements EventSubscriberInterface
 	* @param string $phpbb_root_path
 	* @param string $php_ext
 	*/
-	public function __construct(\phpbb\cache\driver\driver_interface $cache,
-								\phpbb\config\config $config,
-								\phpbb\controller\helper $helper,
-								\phpbb\template\template $template,
-								\phpbb\user $user,
-								\phpbb\language\language $language,
-								\phpbb\extension\manager $ext_manager,
-								\phpbb\path_helper $path_helper,
-								$phpbb_root_path,
-								$phpbb_admin_path,
-								$php_ext)
+	public function __construct(
+		\phpbb\cache\driver\driver_interface $cache,
+		\phpbb\config\config $config,
+		\phpbb\controller\helper $helper,
+		\phpbb\template\template $template,
+		\phpbb\user $user,
+		\phpbb\language\language $language,
+		\phpbb\extension\manager $ext_manager,
+		\phpbb\path_helper $path_helper,
+		$phpbb_root_path,
+		$phpbb_admin_path,
+		$php_ext)
 	{
 		$this->cache = $cache;
 		$this->config = $config;
@@ -89,11 +90,11 @@ class listener implements EventSubscriberInterface
 
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			'core.page_header'				=> 'add_page_header_link',
 			'core.adm_page_header_after'	=> 'update_tpl_vars',
-			'core.add_log'					=> 'purge_lang_cache',
-		);
+			'core.add_log'					=> 'purge_lang_cache'
+		];
 	}
 
 	/**
@@ -103,9 +104,9 @@ class listener implements EventSubscriberInterface
 	*/
 	public function add_page_header_link($event)
 	{
-		$this->template->assign_vars(array(
-			'U_DEMO'	=> $this->helper->route('vinabb_stylesdemo_route', array('mode' => ''))
-		));
+		$this->template->assign_vars([
+			'U_DEMO'	=> $this->helper->route('vinabb_stylesdemo_route', ['mode' => ''])
+		]);
 	}
 
 	/**
@@ -115,7 +116,7 @@ class listener implements EventSubscriberInterface
 	*/
 	public function update_tpl_vars($event)
 	{
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'ROOT_PATH'			=> $this->phpbb_root_path,
 			'ADMIN_ROOT_PATH'	=> $this->phpbb_admin_path,
 			'PREFIX_URL'		=> generate_board_url() . '/' . $this->phpbb_admin_path,
@@ -136,8 +137,8 @@ class listener implements EventSubscriberInterface
 			'T_AVATAR_GALLERY_PATH'	=> "{$this->phpbb_root_path}{$this->config['avatar_gallery_path']}/",
 			'T_ICONS_PATH'			=> "{$this->phpbb_root_path}{$this->config['icons_path']}/",
 			'T_RANKS_PATH'			=> "{$this->phpbb_root_path}{$this->config['ranks_path']}/",
-			'T_UPLOAD_PATH'			=> "{$this->phpbb_root_path}{$this->config['upload_path']}/",
-		));
+			'T_UPLOAD_PATH'			=> "{$this->phpbb_root_path}{$this->config['upload_path']}/"
+		]);
 	}
 
 	/**
