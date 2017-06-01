@@ -8,6 +8,8 @@
 
 namespace vinabb\stylesdemo;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class ext extends \phpbb\extension\base
 {
 	/** @var \phpbb\config\config $config */
@@ -24,8 +26,24 @@ class ext extends \phpbb\extension\base
 		parent::__construct($container, $extension_finder, $migrator, $extension_name, $extension_path);
 
 		$this->config = $this->container->get('config');
-		$this->ext_helper = $this->container->get('vinabb.stylesdemo.helper');
+		$this->ext_helper = new \vinabb\stylesdemo\controllers\helper(
+			$this->container->get('auth'),
+			$this->container->get('dbal.conn'),
+			$this->container->get('log'),
+			$this->container->get('user')
+		);
 	}
+
+	/**
+	* Check whether or not the extension can be enabled.
+	* Requires phpBB 3.1.2 or greater.
+	*
+	* @return bool
+	*/
+	public function is_enableable()
+	{
+		return phpbb_version_compare(PHPBB_VERSION, '3.1.2', '>=');
+  	}
 
 	/**
 	* Overwrite enable_step to assign the role ROLE_ADMIN_DEMO to the guest user
