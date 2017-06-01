@@ -13,7 +13,7 @@ class user extends \phpbb\user
 	/**
 	* Setup basic user-specific items (style, language...)
 	*
-	* Copied from phpBB 3.2.0-RC1 with 4 changes:
+	* Copied from phpBB 3.2.0 with 4 changes:
 	* REMEMBER TO UPDATE CODE CHANGES FOR LATER PHPBB VERSIONS IF NEEDED
 	*
 	* @param bool $lang_set
