@@ -34,7 +34,7 @@ class data_module
 
 		$this->tpl_name = 'data_body';
 		$this->page_title = ($mode == 'acp') ? $this->language->lang('ACP_MANAGE_ACP_STYLE_DATA') : $this->language->lang('ACP_MANAGE_STYLE_DATA');
-		$this->language->add_lang(['demo', 'acp_styles_demo', 'vinabb/stylesdemo']);
+		$this->language->add_lang(['demo', 'acp_styles_demo'], 'vinabb/stylesdemo');
 
 		$action = $this->request->variable('action', '');
 
