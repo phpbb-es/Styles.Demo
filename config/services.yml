@@ -36,6 +36,8 @@ services:
             - '@service_container'
             - '@dbal.conn'
             - '%vinabb.stylesdemo.tables.acp_styles%'
+    vinabb.stylesdemo.acp.settings:
+        class: vinabb\stylesdemo\controllers\acp\settings
     vinabb.stylesdemo.controller:
         class: vinabb\stylesdemo\controllers\main
         arguments:
