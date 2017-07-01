@@ -468,12 +468,12 @@ $styleIframe.load(
 			if (object.price)
 			{
 				$('#downloadPurchase').html('<i class="fa fa-shopping-cart"></i> ' + $label_purchase);
-				$('#downloadPurchase').prop('class', 'btn btn-danger');
+				$('#downloadPurchase').prop('class', 'btn btn-danger btn-xs');
 			}
 			else
 			{
 				$('#downloadPurchase').html('<i class="fa fa-download"></i> ' + $label_download);
-				$('#downloadPurchase').prop('class', 'btn btn-success');
+				$('#downloadPurchase').prop('class', 'btn btn-success btn-xs');
 			}
 		}
 		else
